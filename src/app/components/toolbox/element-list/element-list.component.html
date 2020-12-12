@@ -1,0 +1,14 @@
+<div class="section-title">Elements</div>
+<mat-divider class="horizontal-divider"></mat-divider>
+<mat-form-field appearance="outline" class="search" [color]="'accent'">
+  <mat-label>Search for element</mat-label>
+  <input matInput autocomplete="off" [(ngModel)]="searchValue" (ngModelChange)="filterOptions()">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+
+<mat-list>
+  <mat-list-item matRipple class="mat-list-option" *ngFor="let element of elementTypes">
+    {{element}}
+  </mat-list-item>
+</mat-list>

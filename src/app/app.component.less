@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  .layer-list {
+    display: block;
+    height: calc(100vh - 60px);
+    width: 18vw;
+    min-width: 350px;
+    background-color: #454f58;
+    z-index: 10;
+  }
+
+  .work-area {
+    display: block;
+    height: calc(100vh - 60px);
+    width: 100%;
+    z-index: 1;
+  }
+
+  .toolbox {
+    display: block;
+    height: calc(100vh - 60px);
+    width: 18vw;
+    min-width: 350px;
+    background-color: #454f58;
+    z-index: 10;
+  }
+
+  mat-divider {
+    .vertical-divider {
+      height: 100%;
+    }
+
+    .horizontal-divider {
+      width: 100%;
+    }
+  }
+}

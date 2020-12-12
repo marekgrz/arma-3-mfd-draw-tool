@@ -1,0 +1,17 @@
+<div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer">
+    <div class="work-area mat-card mat-elevation-z0" #workspace>
+      <canvas width="500" height="500"></canvas>
+    </div>
+</div>
+<div class="bottom-container">
+  <div class="zoom-actions">
+    <button mat-mini-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+    <span class="value">{{ZOOM_LEVEL | number : '1.2-2'}}</span>
+    <button mat-mini-fab>
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+  <span class="author">Created by Marek Grzejszczak</span>
+</div>

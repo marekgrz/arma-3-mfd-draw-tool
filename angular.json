@@ -28,6 +28,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/ngx-tree-dnd/styles-tree-dnd.css",
               "src/styles.less"
             ],
             "scripts": []
@@ -91,6 +93,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/ngx-tree-dnd/styles-tree-dnd.css",
               "src/styles.less"
             ],
             "scripts": []
