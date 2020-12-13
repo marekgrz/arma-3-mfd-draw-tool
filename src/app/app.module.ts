@@ -7,7 +7,6 @@ import {HederMenuComponent} from './components/heder-menu/heder-menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
-import {LayerListComponent} from './components/layer-stack/layer-list/layer-list.component';
 import {ToolboxComponent} from './components/toolbox/toolbox.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {WorkAreaComponent} from './components/work-area/work-area.component';
@@ -15,22 +14,30 @@ import {ElementListComponent} from './components/toolbox/element-list/element-li
 import {PropertiesComponent} from './components/toolbox/properties/properties.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatListModule, MatSelectionList} from '@angular/material/list';
+import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
 import {FormsModule} from '@angular/forms';
 import {NgxTreeDndModule} from 'ngx-tree-dnd';
+import {MatTreeModule} from '@angular/material/tree';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatTreeComponent} from './components/layer-stack/mat-tree/mat-tree.component';
+import {SortablejsModule} from 'ngx-sortablejs';
+import {MatTreeItemListComponent} from './components/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
+import {LayerStackComponent} from './components/layer-stack/layer-stack.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HederMenuComponent,
-    LayerListComponent,
+    LayerStackComponent,
     ToolboxComponent,
     WorkAreaComponent,
     ElementListComponent,
-    PropertiesComponent
+    PropertiesComponent,
+    MatTreeComponent,
+    MatTreeItemListComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,9 @@ import {NgxTreeDndModule} from 'ngx-tree-dnd';
     MatRippleModule,
     FormsModule,
     NgxTreeDndModule,
+    MatTreeModule,
+    DragDropModule,
+    SortablejsModule.forRoot({animation: 150}),
   ],
   providers: [],
   bootstrap: [AppComponent]
