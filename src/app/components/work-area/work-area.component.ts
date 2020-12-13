@@ -34,14 +34,30 @@ export class WorkAreaComponent implements AfterViewInit {
     );
   }
 
-  onScroll(e): void {
+
+  resetZoom(): void {
+    this.ZOOM_LEVEL = 1;
+    this.offsetPosition = [0, 0];
+    this.updatePositionAndScale();
+  }
+
+  zoomIn(): void {
+    this.ZOOM_LEVEL += this.ZOOM_STEP;
+    this.updatePositionAndScale();
+  }
+
+  zoomOut(): void {
+    this.ZOOM_LEVEL -= this.ZOOM_STEP;
+    this.updatePositionAndScale();
+  }
+
+  private onScroll(e): void {
     if (e.ctrlKey) {
-      this.ZOOM_LEVEL += e.deltaY < 0 ? this.ZOOM_STEP : -this.ZOOM_STEP;
-      this.updatePositionAndScale();
+      e.deltaY < 0 ? this.zoomIn() : this.zoomOut();
     }
   }
 
-  onMouseDown(e: MouseEvent): void {
+  private onMouseDown(e: MouseEvent): void {
     if (e.button === 1) {
       this.middleMouseDown = true;
       this.mouseClickPosition = [e.clientX, e.clientY];
@@ -49,11 +65,11 @@ export class WorkAreaComponent implements AfterViewInit {
     }
   }
 
-  onMouseUp(): void {
+  private onMouseUp(): void {
     this.middleMouseDown = false;
   }
 
-  onMouseMove(e: MouseEvent): void {
+  private onMouseMove(e: MouseEvent): void {
     if (this.middleMouseDown) {
       this.offsetPosition[0] = this.startPosition[0] - (this.mouseClickPosition[0] - e.clientX);
       this.offsetPosition[1] = this.startPosition[1] - (this.mouseClickPosition[1] - e.clientY);
@@ -61,7 +77,7 @@ export class WorkAreaComponent implements AfterViewInit {
     }
   }
 
-  updatePositionAndScale(): void {
+  private updatePositionAndScale(): void {
     this.workspace.nativeElement.style.transform = `translate(${this.offsetPosition[0]}px,${this.offsetPosition[1]}px) scale(${this.ZOOM_LEVEL})`;
   }
 }
