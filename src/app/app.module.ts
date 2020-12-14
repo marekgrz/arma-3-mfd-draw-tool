@@ -19,13 +19,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
 import {FormsModule} from '@angular/forms';
-import {NgxTreeDndModule} from 'ngx-tree-dnd';
 import {MatTreeModule} from '@angular/material/tree';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTreeComponent} from './components/layer-stack/mat-tree/mat-tree.component';
 import {SortablejsModule} from 'ngx-sortablejs';
 import {MatTreeItemListComponent} from './components/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
 import {LayerStackComponent} from './components/layer-stack/layer-stack.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -53,10 +53,10 @@ import {LayerStackComponent} from './components/layer-stack/layer-stack.componen
     MatListModule,
     MatRippleModule,
     FormsModule,
-    NgxTreeDndModule,
     MatTreeModule,
     DragDropModule,
     SortablejsModule.forRoot({animation: 150}),
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

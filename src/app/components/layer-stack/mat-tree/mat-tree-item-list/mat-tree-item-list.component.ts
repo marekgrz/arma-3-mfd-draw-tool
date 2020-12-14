@@ -14,6 +14,8 @@ export class MatTreeItemListComponent implements OnInit {
 
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
 
+  expanded = true;
+
   options: any = {
     group: 'test',
     onUpdate: () => {

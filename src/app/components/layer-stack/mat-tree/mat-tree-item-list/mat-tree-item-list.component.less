@@ -2,21 +2,46 @@
   border-radius: 5px;
   color: white;
   margin: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid gray;
   cursor: pointer;
   background: inherit;
+  overflow: hidden;
+  transition: 2s ease;
+  max-height: max-content;
 
   .item-child-container {
-    min-height: 20px;
+    //min-height: 40px;
+    padding-bottom: 30px;
   }
 
-  .title {
-    vertical-align: super;
-    margin-left: 5px;
+  .row {
+    display: flex;
+    align-items: center;
+
+    .title {
+      vertical-align: super;
+      margin-left: 5px;
+    }
   }
 }
 
 .selected-item {
   background: #8f8fa7;
+}
+
+.collapsed {
+  display: none;
+}
+
+.expanded {
+  display: block;
+}
+
+.icon-expanded {
+  transform: rotate(90);
+}
+
+.icon-collapsed {
+  transform: rotate(-90);
 }

@@ -1,13 +1,19 @@
-<div [class.item]="!isRoot">
-  <div *ngIf="isRoot">Root</div>
-  <div *ngIf="!isRoot" (click)="selectItem($event)">
-    <i class="material-icons" *ngIf="isContainer(item)">folder</i>
-    <i class="material-icons" *ngIf="!isContainer(item)">code</i>
-    <span class="title">{{item.name}}</span>
-  </div>
-  <div *ngIf="item.children" class="item-child-container" [sortablejs]="item.children" [sortablejsOptions]="options">
-    <div *ngFor="let listChild of item.children">
-      <app-mat-tree-item-list (selected)="emit()" [item]="listChild"></app-mat-tree-item-list>
+<div>
+  <div [class.item]="!isRoot">
+    <div *ngIf="isRoot">Root</div>
+    <div *ngIf="!isRoot" class="row" (click)="selectItem($event)">
+      <i class="material-icons" *ngIf="isContainer(item)">folder</i>
+      <i class="material-icons" *ngIf="!isContainer(item)">code</i>
+      <span class="title">{{item.name}}</span>
+      <button mat-icon-button (click)="expanded = !expanded" *ngIf="isContainer(item)">
+        <mat-icon *ngIf="expanded">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="!expanded">keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="item.children" class="item-child-container" [sortablejs]="item.children" [sortablejsOptions]="options" [ngClass]="expanded ? 'expanded' : 'collapsed'" >
+      <div *ngFor="let listChild of item.children">
+        <app-mat-tree-item-list (selected)="emit()" [item]="listChild"></app-mat-tree-item-list>
+      </div>
     </div>
   </div>
 </div>
