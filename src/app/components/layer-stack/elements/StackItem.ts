@@ -1,11 +1,11 @@
 export class StackItem {
   id: string = generateId();
   name: string;
-  type: NodeType;
+  type: ElementType;
   children = new Array<StackItem>();
 }
 
-export enum NodeType {
+export enum ElementType {
   container,
   element
 }

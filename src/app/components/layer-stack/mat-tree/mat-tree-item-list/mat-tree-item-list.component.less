@@ -1,23 +1,33 @@
 .item {
-  border-radius: 5px;
   color: white;
-  margin: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid gray;
   cursor: pointer;
   background: inherit;
   overflow: hidden;
-  transition: 2s ease;
+  transition: 0.5s ease;
+  max-height: -webkit-max-content;
   max-height: max-content;
 
-  .item-child-container {
-    //min-height: 40px;
-    padding-bottom: 30px;
+  .type-icon {
+    margin-left: 40px;
+  }
+
+  .item-child-container   {
+    padding-left: 10px;
+    padding-bottom: 20px;
   }
 
   .row {
     display: flex;
     align-items: center;
+
+    input {
+      padding: 3px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
     .title {
       vertical-align: super;
@@ -27,7 +37,8 @@
 }
 
 .selected-item {
-  background: #8f8fa7;
+  background: #65656b;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 
 .collapsed {

@@ -5,7 +5,7 @@
     <i class="material-icons">delete</i>
   </button>
   <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
-  <button mat-button matTooltip="Create group" (click)="newGroup()">
+  <button mat-button matTooltip="Create group" (click)="createGroup()">
     <i class="material-icons">snippet_folder</i>
   </button>
   <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
@@ -14,4 +14,4 @@
   </button>
 </div>
 <mat-divider class="horizontal-divider"></mat-divider>
-<app-mat-tree [list]="list" (selectedItem)="selectedItem = $event"></app-mat-tree>
+<app-mat-tree [list]="list"></app-mat-tree>

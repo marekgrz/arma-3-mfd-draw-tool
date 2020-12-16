@@ -26,6 +26,7 @@ import {SortablejsModule} from 'ngx-sortablejs';
 import {MatTreeItemListComponent} from './components/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
 import {LayerStackComponent} from './components/layer-stack/layer-stack.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { GroupElementComponent } from './components/toolbox/properties/element-types/group-element/group-element.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     PropertiesComponent,
     MatTreeComponent,
     MatTreeItemListComponent,
+    GroupElementComponent,
   ],
   imports: [
     BrowserModule,

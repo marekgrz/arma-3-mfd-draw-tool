@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {generateId, NodeType, StackItem} from './StackItem';
+import {generateId, ElementType, StackItem} from './elements/StackItem';
+import {TreeService} from './mat-tree/tree.service';
 
 @Component({
   selector: 'app-layer-list',
@@ -8,19 +9,17 @@ import {generateId, NodeType, StackItem} from './StackItem';
 })
 export class LayerStackComponent implements OnInit {
 
-  selectedItem: StackItem;
-
-  i = 1;
+  groupIndex = 1;
 
   list: StackItem[] = [{
     id: generateId(),
     name: 'Top',
-    type: NodeType.container,
+    type: ElementType.container,
     children: [
       {
         id: generateId(),
         name: 'Child',
-        type: NodeType.element,
+        type: ElementType.element,
         children: null
       }
     ]
@@ -28,48 +27,55 @@ export class LayerStackComponent implements OnInit {
     {
       id: generateId(),
       name: 'Location',
-      type: NodeType.container,
+      type: ElementType.container,
       children: [
         {
           id: generateId(),
           name: 'Location 1',
-          type: NodeType.element,
+          type: ElementType.element,
           children: null
         },
         {
           id: generateId(),
           name: 'Location 2',
-          type: NodeType.element,
+          type: ElementType.element,
           children: null
         }
       ]
     }
   ];
 
-  constructor() {
+  constructor(private treeService: TreeService) {
   }
 
   ngOnInit(): void {
   }
 
-  newGroup(): void {
-    const group = new StackItem();
-    group.id = generateId();
-    group.name = 'Parent ' + this.i;
-    group.type = NodeType.container;
-    group.children = [];
-    if (this.selectedItem) {
-      this.wrapItemsInGroup(group);
+  createGroup(): void {
+    if (this.treeService.getSelectedItem()) {
+      this.wrapItemsInGroup();
     } else {
-      this.list.push(group);
+      this.list.push(this.newGroup());
     }
-    this.i++;
+    this.groupIndex++;
   }
 
-  wrapItemsInGroup(group: StackItem): void {
-    console.log(this.selectedItem);
-    const index = this.list.findIndex(it => it.id === this.selectedItem.id);
-    group.children = [this.list[index]];
-    this.list[index] = group;
+  private newGroup(): StackItem {
+    const group = new StackItem();
+    group.id = generateId();
+    group.name = 'Group ' + this.groupIndex;
+    group.type = ElementType.container;
+    group.children = [];
+    return group;
+  }
+
+  private wrapItemsInGroup(): StackItem {
+    const group = this.newGroup();
+    const children = [JSON.parse(JSON.stringify(this.treeService.getSelectedItem()))];
+    this.treeService.getSelectedItem().name = group.name;
+    this.treeService.getSelectedItem().id = group.id;
+    this.treeService.getSelectedItem().type = group.type;
+    this.treeService.getSelectedItem().children = children;
+    return group;
   }
 }

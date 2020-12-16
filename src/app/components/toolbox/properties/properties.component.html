@@ -1,2 +1,5 @@
 <div class="section-title">Properties</div>
 <mat-divider class="horizontal-divider"></mat-divider>
+<div *ngIf="treeService.selectedItem" class="properties-container">
+  <app-group-element [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-element>
+</div>

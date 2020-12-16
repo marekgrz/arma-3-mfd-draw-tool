@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {StackItem} from '../StackItem';
+import {StackItem} from '../elements/StackItem';
 
 @Component({
   selector: 'app-mat-tree',
