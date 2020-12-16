@@ -1,7 +1,10 @@
+import {BaseElement} from './BaseElement';
+
 export class StackItem {
   id: string = generateId();
   name: string;
   type: ElementType;
+  element?: BaseElement;
   children = new Array<StackItem>();
 }
 
