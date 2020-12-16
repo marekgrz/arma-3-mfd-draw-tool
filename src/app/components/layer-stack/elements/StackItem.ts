@@ -7,7 +7,9 @@ export class StackItem {
 
 export enum ElementType {
   container,
-  element
+  line,
+  rectangle,
+  circle,
 }
 
 export function generateId(): string {

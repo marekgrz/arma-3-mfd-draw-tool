@@ -18,4 +18,8 @@ export class PropertiesComponent implements OnInit {
   isGroup(item: StackItem): boolean {
     return item.type === ElementType.container;
   }
+
+  isRectangle(item: StackItem): boolean {
+    return item.type === ElementType.rectangle;
+  }
 }

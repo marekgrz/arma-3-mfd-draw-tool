@@ -19,7 +19,7 @@ export class LayerStackComponent implements OnInit {
       {
         id: generateId(),
         name: 'Child',
-        type: ElementType.element,
+        type: ElementType.rectangle,
         children: null
       }
     ]
@@ -32,13 +32,13 @@ export class LayerStackComponent implements OnInit {
         {
           id: generateId(),
           name: 'Location 1',
-          type: ElementType.element,
+          type: ElementType.rectangle,
           children: null
         },
         {
           id: generateId(),
           name: 'Location 2',
-          type: ElementType.element,
+          type: ElementType.rectangle,
           children: null
         }
       ]

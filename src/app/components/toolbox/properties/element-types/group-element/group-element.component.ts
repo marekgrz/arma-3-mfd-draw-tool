@@ -16,6 +16,4 @@ export class GroupElementComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
 }

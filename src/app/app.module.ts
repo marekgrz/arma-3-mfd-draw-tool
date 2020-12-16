@@ -27,6 +27,7 @@ import {MatTreeItemListComponent} from './components/layer-stack/mat-tree/mat-tr
 import {LayerStackComponent} from './components/layer-stack/layer-stack.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { GroupElementComponent } from './components/toolbox/properties/element-types/group-element/group-element.component';
+import { RectangleElementComponent } from './components/toolbox/properties/element-types/rectangle-element/rectangle-element.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GroupElementComponent } from './components/toolbox/properties/element-t
     MatTreeComponent,
     MatTreeItemListComponent,
     GroupElementComponent,
+    RectangleElementComponent,
   ],
   imports: [
     BrowserModule,

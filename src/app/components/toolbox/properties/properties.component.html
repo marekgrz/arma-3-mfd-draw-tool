@@ -2,4 +2,5 @@
 <mat-divider class="horizontal-divider"></mat-divider>
 <div *ngIf="treeService.selectedItem" class="properties-container">
   <app-group-element [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-element>
+  <app-rectangle-element [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></app-rectangle-element>
 </div>
