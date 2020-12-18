@@ -1,6 +1,7 @@
 <div>
   <div [class.item]="!isRoot">
-    <div *ngIf="isRoot">Root</div>
+    <div *ngIf="isRoot" class="root" (click)="selectRootSettings($event)"><span class="material-icons">view_list</span>Root
+    </div>
     <div *ngIf="!isRoot" class="row" (click)="selectItem($event)">
       <button mat-icon-button (click)="toggleExpand($event)" *ngIf="isContainer(item)">
         <mat-icon *ngIf="expanded">keyboard_arrow_down</mat-icon>

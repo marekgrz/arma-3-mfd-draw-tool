@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/color-picker": "^5.0.2",
     "@angular/animations": "~11.0.4",
     "@angular/cdk": "^11.0.2",
     "@angular/common": "~11.0.4",
@@ -24,6 +25,7 @@
     "@types/fabric": "^4.2.0",
     "ngx-fabric-wrapper": "^11.0.0",
     "ngx-highlight-js": "^11.1.0",
+    "ngx-material-file-input": "^2.1.1",
     "ngx-sortablejs": "^10.0.0",
     "rxjs": "~6.6.0",
     "sortablejs": "^1.12.0",

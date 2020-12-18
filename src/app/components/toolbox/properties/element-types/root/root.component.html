@@ -1,0 +1,37 @@
+<div class="row-container">
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Canvas width</mat-label>
+    <input type="number" matInput autocomplete="off" [(ngModel)]="width" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Canvas height</mat-label>
+    <input type="number" matInput autocomplete="off" [(ngModel)]="height" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Aspect ratio</mat-label>
+    <input disabled type="number" matInput autocomplete="off" [(ngModel)]="store.aspectRatio" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-checkbox class="checkbox" [(ngModel)]="useImage" >Use image as background</mat-checkbox>
+  <div [className]="useImage ? '' : 'disabled'">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Canvas background</mat-label>
+      <ngx-mat-file-input [formControl]="file" [value]="defaultFile" [accept]="'image/*'"></ngx-mat-file-input>
+      <mat-icon matSuffix class="clickable">folder</mat-icon>
+    </mat-form-field>
+    <mat-icon matSuffix class="clickable info-icon"
+              [matTooltip]="'This is only background image. It will not be visible in game.'"
+              matTooltipPosition="above">warning
+    </mat-icon>
+  </div>
+  <mat-form-field [className]="useImage ? 'disabled' : ''">
+    <input matInput [ngxMatColorPicker]="picker" [formControl]="color">
+    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+    <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+  </mat-form-field>
+  <div class="action-button">
+    <button mat-button (click)="updateDimensions()">
+      <i class="material-icons">save</i>Save
+    </button>
+  </div>
+</div>
+

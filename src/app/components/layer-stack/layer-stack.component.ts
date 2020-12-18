@@ -14,7 +14,7 @@ export class LayerStackComponent implements OnInit {
   list: StackItem[] = [{
     id: generateId(),
     name: 'Top',
-    type: ElementType.container,
+    type: ElementType.group,
     children: [
       {
         id: generateId(),
@@ -27,7 +27,7 @@ export class LayerStackComponent implements OnInit {
     {
       id: generateId(),
       name: 'Location',
-      type: ElementType.container,
+      type: ElementType.group,
       children: [
         {
           id: generateId(),
@@ -64,7 +64,7 @@ export class LayerStackComponent implements OnInit {
     const group = new StackItem();
     group.id = generateId();
     group.name = 'Group ' + this.groupIndex;
-    group.type = ElementType.container;
+    group.type = ElementType.group;
     group.children = [];
     return group;
   }

@@ -15,8 +15,12 @@ export class PropertiesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isRoot(item: StackItem): boolean {
+    return item.type === ElementType.root;
+  }
+
   isGroup(item: StackItem): boolean {
-    return item.type === ElementType.container;
+    return item.type === ElementType.group;
   }
 
   isRectangle(item: StackItem): boolean {

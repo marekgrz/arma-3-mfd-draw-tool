@@ -3,80 +3,106 @@ import {ElementType, StackItem} from '../../elements/StackItem';
 import {TreeService} from '../tree.service';
 
 @Component({
-  selector: 'app-mat-tree-item-list',
-  templateUrl: './mat-tree-item-list.component.html',
-  styleUrls: ['./mat-tree-item-list.component.less']
+    selector: 'app-mat-tree-item-list',
+    templateUrl: './mat-tree-item-list.component.html',
+    styleUrls: ['./mat-tree-item-list.component.less']
 })
 export class MatTreeItemListComponent implements OnInit {
 
-  renaming = false;
+    renaming = false;
 
-  temporaryName: string;
+    temporaryName: string;
 
-  @Input() item: StackItem;
+    @Input() item: StackItem;
 
-  @Input() isRoot: boolean;
+    @Input() isRoot: boolean;
 
-  @Output() selected: EventEmitter<any> = new EventEmitter<any>();
+    @Output() selected: EventEmitter<any> = new EventEmitter<any>();
 
-  expanded = true;
+    expanded = true;
 
-  options: any = {
-    group: 'layer-stack',
-    onUpdate: () => {
+    options: any = {
+        group: 'layer-stack',
+        onUpdate: () => {
 
-    },
-    onAdd: () => {
+        },
+        onAdd: () => {
 
-    },
-    onRemove: () => {
+        },
+        onRemove: () => {
 
-    },
-  };
+        },
+    };
 
-  constructor(private treeService: TreeService) {
-  }
-
-  ngOnInit(): void {
-    this.temporaryName = '' + this.item.name;
-  }
-
-  @HostListener('document:dblclick')
-  clickOutside(): void {
-    this.treeService.setSelectedItem(null);
-    this.removeExistingSelectionStyle();
-  }
-
-  onKeydownHandler(evt: KeyboardEvent): void {
-    if (evt.key === 'Enter' && this.renaming) {
-        this.renaming = false;
-        this.item.name = '' + this.temporaryName;
+    constructor(private treeService: TreeService) {
     }
-    if (evt.key === 'Escape') {
-      this.renaming = false;
-      this.temporaryName = '' + this.item.name;
+
+    ngOnInit(): void {
+        if (this.isRoot) {
+            this.item.type = ElementType.root;
+        }
+        this.temporaryName = '' + this.item.name;
     }
-  }
 
-  selectItem(event): void {
-    const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
-    this.removeExistingSelectionStyle();
-    this.treeService.setSelectedItem(this.item);
-    element.classList.add('selected-item');
-    event.stopPropagation();
-  }
+    @HostListener('document:dblclick', ['$event'])
+    clickOutside(event): void {
+        if (!this.hasSomeParentTheClass(event.target, 'toolbox')) {
+            this.treeService.setSelectedItem(null);
+            this.removeExistingSelectionStyle();
+        }
+    }
 
-  isContainer(item: StackItem): boolean {
-    return item.type === ElementType.container;
-  }
+    hasSomeParentTheClass(element, classname): boolean {
+        if (!element.parentNode) {
+            return false;
+        }
+        if (element.className.split(' ').indexOf(classname) >= 0) {
+            return true;
+        }
+        return this.hasSomeParentTheClass(element.parentNode, classname);
+    }
 
-  toggleExpand(event: Event): void {
-    this.expanded = !this.expanded;
-    event.stopPropagation();
-  }
+    onKeydownHandler(evt: KeyboardEvent): void {
+        if (evt.key === 'Enter' && this.renaming) {
+            this.renaming = false;
+            this.item.name = '' + this.temporaryName;
+        }
+        if (evt.key === 'Escape') {
+            this.renaming = false;
+            this.temporaryName = '' + this.item.name;
+        }
+    }
 
-  private removeExistingSelectionStyle(): void {
-    const elements = document.querySelectorAll('.selected-item');
-    elements.forEach(el => el.classList.remove('selected-item'));
-  }
+    selectRootSettings(event): void {
+        const element = event.target;
+        this.removeExistingSelectionStyle();
+        this.treeService.setSelectedItem(this.item);
+        element.classList.add('selected-root');
+        event.stopPropagation();
+    }
+
+    selectItem(event): void {
+        const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
+        this.removeExistingSelectionStyle();
+        this.treeService.setSelectedItem(this.item);
+        element.classList.add('selected-item');
+        event.stopPropagation();
+    }
+
+    isContainer(item: StackItem): boolean {
+        return item.type === ElementType.group;
+    }
+
+    toggleExpand(event: Event): void {
+        this.expanded = !this.expanded;
+        event.stopPropagation();
+    }
+
+    private removeExistingSelectionStyle(): void {
+        const elements = document.querySelectorAll('.selected-item, .selected-root');
+        elements.forEach(el => {
+            el.classList.remove('selected-item');
+            el.classList.remove('selected-root');
+        });
+    }
 }

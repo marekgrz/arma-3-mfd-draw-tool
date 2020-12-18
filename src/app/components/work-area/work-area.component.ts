@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {fromEvent, Subscription} from 'rxjs';
+import {StoreService} from '../../utils/store.service';
 
 @Component({
   selector: 'app-work-area',
@@ -19,7 +20,7 @@ export class WorkAreaComponent implements AfterViewInit {
   private startPosition = [0, 0];
   private offsetPosition = [0, 0];
 
-  constructor() {
+  constructor(public store: StoreService) {
   }
 
   ngAfterViewInit(): void {

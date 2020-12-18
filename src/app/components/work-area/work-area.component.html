@@ -1,7 +1,12 @@
 <div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer">
-    <div class="work-area mat-card mat-elevation-z0" #workspace>
-      <canvas width="500" height="500"></canvas>
-    </div>
+  <div style="background: #757e87" #workspace>
+    <img class="back"
+         *ngIf="store.canvasUseImage"
+         [width]="store.canvasWidth"
+         [src]="store.canvasBackgroundImg"
+         [height]="store.canvasHeight">
+    <app-fabric-canvas [style.background]="!store.canvasUseImage ? store.canvasBackGroundColor.rgba : 'transparent'" style="display: block"></app-fabric-canvas>
+  </div>
 </div>
 <div class="bottom-container">
   <div class="zoom-actions">

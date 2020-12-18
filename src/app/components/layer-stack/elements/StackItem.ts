@@ -9,7 +9,8 @@ export class StackItem {
 }
 
 export enum ElementType {
-  container,
+  root,
+  group,
   line,
   rectangle,
   circle,

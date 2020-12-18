@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {fabric} from 'fabric';
 
 @Component({
   selector: 'app-element-list',
@@ -24,4 +25,16 @@ export class ElementListComponent implements OnInit {
       .filter(it => it.toLowerCase().includes(this.searchValue.toLowerCase()));
   }
 
+  addLine(): void {
+    const canvas =  new fabric.Canvas('fabric_canvas');
+    const rect = new fabric.Rect({
+      left: 100,
+      top: 100,
+      fill: 'red',
+      width: 20,
+      height: 20
+    });
+    canvas.selection = true;
+    canvas.add(rect);
+  }
 }

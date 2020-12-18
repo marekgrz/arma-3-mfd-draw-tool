@@ -18,7 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTreeModule} from '@angular/material/tree';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTreeComponent} from './components/layer-stack/mat-tree/mat-tree.component';
@@ -28,6 +28,12 @@ import {LayerStackComponent} from './components/layer-stack/layer-stack.componen
 import { MatExpansionModule } from '@angular/material/expansion';
 import { GroupElementComponent } from './components/toolbox/properties/element-types/group-element/group-element.component';
 import { RectangleElementComponent } from './components/toolbox/properties/element-types/rectangle-element/rectangle-element.component';
+import {FabricModule} from 'ngx-fabric-wrapper';
+import { FabricCanvasComponent } from './components/work-area/fabric-canvas/fabric-canvas.component';
+import { RootComponent } from './components/toolbox/properties/element-types/root/root.component';
+import {MaterialFileInputModule} from 'ngx-material-file-input';
+import {MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS, NgxMatColorPickerModule} from '@angular-material-components/color-picker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,6 +48,8 @@ import { RectangleElementComponent } from './components/toolbox/properties/eleme
     MatTreeItemListComponent,
     GroupElementComponent,
     RectangleElementComponent,
+    FabricCanvasComponent,
+    RootComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,8 +69,13 @@ import { RectangleElementComponent } from './components/toolbox/properties/eleme
     DragDropModule,
     SortablejsModule.forRoot({animation: 150}),
     MatExpansionModule,
+    FabricModule,
+    MaterialFileInputModule,
+    ReactiveFormsModule,
+    NgxMatColorPickerModule,
+    MatCheckboxModule,
   ],
-  providers: [],
+  providers: [ { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

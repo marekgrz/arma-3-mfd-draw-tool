@@ -8,7 +8,5 @@
 
 
 <mat-list>
-  <mat-list-item matRipple class="mat-list-option" *ngFor="let element of elementTypes">
-    {{element}}
-  </mat-list-item>
+  <mat-list-item matRipple class="mat-list-option" (dblclick)="addLine()">Line</mat-list-item>
 </mat-list>
