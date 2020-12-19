@@ -23,11 +23,13 @@
               matTooltipPosition="above">warning
     </mat-icon>
   </div>
-  <mat-form-field [className]="useImage ? 'disabled' : ''">
-    <input matInput [ngxMatColorPicker]="picker" [formControl]="color">
-    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-    <ngx-mat-color-picker #picker></ngx-mat-color-picker>
-  </mat-form-field>
+  <div [className]="useImage ? 'disabled' : ''">
+    <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+      <input matInput [ngxMatColorPicker]="picker" [formControl]="color">
+      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+      <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    </mat-form-field>
+  </div>
   <div class="action-button">
     <button mat-button (click)="updateDimensions()">
       <i class="material-icons">save</i>Save
