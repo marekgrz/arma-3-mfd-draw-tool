@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {fromEvent, Subscription} from 'rxjs';
 import {StoreService} from '../../utils/store.service';
 
@@ -7,12 +7,12 @@ import {StoreService} from '../../utils/store.service';
   templateUrl: './work-area.component.html',
   styleUrls: ['./work-area.component.less']
 })
-export class WorkAreaComponent implements AfterViewInit {
+export class WorkAreaComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('workspaceContainer') workspaceContainer: ElementRef;
   @ViewChild('workspace') workspace: ElementRef;
   ZOOM_LEVEL = 1;
-  ZOOM_STEP = 0.05;
+  ZOOM_STEP = 0.1;
   private subscriptions: Subscription[] = [];
 
   private middleMouseDown = false;
@@ -25,14 +25,16 @@ export class WorkAreaComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    this.subscriptions.concat(
-      [
-        fromEvent(this.workspaceContainer.nativeElement, 'wheel').subscribe((e: MouseEvent) => this.onScroll(e)),
-        fromEvent(this.workspaceContainer.nativeElement, 'mousedown').subscribe((e: MouseEvent) => this.onMouseDown(e)),
-        fromEvent(this.workspaceContainer.nativeElement, 'mouseup').subscribe(_ => this.onMouseUp()),
-        fromEvent(this.workspaceContainer.nativeElement, 'mousemove').subscribe((e: MouseEvent) => this.onMouseMove(e)),
-      ]
-    );
+    this.subscriptions = [
+      fromEvent(this.workspaceContainer.nativeElement, 'wheel').subscribe((e: MouseEvent) => this.onScroll(e)),
+      fromEvent(this.workspaceContainer.nativeElement, 'mousedown').subscribe((e: MouseEvent) => this.onMouseDown(e)),
+      fromEvent(this.workspaceContainer.nativeElement, 'mouseup').subscribe(_ => this.onMouseUp()),
+      fromEvent(this.workspaceContainer.nativeElement, 'mousemove').subscribe((e: MouseEvent) => this.onMouseMove(e)),
+    ];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(it => it.unsubscribe());
   }
 
 
@@ -63,6 +65,7 @@ export class WorkAreaComponent implements AfterViewInit {
       this.middleMouseDown = true;
       this.mouseClickPosition = [e.clientX, e.clientY];
       this.startPosition = [...this.offsetPosition];
+      e.preventDefault();
     }
   }
 

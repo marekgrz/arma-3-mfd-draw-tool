@@ -4,7 +4,7 @@ export class StackItem {
   id: string = generateId();
   name: string;
   type: ElementType;
-  element?: BaseElement;
+  element?: any;
   children = new Array<StackItem>();
 }
 

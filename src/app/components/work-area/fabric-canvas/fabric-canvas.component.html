@@ -1,3 +1,5 @@
-<canvas [width]="store.canvasWidth"
-        [height]="store.canvasHeight"
-        [fabric]="config" id="fabric_canvas"></canvas>
+<!--<canvas [width]="store.canvasWidth"-->
+<!--        [height]="store.canvasHeight"-->
+<!--        [fabric]="config"-->
+<!--        id="fabric_canvas" #fabric_canvas></canvas>-->
+<fabric [config]="config" (selectionCreated)="element = $event.selected[0]"></fabric>

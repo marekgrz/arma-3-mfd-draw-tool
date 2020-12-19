@@ -1,7 +1,9 @@
 import {BaseElement} from './BaseElement';
+import {Line} from 'fabric/fabric-impl';
 
-export class Circle implements BaseElement{
-
+export class ElementLine implements BaseElement{
+  name: string;
+  content: Line;
 }
 
 /*
