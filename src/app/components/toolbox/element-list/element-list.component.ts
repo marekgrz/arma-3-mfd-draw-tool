@@ -3,6 +3,7 @@ import {fabric} from 'fabric';
 import {Canvas} from 'fabric/fabric-impl';
 import {StoreService} from '../../../utils/store.service';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
+import {generateId} from '../../layer-stack/elements/StackItem';
 
 @Component({
   selector: 'app-element-list',
@@ -39,17 +40,22 @@ export class ElementListComponent implements OnInit {
         lockScalingY: true,
         cornerSize: 3
       });
+    line['id'] = generateId();
     this.canvas.add(line);
   }
 
   addRect(): void {
-    this.canvas.add(new fabric.Rect({
+    const rect = new fabric.Rect({
       width: 50, height: 50,
       left: 100, top: 100,
       fill: 'rgba(0,0,0,0)',
       stroke: 'black',
       strokeWidth: 10,
-    }));
-    this.treeService.itemList.push()
+    });
+    rect['id'] = generateId();
+    this.canvas.add(rect);
+    this.treeService.selectedItem
+      ? this.treeService.selectedItem.children.push(this.treeService.itemFromRectangle(rect))
+      : this.treeService.itemList.push(this.treeService.itemFromRectangle(rect));
   }
 }

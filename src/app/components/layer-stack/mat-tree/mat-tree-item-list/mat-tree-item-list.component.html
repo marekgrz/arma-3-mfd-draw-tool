@@ -2,7 +2,7 @@
   <div [class.item]="!isRoot">
     <div *ngIf="isRoot" class="root" (click)="selectRootSettings($event)"><span class="material-icons">view_list</span>Root
     </div>
-    <div *ngIf="!isRoot" class="row" (click)="selectItem($event)">
+    <div *ngIf="!isRoot" class="row" (click)="selectItem()" [id]="item.id">
       <button mat-icon-button (click)="toggleExpand($event)" *ngIf="isContainer(item)">
         <mat-icon *ngIf="expanded">keyboard_arrow_down</mat-icon>
         <mat-icon *ngIf="!expanded">keyboard_arrow_right</mat-icon>

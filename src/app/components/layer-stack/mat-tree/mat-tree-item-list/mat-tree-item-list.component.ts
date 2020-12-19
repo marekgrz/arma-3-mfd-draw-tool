@@ -1,108 +1,96 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ElementType, StackItem} from '../../elements/StackItem';
 import {TreeService} from '../tree.service';
 
 @Component({
-    selector: 'app-mat-tree-item-list',
-    templateUrl: './mat-tree-item-list.component.html',
-    styleUrls: ['./mat-tree-item-list.component.less']
+  selector: 'app-mat-tree-item-list',
+  templateUrl: './mat-tree-item-list.component.html',
+  styleUrls: ['./mat-tree-item-list.component.less']
 })
 export class MatTreeItemListComponent implements OnInit {
 
-    renaming = false;
+  renaming = false;
 
-    temporaryName: string;
+  temporaryName: string;
 
-    @Input() item: StackItem;
+  @Input() item: StackItem;
 
-    @Input() isRoot: boolean;
+  @Input() isRoot: boolean;
 
-    @Output() selected: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selected: EventEmitter<any> = new EventEmitter<any>();
 
-    expanded = true;
+  expanded = true;
 
-    options: any = {
-        group: 'layer-stack',
-        onUpdate: () => {
+  options: any = {
+    group: 'layer-stack',
+    onUpdate: () => {
 
-        },
-        onAdd: () => {
+    },
+    onAdd: () => {
 
-        },
-        onRemove: () => {
+    },
+    onRemove: () => {
 
-        },
-    };
+    },
+  };
 
-    constructor(private treeService: TreeService) {
+  constructor(private treeService: TreeService) {
+  }
+
+  ngOnInit(): void {
+    if (this.isRoot) {
+      this.item.type = ElementType.root;
     }
+    this.temporaryName = '' + this.item.name;
+  }
 
-    ngOnInit(): void {
-        if (this.isRoot) {
-            this.item.type = ElementType.root;
-        }
-        this.temporaryName = '' + this.item.name;
+  hasSomeParentTheClass(element, classname): boolean {
+    if (!element.parentNode) {
+      return false;
     }
+    if (element.className.split(' ').indexOf(classname) >= 0) {
+      return true;
+    }
+    return this.hasSomeParentTheClass(element.parentNode, classname);
+  }
 
-    @HostListener('document:dblclick', ['$event'])
-    clickOutside(event): void {
-        if (!this.hasSomeParentTheClass(event.target, 'toolbox')) {
-            this.treeService.setSelectedItem(null);
-            this.removeExistingSelectionStyle();
-        }
+  onKeydownHandler(evt: KeyboardEvent): void {
+    if (evt.key === 'Enter' && this.renaming) {
+      this.renaming = false;
+      this.item.name = '' + this.temporaryName;
     }
+    if (evt.key === 'Escape') {
+      this.renaming = false;
+      this.temporaryName = '' + this.item.name;
+    }
+  }
 
-    hasSomeParentTheClass(element, classname): boolean {
-        if (!element.parentNode) {
-            return false;
-        }
-        if (element.className.split(' ').indexOf(classname) >= 0) {
-            return true;
-        }
-        return this.hasSomeParentTheClass(element.parentNode, classname);
-    }
+  selectRootSettings(event): void {
+    const element = event.target;
+    this.treeService.deselectCurrentItems();
+    this.treeService.selectedItem = this.item;
+    element.classList.add('selected-root');
+    event.stopPropagation();
+  }
 
-    onKeydownHandler(evt: KeyboardEvent): void {
-        if (evt.key === 'Enter' && this.renaming) {
-            this.renaming = false;
-            this.item.name = '' + this.temporaryName;
-        }
-        if (evt.key === 'Escape') {
-            this.renaming = false;
-            this.temporaryName = '' + this.item.name;
-        }
-    }
+  selectItem(): void {
+    // const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
+    const element = document.getElementById(this.item.id);
+    this.treeService.deselectCurrentItems();
+    this.treeService.selectedItem = this.item;
+    this.treeService.selectItemInCanvas();
+    element.classList.add('selected-item');
+    event.stopPropagation();
+  }
 
-    selectRootSettings(event): void {
-        const element = event.target;
-        this.removeExistingSelectionStyle();
-        this.treeService.setSelectedItem(this.item);
-        element.classList.add('selected-root');
-        event.stopPropagation();
-    }
+  isContainer(item: StackItem): boolean {
+    return item.type === ElementType.group;
+  }
 
-    selectItem(event): void {
-        const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
-        this.removeExistingSelectionStyle();
-        this.treeService.setSelectedItem(this.item);
-        element.classList.add('selected-item');
-        event.stopPropagation();
-    }
+  toggleExpand(event: Event): void {
+    this.expanded = !this.expanded;
+    event.stopPropagation();
+  }
 
-    isContainer(item: StackItem): boolean {
-        return item.type === ElementType.group;
-    }
 
-    toggleExpand(event: Event): void {
-        this.expanded = !this.expanded;
-        event.stopPropagation();
-    }
-
-    private removeExistingSelectionStyle(): void {
-        const elements = document.querySelectorAll('.selected-item, .selected-root');
-        elements.forEach(el => {
-            el.classList.remove('selected-item');
-            el.classList.remove('selected-root');
-        });
-    }
 }

@@ -5,7 +5,7 @@
     <i class="material-icons">delete</i>
   </button>
   <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
-  <button mat-button matTooltip="Create group" (click)="createGroup()">
+  <button mat-button matTooltip="Create group" (click)="treeService.createGroup()">
     <i class="material-icons">snippet_folder</i>
   </button>
   <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
@@ -14,4 +14,4 @@
   </button>
 </div>
 <mat-divider class="horizontal-divider"></mat-divider>
-<app-mat-tree [list]="list"></app-mat-tree>
+<app-mat-tree [list]="this.treeService.itemList"></app-mat-tree>

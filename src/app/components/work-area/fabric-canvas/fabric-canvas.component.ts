@@ -2,6 +2,7 @@ import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
 import {StoreService} from '../../../utils/store.service';
 import {FabricComponent} from 'ngx-fabric-wrapper';
 import {Object} from 'fabric/fabric-impl';
+import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 
 @Component({
   selector: 'app-fabric-canvas',
@@ -44,12 +45,17 @@ export class FabricCanvasComponent implements AfterViewInit {
   @HostListener('document:keyup', ['$event'])
   deleteObject(event: KeyboardEvent): void {
     if (event.key === 'Delete' && this.element) {
+      if (this.element.group) {
+        this.element.group._objects.forEach(it => this.store.canvas.remove(it));
+      }
       this.store.canvas.remove(this.element);
+      this.treeService.deleteById(this.element['id']);
       this.element = null;
     }
   }
 
-  constructor(public store: StoreService) {
+  constructor(public store: StoreService,
+              public treeService: TreeService) {
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +64,8 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   private setupCanvas(): void {
     const canvas = this.componentRef.directiveRef.fabric();
+    this.onSelected(canvas);
+    this.onDeselected(canvas);
     this.lockStrokeWidth(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
@@ -74,5 +82,22 @@ export class FabricCanvasComponent implements AfterViewInit {
         o.strokeWidth = o.strokeWidthUnscaled / o.scaleX;
       }
     });
+  }
+
+  private onDeselected(canvas): void {
+    canvas.on('before:selection:cleared', () => {
+      this.treeService.deselectCurrentItems();
+    });
+  }
+
+  private onSelected(canvas): void {
+    const selectionHandler = () => {
+      const elementIds = canvas.getActiveObjects().map(it => it.id);
+      if (elementIds && elementIds.length > 0) {
+        this.treeService.selectItemInLayerList(elementIds);
+      }
+    };
+    canvas.on('selection:created', selectionHandler);
+    canvas.on('selection:updated', selectionHandler);
   }
 }
