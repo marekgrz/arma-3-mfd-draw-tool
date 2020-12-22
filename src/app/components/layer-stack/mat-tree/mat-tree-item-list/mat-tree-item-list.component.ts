@@ -78,9 +78,8 @@ export class MatTreeItemListComponent implements OnInit {
     const element = document.getElementById(this.item.id);
     this.treeService.deselectCurrentItems();
     this.treeService.selectedItem = this.item;
-    this.treeService.selectItemInCanvas();
+    this.treeService.onItemInLayerStackSelected(this.item);
     element.classList.add('selected-item');
-    event.stopPropagation();
   }
 
   isContainer(item: StackItem): boolean {

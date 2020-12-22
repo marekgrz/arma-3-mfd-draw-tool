@@ -54,15 +54,15 @@ export class TreeService {
     this.itemList = this.itemList.filter(it => it.id !== id);
   }
 
-  selectItemInCanvas(): void {
-    const elementListOriginal = this.flatten(this.selectedItem);
-    const selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
+  onItemInLayerStackSelected(item: StackItem): void {
     this.store.canvas.discardActiveObject();
+    const elementListOriginal = this.flatten(item);
+    const selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     this.store.canvas.setActiveObject(selection);
     this.store.canvas.requestRenderAll();
   }
 
-  selectItemInLayerList(ids: string[]): void {
+  onItemInCanvasSelected(ids: string[]): void {
     if (ids.length < 2) {
       this.selectedItem = this.findElementById(this.itemList, ids[0]);
     }

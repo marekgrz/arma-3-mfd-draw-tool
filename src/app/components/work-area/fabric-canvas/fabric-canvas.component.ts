@@ -94,7 +94,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     const selectionHandler = () => {
       const elementIds = canvas.getActiveObjects().map(it => it.id);
       if (elementIds && elementIds.length > 0) {
-        this.treeService.selectItemInLayerList(elementIds);
+        this.treeService.onItemInCanvasSelected(elementIds);
       }
     };
     canvas.on('selection:created', selectionHandler);
