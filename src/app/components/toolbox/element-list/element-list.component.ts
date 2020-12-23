@@ -50,7 +50,8 @@ export class ElementListComponent implements OnInit {
       left: 100, top: 100,
       fill: 'rgba(0,0,0,0)',
       stroke: 'black',
-      strokeWidth: 10,
+      strokeWidth: 1,
+      strokeUniform: true
     });
     rect['id'] = generateId();
     this.canvas.add(rect);

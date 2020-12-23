@@ -1,4 +1,42 @@
-<mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'" >
-  <mat-label>Element name</mat-label>
-  <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
-</mat-form-field>
+<div class="row-container">
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Element name</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
+  </mat-form-field>
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [X]</mat-label>
+      <input matInput autocomplete="off"
+             [(ngModel)]="item.element.left"
+             (change)="save()">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [Y]</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="item.element.top" (change)="save()">
+    </mat-form-field>
+  </div>
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Width</mat-label>
+      <input matInput autocomplete="off"
+             [value]="getWidth()"
+             (change)="updateWidth($event)">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Height</mat-label>
+      <input matInput autocomplete="off"
+             [value]="getHeight()"
+             (change)="updateHeight($event)">
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Stroke</mat-label>
+    <input matInput autocomplete="off"
+           [(ngModel)]="item.element.strokeWidth"
+           (change)="save()">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Angle</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="item.element.angle" (change)="save()">
+  </mat-form-field>
+</div>

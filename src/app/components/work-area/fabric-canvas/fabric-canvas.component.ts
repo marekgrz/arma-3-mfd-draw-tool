@@ -19,26 +19,26 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   snappingEnabled = false;
 
-  SNAP_ANGLE = 15;
+  SNAP_ANGLE = 5;
 
-  @HostListener('document:keydown', ['$event'])
+  STEP_ANGLE = 0.01;
+
+  @HostListener('window:keydown', ['$event'])
   activateSnapping(event: KeyboardEvent): void {
     if (event.key === 'Shift') {
       this.snappingEnabled = true;
     }
   }
 
-  @HostListener('document:keyup', ['$event'])
+  @HostListener('window:keyup', ['$event'])
   disableSnapping(event: KeyboardEvent): void {
-    if (event.key === 'Shift') {
-      this.snappingEnabled = false;
-    }
+    this.snappingEnabled = false;
   }
 
   @HostListener('mousemove')
   rotateObject(): void {
     if (this.element) {
-      this.element.setOptions({snapAngle: this.snappingEnabled ? this.SNAP_ANGLE : 0.1});
+      this.element.setOptions({snapAngle: this.snappingEnabled ? this.SNAP_ANGLE : this.STEP_ANGLE});
     }
   }
 
@@ -66,22 +66,9 @@ export class FabricCanvasComponent implements AfterViewInit {
     const canvas = this.componentRef.directiveRef.fabric();
     this.onSelected(canvas);
     this.onDeselected(canvas);
-    this.lockStrokeWidth(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
-  }
-
-  private lockStrokeWidth(canvas): void {
-    canvas.on('object:scaling', e => {
-      const o = e.target;
-      if (!o.strokeWidthUnscaled && o.strokeWidth) {
-        o.strokeWidthUnscaled = o.strokeWidth;
-      }
-      if (o.strokeWidthUnscaled) {
-        o.strokeWidth = o.strokeWidthUnscaled / o.scaleX;
-      }
-    });
   }
 
   private onDeselected(canvas): void {

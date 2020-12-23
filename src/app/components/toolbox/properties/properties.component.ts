@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {ElementType, StackItem} from '../../layer-stack/elements/StackItem';
 

@@ -58,15 +58,16 @@ export class TreeService {
     this.store.canvas.discardActiveObject();
     const elementListOriginal = this.flatten(item);
     const selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
+    this.selectedItem = item;
     this.store.canvas.setActiveObject(selection);
     this.store.canvas.requestRenderAll();
   }
 
   onItemInCanvasSelected(ids: string[]): void {
+    this.deselectCurrentItems();
     if (ids.length < 2) {
       this.selectedItem = this.findElementById(this.itemList, ids[0]);
     }
-    this.deselectCurrentItems();
     ids.forEach(id => {
       const element = document.getElementById(id);
       element.classList.add('selected-item');
