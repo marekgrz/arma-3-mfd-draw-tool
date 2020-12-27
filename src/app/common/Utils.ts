@@ -26,7 +26,7 @@ export function findByID(id: string, items: StackItem[]): StackItem {
       return item;
     }
     if (item.children) {
-      const result = this.findByID(id, item.children);
+      const result = findByID(id, item.children);
       if (result) {
         return result;
       }

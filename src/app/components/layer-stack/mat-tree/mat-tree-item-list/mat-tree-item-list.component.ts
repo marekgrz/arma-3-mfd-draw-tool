@@ -77,7 +77,8 @@ export class MatTreeItemListComponent implements OnInit {
 
   selectItem(): void {
     // const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
-    const element = document.getElementById(this.item.id);
+    //const element = document.getElementById(this.item.id);
+    const element = document.querySelector(`[itemID=${this.item.id}]`);
     this.interaction.deselectCurrentItems();
     this.treeService.selectedItem = this.item;
     this.interaction.onItemInLayerStackSelected(this.item);
