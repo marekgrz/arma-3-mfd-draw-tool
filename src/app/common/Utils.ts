@@ -37,7 +37,7 @@ export function findByID(id: string, items: StackItem[]): StackItem {
 
 export function deleteElementById(node: StackItem, id): void {
   if (node.children) {
-    node.children.forEach(it => this.deleteElementById(it, id));
+    node.children.forEach(it => deleteElementById(it, id));
     node.children = node.children.filter(it => it.id !== id);
   }
 }

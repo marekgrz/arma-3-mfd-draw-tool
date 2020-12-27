@@ -23,14 +23,14 @@ export class InteractionService {
   }
 
   onItemInCanvasSelected(ids: string[]): void {
-    this.deselectCurrentItems();
-    if (ids.length < 2) {
-      this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
-    }
-    ids.forEach(id => {
-      const element = document.getElementById(id);
-      element.classList.add('selected-item');
-    });
+    // //this.deselectCurrentItems();
+    // if (ids.length < 2) {
+    //   //this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
+    // }
+    // ids.forEach(id => {
+    //   const element = document.getElementById(id);
+    //   element.classList.add('selected-item');
+    // });
   }
 
   deselectCurrentItems(): void {

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
 import {StoreService} from '../../../utils/store.service';
 import {FabricComponent} from 'ngx-fabric-wrapper';
-import {Object} from 'fabric/fabric-impl';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
+import {fabric} from 'fabric';
 
 @Component({
   selector: 'app-fabric-canvas',
@@ -16,7 +16,7 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   config = {};
 
-  element: Object;
+  element: fabric.Object;
 
   snappingEnabled = false;
 
@@ -46,11 +46,13 @@ export class FabricCanvasComponent implements AfterViewInit {
   @HostListener('document:keyup', ['$event'])
   deleteObject(event: KeyboardEvent): void {
     if (event.key === 'Delete' && this.element) {
+      this.treeService.deleteItemByID(this.treeService.selectedItem.id);
       if (this.element.group) {
         this.element.group._objects.forEach(it => this.store.canvas.remove(it));
       }
       this.store.canvas.remove(this.element);
-      this.treeService.deleteItemByID(this.element['id']);
+      this.store.canvas.discardActiveObject();
+      this.store.canvas.renderAll();
       this.element = null;
     }
   }
