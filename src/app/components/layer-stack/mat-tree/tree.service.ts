@@ -3,6 +3,7 @@ import {ElementType, StackItem} from '../elements/StackItem';
 import {Line, Rect} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
+import {deleteElementById, findByID} from '../../../common/Utils';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class TreeService {
   itemList: StackItem[] = [];
 
   private rectangleIndex = 1;
+  private textureIndex = 1;
   private lineIndex = 1;
   private groupIndex = 1;
 
@@ -40,47 +42,41 @@ export class TreeService {
     return item;
   }
 
+  itemFromTexture(texture: fabric.Image): StackItem {
+    const item = new StackItem();
+    item.id = texture['id'];
+    item.name = 'Texture_' + this.textureIndex++;
+    item.type = ElementType.texture;
+    item.element = texture;
+    item.children = null;
+    return item;
+  }
+
   createGroup(): void {
-    if (this.selectedItem && this.selectedItem.type !== ElementType.root) {
-      this.wrapItemsInGroup();
-    } else {
-      this.itemList.push(this.newGroup());
-    }
+    // if (this.selectedItem && this.selectedItem.type !== ElementType.root) {
+    //   this.wrapItemsInGroup();
+    // } else {
+    //
+    // }
+    this.itemList.push(this.newGroup());
     this.groupIndex++;
   }
 
-  deleteById(id: string): void {
-    this.itemList.forEach(it => this.deleteElementById(it, id));
+  deleteItemByID(id: string): void {
+    this.itemList.forEach(it => deleteElementById(it, id));
     this.itemList = this.itemList.filter(it => it.id !== id);
   }
 
-  onItemInLayerStackSelected(item: StackItem): void {
-    this.store.canvas.discardActiveObject();
-    const elementListOriginal = this.flatten(item);
-    const selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
-    this.selectedItem = item;
-    this.store.canvas.setActiveObject(selection);
-    this.store.canvas.requestRenderAll();
-  }
-
-  onItemInCanvasSelected(ids: string[]): void {
-    this.deselectCurrentItems();
-    if (ids.length < 2) {
-      this.selectedItem = this.findElementById(this.itemList, ids[0]);
-    }
-    ids.forEach(id => {
-      const element = document.getElementById(id);
-      element.classList.add('selected-item');
-    });
-  }
-
-  deselectCurrentItems(): void {
-    this.selectedItem = null;
-    const elements = document.querySelectorAll('.selected-item, .selected-root');
-    elements.forEach(el => {
-      el.classList.remove('selected-item');
-      el.classList.remove('selected-root');
-    });
+  pushToListInCorrectPlace(item: StackItem): void {
+    this.itemList.push(item);
+    // if (!this.selectedItem || !this.selectedItem.parent) {
+    //   //isRoot
+    //   this.itemList.push(item);
+    // } else {
+    //   this.selectedItem.type === ElementType.group
+    //     ? this.selectedItem.children.push(item)
+    //     : this.selectedItem.parent.children.push(item);
+    // }
   }
 
   private newGroup(): StackItem {
@@ -91,7 +87,13 @@ export class TreeService {
     return group;
   }
 
-  private wrapItemsInGroup(): StackItem {
+  // UNUSED YET
+  updateItemParent(itemID: string, newParentID: string): void {
+    const selectedItem = findByID(itemID, this.itemList);
+    selectedItem.parent = findByID(newParentID, this.itemList);
+  }
+
+  private wrapItemsInGroup(): void {
     const group = this.newGroup();
     const children = [Object.assign({}, this.selectedItem)];
     this.selectedItem.name = group.name;
@@ -99,50 +101,5 @@ export class TreeService {
     this.selectedItem.element = group.element;
     this.selectedItem.type = group.type;
     this.selectedItem.children = children;
-    return group;
-  }
-
-  private findElementById(nodes, id, callback?): StackItem {
-    let res;
-    const findNode = (nodes, id) => {
-      for (const item of nodes) {
-        if (item.id === id) {
-          res = item;
-          break;
-        }
-        if (item.nextItems) {
-          findNode(item.nextItems, id);
-        }
-      }
-    };
-    findNode(nodes, id);
-    return res;
-  }
-
-  private deleteElementById(node: StackItem, id): void {
-    if (node.children) {
-      node.children.forEach(it => this.deleteElementById(it, id));
-      node.children = node.children.filter(it => it.id !== id);
-    }
-  }
-
-  private flatten(node: StackItem): fabric.Object[] {
-    if (!node.children) {
-      if (!node.element) {
-        return [];
-      }
-      return [node.element];
-    }
-    let elements = [];
-    node.children.map(item => {
-        if (item.children) {
-          elements = [...elements, ...this.flatten(item)];
-        }
-        if (item.element) {
-          elements.push(item.element);
-        }
-      }
-    );
-    return elements;
   }
 }

@@ -34,6 +34,7 @@ import { RootComponent } from './components/toolbox/properties/element-types/roo
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS, NgxMatColorPickerModule} from '@angular-material-components/color-picker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TextureElementComponent } from './components/toolbox/properties/element-types/texture-element/texture-element.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     RectangleElementComponent,
     FabricCanvasComponent,
     RootComponent,
+    TextureElementComponent,
   ],
   imports: [
     BrowserModule,

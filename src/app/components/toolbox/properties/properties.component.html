@@ -4,4 +4,5 @@
   <app-root-element [item]="treeService.selectedItem"  *ngIf="isRoot(treeService.selectedItem)"></app-root-element>
   <app-group-element [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-element>
   <app-rectangle-element [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></app-rectangle-element>
+  <app-texture-element [item]="treeService.selectedItem" *ngIf="isTexture(treeService.selectedItem)"></app-texture-element>
 </div>

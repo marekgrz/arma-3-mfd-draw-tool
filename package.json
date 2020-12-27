@@ -1,6 +1,18 @@
 {
   "name": "arma-mfd-drawer",
   "version": "0.0.0",
+  "browser": {
+    "http": false,
+    "https": false,
+    "net": false,
+    "path": false,
+    "stream": false,
+    "tls": false,
+    "constants": false,
+    "fs": false,
+    "os": false,
+    "zlib": false
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -29,6 +41,7 @@
     "ngx-sortablejs": "^10.0.0",
     "rxjs": "~6.6.0",
     "sortablejs": "^1.12.0",
+    "tga-js": "^1.1.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
@@ -37,7 +50,7 @@
     "@angular/cli": "~11.0.4",
     "@angular/compiler-cli": "~11.0.4",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.19.11",
     "@types/sortablejs": "^1.10.6",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",

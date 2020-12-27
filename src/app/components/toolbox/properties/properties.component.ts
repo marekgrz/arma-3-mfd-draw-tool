@@ -26,4 +26,8 @@ export class PropertiesComponent implements OnInit {
   isRectangle(item: StackItem): boolean {
     return item.type === ElementType.rectangle;
   }
+
+  isTexture(item: StackItem): boolean {
+    return item.type === ElementType.texture;
+  }
 }

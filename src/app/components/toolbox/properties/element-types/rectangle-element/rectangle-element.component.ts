@@ -24,7 +24,7 @@ export class RectangleElementComponent implements OnInit {
     this.newWidth = this.getWidth();
   }
 
-  save() {
+  save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
     rect.left = Number(this.item.element.left);
     rect.top = Number(this.item.element.top);
@@ -36,21 +36,21 @@ export class RectangleElementComponent implements OnInit {
     this.store.canvas.requestRenderAll();
   }
 
-  updateHeight(event) {
+  updateHeight(event): void {
     this.newHeight = event.target.value;
     this.save();
   }
 
-  updateWidth(event) {
+  updateWidth(event): void {
     this.newWidth = event.target.value;
     this.save();
   }
 
-  getWidth() {
+  getWidth(): number {
     return this.item.element.width * this.item.element.scaleX;
   }
 
-  getHeight() {
+  getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
   }
 }

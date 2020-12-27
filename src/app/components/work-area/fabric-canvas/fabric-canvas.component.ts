@@ -3,6 +3,7 @@ import {StoreService} from '../../../utils/store.service';
 import {FabricComponent} from 'ngx-fabric-wrapper';
 import {Object} from 'fabric/fabric-impl';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
+import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'app-fabric-canvas',
@@ -49,13 +50,14 @@ export class FabricCanvasComponent implements AfterViewInit {
         this.element.group._objects.forEach(it => this.store.canvas.remove(it));
       }
       this.store.canvas.remove(this.element);
-      this.treeService.deleteById(this.element['id']);
+      this.treeService.deleteItemByID(this.element['id']);
       this.element = null;
     }
   }
 
   constructor(public store: StoreService,
-              public treeService: TreeService) {
+              public treeService: TreeService,
+              private interaction: InteractionService) {
   }
 
   ngAfterViewInit(): void {
@@ -73,7 +75,7 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   private onDeselected(canvas): void {
     canvas.on('before:selection:cleared', () => {
-      this.treeService.deselectCurrentItems();
+      this.interaction.deselectCurrentItems();
     });
   }
 
@@ -81,7 +83,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     const selectionHandler = () => {
       const elementIds = canvas.getActiveObjects().map(it => it.id);
       if (elementIds && elementIds.length > 0) {
-        this.treeService.onItemInCanvasSelected(elementIds);
+        this.interaction.onItemInCanvasSelected(elementIds);
       }
     };
     canvas.on('selection:created', selectionHandler);

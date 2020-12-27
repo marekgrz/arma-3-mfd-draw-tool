@@ -3,7 +3,7 @@ import {fabric} from 'fabric';
 import {Canvas} from 'fabric/fabric-impl';
 import {StoreService} from '../../../utils/store.service';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
-import {generateId} from '../../layer-stack/elements/StackItem';
+import {ElementType, generateId, StackItem} from '../../layer-stack/elements/StackItem';
 
 @Component({
   selector: 'app-element-list',
@@ -14,7 +14,7 @@ export class ElementListComponent implements OnInit {
 
   searchValue = '';
   elementTypes: string[];
-  private allElementTypes: string[] = ['Rectangle', 'Line', 'Text'];
+  private allElementTypes: string[] = ['Rectangle', 'Line', 'Text', 'Texture'];
   canvas: Canvas;
 
   constructor(public store: StoreService,
@@ -55,8 +55,23 @@ export class ElementListComponent implements OnInit {
     });
     rect['id'] = generateId();
     this.canvas.add(rect);
-    this.treeService.selectedItem
-      ? this.treeService.selectedItem.children.push(this.treeService.itemFromRectangle(rect))
-      : this.treeService.itemList.push(this.treeService.itemFromRectangle(rect));
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect))
+  }
+  addTexture(): void {
+    const htmlImage = new Image();
+    htmlImage.onload = img => {
+      const image = new fabric.Image(htmlImage, {
+        angle: 0,
+        left: 100,
+        top: 100,
+        strokeUniform: true
+      });
+      image.scaleToWidth(100);
+      image.scaleToHeight(100);
+      image['id'] = generateId();
+      this.canvas.add(image);
+      this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image))
+    };
+    htmlImage.src = 'assets/image-placeholder.webp';
   }
 }

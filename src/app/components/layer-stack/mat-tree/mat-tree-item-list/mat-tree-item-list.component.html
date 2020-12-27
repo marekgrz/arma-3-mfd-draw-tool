@@ -1,4 +1,4 @@
-<div>
+<div [attr.itemID]="item.id">
   <div [class.item]="!isRoot">
     <div *ngIf="isRoot" class="root" (click)="selectRootSettings($event)"><span class="material-icons">view_list</span>Root
     </div>
@@ -14,7 +14,7 @@
       <mat-icon *ngIf="renaming" (click)="renaming =! renaming; $event.stopPropagation()">cancel</mat-icon>
     </div>
     <div *ngIf="item.children" class="item-child-container" [sortablejs]="item.children" [sortablejsOptions]="options"
-         [ngClass]="expanded ? 'expanded' : 'collapsed'">
+         [ngClass]="expanded ? 'expanded' : 'collapsed'" [attr.itemID]="item.id">
       <div *ngFor="let listChild of item.children">
         <app-mat-tree-item-list [item]="listChild"></app-mat-tree-item-list>
       </div>

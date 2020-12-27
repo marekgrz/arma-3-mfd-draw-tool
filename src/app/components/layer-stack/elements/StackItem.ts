@@ -1,11 +1,10 @@
-import {BaseElement} from './BaseElement';
-
 export class StackItem {
   id: string = generateId();
   name: string;
   type: ElementType;
   element?: any;
   children = new Array<StackItem>();
+  parent?: StackItem;
 }
 
 export enum ElementType {
@@ -14,6 +13,7 @@ export enum ElementType {
   line,
   rectangle,
   circle,
+  texture
 }
 
 export function generateId(): string {

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ElementType, StackItem} from '../../elements/StackItem';
 import {TreeService} from '../tree.service';
+import {InteractionService} from '../interaction.service';
 
 @Component({
   selector: 'app-mat-tree-item-list',
@@ -23,18 +24,19 @@ export class MatTreeItemListComponent implements OnInit {
 
   options: any = {
     group: 'layer-stack',
-    onUpdate: () => {
-
+    onUpdate: (evt) => {
+      // this.updateParents(evt);
     },
-    onAdd: () => {
-
+    onAdd: (evt) => {
+      // this.updateParents(evt);
     },
     onRemove: () => {
 
     },
   };
 
-  constructor(private treeService: TreeService) {
+  constructor(private treeService: TreeService,
+              private interaction: InteractionService) {
   }
 
   ngOnInit(): void {
@@ -67,7 +69,7 @@ export class MatTreeItemListComponent implements OnInit {
 
   selectRootSettings(event): void {
     const element = event.target;
-    this.treeService.deselectCurrentItems();
+    this.interaction.deselectCurrentItems();
     this.treeService.selectedItem = this.item;
     element.classList.add('selected-root');
     event.stopPropagation();
@@ -76,9 +78,9 @@ export class MatTreeItemListComponent implements OnInit {
   selectItem(): void {
     // const element = event.target.classList.contains('row') ? event.target.parentElement : event.target.parentElement.parentElement;
     const element = document.getElementById(this.item.id);
-    this.treeService.deselectCurrentItems();
+    this.interaction.deselectCurrentItems();
     this.treeService.selectedItem = this.item;
-    this.treeService.onItemInLayerStackSelected(this.item);
+    this.interaction.onItemInLayerStackSelected(this.item);
     element.classList.add('selected-item');
   }
 
@@ -91,5 +93,9 @@ export class MatTreeItemListComponent implements OnInit {
     event.stopPropagation();
   }
 
-
+  // private updateParents(evt): void {
+  //   const itemID = evt.item.firstChild.firstElementChild.getAttribute('itemID');
+  //   const parentID = evt.to.getAttribute('itemID');
+  //   this.treeService.updateItemParent(itemID, parentID);
+  // }
 }
