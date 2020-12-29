@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {StackItem} from '../../../../layer-stack/elements/StackItem';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../../../utils/store.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-rectangle-element',
@@ -15,6 +16,7 @@ export class RectangleElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  color: FormControl;
 
   constructor(private store: StoreService) {
   }
@@ -22,6 +24,7 @@ export class RectangleElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
   }
 
   save(): void {
@@ -30,6 +33,7 @@ export class RectangleElementComponent implements OnInit {
     rect.top = Number(this.item.element.top);
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
+    rect.set('stroke', this.color.value);
     rect.set('strokeWidth', Number(this.item.element.strokeWidth));
     rect.angle = this.item.element.angle;
     rect.setCoords();

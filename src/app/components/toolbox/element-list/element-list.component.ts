@@ -3,7 +3,8 @@ import {fabric} from 'fabric';
 import {Canvas} from 'fabric/fabric-impl';
 import {StoreService} from '../../../utils/store.service';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
-import {ElementType, generateId, StackItem} from '../../layer-stack/elements/StackItem';
+import {generateId} from '../../layer-stack/elements/StackItem';
+import {Color} from '@angular-material-components/color-picker';
 
 @Component({
   selector: 'app-element-list',
@@ -49,14 +50,15 @@ export class ElementListComponent implements OnInit {
       width: 50, height: 50,
       left: 100, top: 100,
       fill: 'rgba(0,0,0,0)',
-      stroke: 'black',
+      stroke: new Color(0, 0, 0, 1) as any,
       strokeWidth: 1,
       strokeUniform: true
     });
     rect['id'] = generateId();
     this.canvas.add(rect);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect))
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
   }
+
   addTexture(): void {
     const htmlImage = new Image();
     htmlImage.onload = img => {
@@ -70,7 +72,7 @@ export class ElementListComponent implements OnInit {
       image.scaleToHeight(100);
       image['id'] = generateId();
       this.canvas.add(image);
-      this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image))
+      this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image));
     };
     htmlImage.src = 'assets/image-placeholder.webp';
   }
