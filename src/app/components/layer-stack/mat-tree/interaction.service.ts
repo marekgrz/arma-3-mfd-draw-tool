@@ -3,7 +3,7 @@ import {TreeService} from './tree.service';
 import {ElementType, StackItem} from '../elements/StackItem';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
-import {findByID} from '../../../common/Utils';
+import {findByID, flattenNode} from '../../../common/Utils';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class InteractionService {
     this.store.canvas.discardActiveObject();
     let selection;
     if (item.type === ElementType.group) {
-      const elementListOriginal = this.flatten(item);
+      const elementListOriginal = flattenNode(item);
       selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     } else {
       selection = this.store.canvas.getObjects().find(element => element['id'] === item.id);
@@ -46,25 +46,5 @@ export class InteractionService {
       el.classList.remove('selected-item');
       el.classList.remove('selected-root');
     });
-  }
-
-  private flatten(node: StackItem): fabric.Object[] {
-    if (!node.children) {
-      if (!node.element) {
-        return [];
-      }
-      return [node.element];
-    }
-    let elements = [];
-    node.children.map(item => {
-        if (item.children) {
-          elements = [...elements, ...this.flatten(item)];
-        }
-        if (item.element) {
-          elements.push(item.element);
-        }
-      }
-    );
-    return elements;
   }
 }

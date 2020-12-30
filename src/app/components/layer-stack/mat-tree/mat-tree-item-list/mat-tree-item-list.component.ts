@@ -25,13 +25,13 @@ export class MatTreeItemListComponent implements OnInit {
   options: any = {
     group: 'layer-stack',
     onUpdate: (evt) => {
-      // this.updateParents(evt);
+      this.treeService.refreshStackPosition();
     },
     onAdd: (evt) => {
-      // this.updateParents(evt);
+      this.treeService.refreshStackPosition();
     },
     onRemove: () => {
-
+      this.treeService.refreshStackPosition();
     },
   };
 

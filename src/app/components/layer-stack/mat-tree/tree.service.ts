@@ -3,7 +3,7 @@ import {ElementType, StackItem} from '../elements/StackItem';
 import {Line, Rect} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
-import {deleteElementById, findByID} from '../../../common/Utils';
+import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,17 @@ export class TreeService {
   private groupIndex = 1;
 
   constructor(public store: StoreService) {
+  }
+
+  refreshStackPosition(): void {
+    let index = 1;
+    const flatItemList = flattenList(this.itemList).filter(el => el.type !== ElementType.group);
+    const objects = this.store.canvas.getObjects();
+    flatItemList.map(item => {
+      objects.find(obj => obj['id'] === item.id)
+        .moveTo(index);
+      index++;
+    });
   }
 
   itemFromLine(line: Line): StackItem {
