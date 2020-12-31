@@ -18,6 +18,34 @@ body {
 //
 //GLOBAL
 //
+.row-container {
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.info-icon {
+  vertical-align: sub;
+  padding-left: 10px;
+}
+
+.checkbox {
+  padding: 0 10px 10px 10px;
+  font-size: 0.7rem;
+  display: flex;
+}
+
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .full-width {
   width: 100%;
 }
@@ -26,6 +54,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
   mat-form-field {
     width: 48%;
   }
@@ -34,13 +63,16 @@ body {
 .small-input {
   font-size: 12px;
   color: #efefef;
+
   .mat-form-field-infix {
     padding: 0.5em !important;
   }
 }
-.clickable{
+
+.clickable {
   cursor: pointer;
 }
+
 .section-title {
   background-color: #394048;
   padding: 10px;
@@ -55,9 +87,9 @@ body {
 .disable-text-selection {
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select:none;
-  user-select:none;
-  -o-user-select:none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
 }
 
 .upper-canvas {
@@ -67,6 +99,7 @@ body {
 .tree-content {
   margin: 5px !important;
 }
+
 .tree-content-main, .root-title {
   margin-left: 15px;
 }

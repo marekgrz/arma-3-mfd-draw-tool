@@ -59,6 +59,43 @@ export class ElementListComponent implements OnInit {
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
   }
 
+  addTriangle(): void {
+    const triangle = new fabric.Triangle({
+      width: 50, height: 50,
+      left: 100, top: 100,
+      fill: 'rgba(0,0,0,0)',
+      stroke: new Color(0, 0, 0, 1) as any,
+      strokeWidth: 1,
+      strokeUniform: true
+    });
+    triangle['id'] = generateId();
+    this.canvas.add(triangle);
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTriangle(triangle));
+  }
+
+  addPolygonRect(): void {
+    const rect = new fabric.Rect({
+      width: 50, height: 50,
+      left: 100, top: 100,
+      fill: new Color(0, 0, 0, 1) as any,
+    });
+    rect['id'] = generateId();
+    this.canvas.add(rect);
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonRectangle(rect));
+  }
+
+  addPolygonTriangle(): void {
+    const triangle = new fabric.Triangle({
+      width: 50, height: 50,
+      left: 100, top: 100,
+      fill: new Color(0, 0, 0, 1) as any,
+    });
+    triangle['id'] = generateId();
+    this.canvas.add(triangle);
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonTriangle(triangle));
+  }
+
+
   addCircle(): void {
     const circle = new fabric.Circle({
       radius: 50,

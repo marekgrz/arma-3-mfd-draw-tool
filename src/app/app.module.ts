@@ -36,6 +36,9 @@ import {MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS, NgxMatColorPickerModule} from 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { TextureElementComponent } from './components/toolbox/properties/element-types/texture-element/texture-element.component';
 import { CircleElementComponent } from './components/toolbox/properties/element-types/circle-element/circle-element.component';
+import { PolygonRectElementComponent } from './components/toolbox/properties/element-types/polygon-rect-element/polygon-rect-element.component';
+import { PolygonTriangleElementComponent } from './components/toolbox/properties/element-types/polygon-triangle-element/polygon-triangle-element.component';
+import { TriangleElementComponent } from './components/toolbox/properties/element-types/triangle-element/triangle-element.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { CircleElementComponent } from './components/toolbox/properties/element-
     RootComponent,
     TextureElementComponent,
     CircleElementComponent,
+    PolygonRectElementComponent,
+    PolygonTriangleElementComponent,
+    TriangleElementComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,9 @@ export enum ElementType {
   line,
   rectangle,
   circle,
+  triangle,
+  polygonRect,
+  polygonTriangle,
   texture
 }
 

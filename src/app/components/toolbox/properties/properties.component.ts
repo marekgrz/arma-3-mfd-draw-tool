@@ -34,4 +34,16 @@ export class PropertiesComponent implements OnInit {
   isCircle(item: StackItem): boolean {
     return item.type === ElementType.circle;
   }
+
+  isTriangle(item: StackItem): boolean {
+    return item.type === ElementType.triangle;
+  }
+
+  isPolygonTriangle(item: StackItem): boolean {
+    return item.type === ElementType.polygonTriangle;
+  }
+
+  isPolygonRectangle(item: StackItem): boolean {
+    return item.type === ElementType.polygonRect;
+  }
 }

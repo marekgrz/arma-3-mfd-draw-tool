@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ElementType, StackItem} from '../elements/StackItem';
-import {Circle, Line, Rect} from 'fabric/fabric-impl';
+import {Circle, Line, Rect, Triangle} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
@@ -19,6 +19,9 @@ export class TreeService {
   private lineIndex = 1;
   private groupIndex = 1;
   private circleIndex = 1;
+  private polygonRectangleIndex = 1;
+  private polygonTriangleIndex = 1;
+  private triangleIndex = 1;
 
   constructor(public store: StoreService) {
   }
@@ -54,12 +57,42 @@ export class TreeService {
     return item;
   }
 
+  itemFromTriangle(triangle: Triangle): StackItem {
+    const item = new StackItem();
+    item.id = triangle['id'];
+    item.name = 'Triangle' + this.triangleIndex++;
+    item.type = ElementType.triangle;
+    item.element = triangle;
+    item.children = null;
+    return item;
+  }
+
   itemFromCircle(circle: Circle): StackItem {
     const item = new StackItem();
     item.id = circle['id'];
     item.name = 'Circle_' + this.circleIndex++;
     item.type = ElementType.circle;
     item.element = circle;
+    item.children = null;
+    return item;
+  }
+
+  itemFromPolygonRectangle(rectangle: Rect): StackItem {
+    const item = new StackItem();
+    item.id = rectangle['id'];
+    item.name = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
+    item.type = ElementType.polygonRect;
+    item.element = rectangle;
+    item.children = null;
+    return item;
+  }
+
+  itemFromPolygonTriangle(triangle: Triangle): StackItem {
+    const item = new StackItem();
+    item.id = triangle['id'];
+    item.name = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
+    item.type = ElementType.polygonTriangle;
+    item.element = triangle;
     item.children = null;
     return item;
   }
