@@ -59,6 +59,20 @@ export class ElementListComponent implements OnInit {
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
   }
 
+  addCircle(): void {
+    const circle = new fabric.Circle({
+      radius: 50,
+      fill: 'rgba(0,0,0,0)',
+      stroke: new Color(0, 0, 0, 1) as any,
+      strokeWidth: 1,
+      strokeUniform: true,
+      left: 50, top: 50
+    });
+    circle['id'] = generateId();
+    this.canvas.add(circle);
+    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromCircle(circle));
+  }
+
   addTexture(): void {
     const htmlImage = new Image();
     htmlImage.onload = img => {

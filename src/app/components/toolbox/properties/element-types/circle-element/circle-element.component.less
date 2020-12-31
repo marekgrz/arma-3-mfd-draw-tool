@@ -1,0 +1,27 @@
+.row-container {
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+
+  .action-button{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .info-icon {
+    vertical-align: sub;
+    padding-left: 10px;
+  }
+
+  .checkbox{
+    padding: 0 10px 10px 10px;
+    font-size: 0.7rem;
+    display: flex;
+  }
+}
+
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+  cursor: not-allowed;
+}

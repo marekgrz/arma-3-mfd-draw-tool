@@ -1,0 +1,70 @@
+<div class="row-container">
+<!--  NAME-->
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Element name</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
+  </mat-form-field>
+<!--  POSITION-->
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [X]</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="item.element.left"
+             (change)="save()">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [Y]</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="item.element.top"
+             (change)="save()">
+    </mat-form-field>
+  </div>
+<!--  RADIUS-->
+  <mat-checkbox class="checkbox" [(ngModel)]="uniformDiameter" (ngModelChange)="makeDiameterUniform()">Uniform radius</mat-checkbox>
+  <div class="pair-elements" *ngIf="!uniformDiameter">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Radius X</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [value]="getDiameterX()"
+             (change)="updateDiameterX($event)">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Radius Y</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [value]="getDiameterY()"
+             (change)="updateDiameterY($event)">
+    </mat-form-field>
+  </div>
+  <div class="pair-elements" *ngIf="uniformDiameter">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Radius</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [value]="getDiameterX()"
+             (change)="updateDiameter($event)">
+    </mat-form-field>
+  </div>
+<!--  STROKE-->
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Stroke</mat-label>
+    <input matInput autocomplete="off"
+           [type]="'number'"
+           [(ngModel)]="item.element.strokeWidth"
+           (change)="save()">
+  </mat-form-field>
+<!--  COLOR-->
+  <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+    <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
+    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+    <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+  </mat-form-field>
+<!--  ANGLE-->
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Angle</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="item.element.angle" (change)="save()">
+  </mat-form-field>
+</div>

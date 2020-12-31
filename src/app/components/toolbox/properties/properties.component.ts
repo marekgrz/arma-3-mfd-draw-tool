@@ -30,4 +30,8 @@ export class PropertiesComponent implements OnInit {
   isTexture(item: StackItem): boolean {
     return item.type === ElementType.texture;
   }
+
+  isCircle(item: StackItem): boolean {
+    return item.type === ElementType.circle;
+  }
 }

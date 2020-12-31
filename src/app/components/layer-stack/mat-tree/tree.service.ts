@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ElementType, StackItem} from '../elements/StackItem';
-import {Line, Rect} from 'fabric/fabric-impl';
+import {Circle, Line, Rect} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
@@ -18,6 +18,7 @@ export class TreeService {
   private textureIndex = 1;
   private lineIndex = 1;
   private groupIndex = 1;
+  private circleIndex = 1;
 
   constructor(public store: StoreService) {
   }
@@ -49,6 +50,16 @@ export class TreeService {
     item.name = 'Rectangle_' + this.rectangleIndex++;
     item.type = ElementType.rectangle;
     item.element = rectangle;
+    item.children = null;
+    return item;
+  }
+
+  itemFromCircle(circle: Circle): StackItem {
+    const item = new StackItem();
+    item.id = circle['id'];
+    item.name = 'Circle_' + this.circleIndex++;
+    item.type = ElementType.circle;
+    item.element = circle;
     item.children = null;
     return item;
   }
