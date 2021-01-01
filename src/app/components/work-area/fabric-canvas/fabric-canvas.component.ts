@@ -79,6 +79,16 @@ export class FabricCanvasComponent implements AfterViewInit {
     canvas.on('before:selection:cleared', () => {
       this.interaction.deselectCurrentItems();
     });
+
+    canvas.on('mouse:over', e => {
+      e.target.set('opacity', '0.5');
+      canvas.renderAll();
+    });
+
+    canvas.on('mouse:out', e => {
+      e.target.set('opacity', '1');
+      canvas.renderAll();
+    });
   }
 
   private onSelected(canvas): void {
