@@ -23,6 +23,10 @@ export class PropertiesComponent implements OnInit {
     return item.type === ElementType.group;
   }
 
+  isLine(item: StackItem): boolean {
+    return item.type === ElementType.line;
+  }
+
   isRectangle(item: StackItem): boolean {
     return item.type === ElementType.rectangle;
   }

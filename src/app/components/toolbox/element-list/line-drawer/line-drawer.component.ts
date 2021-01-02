@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {generateId} from '../../../layer-stack/elements/StackItem';
 import {fromEvent} from 'rxjs';
 import {InteractionService} from '../../../layer-stack/mat-tree/interaction.service';
+import {Color} from '@angular-material-components/color-picker';
 
 export abstract class LineDrawerComponent {
 
@@ -67,10 +68,9 @@ export abstract class LineDrawerComponent {
       coords,
       {
         fill: 'rgba(0,0,0,0)',
-        stroke: 'red',
+        stroke: new Color(0, 0, 0, 1) as any,
         strokeWidth: 5,
-        lockScalingY: true,
-        cornerSize: 3
+        strokeUniform: true,
       });
     line['id'] = temporary ? 'tempPolyLine' : generateId();
     this.store.canvas.add(line);

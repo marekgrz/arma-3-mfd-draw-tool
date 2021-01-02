@@ -40,6 +40,7 @@ import { PolygonRectElementComponent } from './components/toolbox/properties/ele
 import { PolygonTriangleElementComponent } from './components/toolbox/properties/element-types/polygon-triangle-element/polygon-triangle-element.component';
 import { TriangleElementComponent } from './components/toolbox/properties/element-types/triangle-element/triangle-element.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LineElementComponent } from './components/toolbox/properties/element-types/line-element/line-element.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PolygonRectElementComponent,
     PolygonTriangleElementComponent,
     TriangleElementComponent,
+    LineElementComponent,
   ],
   imports: [
     BrowserModule,
