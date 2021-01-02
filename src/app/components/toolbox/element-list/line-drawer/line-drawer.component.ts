@@ -71,6 +71,8 @@ export abstract class LineDrawerComponent {
         stroke: new Color(0, 0, 0, 1) as any,
         strokeWidth: 5,
         strokeUniform: true,
+        objectCaching: false,
+        transparentCorners: false,
       });
     line['id'] = temporary ? 'tempPolyLine' : generateId();
     this.store.canvas.add(line);
