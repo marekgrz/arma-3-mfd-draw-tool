@@ -10,8 +10,18 @@ import {findByID, flattenNode} from '../../../common/Utils';
 })
 export class InteractionService {
 
+  private drawingMode = false;
+
   constructor(private treeService: TreeService,
               private store: StoreService) {
+  }
+
+  startFreeDrawing(): void {
+    this.drawingMode = true;
+  }
+
+  stopFreeDrawing(): void {
+    this.drawingMode = false;
   }
 
   onItemInLayerStackSelected(item: StackItem): void {
@@ -29,14 +39,16 @@ export class InteractionService {
   }
 
   onItemInCanvasSelected(ids: string[]): void {
-    this.deselectCurrentItems();
-    if (ids.length < 2) {
-      this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
+    if (!this.drawingMode) {
+      this.deselectCurrentItems();
+      if (ids.length < 2) {
+        this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
+      }
+      ids.forEach(id => {
+        const element = document.getElementById(id);
+        element.classList.add('selected-item');
+      });
     }
-    ids.forEach(id => {
-      const element = document.getElementById(id);
-      element.classList.add('selected-item');
-    });
   }
 
   deselectCurrentItems(): void {

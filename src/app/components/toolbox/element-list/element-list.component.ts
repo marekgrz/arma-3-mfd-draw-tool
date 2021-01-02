@@ -5,13 +5,16 @@ import {StoreService} from '../../../utils/store.service';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {generateId} from '../../layer-stack/elements/StackItem';
 import {Color} from '@angular-material-components/color-picker';
+import {LineDrawerComponent} from './line-drawer/line-drawer.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'app-element-list',
   templateUrl: './element-list.component.html',
   styleUrls: ['./element-list.component.less']
 })
-export class ElementListComponent implements OnInit {
+export class ElementListComponent extends LineDrawerComponent implements OnInit {
 
   searchValue = '';
   elementTypes: string[];
@@ -19,7 +22,10 @@ export class ElementListComponent implements OnInit {
   canvas: Canvas;
 
   constructor(public store: StoreService,
-              public treeService: TreeService) {
+              public treeService: TreeService,
+              public snackBar: MatSnackBar,
+              private interactionService: InteractionService) {
+    super(store, treeService, snackBar, interactionService);
   }
 
   ngOnInit(): void {
@@ -29,20 +35,6 @@ export class ElementListComponent implements OnInit {
 
   filterOptions(): void {
     this.elementTypes = this.allElementTypes.filter(it => it.toLowerCase().includes(this.searchValue.toLowerCase()));
-  }
-
-  addLine(): void {
-    const line = new fabric.Line(
-      [100, 100, 200, 100],
-      {
-        fill: 'red',
-        stroke: 'red',
-        strokeWidth: 5,
-        lockScalingY: true,
-        cornerSize: 3
-      });
-    line['id'] = generateId();
-    this.canvas.add(line);
   }
 
   addRect(): void {

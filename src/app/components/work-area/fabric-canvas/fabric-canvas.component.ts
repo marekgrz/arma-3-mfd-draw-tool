@@ -70,6 +70,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     const canvas = this.componentRef.directiveRef.fabric();
     this.onSelected(canvas);
     this.onDeselected(canvas);
+    this.onHighLighted(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
@@ -78,16 +79,6 @@ export class FabricCanvasComponent implements AfterViewInit {
   private onDeselected(canvas): void {
     canvas.on('before:selection:cleared', () => {
       this.interaction.deselectCurrentItems();
-    });
-
-    canvas.on('mouse:over', e => {
-      e.target.set('opacity', '0.5');
-      canvas.renderAll();
-    });
-
-    canvas.on('mouse:out', e => {
-      e.target.set('opacity', '1');
-      canvas.renderAll();
     });
   }
 
@@ -100,5 +91,21 @@ export class FabricCanvasComponent implements AfterViewInit {
     };
     canvas.on('selection:created', selectionHandler);
     canvas.on('selection:updated', selectionHandler);
+  }
+
+  private onHighLighted(canvas): void {
+    canvas.on('mouse:over', e => {
+      if (e.target) {
+        e.target.set('opacity', '0.5');
+        canvas.renderAll();
+      }
+    });
+
+    canvas.on('mouse:out', e => {
+      if (e.target) {
+        e.target.set('opacity', '1');
+        canvas.renderAll();
+      }
+    });
   }
 }

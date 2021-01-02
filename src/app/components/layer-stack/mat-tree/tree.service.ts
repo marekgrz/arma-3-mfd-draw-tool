@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ElementType, StackItem} from '../elements/StackItem';
-import {Circle, Line, Rect, Triangle} from 'fabric/fabric-impl';
+import {Circle, Line, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
@@ -37,7 +37,7 @@ export class TreeService {
     });
   }
 
-  itemFromLine(line: Line): StackItem {
+  itemFromLine(line: Polyline): StackItem {
     const item = new StackItem();
     item.id = line['id'];
     item.name = 'Line_' + this.lineIndex++;

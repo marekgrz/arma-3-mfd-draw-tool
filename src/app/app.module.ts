@@ -39,6 +39,7 @@ import { CircleElementComponent } from './components/toolbox/properties/element-
 import { PolygonRectElementComponent } from './components/toolbox/properties/element-types/polygon-rect-element/polygon-rect-element.component';
 import { PolygonTriangleElementComponent } from './components/toolbox/properties/element-types/polygon-triangle-element/polygon-triangle-element.component';
 import { TriangleElementComponent } from './components/toolbox/properties/element-types/triangle-element/triangle-element.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { TriangleElementComponent } from './components/toolbox/properties/elemen
     ReactiveFormsModule,
     NgxMatColorPickerModule,
     MatCheckboxModule,
+    MatSnackBarModule,
   ],
   providers: [ { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   bootstrap: [AppComponent]
