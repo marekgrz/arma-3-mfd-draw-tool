@@ -1,6 +1,6 @@
 <app-heder-menu></app-heder-menu>
 <div class="main">
   <app-layer-list class="layer-list"></app-layer-list>
-  <app-work-area class="work-area"></app-work-area>
-  <app-toolbox class="toolbox"></app-toolbox>
+  <app-work-area (showDesigner)="showToolbox = $event" class="work-area"></app-work-area>
+  <app-toolbox *ngIf="showToolbox" class="toolbox"></app-toolbox>
 </div>

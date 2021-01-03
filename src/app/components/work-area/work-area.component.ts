@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {fromEvent, Subscription} from 'rxjs';
 import {StoreService} from '../../utils/store.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-work-area',
@@ -11,6 +12,11 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('workspaceContainer') workspaceContainer: ElementRef;
   @ViewChild('workspace') workspace: ElementRef;
+
+  @Output()
+  showDesigner: EventEmitter<any> = new EventEmitter<any>();
+
+  viewMode: 'design' | 'text' = 'design';
   ZOOM_LEVEL = 1;
   ZOOM_STEP = 0.1;
   private subscriptions: Subscription[] = [];

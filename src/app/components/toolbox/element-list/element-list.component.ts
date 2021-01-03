@@ -19,7 +19,6 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
   searchValue = '';
   elementTypes: string[];
   private allElementTypes: string[] = ['Rectangle', 'Line', 'Text', 'Texture'];
-  canvas: Canvas;
 
   constructor(public store: StoreService,
               public treeService: TreeService,
@@ -30,7 +29,6 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
 
   ngOnInit(): void {
     this.elementTypes = [...this.allElementTypes];
-    this.canvas = this.store.canvas;
   }
 
   filterOptions(): void {
@@ -47,7 +45,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       strokeUniform: true
     });
     rect['id'] = generateId();
-    this.canvas.add(rect);
+    this.store.canvas.add(rect);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
   }
 
@@ -61,7 +59,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       strokeUniform: true
     });
     triangle['id'] = generateId();
-    this.canvas.add(triangle);
+    this.store.canvas.add(triangle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTriangle(triangle));
   }
 
@@ -72,7 +70,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       fill: new Color(0, 0, 0, 1) as any,
     });
     rect['id'] = generateId();
-    this.canvas.add(rect);
+    this.store.canvas.add(rect);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonRectangle(rect));
   }
 
@@ -83,7 +81,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       fill: new Color(0, 0, 0, 1) as any,
     });
     triangle['id'] = generateId();
-    this.canvas.add(triangle);
+    this.store.canvas.add(triangle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonTriangle(triangle));
   }
 
@@ -98,7 +96,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       left: 50, top: 50
     });
     circle['id'] = generateId();
-    this.canvas.add(circle);
+    this.store.canvas.add(circle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromCircle(circle));
   }
 
@@ -114,7 +112,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       image.scaleToWidth(100);
       image.scaleToHeight(100);
       image['id'] = generateId();
-      this.canvas.add(image);
+      this.store.canvas.add(image);
       this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image));
     };
     htmlImage.src = 'assets/image-placeholder.webp';

@@ -25,22 +25,25 @@ import {MatTreeComponent} from './components/layer-stack/mat-tree/mat-tree.compo
 import {SortablejsModule} from 'ngx-sortablejs';
 import {MatTreeItemListComponent} from './components/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
 import {LayerStackComponent} from './components/layer-stack/layer-stack.component';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { GroupElementComponent } from './components/toolbox/properties/element-types/group-element/group-element.component';
-import { RectangleElementComponent } from './components/toolbox/properties/element-types/rectangle-element/rectangle-element.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {GroupElementComponent} from './components/toolbox/properties/element-types/group-element/group-element.component';
+import {RectangleElementComponent} from './components/toolbox/properties/element-types/rectangle-element/rectangle-element.component';
 import {FabricModule} from 'ngx-fabric-wrapper';
-import { FabricCanvasComponent } from './components/work-area/fabric-canvas/fabric-canvas.component';
-import { RootComponent } from './components/toolbox/properties/element-types/root/root.component';
+import {FabricCanvasComponent} from './components/work-area/fabric-canvas/fabric-canvas.component';
+import {RootComponent} from './components/toolbox/properties/element-types/root/root.component';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS, NgxMatColorPickerModule} from '@angular-material-components/color-picker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { TextureElementComponent } from './components/toolbox/properties/element-types/texture-element/texture-element.component';
-import { CircleElementComponent } from './components/toolbox/properties/element-types/circle-element/circle-element.component';
-import { PolygonRectElementComponent } from './components/toolbox/properties/element-types/polygon-rect-element/polygon-rect-element.component';
-import { PolygonTriangleElementComponent } from './components/toolbox/properties/element-types/polygon-triangle-element/polygon-triangle-element.component';
-import { TriangleElementComponent } from './components/toolbox/properties/element-types/triangle-element/triangle-element.component';
+import {TextureElementComponent} from './components/toolbox/properties/element-types/texture-element/texture-element.component';
+import {CircleElementComponent} from './components/toolbox/properties/element-types/circle-element/circle-element.component';
+import {PolygonRectElementComponent} from './components/toolbox/properties/element-types/polygon-rect-element/polygon-rect-element.component';
+import {PolygonTriangleElementComponent} from './components/toolbox/properties/element-types/polygon-triangle-element/polygon-triangle-element.component';
+import {TriangleElementComponent} from './components/toolbox/properties/element-types/triangle-element/triangle-element.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { LineElementComponent } from './components/toolbox/properties/element-types/line-element/line-element.component';
+import {LineElementComponent} from './components/toolbox/properties/element-types/line-element/line-element.component';
+import {CodeViewerComponent} from './components/work-area/code-viewer/code-viewer.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,7 @@ import { LineElementComponent } from './components/toolbox/properties/element-ty
     PolygonTriangleElementComponent,
     TriangleElementComponent,
     LineElementComponent,
+    CodeViewerComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,8 +92,19 @@ import { LineElementComponent } from './components/toolbox/properties/element-ty
     NgxMatColorPickerModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatButtonToggleModule,
+    HighlightModule,
   ],
-  providers: [ { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        lineNumbers: true,
+        lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
+      } as HighlightOptions
+    },
+    {provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

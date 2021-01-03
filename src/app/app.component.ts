@@ -7,11 +7,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'arma-mfd-drawer';
-  //
-  // constructor(private treeService: TreeService) {
-  // }
-  //
-  // ngAfterViewChecked() {
-  //   console.log(this.treeService.selectedItem);
-  // }
+
+  showToolbox = true;
 }
