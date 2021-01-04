@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { TreeService } from '../../layer-stack/mat-tree/tree.service';
-import { BaseShape } from '../../../common/BaseShape';
-import { ClassGroup } from '../../../templates/ClassGroup';
-import { Line } from '../../../templates/Line';
-import { ElementType, StackItem } from '../../layer-stack/elements/StackItem';
-import { Color } from '@angular-material-components/color-picker';
-import { fabric } from 'fabric';
-import { Polygon } from '../../../templates/Polygon';
+import {Component, OnInit} from '@angular/core';
+import {TreeService} from '../../layer-stack/mat-tree/tree.service';
+import {BaseShape} from '../../../common/BaseShape';
+import {ClassGroup} from '../../../templates/ClassGroup';
+import {Line} from '../../../templates/Line';
+import {ElementType, StackItem} from '../../layer-stack/elements/StackItem';
+import {Color} from '@angular-material-components/color-picker';
+import {Polygon} from '../../../templates/Polygon';
 
 @Component({
   selector: 'app-code-viewer',

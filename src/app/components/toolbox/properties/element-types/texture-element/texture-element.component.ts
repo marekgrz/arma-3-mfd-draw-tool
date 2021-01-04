@@ -20,6 +20,7 @@ export class TextureElementComponent implements OnInit {
 
   defaultFile: FileInput;
 
+  angle: number;
   newHeight = 0;
   newWidth = 0;
 
@@ -29,6 +30,7 @@ export class TextureElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
   }
 
   save(fileChange?): void {
@@ -39,6 +41,7 @@ export class TextureElementComponent implements OnInit {
     image.scaleY = Number(this.newHeight / this.item.element.height);
     image.angle = this.item.element.angle;
     image.setCoords();
+    image.rotate(this.angle);
     if (fileChange) {
       this.changeTextureImage();
     }
@@ -79,5 +82,9 @@ export class TextureElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

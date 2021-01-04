@@ -16,6 +16,7 @@ export class PolygonRectElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  angle: number;
   color: FormControl;
 
   constructor(private store: StoreService) {
@@ -24,6 +25,7 @@ export class PolygonRectElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().fill);
   }
 
@@ -34,8 +36,8 @@ export class PolygonRectElementComponent implements OnInit {
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
     rect.set('fill', this.color.value);
-    rect.angle = this.item.element.angle;
     rect.setCoords();
+    rect.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -55,5 +57,9 @@ export class PolygonRectElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

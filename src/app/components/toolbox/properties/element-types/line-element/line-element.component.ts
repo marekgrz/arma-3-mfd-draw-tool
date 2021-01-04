@@ -17,6 +17,7 @@ export class LineElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  angle: number;
   color: FormControl;
 
   constructor(private store: StoreService) {
@@ -25,6 +26,7 @@ export class LineElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
 
     this.setupPolyLineEdit();
@@ -92,15 +94,15 @@ export class LineElementComponent implements OnInit {
   }
 
   save(): void {
-    const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    rect.left = Number(this.item.element.left);
-    rect.top = Number(this.item.element.top);
-    rect.scaleX = Number(this.newWidth / this.item.element.width);
-    rect.scaleY = Number(this.newHeight / this.item.element.height);
-    rect.set('stroke', this.color.value);
-    rect.set('strokeWidth', Number(this.item.element.strokeWidth));
-    rect.angle = this.item.element.angle;
-    rect.setCoords();
+    const line: fabric.Object = this.store.canvas.getActiveObject();
+    line.left = Number(this.item.element.left);
+    line.top = Number(this.item.element.top);
+    line.scaleX = Number(this.newWidth / this.item.element.width);
+    line.scaleY = Number(this.newHeight / this.item.element.height);
+    line.set('stroke', this.color.value);
+    line.set('strokeWidth', Number(this.item.element.strokeWidth));
+    line.setCoords();
+    line.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -120,5 +122,9 @@ export class LineElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

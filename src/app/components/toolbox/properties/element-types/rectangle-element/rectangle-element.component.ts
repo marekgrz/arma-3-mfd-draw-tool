@@ -16,6 +16,7 @@ export class RectangleElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  angle: number;
   color: FormControl;
 
   constructor(private store: StoreService) {
@@ -24,6 +25,7 @@ export class RectangleElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
   }
 
@@ -35,8 +37,8 @@ export class RectangleElementComponent implements OnInit {
     rect.scaleY = Number(this.newHeight / this.item.element.height);
     rect.set('stroke', this.color.value);
     rect.set('strokeWidth', Number(this.item.element.strokeWidth));
-    rect.angle = this.item.element.angle;
     rect.setCoords();
+    rect.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -56,5 +58,9 @@ export class RectangleElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

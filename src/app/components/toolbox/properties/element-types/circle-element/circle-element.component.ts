@@ -15,6 +15,7 @@ export class CircleElementComponent implements OnInit {
   @Input()
   item: StackItem;
 
+  angle: number;
   color: FormControl;
   newDiameterX: number;
   newDiameterY: number;
@@ -26,6 +27,7 @@ export class CircleElementComponent implements OnInit {
   ngOnInit(): void {
     this.newDiameterX = this.getDiameterX();
     this.newDiameterY = this.getDiameterY();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
   }
 
@@ -37,8 +39,8 @@ export class CircleElementComponent implements OnInit {
     circle.scaleY = Number(this.newDiameterY / this.item.element.height);
     circle.set('stroke', this.color.value);
     circle.set('strokeWidth', Number(this.item.element.strokeWidth));
-    circle.angle = this.item.element.angle;
     circle.setCoords();
+    circle.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -66,11 +68,14 @@ export class CircleElementComponent implements OnInit {
     return this.item.element.height * this.item.element.scaleY;
   }
 
-  makeDiameterUniform() {
+  getAngle(): number {
+    return this.item.element.angle * 1;
+  }
+
+  makeDiameterUniform(): void {
     if (this.uniformDiameter) {
       this.newDiameterY = this.newDiameterX.valueOf();
       this.save();
     }
   }
-
 }

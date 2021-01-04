@@ -16,6 +16,7 @@ export class PolygonTriangleElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  angle: number;
   color: FormControl;
 
   constructor(private store: StoreService) {
@@ -24,6 +25,7 @@ export class PolygonTriangleElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().fill);
   }
 
@@ -34,8 +36,8 @@ export class PolygonTriangleElementComponent implements OnInit {
     triangle.scaleX = Number(this.newWidth / this.item.element.width);
     triangle.scaleY = Number(this.newHeight / this.item.element.height);
     triangle.set('fill', this.color.value);
-    triangle.angle = this.item.element.angle;
     triangle.setCoords();
+    triangle.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -55,5 +57,9 @@ export class PolygonTriangleElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

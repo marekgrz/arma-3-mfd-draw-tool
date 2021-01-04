@@ -16,6 +16,7 @@ export class TriangleElementComponent implements OnInit {
 
   newHeight = 0;
   newWidth = 0;
+  angle: number;
   color: FormControl;
 
   constructor(private store: StoreService) {
@@ -24,19 +25,20 @@ export class TriangleElementComponent implements OnInit {
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
+    this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
   }
 
   save(): void {
-    const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    rect.left = Number(this.item.element.left);
-    rect.top = Number(this.item.element.top);
-    rect.scaleX = Number(this.newWidth / this.item.element.width);
-    rect.scaleY = Number(this.newHeight / this.item.element.height);
-    rect.set('stroke', this.color.value);
-    rect.set('strokeWidth', Number(this.item.element.strokeWidth));
-    rect.angle = this.item.element.angle;
-    rect.setCoords();
+    const triangle: fabric.Triangle = this.store.canvas.getActiveObject();
+    triangle.left = Number(this.item.element.left);
+    triangle.top = Number(this.item.element.top);
+    triangle.scaleX = Number(this.newWidth / this.item.element.width);
+    triangle.scaleY = Number(this.newHeight / this.item.element.height);
+    triangle.set('stroke', this.color.value);
+    triangle.set('strokeWidth', Number(this.item.element.strokeWidth));
+    triangle.setCoords();
+    triangle.rotate(this.angle);
     this.store.canvas.requestRenderAll();
   }
 
@@ -56,5 +58,9 @@ export class TriangleElementComponent implements OnInit {
 
   getHeight(): number {
     return this.item.element.height * this.item.element.scaleY;
+  }
+
+  getAngle(): number {
+    return this.item.element.angle * 1;
   }
 }

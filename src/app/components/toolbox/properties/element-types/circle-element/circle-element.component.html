@@ -65,6 +65,6 @@
 <!--  ANGLE-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="item.element.angle" (change)="save()">
+    <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
   </mat-form-field>
 </div>
