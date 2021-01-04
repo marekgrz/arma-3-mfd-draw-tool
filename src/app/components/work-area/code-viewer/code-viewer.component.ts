@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {TreeService} from '../../layer-stack/mat-tree/tree.service';
-import {BaseShape} from '../../../common/BaseShape';
-import {ClassGroup} from '../../../templates/ClassGroup';
-import {Line} from '../../../templates/Line';
-import {ElementType, StackItem} from '../../layer-stack/elements/StackItem';
-import {Color} from '@angular-material-components/color-picker';
+import { Component, OnInit } from '@angular/core';
+import { TreeService } from '../../layer-stack/mat-tree/tree.service';
+import { BaseShape } from '../../../common/BaseShape';
+import { ClassGroup } from '../../../templates/ClassGroup';
+import { Line } from '../../../templates/Line';
+import { ElementType, StackItem } from '../../layer-stack/elements/StackItem';
+import { Color } from '@angular-material-components/color-picker';
+import { fabric } from 'fabric';
+import { Polygon } from '../../../templates/Polygon';
 
 @Component({
   selector: 'app-code-viewer',
@@ -41,9 +43,20 @@ export class CodeViewerComponent implements OnInit {
       case ElementType.line: {
         return this.createLine(item);
       }
+      case ElementType.rectangle: {
+        return this.createLine(this.addPointsFromCoords(item));
+      }
+      case ElementType.triangle: {
+        return this.createLine(this.addPointsFromCoords(item));
+      }
+      case ElementType.polygonRect: {
+        return this.createPolygon(this.addPointsFromCoords(item));
+      }
+      case ElementType.polygonTriangle: {
+        return this.createPolygon(this.addPointsFromCoords(item));
+      }
     }
   }
-
 
   createGroup(item: StackItem, content: BaseShape[]): ClassGroup {
     const classGroup: ClassGroup = new ClassGroup();
@@ -53,7 +66,6 @@ export class CodeViewerComponent implements OnInit {
     classGroup.content = content;
     return classGroup;
   }
-
 
   createLine(item: StackItem): Line {
     const element = item.element;
@@ -65,6 +77,23 @@ export class CodeViewerComponent implements OnInit {
     line.lineType = element['lineType'];
     line.width = Number(element.strokeWidth);
     return line;
+  }
+
+  createPolygon(item: StackItem): Polygon {
+    const element = item.element;
+    console.log(element);
+    const polygon: Polygon = new Polygon();
+    polygon.name = item.name;
+    polygon.color = element['texturePath'] ? undefined : element.fill as any;
+    polygon.texturePath = element['texturePath'] ? element['texturePath'] : '';
+    polygon.points = element.points;
+    return polygon;
+  }
+
+  private addPointsFromCoords(item: StackItem): StackItem {
+    const element = item.element;
+    item.element['points'] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
+    return item;
   }
 
   private getMFDClass(): string {

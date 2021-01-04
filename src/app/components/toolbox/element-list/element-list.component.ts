@@ -42,7 +42,8 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
       fill: 'rgba(0,0,0,0)',
       stroke: new Color(0, 0, 0, 1) as any,
       strokeWidth: 1,
-      strokeUniform: true
+      strokeUniform: true,
+      strokeDashArray: [10,5],
     });
     rect['id'] = generateId();
     this.store.canvas.add(rect);
@@ -52,7 +53,7 @@ export class ElementListComponent extends LineDrawerComponent implements OnInit 
   addTriangle(): void {
     const triangle = new fabric.Triangle({
       width: 50, height: 50,
-      left: 100, top: 100,
+      left: 0, top: 0,
       fill: 'rgba(0,0,0,0)',
       stroke: new Color(0, 0, 0, 1) as any,
       strokeWidth: 1,
