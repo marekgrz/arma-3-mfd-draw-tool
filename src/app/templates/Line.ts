@@ -1,7 +1,7 @@
-import {Color} from '../common/Color';
 import {getBoneIfExists, getColorArray} from '../common/Utils';
 import {Point} from '../common/Point';
 import {BaseShape} from '../common/BaseShape';
+import {Color} from '@angular-material-components/color-picker';
 
 export class Line implements BaseShape {
   name: string;
@@ -13,19 +13,19 @@ export class Line implements BaseShape {
 
   getElement(indent: string): string {
     return `
-    ${indent}class ${this.name}
-    ${indent}{
-    ${indent}\t${getColorArray(this.color)}
-    ${indent}\tclass Line
-    ${indent}\t{
-    ${indent}\t\ttype\t\t= "line";
-    ${indent}\t\tlineType\t= ${this.lineType};
-    ${indent}\t\twidth\t= ${this.width};
-    ${indent}\t\tpoints[]\t=
-    ${indent}\t\t{${getLinePoints(this.points, indent, this.bone)}
-    ${indent}\t\t};
-    ${indent}\t};
-    ${indent}};`;
+${indent}class ${this.name}
+${indent}{
+${indent}\t${getColorArray(this.color)}
+${indent}\tclass Line
+${indent}\t{
+${indent}\t\ttype\t\t= "line";
+${indent}\t\tlineType\t= ${this.lineType};
+${indent}\t\twidth\t\t= ${this.width};
+${indent}\t\tpoints[]\t=
+${indent}\t\t{${getLinePoints(this.points, indent, this.bone)}
+${indent}\t\t};
+${indent}\t};
+${indent}};`;
   }
 }
 

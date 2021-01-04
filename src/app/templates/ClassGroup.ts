@@ -1,6 +1,6 @@
-import {Color} from '../common/Color';
 import {BaseShape} from '../common/BaseShape';
 import {getColorArray, getCondition} from '../common/Utils';
+import {Color} from '@angular-material-components/color-picker';
 
 export class ClassGroup implements BaseShape {
   name: string;
@@ -9,13 +9,14 @@ export class ClassGroup implements BaseShape {
   condition?: string;
 
   getElement(indent: string = ''): string {
-    return `
+    const content = `
 ${indent}class ${this.name}
 ${indent}{
 ${indent}\t${getColorArray(this.color)}
 ${indent}\t${getCondition(this.condition)}
 ${indent}\t${getContent(this.content, indent)}
-${indent}};${addCommentsOnEndOfClass(this.name)}`;
+${indent}};${addCommentsOnEndOfClass(this.name)}`.split('\n').filter(line => line.trim().length).join('\n');
+    return '\n' + content;
   }
 }
 

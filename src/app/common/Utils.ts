@@ -1,6 +1,6 @@
-import {Color} from './Color';
 import {StackItem} from '../components/layer-stack/elements/StackItem';
 import {fabric} from 'fabric';
+import {Color} from '@angular-material-components/color-picker';
 
 export function getBoneIfExists(bone: string): string {
   return bone && bone.length > 0 ? bone + ', ' : '';

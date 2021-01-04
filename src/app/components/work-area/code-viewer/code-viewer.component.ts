@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {BaseShape} from '../../../common/BaseShape';
 import {ClassGroup} from '../../../templates/ClassGroup';
-import {Color} from '../../../common/Color';
 import {Line} from '../../../templates/Line';
 import {ElementType, StackItem} from '../../layer-stack/elements/StackItem';
-import {fabric} from 'fabric';
+import {Color} from '@angular-material-components/color-picker';
 
 @Component({
   selector: 'app-code-viewer',
@@ -22,7 +21,7 @@ export class CodeViewerComponent implements OnInit {
 
   // MUST BE STRING
   getCode(): string {
-    return this.convertToA3Format(this.treeService.itemList).map(it => it.getElement('')).toString();
+    return this.getMFDClass();
   }
 
   convertToA3Format(itemList: StackItem[]): BaseShape[] {
@@ -40,7 +39,7 @@ export class CodeViewerComponent implements OnInit {
   resolveElement(item: StackItem): BaseShape {
     switch (item.type) {
       case ElementType.line: {
-        return this.createLine(item.element);
+        return this.createLine(item);
       }
     }
   }
@@ -56,14 +55,31 @@ export class CodeViewerComponent implements OnInit {
   }
 
 
-  createLine(element: fabric.Polyline): Line {
+  createLine(item: StackItem): Line {
+    const element = item.element;
     const line: Line = new Line();
-    line.name = element.name;
+    line.name = item.name;
+    line.color = element.stroke as any;
     line.points = element.points;
     line.bone = 'Center';
     line.lineType = element['lineType'];
     line.width = Number(element.strokeWidth);
     return line;
+  }
+
+  private getMFDClass(): string {
+    const bonesClass: ClassGroup = new ClassGroup();
+    bonesClass.name = 'Bones';
+
+    const drawClass: ClassGroup = new ClassGroup();
+    drawClass.name = 'Draw';
+    drawClass.content = this.convertToA3Format(this.treeService.itemList);
+
+    const mfdClass: ClassGroup = new ClassGroup();
+    mfdClass.name = 'MFD';
+    mfdClass.content = [bonesClass, drawClass];
+
+    return mfdClass.getElement();
   }
 
 }
