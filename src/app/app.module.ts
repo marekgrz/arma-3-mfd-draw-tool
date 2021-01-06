@@ -100,13 +100,8 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
         lineNumbers: true,
+        fullLibraryLoader: () => import('highlight.js'),
         lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
-        languages: {
-          typescript: () => import('highlight.js/lib/languages/typescript'),
-          css: () => import('highlight.js/lib/languages/css'),
-          cpp: () => import('highlight.js/lib/languages/cpp'),
-          xml: () => import('highlight.js/lib/languages/xml')
-        }
       } as HighlightOptions
     },
     {provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS},
