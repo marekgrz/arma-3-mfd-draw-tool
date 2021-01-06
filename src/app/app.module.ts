@@ -44,6 +44,8 @@ import {LineElementComponent} from './components/toolbox/properties/element-type
 import {CodeViewerComponent} from './components/work-area/code-viewer/code-viewer.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
+import {ToastrModule} from 'ngx-toastr';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
     MatSnackBarModule,
     MatButtonToggleModule,
     HighlightModule,
+    ToastrModule.forRoot(),
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

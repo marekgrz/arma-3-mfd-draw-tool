@@ -1,17 +1,22 @@
 <mat-toolbar class="header">
-  <button mat-button>
+  <button mat-button (click)="newProject()">
     <i class="material-icons">add_to_photos</i>New
   </button>
   <mat-divider [vertical]="true"></mat-divider>
-  <button mat-button>
-    <i class="material-icons">save_alt</i>Save
+  <button mat-button (click)="openProject()">
+    <i class="material-icons">folder_open</i>Open
   </button>
   <mat-divider [vertical]="true"></mat-divider>
-  <button mat-button>
-    <i class="material-icons">folder_open</i>Open
+  <button mat-button (click)="saveProjectAs()">
+    <i class="material-icons">save_alt</i>Save as
+  </button>
+  <mat-divider [vertical]="true"></mat-divider>
+  <button mat-button (click)="saveProject()">
+    <i class="material-icons">save_alt</i>Save
   </button>
   <mat-divider [vertical]="true"></mat-divider>
   <button mat-button>
     <i class="material-icons">exit_to_app</i>Export to A3
   </button>
+  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 </mat-toolbar>
