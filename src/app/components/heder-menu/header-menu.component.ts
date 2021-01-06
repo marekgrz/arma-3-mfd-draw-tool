@@ -4,11 +4,11 @@ import {TreeService} from '../layer-stack/mat-tree/tree.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-heder-menu',
-  templateUrl: './heder-menu.component.html',
-  styleUrls: ['./heder-menu.component.less']
+  selector: 'app-header-menu',
+  templateUrl: './header-menu.component.html',
+  styleUrls: ['./header-menu.component.less']
 })
-export class HederMenuComponent implements OnInit {
+export class HeaderMenuComponent implements OnInit {
 
   loading = false;
 

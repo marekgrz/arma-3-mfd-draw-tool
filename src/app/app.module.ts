@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HederMenuComponent} from './components/heder-menu/heder-menu.component';
+import {HeaderMenuComponent} from './components/heder-menu/header-menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
@@ -50,7 +50,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
-    HederMenuComponent,
+    HeaderMenuComponent,
     LayerStackComponent,
     ToolboxComponent,
     WorkAreaComponent,
