@@ -2,6 +2,8 @@ const {app, BrowserWindow} = require('electron')
 const url = require("url");
 const path = require("path");
 
+require('electron-reload')(__dirname);
+
 let mainWindow
 
 function createWindow () {
@@ -13,13 +15,14 @@ function createWindow () {
     }
   })
 
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, `/dist/index.html`),
-      protocol: "file:",
-      slashes: true
-    })
-  );
+  // mainWindow.loadURL(
+  //   url.format({
+  //     pathname: path.join(__dirname, `/dist/index.html`),
+  //     protocol: "file:",
+  //     slashes: true
+  //   })
+  // );
+  mainWindow.loadURL('http://localhost:4200')
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
