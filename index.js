@@ -18,6 +18,7 @@ function createWindow() {
       nodeIntegration: true
     }
   })
+  mainWindow.maximize();
 
   // mainWindow.loadURL(
   //   url.format({

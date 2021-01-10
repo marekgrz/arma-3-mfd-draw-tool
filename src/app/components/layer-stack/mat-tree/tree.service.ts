@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ElementType, StackItem} from '../elements/StackItem';
-import {Circle, Line, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
+import {Circle, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
@@ -34,6 +34,13 @@ export class TreeService {
       objects.find(obj => obj['id'] === item.id)
         .moveTo(index);
       index++;
+    });
+  }
+
+  refreshItemListFromCanvas(canvas: fabric.Canvas): void {
+    const elements: fabric.Object[] = canvas.getObjects();
+    elements.forEach(element => {
+      findByID(element['id'], this.itemList).element = element;
     });
   }
 

@@ -17,8 +17,11 @@ body {
 //
 //GLOBAL
 //
-p[hidden] { display: none; }
-.hljs-ln-numbers{
+p[hidden] {
+  display: none;
+}
+
+.hljs-ln-numbers {
   border-right: 1px solid #b3b3b3;
   padding-right: 8px !important;
   text-align: end;
@@ -28,11 +31,12 @@ p[hidden] { display: none; }
   padding-left: 5px !important;
 }
 
-.hljs{
+.hljs {
   border-radius: 5px;
   max-height: 90vh;
   tab-size: 3;
 }
+
 .row-container {
   justify-content: left;
   display: flex;
@@ -45,6 +49,7 @@ p[hidden] { display: none; }
 }
 
 .info-icon {
+  color: grey;
   vertical-align: sub;
   padding-left: 10px;
 }
@@ -65,6 +70,11 @@ p[hidden] { display: none; }
   width: 100%;
 }
 
+.half-width {
+  width: 50%;
+}
+
+
 .pair-elements {
   display: flex;
   flex-wrap: wrap;
@@ -75,12 +85,29 @@ p[hidden] { display: none; }
   }
 }
 
+.medium-input {
+  font-size: 15px;
+  color: #efefef;
+
+  .mat-form-field-infix {
+    padding: 0.5em !important;
+
+    .mat-select-arrow-wrapper .mat-select-arrow {
+      margin-top: 5px !important;
+    }
+  }
+}
+
 .small-input {
   font-size: 12px;
   color: #efefef;
 
   .mat-form-field-infix {
     padding: 0.5em !important;
+
+    .mat-select-arrow-wrapper .mat-select-arrow {
+      margin-top: 5px !important;
+    }
   }
 }
 
@@ -105,6 +132,11 @@ p[hidden] { display: none; }
   -ms-user-select: none;
   user-select: none;
   -o-user-select: none;
+}
+
+.mat-tooltip {
+  font-size: 14px !important;
+  background: #515c67;
 }
 
 .upper-canvas {
@@ -135,3 +167,64 @@ p[hidden] { display: none; }
   background: #a2a2a2;
 }
 
+
+// fonts
+@font-face {
+  font-family: "EtelkaMonospacePro";
+  src: local("EtelkaMonospacePro"), url(./assets/fonts/EtelkaMonospacePro.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "EtelkaMonospaceProBold";
+  src: local("EtelkaMonospacePro"), url(./assets/fonts/EtelkaMonospaceProBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "EtelkaNarrowMediumPro";
+  src: local("EtelkaNarrowMediumPro"), url(./assets/fonts/EtelkaNarrowMediumPro.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "LucidaConsoleB";
+  src: local("LucidaConsoleB"), url(./assets/fonts/LucidaConsoleB.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "PuristaBold";
+  src: local("PuristaBold"), url(./assets/fonts/PuristaBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaLight";
+  src: local("PuristaLight"), url(./assets/fonts/PuristaLight.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaMedium";
+  src: local("PuristaMedium"), url(./assets/fonts/PuristaMedium.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaSemiBold";
+  src: local("PuristaSemiBold"), url(./assets/fonts/PuristaSemiBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: local("RobotoCondensed"), url(./assets/fonts/RobotoCondensed.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensedBold";
+  src: local("RobotoCondensedBold"), url(./assets/fonts/RobotoCondensedBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensedLight";
+  src: local("RobotoCondensedLight"), url(./assets/fonts/RobotoCondensedLight.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "TahomaB";
+  src: local("TahomaB"), url(./assets/fonts/TahomaB.ttf) format("truetype");
+}

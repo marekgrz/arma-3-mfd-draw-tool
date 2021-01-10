@@ -46,6 +46,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
 import {ToastrModule} from 'ngx-toastr';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {NewProjectDialogComponent} from './components/dialogs/new-project-dialog/new-project-dialog.component';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TriangleElementComponent,
     LineElementComponent,
     CodeViewerComponent,
+    NewProjectDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +104,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HighlightModule,
     ToastrModule.forRoot(),
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [
     {

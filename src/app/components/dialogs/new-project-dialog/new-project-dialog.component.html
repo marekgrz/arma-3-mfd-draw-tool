@@ -1,0 +1,190 @@
+<h2 mat-dialog-title>New project</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row-container">
+    <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'" [formGroup]="requiredFields">
+      <mat-label>MFD Classname</mat-label>
+      <input matInput autocomplete="off"
+             required
+      formControlName="name">
+      <mat-error *ngIf="name.invalid || name.invalid">Field required</mat-error>
+    </mat-form-field>
+<!--MEM POINTS-->
+    <div class="section" [formGroup]="requiredFields">
+      <div class="title">Memory points
+        <mat-icon matSuffix class="clickable info-icon"
+                  [matTooltip]="'Enter memory points that define corners of screen in your model. They need to be defined in memory LOD.'"
+                  matTooltipPosition="right">info
+        </mat-icon>
+      </div>
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Top left memory point</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="topLeft"
+                 [type]="'text'">
+          <mat-error *ngIf="topLeft.invalid">Field required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Top right memory point</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="topRight"
+                 [type]="'text'">
+          <mat-error *ngIf="topRight.invalid">Field required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Bottom left memory point</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="bottomLeft"
+                 [type]="'text'">
+          <mat-error *ngIf="bottomLeft.invalid">Field required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Bottom right memory point</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="bottomRight"
+                 [type]="'text'">
+          <mat-error *ngIf="bottomRight.invalid">Field required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+<!--SCREEN DIMENSIONS-->
+    <div class="section" [formGroup]="requiredFields">
+      <div class="title">Screen dimensions
+        <mat-icon matSuffix class="clickable info-icon"
+                  [matTooltip]="'Enter dimensions of the screen. Values need to be obtained manually in 3D software of choice like Blender or directly in Object Builder.'"
+                  matTooltipPosition="right">info
+        </mat-icon>
+      </div>
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Screen width</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="screenWidth"
+                 [type]="'number'">
+          <mat-error *ngIf="screenWidth.invalid">Field required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Screen height</mat-label>
+          <input matInput autocomplete="off"
+                 required
+                 formControlName="screenHeight"
+                 [type]="'number'">
+          <mat-error *ngIf="screenHeight.invalid">Field required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="title">Border (optional)
+        <mat-icon matSuffix class="clickable info-icon"
+                  [matTooltip]="'Define optional border from your corners defined above.'"
+                  matTooltipPosition="right">info
+        </mat-icon>
+      </div>
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Top border</mat-label>
+          <input matInput autocomplete="off"
+                 [(ngModel)]="globalHudProperties.borderTop"
+                 placeholder="0"
+                 [type]="'number'">
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Bottom border</mat-label>
+          <input matInput autocomplete="off"
+                 [(ngModel)]="globalHudProperties.borderBottom"
+                 placeholder="0"
+                 [type]="'number'">
+        </mat-form-field>
+      </div>
+
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Left border</mat-label>
+          <input matInput autocomplete="off"
+                 [(ngModel)]="globalHudProperties.borderLeft"
+                 placeholder="0"
+                 [type]="'number'">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-label>Right border</mat-label>
+          <input matInput autocomplete="off"
+                 [(ngModel)]="globalHudProperties.borderRight"
+                 placeholder="0"
+                 [type]="'number'">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="pair-elements">
+        <mat-form-field appearance="outline" class="medium-input select" color="accent">
+          <mat-label>Font type</mat-label>
+          <mat-select [(ngModel)]="globalHudProperties.font">
+            <mat-option *ngFor="let font of FONT_LIST" [value]="font">{{font}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h2 class="sample-text" [style.font-family]="globalHudProperties.font">SAMPLE sample</h2>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="title">Material colors
+        <mat-icon matSuffix class="clickable info-icon"
+                  [matTooltip]="'Define default material colors just like RVMAT.'"
+                  matTooltipPosition="right">info
+        </mat-icon>
+      </div>
+      <div class="color-row">
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+          <mat-label>Diffuse</mat-label>
+          <input matInput [ngxMatColorPicker]="diffusePicker" [formControl]="diffuseColor" (colorChange)="save()">
+          <ngx-mat-color-toggle matSuffix [for]="diffusePicker"></ngx-mat-color-toggle>
+          <ngx-mat-color-picker #diffusePicker></ngx-mat-color-picker>
+        </mat-form-field>
+
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+          <mat-label>Ambient</mat-label>
+          <input matInput [ngxMatColorPicker]="ambientPicker" [formControl]="ambientColor" (colorChange)="save()">
+          <ngx-mat-color-toggle matSuffix [for]="ambientPicker"></ngx-mat-color-toggle>
+          <ngx-mat-color-picker #ambientPicker></ngx-mat-color-picker>
+        </mat-form-field>
+
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+          <mat-label>Emissive</mat-label>
+          <input matInput [ngxMatColorPicker]="emmissivePicker" [formControl]="emissiveColor" (colorChange)="save()">
+          <ngx-mat-color-toggle matSuffix [for]="emmissivePicker"></ngx-mat-color-toggle>
+          <ngx-mat-color-picker #emmissivePicker></ngx-mat-color-picker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button
+          *ngIf="!isFormValid()"
+          (click)="markFormGroupTouched()"
+          cdkFocusInitial>
+    Done
+  </button>
+  <button mat-button
+          *ngIf="isFormValid()"
+          [mat-dialog-close]="true"
+          (click)="save()"
+          cdkFocusInitial>
+    Done
+  </button>
+</mat-dialog-actions>
