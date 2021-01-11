@@ -1,5 +1,5 @@
 <app-header-menu></app-header-menu>
-<div class="main">
+<div class="main" [ngClass]="!store.isProjectStarted ? 'disabled-container' : ''">
   <app-layer-list class="layer-list"></app-layer-list>
   <app-work-area (showDesigner)="showToolbox = $event" class="work-area"></app-work-area>
   <app-toolbox *ngIf="showToolbox" class="toolbox"></app-toolbox>

@@ -90,7 +90,7 @@ export class NewProjectDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save(): void {
+  startProject(): void {
     this.globalHudProperties.name = this.name.value;
     this.globalHudProperties.topLeft = this.topLeft.value;
     this.globalHudProperties.topRight = this.topRight.value;
@@ -98,7 +98,7 @@ export class NewProjectDialogComponent implements OnInit {
     this.globalHudProperties.bottomRight = this.bottomRight.value;
     this.globalHudProperties.screenWidth = this.screenWidth.value;
     this.globalHudProperties.screenHeight = this.screenHeight.value;
-    this.store.resetProject(this.globalHudProperties);
+    this.store.startNewProject(this.globalHudProperties);
   }
 
   markFormGroupTouched(): void {

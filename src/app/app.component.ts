@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {StoreService} from './utils/store.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,7 @@ export class AppComponent {
   title = 'arma-mfd-drawer';
 
   showToolbox = true;
+
+  constructor(public store: StoreService) {
+  }
 }

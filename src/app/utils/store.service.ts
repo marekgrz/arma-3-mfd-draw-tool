@@ -9,8 +9,8 @@ import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileSt
 export class StoreService {
 
   canvas: Canvas;
-  canvasWidth = 500;
-  canvasHeight = 500;
+  canvasWidth = 0;
+  canvasHeight = 0;
   canvasBackgroundImg = '';
   canvasBackGroundColor = new Color(162, 162, 162);
   canvasUseImage = false;
@@ -19,7 +19,7 @@ export class StoreService {
 
   // global properties
   hudProperties: GlobalHUDProperties = new GlobalHUDProperties();
-
+  isProjectStarted = false;
 
   constructor() {
   }
@@ -32,15 +32,28 @@ export class StoreService {
   reloadProject(project: ProjectFileStructure): void {
     this.canvasWidth = project.globalHUDProperties.screenWidth;
     this.canvasHeight = project.globalHUDProperties.screenHeight;
+    this.hudProperties = project.globalHUDProperties;
     this.updateCanvas();
     this.canvas.loadFromJSON(project.canvasContent, this.canvas.renderAll.bind(this.canvas));
+    this.isProjectStarted = true;
   }
 
-  resetProject(hudProperties: GlobalHUDProperties): void {
+  startNewProject(hudProperties: GlobalHUDProperties): void {
     this.hudProperties = hudProperties;
     this.canvas.clear();
     this.canvasWidth = this.hudProperties.screenWidth;
     this.canvasHeight = this.hudProperties.screenHeight;
     this.updateCanvas();
+    this.isProjectStarted = true;
+  }
+
+  resetCanvas(): void {
+    if (this.canvas) {
+      this.canvasWidth = 0;
+      this.canvasHeight = 0;
+      this.canvas.clear();
+      this.updateCanvas();
+      this.isProjectStarted = false;
+    }
   }
 }

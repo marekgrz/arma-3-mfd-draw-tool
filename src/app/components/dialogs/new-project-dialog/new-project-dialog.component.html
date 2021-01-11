@@ -150,21 +150,21 @@
       <div class="color-row">
         <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
           <mat-label>Diffuse</mat-label>
-          <input matInput [ngxMatColorPicker]="diffusePicker" [formControl]="diffuseColor" (colorChange)="save()">
+          <input matInput [ngxMatColorPicker]="diffusePicker" [formControl]="diffuseColor">
           <ngx-mat-color-toggle matSuffix [for]="diffusePicker"></ngx-mat-color-toggle>
           <ngx-mat-color-picker #diffusePicker></ngx-mat-color-picker>
         </mat-form-field>
 
         <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
           <mat-label>Ambient</mat-label>
-          <input matInput [ngxMatColorPicker]="ambientPicker" [formControl]="ambientColor" (colorChange)="save()">
+          <input matInput [ngxMatColorPicker]="ambientPicker" [formControl]="ambientColor">
           <ngx-mat-color-toggle matSuffix [for]="ambientPicker"></ngx-mat-color-toggle>
           <ngx-mat-color-picker #ambientPicker></ngx-mat-color-picker>
         </mat-form-field>
 
         <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
           <mat-label>Emissive</mat-label>
-          <input matInput [ngxMatColorPicker]="emmissivePicker" [formControl]="emissiveColor" (colorChange)="save()">
+          <input matInput [ngxMatColorPicker]="emmissivePicker" [formControl]="emissiveColor">
           <ngx-mat-color-toggle matSuffix [for]="emmissivePicker"></ngx-mat-color-toggle>
           <ngx-mat-color-picker #emmissivePicker></ngx-mat-color-picker>
         </mat-form-field>
@@ -175,15 +175,18 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button
+          [mat-dialog-close]="false">
+    Cancel
+  </button>
+  <button mat-button
           *ngIf="!isFormValid()"
-          (click)="markFormGroupTouched()"
-          cdkFocusInitial>
+          (click)="markFormGroupTouched()">
     Done
   </button>
   <button mat-button
           *ngIf="isFormValid()"
           [mat-dialog-close]="true"
-          (click)="save()"
+          (click)="startProject()"
           cdkFocusInitial>
     Done
   </button>

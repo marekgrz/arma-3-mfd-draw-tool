@@ -26,6 +26,11 @@ export class TreeService {
   constructor(public store: StoreService) {
   }
 
+  resetProjectStack(): void {
+    this.selectedItem = undefined;
+    this.itemList = [];
+  }
+
   refreshStackPosition(): void {
     let index = 1;
     const flatItemList = flattenList(this.itemList).filter(el => el.type !== ElementType.group);

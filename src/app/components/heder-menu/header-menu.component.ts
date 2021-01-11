@@ -7,6 +7,7 @@ import {parseProjectToFile, ProjectFileStructure} from '../../common/ProjectFile
 import {MatDialog} from '@angular/material/dialog';
 import {NewProjectDialogComponent} from '../dialogs/new-project-dialog/new-project-dialog.component';
 import {ConfirmDialogComponent} from '../dialogs/confirm-dialog/confirm-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header-menu',
@@ -20,27 +21,14 @@ export class HeaderMenuComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private ipc: IpcService,
               private treeService: TreeService,
-              private store: StoreService,
+              public store: StoreService,
+              private snackBar: MatSnackBar,
               private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
-      const savedProject: ProjectFileStructure = JSON.parse(message);
-      console.log(savedProject)
-      this.store.reloadProject(savedProject);
-      this.treeService.itemList = savedProject.layerStackContent;
-      this.treeService.refreshItemListFromCanvas(this.store.canvas);
-      this.toastr.success('Project loaded');
-    });
-    this.ipc.on('saveFile', (event: Electron.IpcMessageEvent) => {
-      this.toastr.success('Project saved');
-      this.loading = false;
-    });
-    this.ipc.on('saveFileAs', (event: Electron.IpcMessageEvent) => {
-      this.toastr.success('Project saved');
-      this.loading = false;
-    });
+    this.setupFileHandling();
+    this.startNewProject();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -65,17 +53,6 @@ export class HeaderMenuComponent implements OnInit {
     }
   }
 
-  private startNewProject(): void {
-    this.store.canvas.clear();
-    this.treeService.itemList = [];
-    this.ipc.send('new', '');
-    const dialogRef = this.dialog.open(NewProjectDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
   openProject(): void {
     this.ipc.send('openFile', '');
   }
@@ -88,5 +65,44 @@ export class HeaderMenuComponent implements OnInit {
   saveProject(): void {
     this.loading = true;
     this.ipc.send('saveFile', parseProjectToFile(this.treeService, this.store));
+  }
+
+  private showSnackBarInfo(): void {
+    this.snackBar.open('Start new project or load existing one', undefined, {panelClass: 'custom-snackbar'});
+  }
+
+  private hideSnackBarInfo(): void {
+    this.snackBar.dismiss();
+  }
+
+  private startNewProject(): void {
+    this.hideSnackBarInfo();
+    this.store.resetCanvas();
+    this.treeService.resetProjectStack();
+    this.ipc.send('new', '');
+    const dialogRef = this.dialog.open(NewProjectDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      result ? this.hideSnackBarInfo() : this.showSnackBarInfo();
+    });
+  }
+
+  private setupFileHandling(): void {
+    this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
+      const savedProject: ProjectFileStructure = JSON.parse(message);
+      this.treeService.itemList = savedProject.layerStackContent;
+      this.treeService.refreshItemListFromCanvas(this.store.canvas);
+      this.store.reloadProject(savedProject);
+      this.toastr.success('Project loaded');
+      this.hideSnackBarInfo();
+    });
+    this.ipc.on('saveFile', (event: Electron.IpcMessageEvent) => {
+      this.toastr.success('Project saved');
+      this.loading = false;
+    });
+    this.ipc.on('saveFileAs', (event: Electron.IpcMessageEvent) => {
+      this.toastr.success('Project saved');
+      this.loading = false;
+    });
   }
 }
