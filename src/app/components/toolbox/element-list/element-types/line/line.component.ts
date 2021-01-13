@@ -1,22 +1,28 @@
-import {StoreService} from '../../../../utils/store.service';
-import {TreeService} from '../../../layer-stack/mat-tree/tree.service';
+import {Component} from '@angular/core';
 import {Point, Polyline} from 'fabric/fabric-impl';
-import {fabric} from 'fabric';
+import {StoreService} from '../../../../../utils/store.service';
+import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {generateId} from '../../../layer-stack/elements/StackItem';
+import {InteractionService} from '../../../../layer-stack/mat-tree/interaction.service';
 import {fromEvent} from 'rxjs';
-import {InteractionService} from '../../../layer-stack/mat-tree/interaction.service';
+import {fabric} from 'fabric';
 import {Color} from '@angular-material-components/color-picker';
+import {generateId} from '../../../../layer-stack/elements/StackItem';
 
-export abstract class LineDrawerComponent {
+@Component({
+  selector: 'app-line',
+  templateUrl: './line.component.html',
+  styleUrls: ['./line.component.less']
+})
+export class LineComponent {
 
   lineDrawingStarted = false;
   points: Point[];
 
-  protected constructor(public store: StoreService,
-                        public treeService: TreeService,
-                        public snackBar: MatSnackBar,
-                        public interaction: InteractionService) {
+  protected constructor(private store: StoreService,
+                        private treeService: TreeService,
+                        private snackBar: MatSnackBar,
+                        private interaction: InteractionService) {
   }
 
   startLineDrawing(): void {

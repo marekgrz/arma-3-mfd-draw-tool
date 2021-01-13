@@ -50,6 +50,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {NewProjectDialogComponent} from './components/dialogs/new-project-dialog/new-project-dialog.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
+import { LineComponent } from './components/toolbox/element-list/element-types/line/line.component';
+import { RectangleComponent } from './components/toolbox/element-list/element-types/rectangle/rectangle.component';
+import { TriangleComponent } from './components/toolbox/element-list/element-types/triangle/triangle.component';
+import { CircleComponent } from './components/toolbox/element-list/element-types/circle/circle.component';
+import { TextureComponent } from './components/toolbox/element-list/element-types/texture/texture.component';
+import { PolygonRectangleComponent } from './components/toolbox/element-list/element-types/polygon-rectangle/polygon-rectangle.component';
+import { PolygonTriangleComponent } from './components/toolbox/element-list/element-types/polygon-triangle/polygon-triangle.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +82,13 @@ import {MatSelectModule} from '@angular/material/select';
     CodeViewerComponent,
     NewProjectDialogComponent,
     ConfirmDialogComponent,
+    LineComponent,
+    RectangleComponent,
+    TriangleComponent,
+    CircleComponent,
+    TextureComponent,
+    PolygonRectangleComponent,
+    PolygonTriangleComponent,
   ],
   imports: [
     BrowserModule,
