@@ -19,10 +19,10 @@ export class LineComponent {
   lineDrawingStarted = false;
   points: Point[];
 
-  protected constructor(private store: StoreService,
-                        private treeService: TreeService,
-                        private snackBar: MatSnackBar,
-                        private interaction: InteractionService) {
+  constructor(private store: StoreService,
+              private treeService: TreeService,
+              private snackBar: MatSnackBar,
+              private interaction: InteractionService) {
   }
 
   startLineDrawing(): void {

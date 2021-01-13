@@ -6,6 +6,7 @@ import {StoreService} from './utils/store.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
+
 export class AppComponent {
   title = 'arma-mfd-drawer';
 

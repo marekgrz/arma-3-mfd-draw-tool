@@ -5,6 +5,8 @@ import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
 import {fabric} from 'fabric';
 
+declare var fontfaceobserver: any;
+
 @Component({
   selector: 'app-fabric-canvas',
   templateUrl: './fabric-canvas.component.html',
@@ -19,6 +21,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   element: fabric.Object;
 
   snappingEnabled = false;
+
+  loaded = false;
 
   SNAP_ANGLE = 5;
 
@@ -63,7 +67,11 @@ export class FabricCanvasComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.setupCanvas();
+    window.addEventListener('load', () => {
+      this.setupCanvas();
+      this.store.canvas.requestRenderAll();
+      this.loaded = true;
+    });
   }
 
   private setupCanvas(): void {

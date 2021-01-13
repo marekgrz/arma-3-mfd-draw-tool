@@ -8,6 +8,21 @@ import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileSt
 })
 export class StoreService {
 
+  FONT_LIST: string[] = [
+    'EtelkaMonospacePro',
+    'EtelkaMonospaceProBold',
+    'EtelkaNarrowMediumPro',
+    'LucidaConsoleB',
+    'PuristaBold',
+    'PuristaLight',
+    'PuristaMedium',
+    'PuristaSemiBold',
+    'RobotoCondensed',
+    'RobotoCondensedBold',
+    'RobotoCondensedLight',
+    'TahomaB',
+  ];
+
   canvas: Canvas;
   canvasWidth = 0;
   canvasHeight = 0;
@@ -35,6 +50,7 @@ export class StoreService {
     this.hudProperties = project.globalHUDProperties;
     this.updateCanvas();
     this.canvas.loadFromJSON(project.canvasContent, this.canvas.renderAll.bind(this.canvas));
+    this.canvas.requestRenderAll();
     this.isProjectStarted = true;
   }
 

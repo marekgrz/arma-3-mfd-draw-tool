@@ -48,15 +48,17 @@ import {ToastrModule} from 'ngx-toastr';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NewProjectDialogComponent} from './components/dialogs/new-project-dialog/new-project-dialog.component';
-import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogComponent} from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
-import { LineComponent } from './components/toolbox/element-list/element-types/line/line.component';
-import { RectangleComponent } from './components/toolbox/element-list/element-types/rectangle/rectangle.component';
-import { TriangleComponent } from './components/toolbox/element-list/element-types/triangle/triangle.component';
-import { CircleComponent } from './components/toolbox/element-list/element-types/circle/circle.component';
-import { TextureComponent } from './components/toolbox/element-list/element-types/texture/texture.component';
-import { PolygonRectangleComponent } from './components/toolbox/element-list/element-types/polygon-rectangle/polygon-rectangle.component';
-import { PolygonTriangleComponent } from './components/toolbox/element-list/element-types/polygon-triangle/polygon-triangle.component';
+import {LineComponent} from './components/toolbox/element-list/element-types/line/line.component';
+import {RectangleComponent} from './components/toolbox/element-list/element-types/rectangle/rectangle.component';
+import {TriangleComponent} from './components/toolbox/element-list/element-types/triangle/triangle.component';
+import {CircleComponent} from './components/toolbox/element-list/element-types/circle/circle.component';
+import {TextureComponent} from './components/toolbox/element-list/element-types/texture/texture.component';
+import {PolygonRectangleComponent} from './components/toolbox/element-list/element-types/polygon-rectangle/polygon-rectangle.component';
+import {PolygonTriangleComponent} from './components/toolbox/element-list/element-types/polygon-triangle/polygon-triangle.component';
+import {TextComponent} from './components/toolbox/element-list/element-types/text/text.component';
+import {TextElementComponent} from './components/toolbox/properties/element-types/text-element/text-element.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,9 @@ import { PolygonTriangleComponent } from './components/toolbox/element-list/elem
     TextureComponent,
     PolygonRectangleComponent,
     PolygonTriangleComponent,
+    TextComponent,
+    TextComponent,
+    TextElementComponent,
   ],
   imports: [
     BrowserModule,

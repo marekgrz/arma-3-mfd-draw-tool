@@ -1,0 +1,42 @@
+<div class="row-container">
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Element name</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
+  </mat-form-field>
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [X]</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="item.element.left"
+             (change)="save()">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Position [Y]</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="item.element.top"
+             (change)="save()">
+    </mat-form-field>
+  </div>
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+      <mat-label>Font type</mat-label>
+      <mat-select [(ngModel)]="fontName" (selectionChange)="save()">
+        <mat-option *ngFor="let font of store.FONT_LIST" [value]="font">{{font}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="small-input font-size" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Font size</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="item.element.fontSize"
+             (change)="save()">
+    </mat-form-field>
+  </div>
+  <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+    <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
+    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+    <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+  </mat-form-field>
+</div>

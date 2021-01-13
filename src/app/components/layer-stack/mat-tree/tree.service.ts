@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ElementType, StackItem} from '../elements/StackItem';
-import {Circle, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
+import {Circle, IText, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
@@ -22,6 +22,7 @@ export class TreeService {
   private polygonRectangleIndex = 1;
   private polygonTriangleIndex = 1;
   private triangleIndex = 1;
+  private textIndex = 1;
 
   constructor(public store: StoreService) {
   }
@@ -65,6 +66,16 @@ export class TreeService {
     item.name = 'Rectangle_' + this.rectangleIndex++;
     item.type = ElementType.rectangle;
     item.element = rectangle;
+    item.children = null;
+    return item;
+  }
+
+  itemFromText(text: IText): StackItem {
+    const item = new StackItem();
+    item.id = text['id'];
+    item.name = 'TextElement_' + this.textIndex++;
+    item.type = ElementType.text;
+    item.element = text;
     item.children = null;
     return item;
   }

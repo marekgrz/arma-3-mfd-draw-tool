@@ -27,6 +27,10 @@ export class PropertiesComponent implements OnInit {
     return item.type === ElementType.line;
   }
 
+  isText(item: StackItem): boolean {
+    return item.type === ElementType.text;
+  }
+
   isRectangle(item: StackItem): boolean {
     return item.type === ElementType.rectangle;
   }

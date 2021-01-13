@@ -16,7 +16,8 @@ export enum ElementType {
   triangle,
   polygonRect,
   polygonTriangle,
-  texture
+  texture,
+  text
 }
 
 export function generateId(): string {
