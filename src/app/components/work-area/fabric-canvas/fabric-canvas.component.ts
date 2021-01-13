@@ -5,8 +5,6 @@ import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
 import {fabric} from 'fabric';
 
-declare var fontfaceobserver: any;
-
 @Component({
   selector: 'app-fabric-canvas',
   templateUrl: './fabric-canvas.component.html',
