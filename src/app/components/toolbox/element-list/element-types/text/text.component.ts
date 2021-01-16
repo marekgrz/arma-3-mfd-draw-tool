@@ -17,7 +17,7 @@ export class TextComponent {
   }
 
   addText(): void {
-    const text = new fabric.IText('Text',{
+    const text = new fabric.Text('Text', {
       left: 100, top: 100,
       fontFamily: 'RobotoCondensed',
       fontSize: 50,

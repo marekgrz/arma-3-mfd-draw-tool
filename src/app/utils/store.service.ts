@@ -23,6 +23,8 @@ export class StoreService {
     'TahomaB',
   ];
 
+  usedSources: string[] = [];
+
   canvas: Canvas;
   canvasWidth = 0;
   canvasHeight = 0;
@@ -71,5 +73,12 @@ export class StoreService {
       this.updateCanvas();
       this.isProjectStarted = false;
     }
+  }
+
+  addUsedSource(sourceName: string): void {
+    if (this.usedSources.find(it => it === sourceName)) {
+      return;
+    }
+    this.usedSources.push(sourceName);
   }
 }

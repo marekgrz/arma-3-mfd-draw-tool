@@ -34,6 +34,15 @@
              (change)="save()">
     </mat-form-field>
   </div>
+  <div class="pair-elements">
+    <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+      <mat-label>Source</mat-label>
+      <mat-select [(ngModel)]="source" (selectionChange)="save()">
+        <mat-option *ngFor="let source of getAvailableSources()" [value]="source">{{source}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-button (click)="refresh()">Refresh</button>
   <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
     <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
     <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>

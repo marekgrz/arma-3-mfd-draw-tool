@@ -70,7 +70,7 @@ export class TreeService {
     return item;
   }
 
-  itemFromText(text: IText): StackItem {
+  itemFromText(text: fabric.Text): StackItem {
     const item = new StackItem();
     item.id = text['id'];
     item.name = 'TextElement_' + this.textIndex++;

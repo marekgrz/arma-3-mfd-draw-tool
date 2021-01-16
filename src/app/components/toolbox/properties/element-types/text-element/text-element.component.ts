@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {StackItem} from '../../../../layer-stack/elements/StackItem';
 import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../utils/store.service';
-import {fabric} from 'fabric';
-import {IText} from 'fabric/fabric-impl';
+import {SourceService} from '../../../../../utils/source.service';
 
 @Component({
   selector: 'app-text-element',
@@ -19,8 +18,11 @@ export class TextElementComponent {
   newWidth = 0;
   color: FormControl;
   fontName: string;
+  source: string;
+  value = '1';
 
-  constructor(public store: StoreService) {
+  constructor(public store: StoreService,
+              public sources: SourceService) {
   }
 
   ngOnInit(): void {
@@ -31,8 +33,8 @@ export class TextElementComponent {
   }
 
   save(): void {
-    console.log(this.fontName);
     const text = this.store.canvas.getActiveObject() as any;
+    console.log(text);
     text.left = Number(this.item.element.left);
     text.top = Number(this.item.element.top);
     text.scaleX = Number(this.newWidth / this.item.element.width);
@@ -41,7 +43,20 @@ export class TextElementComponent {
     text.set('fontFamily', this.fontName);
     text.set('fill', this.color.value);
     text.setCoords();
+    text['source'] = this.source;
     this.store.canvas.requestRenderAll();
+  }
+
+  refresh(): void {
+    const text = this.store.canvas.getActiveObject() as any;
+    text['source'] = this.source;
+    this.sources[this.source]++;
+    text.text =  this.sources[this.source].toString();
+    this.store.canvas.requestRenderAll();
+  }
+
+  getAvailableSources(): string[] {
+    return Object.keys(this.sources);
   }
 
   updateHeight(event): void {
