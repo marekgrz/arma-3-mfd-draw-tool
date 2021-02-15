@@ -12,6 +12,8 @@ export class AppComponent {
 
   showToolbox = true;
 
+  previewMode = false;
+
   constructor(public store: StoreService) {
   }
 }

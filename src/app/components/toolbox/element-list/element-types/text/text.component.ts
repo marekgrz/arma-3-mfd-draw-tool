@@ -3,7 +3,6 @@ import {StoreService} from '../../../../../utils/store.service';
 import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
 import {fabric} from 'fabric';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
-import {Color} from '@angular-material-components/color-picker';
 
 @Component({
   selector: 'app-text',
@@ -20,6 +19,7 @@ export class TextComponent {
     const text = new fabric.Text('Text', {
       left: 100, top: 100,
       fontFamily: 'RobotoCondensed',
+      textAlign: 'center',
       fontSize: 50,
     });
     text['id'] = generateId();

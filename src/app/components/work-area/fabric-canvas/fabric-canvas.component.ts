@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
 import {StoreService} from '../../../utils/store.service';
 import {FabricComponent} from 'ngx-fabric-wrapper';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
@@ -13,6 +13,9 @@ import {fabric} from 'fabric';
 export class FabricCanvasComponent implements AfterViewInit {
 
   @ViewChild(FabricComponent, {static: false}) componentRef?: FabricComponent;
+
+  @Input()
+  previewOnly: boolean;
 
   config = {};
 

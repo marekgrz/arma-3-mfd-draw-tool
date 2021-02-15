@@ -28,7 +28,8 @@ export class HeaderMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupFileHandling();
-    this.startNewProject();
+    // this.startNewProject();
+    setTimeout(() => this.reopenProject(), 1000);
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -55,6 +56,10 @@ export class HeaderMenuComponent implements OnInit {
 
   openProject(): void {
     this.ipc.send('openFile', '');
+  }
+
+  reopenProject(): void {
+    this.ipc.send('openDefault', '');
   }
 
   saveProjectAs(): void {
@@ -89,6 +94,7 @@ export class HeaderMenuComponent implements OnInit {
 
   private setupFileHandling(): void {
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
+      console.log(message);
       const savedProject: ProjectFileStructure = JSON.parse(message);
       this.treeService.itemList = savedProject.layerStackContent;
       this.treeService.refreshItemListFromCanvas(this.store.canvas);
@@ -103,6 +109,14 @@ export class HeaderMenuComponent implements OnInit {
     this.ipc.on('saveFileAs', (event: Electron.IpcMessageEvent) => {
       this.toastr.success('Project saved');
       this.loading = false;
+    });
+    this.ipc.on('openDefault', (event: Electron.IpcMessageEvent, message) => {
+      const savedProject: ProjectFileStructure = JSON.parse(message);
+      this.treeService.itemList = savedProject.layerStackContent;
+      this.treeService.refreshItemListFromCanvas(this.store.canvas);
+      this.store.reloadProject(savedProject);
+      this.toastr.success('Project loaded');
+      this.hideSnackBarInfo();
     });
   }
 }

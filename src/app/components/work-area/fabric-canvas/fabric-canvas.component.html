@@ -5,4 +5,4 @@
 <div *ngIf="!loaded">
   <div *ngFor="let font of store.FONT_LIST" [style.font-family]="font">&nbsp;</div>
 </div>
-<fabric [config]="config" (selectionCreated)="element = $event.selected[0]"></fabric>
+<fabric [config]="config" (selectionCreated)="element = $event.selected[0]" [notClickable]="previewOnly"></fabric>

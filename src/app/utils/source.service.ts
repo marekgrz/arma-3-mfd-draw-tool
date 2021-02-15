@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {StoreService} from './store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,25 @@ export class SourceService {
   weaponHeading = 0;
   laserDist = 0;
 
-  constructor() {
+  constructor(private store: StoreService) {
   }
+
+  // "image", "rect", "circle", "text", "rect", "triangle", "circle", "polyline"
+
+  refreshSourcesInCanvas(): void {
+    const allObjects = this.store.canvas.getObjects();
+    allObjects.map(el => {
+      switch (el.type) {
+        case 'text':
+          this.refreshTextElement(el);
+          break;
+      }
+    });
+    this.store.canvas.requestRenderAll();
+  }
+
+  refreshTextElement(element): void {
+    element.text = this[element['source']].toString();
+  }
+
 }

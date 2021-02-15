@@ -16,7 +16,10 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   @Output()
   showDesigner: EventEmitter<any> = new EventEmitter<any>();
 
-  viewMode: 'design' | 'text' = 'design';
+  @Output()
+  showPreview: EventEmitter<any> = new EventEmitter<any>();
+
+  viewMode: 'design' | 'text' | 'preview' = 'design';
   ZOOM_LEVEL = 1;
   ZOOM_STEP = 0.1;
   private subscriptions: Subscription[] = [];

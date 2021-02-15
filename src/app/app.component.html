@@ -1,6 +1,7 @@
 <app-header-menu></app-header-menu>
 <div class="main" [ngClass]="!store.isProjectStarted ? 'disabled-container' : ''">
-  <app-layer-list class="layer-list"></app-layer-list>
-  <app-work-area (showDesigner)="showToolbox = $event" class="work-area"></app-work-area>
+  <app-layer-list *ngIf="!previewMode" class="layer-list"></app-layer-list>
+  <app-sources-list *ngIf="previewMode" class="layer-list"></app-sources-list>
+  <app-work-area (showDesigner)="showToolbox = $event" (showPreview)="previewMode = $event" class="work-area"></app-work-area>
   <app-toolbox *ngIf="showToolbox" class="toolbox"></app-toolbox>
 </div>

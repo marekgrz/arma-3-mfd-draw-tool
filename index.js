@@ -47,7 +47,6 @@ app.on('activate', function () {
 })
 
 
-
 ipcMain.on('new', function (event) {
   filePath = undefined;
 })
@@ -61,9 +60,15 @@ ipcMain.on('openFile', function (event) {
         return;
       }
       filePath = e.filePaths[0];
-      openProject(event);
+      openProject(event, 'openFile');
       console.log('File opened');
     })
+})
+
+ipcMain.on('openDefault', function (event) {
+  filePath = 'C:\\Projects\\arma-mfd-drawer\\src\\assets\\Template.a3mfd'
+  openProject(event, 'openDefault');
+  console.log('File reopened');
 })
 
 ipcMain.on('saveFile', (event, message) => {
@@ -94,14 +99,14 @@ function showSaveDialog(message, event) {
     })
 }
 
-function openProject(event) {
+function openProject(event, channel) {
   fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
     if (err) {
-      event.sender.send('Error');
+      event.sender.send(channel);
       return;
     }
     if (data) {
-      event.sender.send('openFile', data);
+      event.sender.send(channel, data);
     }
   })
 }

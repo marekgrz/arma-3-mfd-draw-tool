@@ -59,6 +59,9 @@ import {PolygonRectangleComponent} from './components/toolbox/element-list/eleme
 import {PolygonTriangleComponent} from './components/toolbox/element-list/element-types/polygon-triangle/polygon-triangle.component';
 import {TextComponent} from './components/toolbox/element-list/element-types/text/text.component';
 import {TextElementComponent} from './components/toolbox/properties/element-types/text-element/text-element.component';
+import {NotClickableDirective} from './utils/not-clickable.directive';
+import {SourcesListComponent} from './components/sources-list/sources-list.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -94,6 +97,8 @@ import {TextElementComponent} from './components/toolbox/properties/element-type
     TextComponent,
     TextComponent,
     TextElementComponent,
+    NotClickableDirective,
+    SourcesListComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +130,7 @@ import {TextElementComponent} from './components/toolbox/properties/element-type
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSelectModule,
+    MatSliderModule,
   ],
   providers: [
     {
