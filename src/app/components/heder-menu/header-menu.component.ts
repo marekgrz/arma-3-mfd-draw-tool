@@ -94,7 +94,6 @@ export class HeaderMenuComponent implements OnInit {
 
   private setupFileHandling(): void {
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
-      console.log(message);
       const savedProject: ProjectFileStructure = JSON.parse(message);
       this.treeService.itemList = savedProject.layerStackContent;
       this.treeService.refreshItemListFromCanvas(this.store.canvas);
@@ -111,12 +110,14 @@ export class HeaderMenuComponent implements OnInit {
       this.loading = false;
     });
     this.ipc.on('openDefault', (event: Electron.IpcMessageEvent, message) => {
-      const savedProject: ProjectFileStructure = JSON.parse(message);
-      this.treeService.itemList = savedProject.layerStackContent;
-      this.treeService.refreshItemListFromCanvas(this.store.canvas);
-      this.store.reloadProject(savedProject);
-      this.toastr.success('Project loaded');
-      this.hideSnackBarInfo();
+      if (!!message) {
+        const savedProject: ProjectFileStructure = JSON.parse(message);
+        this.treeService.itemList = savedProject.layerStackContent;
+        this.treeService.refreshItemListFromCanvas(this.store.canvas);
+        this.store.reloadProject(savedProject);
+        this.toastr.success('Project loaded');
+        this.hideSnackBarInfo();
+      }
     });
   }
 }

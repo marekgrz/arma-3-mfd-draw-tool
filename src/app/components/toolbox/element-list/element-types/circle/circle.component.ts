@@ -25,6 +25,7 @@ export class CircleComponent  {
       left: 50, top: 50
     });
     circle['id'] = generateId();
+    circle['circleStep'] = 0.1;
     this.store.canvas.add(circle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromCircle(circle));
   }

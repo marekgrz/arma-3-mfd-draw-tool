@@ -21,6 +21,20 @@
              (change)="save()">
     </mat-form-field>
   </div>
+<!--  STEP-->
+  <div class="pair-elements circle-step">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Step</mat-label>
+      <input matInput autocomplete="off"
+             [type]="'number'"
+             [(ngModel)]="circleStep"
+             (change)="save()">
+    </mat-form-field>
+    <mat-icon matSuffix class="clickable info-icon"
+              [matTooltip]="'Circles are drawn using line and points. Step value determines how dense are the points on the circle. The lower the step results in smoother circle.'"
+              matTooltipPosition="above">info
+    </mat-icon>
+  </div>
 <!--  RADIUS-->
   <mat-checkbox class="checkbox" [(ngModel)]="uniformDiameter" (ngModelChange)="makeDiameterUniform()">Uniform radius</mat-checkbox>
   <div class="pair-elements" *ngIf="!uniformDiameter">

@@ -20,6 +20,7 @@ export class CircleElementComponent implements OnInit {
   newDiameterX: number;
   newDiameterY: number;
   uniformDiameter = true;
+  circleStep = 0.1;
 
   constructor(private store: StoreService) {
   }
@@ -29,6 +30,7 @@ export class CircleElementComponent implements OnInit {
     this.newDiameterY = this.getDiameterY();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
+    this.circleStep = this.item.element['circleStep'];
   }
 
   save(): void {
@@ -37,6 +39,7 @@ export class CircleElementComponent implements OnInit {
     circle.top = Number(this.item.element.top);
     circle.scaleX = Number(this.newDiameterX / this.item.element.width);
     circle.scaleY = Number(this.newDiameterY / this.item.element.height);
+    circle['circleStep'] = this.circleStep;
     circle.set('stroke', this.color.value);
     circle.set('strokeWidth', Number(this.item.element.strokeWidth));
     circle.setCoords();

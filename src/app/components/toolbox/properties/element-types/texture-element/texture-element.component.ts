@@ -31,6 +31,7 @@ export class TextureElementComponent implements OnInit {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
+    this.file.setValue(this.item.element['file']);
   }
 
   save(fileChange?): void {
@@ -50,6 +51,7 @@ export class TextureElementComponent implements OnInit {
 
   changeTextureImage(): void {
     if (this.file.value) {
+      this.item.element['file']=this.file.value;
       const reader = new FileReader();
       reader.readAsDataURL(this.file.value.files[0]);
       reader.onload = event => this.swapImageInCanvas(event);

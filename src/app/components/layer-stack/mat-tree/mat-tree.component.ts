@@ -13,7 +13,6 @@ export class MatTreeComponent implements OnInit {
   @Output() selectedItem: EventEmitter<StackItem> = new EventEmitter<StackItem>();
 
   selectedObject(item: StackItem): void {
-    console.log(item);
     this.selectedItem.emit(item);
   }
 

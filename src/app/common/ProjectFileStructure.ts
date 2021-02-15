@@ -12,7 +12,7 @@ export class ProjectFileStructure {
 
 export function parseProjectToFile(treeService: TreeService, store: StoreService): string {
   const project: ProjectFileStructure = new ProjectFileStructure();
-  project.canvasContent = store.canvas.toJSON(['id', 'points']);
+  project.canvasContent = store.canvas.toJSON(['id', 'points', 'circleStep']);
   project.layerStackContent = treeService.itemList;
   project.globalHUDProperties = store.hudProperties;
   return JSON.stringify(project);
