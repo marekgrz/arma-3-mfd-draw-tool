@@ -96,9 +96,9 @@ export class HeaderMenuComponent implements OnInit {
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
       const savedProject: ProjectFileStructure = JSON.parse(message);
       this.treeService.itemList = savedProject.layerStackContent;
-      this.treeService.refreshItemListFromCanvas(this.store.canvas);
       this.store.reloadProject(savedProject);
       this.toastr.success('Project loaded');
+      this.treeService.refreshItemListFromCanvas(this.store.canvas);
       this.hideSnackBarInfo();
     });
     this.ipc.on('saveFile', (event: Electron.IpcMessageEvent) => {

@@ -103,7 +103,7 @@ export class ElementParserService {
     const centerX = 317.5;
     const centerY = 108.5;
     const points: Point[] = [];
-    for (let a = 0; a <= 2 * Math.PI; a += element['circleStep']) {
+    for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element['circleStep'])) {
       const x = centerX + radiusX * Math.cos(a);
       const y = centerY + radiusY * Math.sin(a);
       points.push({x, y} as Point);

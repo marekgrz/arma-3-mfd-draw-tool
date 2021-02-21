@@ -62,7 +62,6 @@ export class TextureElementComponent implements OnInit {
     const fileURL = event.target.result.toString();
     const tga = new TgaLoader();
     tga.open(fileURL, () => {
-      console.log('ImageLoaded');
       this.item.element.setSrc(tga.getDataURL('image/png'));
       this.store.canvas.requestRenderAll();
     });
