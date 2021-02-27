@@ -3,6 +3,7 @@ import {StoreService} from '../../../../../utils/store.service';
 import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
 import {fabric} from 'fabric';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
+import {ID} from '../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'app-text',
@@ -22,7 +23,7 @@ export class TextComponent {
       textAlign: 'center',
       fontSize: 50,
     });
-    text['id'] = generateId();
+    text[ID] = generateId();
     this.store.canvas.add(text);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromText(text));
   }

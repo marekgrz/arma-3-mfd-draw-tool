@@ -4,6 +4,8 @@ import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
 import {fabric} from 'fabric';
 import {Color} from '@angular-material-components/color-picker';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
+import {ID, LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {LineType} from '../../../../../templates/Line';
 
 @Component({
   selector: 'app-rectangle',
@@ -24,9 +26,10 @@ export class RectangleComponent {
       stroke: new Color(0, 0, 0, 1) as any,
       strokeWidth: 1,
       strokeUniform: true,
-      strokeDashArray: [10, 5],
+      strokeDashArray: [1, 10],
     });
-    rect['id'] = generateId();
+    rect[ID] = generateId();
+    rect[LINETYPE] = LineType.full;
     this.store.canvas.add(rect);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
   }

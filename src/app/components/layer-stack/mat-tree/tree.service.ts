@@ -4,6 +4,7 @@ import {Circle, IText, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {deleteElementById, findByID, flattenList} from '../../../common/Utils';
+import {ID} from '../../../common/ProjectFileStructure';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class TreeService {
     const flatItemList = flattenList(this.itemList).filter(el => el.type !== ElementType.group);
     const objects = this.store.canvas.getObjects();
     flatItemList.map(item => {
-      objects.find(obj => obj['id'] === item.id)
+      objects.find(obj => obj[ID] === item.id)
         .moveTo(index);
       index++;
     });
@@ -46,13 +47,13 @@ export class TreeService {
   refreshItemListFromCanvas(canvas: fabric.Canvas): void {
     const elements: fabric.Object[] = canvas.getObjects();
     elements.forEach(element => {
-      findByID(element['id'], this.itemList).element = element;
+      findByID(element[ID], this.itemList).element = element;
     });
   }
 
   itemFromLine(line: Polyline): StackItem {
     const item = new StackItem();
-    item.id = line['id'];
+    item.id = line[ID];
     item.name = 'Line_' + this.lineIndex++;
     item.type = ElementType.line;
     item.element = line;
@@ -62,7 +63,7 @@ export class TreeService {
 
   itemFromRectangle(rectangle: Rect): StackItem {
     const item = new StackItem();
-    item.id = rectangle['id'];
+    item.id = rectangle[ID];
     item.name = 'Rectangle_' + this.rectangleIndex++;
     item.type = ElementType.rectangle;
     item.element = rectangle;
@@ -72,7 +73,7 @@ export class TreeService {
 
   itemFromText(text: fabric.Text): StackItem {
     const item = new StackItem();
-    item.id = text['id'];
+    item.id = text[ID];
     item.name = 'TextElement_' + this.textIndex++;
     item.type = ElementType.text;
     item.element = text;
@@ -82,7 +83,7 @@ export class TreeService {
 
   itemFromTriangle(triangle: Triangle): StackItem {
     const item = new StackItem();
-    item.id = triangle['id'];
+    item.id = triangle[ID];
     item.name = 'Triangle' + this.triangleIndex++;
     item.type = ElementType.triangle;
     item.element = triangle;
@@ -92,7 +93,7 @@ export class TreeService {
 
   itemFromCircle(circle: Circle): StackItem {
     const item = new StackItem();
-    item.id = circle['id'];
+    item.id = circle[ID];
     item.name = 'Circle_' + this.circleIndex++;
     item.type = ElementType.circle;
     item.element = circle;
@@ -102,7 +103,7 @@ export class TreeService {
 
   itemFromPolygonRectangle(rectangle: Rect): StackItem {
     const item = new StackItem();
-    item.id = rectangle['id'];
+    item.id = rectangle[ID];
     item.name = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
     item.type = ElementType.polygonRect;
     item.element = rectangle;
@@ -112,7 +113,7 @@ export class TreeService {
 
   itemFromPolygonTriangle(triangle: Triangle): StackItem {
     const item = new StackItem();
-    item.id = triangle['id'];
+    item.id = triangle[ID];
     item.name = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
     item.type = ElementType.polygonTriangle;
     item.element = triangle;
@@ -122,7 +123,7 @@ export class TreeService {
 
   itemFromTexture(texture: fabric.Image): StackItem {
     const item = new StackItem();
-    item.id = texture['id'];
+    item.id = texture[ID];
     item.name = 'Texture_' + this.textureIndex++;
     item.type = ElementType.texture;
     item.element = texture;

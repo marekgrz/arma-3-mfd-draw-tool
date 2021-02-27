@@ -7,6 +7,7 @@ import {Line} from '../templates/Line';
 import {Polygon} from '../templates/Polygon';
 import {Point} from '../common/Point';
 import {TreeService} from '../components/layer-stack/mat-tree/tree.service';
+import {CIRCLESTEP, LINETYPE, POINTS} from '../common/ProjectFileStructure';
 
 @Injectable({
   providedIn: 'root'
@@ -88,7 +89,7 @@ export class ElementParserService {
     line.color = element.stroke as any;
     line.points = element.points;
     line.bone = 'Center';
-    line.lineType = element['lineType'];
+    line.lineType = element[LINETYPE];
     line.width = Number(element.strokeWidth);
     return line;
   }
@@ -110,18 +111,18 @@ export class ElementParserService {
     const centerX = 317.5;
     const centerY = 108.5;
     const points: Point[] = [];
-    for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element['circleStep'])) {
+    for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element[CIRCLESTEP])) {
       const x = centerX + radiusX * Math.cos(a);
       const y = centerY + radiusY * Math.sin(a);
       points.push({x, y} as Point);
     }
-    item.element['points'] = points;
+    item.element[POINTS] = points;
     return item;
   }
 
   private addPointsFromCoords(item: StackItem): StackItem {
     const element = item.element;
-    item.element['points'] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
+    item.element[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
     return item;
   }
 }

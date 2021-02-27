@@ -6,6 +6,7 @@ import {StoreService} from '../../../utils/store.service';
 import {findByID, flattenNode} from '../../../common/Utils';
 import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ID} from '../../../common/ProjectFileStructure';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class InteractionService {
       const elementListOriginal = flattenNode(item);
       selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     } else {
-      selection = this.store.canvas.getObjects().find(element => element['id'] === item.id);
+      selection = this.store.canvas.getObjects().find(element => element[ID] === item.id);
     }
     // this.treeService.selectedItem = item;
     this.store.canvas.setActiveObject(selection);
@@ -65,7 +66,7 @@ export class InteractionService {
       if (result) {
         this.store.canvas.getActiveObjects().forEach(it => {
           this.store.canvas.remove(it);
-          this.treeService.deleteItemByID(it['id']);
+          this.treeService.deleteItemByID(it[ID]);
         });
         if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
           this.treeService.deleteItemByID(this.treeService.selectedItem.id);

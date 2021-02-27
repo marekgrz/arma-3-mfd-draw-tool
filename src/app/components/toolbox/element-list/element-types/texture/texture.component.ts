@@ -3,6 +3,7 @@ import {fabric} from 'fabric';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
 import {StoreService} from '../../../../../utils/store.service';
 import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
+import {ID} from '../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'app-texture',
@@ -26,7 +27,7 @@ export class TextureComponent {
       });
       image.scaleToWidth(100);
       image.scaleToHeight(100);
-      image['id'] = generateId();
+      image[ID] = generateId();
       this.store.canvas.add(image);
       this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image));
     };

@@ -1,4 +1,5 @@
 import {Point} from '../../../common/Point';
+import {LineType} from '../../../templates/Line';
 
 export class StackItem {
   id: string = generateId();

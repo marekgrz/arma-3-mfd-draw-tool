@@ -8,6 +8,7 @@ import {fromEvent} from 'rxjs';
 import {fabric} from 'fabric';
 import {Color} from '@angular-material-components/color-picker';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
+import {ID} from '../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'app-line',
@@ -67,7 +68,7 @@ export class LineComponent {
 
   private drawLineBetweenPoints(coords: Point[], temporary: boolean): Polyline {
     this.store.canvas.getObjects()
-      .filter(item => item['id'] === 'tempPolyLine')
+      .filter(item => item[ID] === 'tempPolyLine')
       .map(element => this.store.canvas.remove(element));
     this.store.canvas.renderAll();
     const line = new fabric.Polyline(
@@ -80,7 +81,7 @@ export class LineComponent {
         objectCaching: false,
         transparentCorners: false,
       });
-    line['id'] = temporary ? 'tempPolyLine' : generateId();
+    line[ID] = temporary ? 'tempPolyLine' : generateId();
     this.store.canvas.add(line);
     return line;
   }
@@ -102,7 +103,7 @@ export class LineComponent {
     this.interaction.stopFreeDrawing();
     this.lineDrawingStarted = false;
     this.store.canvas.getObjects()
-      .filter(item => item['id'] === 'tempPolyLine')
+      .filter(item => item[ID] === 'tempPolyLine')
       .map(element => this.store.canvas.remove(element));
     this.points = [];
     this.store.canvas.renderAll();
