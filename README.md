@@ -6,4 +6,4 @@
 4. Circle transcoding - Done
 5. Text aligning
 6. Delete multiple selected elements - Done
-7. Fix reloading polyline to be editable.
+7. Fix reloading polyline to be editable - Done

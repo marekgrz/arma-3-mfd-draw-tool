@@ -6,13 +6,6 @@ export function getBoneIfExists(bone: string): string {
   return bone && bone.length > 0 ? bone + ', ' : '';
 }
 
-export function getCondition(condition: string): string {
-  if (!condition) {
-    return '';
-  }
-  return `condition = "${condition}";`;
-}
-
 
 export function getColorArray(color: Color): string {
   if (!color) {

@@ -1,3 +1,5 @@
+import {Point} from '../../../common/Point';
+
 export class StackItem {
   id: string = generateId();
   name: string;
@@ -5,6 +7,14 @@ export class StackItem {
   element?: any;
   children = new Array<StackItem>();
   parent?: StackItem;
+  groupCondition?: string;
+  groupBlinking = false;
+  groupBlinkingPattern?: string;
+  groupBlinkingStartsOn?: number;
+  clipTL: Point = new Point();
+  clipBR: Point = new Point();
+  clipTLParallax: Point = new Point();
+  clipBRParallax: Point = new Point();
 }
 
 export enum ElementType {
