@@ -51,7 +51,7 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   @HostListener('document:keyup', ['$event'])
   deleteObject(event: KeyboardEvent): void {
-    if (event.key === 'Delete' && this.element) {
+    if (event.key === 'Delete' && this.treeService.selectedItem) {
       this.interaction.onDeleteSelection();
       this.element = null;
     }
