@@ -4,6 +4,8 @@ import {ElementType, StackItem} from '../elements/StackItem';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../utils/store.service';
 import {findByID, flattenNode} from '../../../common/Utils';
+import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class InteractionService {
   private drawingMode = false;
 
   constructor(private treeService: TreeService,
-              private store: StoreService) {
+              private store: StoreService,
+              private dialog: MatDialog) {
   }
 
   startFreeDrawing(): void {
@@ -55,15 +58,22 @@ export class InteractionService {
   }
 
   onDeleteSelection(): void {
-    this.store.canvas.getActiveObjects().forEach(it => {
-      this.store.canvas.remove(it);
-      this.treeService.deleteItemByID(it['id']);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {message: 'Delete selected elements?'}
     });
-    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
-      this.treeService.deleteItemByID(this.treeService.selectedItem.id);
-    }
-    this.store.canvas.discardActiveObject();
-    this.store.canvas.renderAll();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.store.canvas.getActiveObjects().forEach(it => {
+          this.store.canvas.remove(it);
+          this.treeService.deleteItemByID(it['id']);
+        });
+        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+          this.treeService.deleteItemByID(this.treeService.selectedItem.id);
+        }
+        this.store.canvas.discardActiveObject();
+        this.store.canvas.renderAll();
+      }
+    });
   }
 
   deselectCurrentItems(): void {
