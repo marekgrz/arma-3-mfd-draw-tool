@@ -33,12 +33,15 @@ export class InteractionService {
     } else {
       selection = this.store.canvas.getObjects().find(element => element['id'] === item.id);
     }
-    this.treeService.selectedItem = item;
+    // this.treeService.selectedItem = item;
     this.store.canvas.setActiveObject(selection);
     this.store.canvas.requestRenderAll();
   }
 
   onItemInCanvasSelected(ids: string[]): void {
+    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+      return;
+    }
     if (!this.drawingMode) {
       this.deselectCurrentItems();
       if (ids.length < 2) {
@@ -49,6 +52,18 @@ export class InteractionService {
         element.classList.add('selected-item');
       });
     }
+  }
+
+  onDeleteSelection(): void {
+    this.store.canvas.getActiveObjects().forEach(it => {
+      this.store.canvas.remove(it);
+      this.treeService.deleteItemByID(it['id']);
+    });
+    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+      this.treeService.deleteItemByID(this.treeService.selectedItem.id);
+    }
+    this.store.canvas.discardActiveObject();
+    this.store.canvas.renderAll();
   }
 
   deselectCurrentItems(): void {

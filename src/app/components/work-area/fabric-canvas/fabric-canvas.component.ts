@@ -4,6 +4,7 @@ import {FabricComponent} from 'ngx-fabric-wrapper';
 import {TreeService} from '../../layer-stack/mat-tree/tree.service';
 import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
 import {fabric} from 'fabric';
+import {ElementType} from '../../layer-stack/elements/StackItem';
 
 @Component({
   selector: 'app-fabric-canvas',
@@ -30,19 +31,19 @@ export class FabricCanvasComponent implements AfterViewInit {
   STEP_ANGLE = 0.01;
 
   @HostListener('window:keydown', ['$event'])
-  activateSnapping(event: KeyboardEvent): void {
+  onActivateSnapping(event: KeyboardEvent): void {
     if (event.key === 'Shift') {
       this.snappingEnabled = true;
     }
   }
 
   @HostListener('window:keyup', ['$event'])
-  disableSnapping(event: KeyboardEvent): void {
+  onDisableSnapping(event: KeyboardEvent): void {
     this.snappingEnabled = false;
   }
 
   @HostListener('mousemove')
-  rotateObject(): void {
+  onRotateObject(): void {
     if (this.element) {
       this.element.setOptions({snapAngle: this.snappingEnabled ? this.SNAP_ANGLE : this.STEP_ANGLE});
     }
@@ -51,13 +52,7 @@ export class FabricCanvasComponent implements AfterViewInit {
   @HostListener('document:keyup', ['$event'])
   deleteObject(event: KeyboardEvent): void {
     if (event.key === 'Delete' && this.element) {
-      this.treeService.deleteItemByID(this.treeService.selectedItem.id);
-      if (this.element.group) {
-        this.element.group._objects.forEach(it => this.store.canvas.remove(it));
-      }
-      this.store.canvas.remove(this.element);
-      this.store.canvas.discardActiveObject();
-      this.store.canvas.renderAll();
+      this.interaction.onDeleteSelection();
       this.element = null;
     }
   }

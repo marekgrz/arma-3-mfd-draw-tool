@@ -1,16 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TreeService} from './mat-tree/tree.service';
+import {InteractionService} from './mat-tree/interaction.service';
 
 @Component({
   selector: 'app-layer-list',
   templateUrl: './layer-stack.component.html',
   styleUrls: ['./layer-stack.component.less']
 })
-export class LayerStackComponent implements OnInit {
+export class LayerStackComponent {
 
-  constructor(public treeService: TreeService) {
+  constructor(public treeService: TreeService,
+              private interaction: InteractionService) {
   }
 
-  ngOnInit(): void {
+  deleteSelection(): void {
+    this.interaction.onDeleteSelection();
   }
 }
