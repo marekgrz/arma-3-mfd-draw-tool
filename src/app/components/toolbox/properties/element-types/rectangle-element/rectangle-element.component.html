@@ -1,8 +1,10 @@
 <div class="row-container">
+<!--  Name-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Element name</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
   </mat-form-field>
+<!--  Position-->
   <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Position [X]</mat-label>
@@ -19,6 +21,7 @@
              (change)="save()">
     </mat-form-field>
   </div>
+<!--  Width-->
   <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Width</mat-label>
@@ -27,6 +30,7 @@
              [value]="getWidth()"
              (change)="updateWidth($event)">
     </mat-form-field>
+<!--    Height-->
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Height</mat-label>
       <input matInput autocomplete="off"
@@ -35,6 +39,7 @@
              (change)="updateHeight($event)">
     </mat-form-field>
   </div>
+<!--  Stroke-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Stroke</mat-label>
     <input matInput autocomplete="off"
@@ -42,11 +47,20 @@
            [(ngModel)]="item.element.strokeWidth"
            (change)="save()">
   </mat-form-field>
+<!--  Line Type-->
+  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+    <mat-label>Line type</mat-label>
+    <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
+      <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+<!--  Color-->
   <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
     <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
     <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
     <ngx-mat-color-picker #picker></ngx-mat-color-picker>
   </mat-form-field>
+<!--  Angle-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()"  (change)="save()">

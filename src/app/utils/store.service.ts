@@ -23,6 +23,13 @@ export class StoreService {
     'TahomaB',
   ];
 
+  LINE_TYPE_LIST: {name: string, value: number}[] = [
+    {name: 'Full', value: 0},
+    {name: 'Dotted', value: 1},
+    {name: 'Dashed', value: 2},
+    {name: 'Dot-dashed', value: 3},
+  ];
+
   usedSources: string[] = [];
 
   canvas: Canvas;

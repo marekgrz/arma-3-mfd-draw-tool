@@ -4,7 +4,8 @@ import {Color} from '@angular-material-components/color-picker';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
 import {StoreService} from '../../../../../utils/store.service';
 import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
-import {CIRCLESTEP, ID} from '../../../../../common/ProjectFileStructure';
+import {CIRCLESTEP, ID, LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {LineType} from '../../../../../templates/Line';
 
 @Component({
   selector: 'app-circle',
@@ -27,6 +28,7 @@ export class CircleComponent  {
     });
     circle[ID] = generateId();
     circle[CIRCLESTEP] = 0.1;
+    circle[LINETYPE] = LineType.full;
     this.store.canvas.add(circle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromCircle(circle));
   }

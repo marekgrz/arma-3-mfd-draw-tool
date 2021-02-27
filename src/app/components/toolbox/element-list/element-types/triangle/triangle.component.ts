@@ -4,7 +4,8 @@ import {Color} from '@angular-material-components/color-picker';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
 import {TreeService} from '../../../../layer-stack/mat-tree/tree.service';
 import {StoreService} from '../../../../../utils/store.service';
-import {ID} from '../../../../../common/ProjectFileStructure';
+import {ID, LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {LineType} from '../../../../../templates/Line';
 
 @Component({
   selector: 'app-triangle',
@@ -30,6 +31,7 @@ export class TriangleComponent implements OnInit {
       strokeUniform: true
     });
     triangle[ID] = generateId();
+    triangle[LINETYPE] = LineType.full;
     this.store.canvas.add(triangle);
     this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTriangle(triangle));
   }

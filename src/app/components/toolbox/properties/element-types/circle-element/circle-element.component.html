@@ -70,6 +70,13 @@
            [(ngModel)]="item.element.strokeWidth"
            (change)="save()">
   </mat-form-field>
+<!--  Line Type-->
+  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+    <mat-label>Line type</mat-label>
+    <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
+      <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 <!--  COLOR-->
   <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
     <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">

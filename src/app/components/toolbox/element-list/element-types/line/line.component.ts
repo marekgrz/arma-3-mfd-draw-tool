@@ -8,7 +8,8 @@ import {fromEvent} from 'rxjs';
 import {fabric} from 'fabric';
 import {Color} from '@angular-material-components/color-picker';
 import {generateId} from '../../../../layer-stack/elements/StackItem';
-import {ID} from '../../../../../common/ProjectFileStructure';
+import {ID, LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {LineType} from '../../../../../templates/Line';
 
 @Component({
   selector: 'app-line',
@@ -82,6 +83,7 @@ export class LineComponent {
         transparentCorners: false,
       });
     line[ID] = temporary ? 'tempPolyLine' : generateId();
+    line[LINETYPE] = LineType.full;
     this.store.canvas.add(line);
     return line;
   }

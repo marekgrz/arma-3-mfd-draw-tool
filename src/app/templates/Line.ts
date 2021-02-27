@@ -44,6 +44,6 @@ function getLinePoints(points: Point[], indent: string, bone?: string): string {
 export enum LineType {
   full = 0,
   dotted = 1,
-  dashed = 3,
-  dotDashed = 4
+  dashed = 2,
+  dotDashed = 3
 }

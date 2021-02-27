@@ -26,7 +26,6 @@ export class RectangleComponent {
       stroke: new Color(0, 0, 0, 1) as any,
       strokeWidth: 1,
       strokeUniform: true,
-      strokeDashArray: [1, 10],
     });
     rect[ID] = generateId();
     rect[LINETYPE] = LineType.full;

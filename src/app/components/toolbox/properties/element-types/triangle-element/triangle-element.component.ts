@@ -3,13 +3,16 @@ import {StackItem} from '../../../../layer-stack/elements/StackItem';
 import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../utils/store.service';
 import {fabric} from 'fabric';
+import {LineType} from '../../../../../templates/Line';
+import {LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {BaseElementType} from '../BaseElementType';
 
 @Component({
   selector: 'app-triangle-element',
   templateUrl: './triangle-element.component.html',
   styleUrls: ['./triangle-element.component.less']
 })
-export class TriangleElementComponent implements OnInit {
+export class TriangleElementComponent extends BaseElementType implements OnInit {
 
   @Input()
   item: StackItem;
@@ -18,8 +21,10 @@ export class TriangleElementComponent implements OnInit {
   newWidth = 0;
   angle: number;
   color: FormControl;
+  lineType = LineType.full;
 
-  constructor(private store: StoreService) {
+  constructor(public store: StoreService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class TriangleElementComponent implements OnInit {
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
+    this.lineType = this.item.element[LINETYPE];
   }
 
   save(): void {
@@ -35,6 +41,8 @@ export class TriangleElementComponent implements OnInit {
     triangle.top = Number(this.item.element.top);
     triangle.scaleX = Number(this.newWidth / this.item.element.width);
     triangle.scaleY = Number(this.newHeight / this.item.element.height);
+    triangle[LINETYPE] = this.lineType;
+    this.setElementLineType(triangle, this.lineType);
     triangle.set('stroke', this.color.value);
     triangle.set('strokeWidth', Number(this.item.element.strokeWidth));
     triangle.setCoords();

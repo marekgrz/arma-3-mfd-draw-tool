@@ -3,13 +3,16 @@ import {StackItem} from '../../../../layer-stack/elements/StackItem';
 import {fabric} from 'fabric';
 import {StoreService} from '../../../../../utils/store.service';
 import {FormControl} from '@angular/forms';
+import {LineType} from '../../../../../templates/Line';
+import {LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {BaseElementType} from '../BaseElementType';
 
 @Component({
   selector: 'app-rectangle-element',
   templateUrl: './rectangle-element.component.html',
   styleUrls: ['./rectangle-element.component.less']
 })
-export class RectangleElementComponent implements OnInit {
+export class RectangleElementComponent extends BaseElementType implements OnInit {
 
   @Input()
   item: StackItem;
@@ -18,8 +21,10 @@ export class RectangleElementComponent implements OnInit {
   newWidth = 0;
   angle: number;
   color: FormControl;
+  lineType = LineType.full;
 
-  constructor(private store: StoreService) {
+  constructor(public store: StoreService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class RectangleElementComponent implements OnInit {
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
+    this.lineType = this.item.element[LINETYPE];
   }
 
   save(): void {
@@ -35,6 +41,8 @@ export class RectangleElementComponent implements OnInit {
     rect.top = Number(this.item.element.top);
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
+    rect[LINETYPE] = this.lineType;
+    this.setElementLineType(rect, this.lineType);
     rect.set('stroke', this.color.value);
     rect.set('strokeWidth', Number(this.item.element.strokeWidth));
     rect.setCoords();

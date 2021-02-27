@@ -4,13 +4,16 @@ import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../utils/store.service';
 import {fabric} from 'fabric';
 import {Point} from 'fabric/fabric-impl';
+import {LineType} from '../../../../../templates/Line';
+import {LINETYPE} from '../../../../../common/ProjectFileStructure';
+import {BaseElementType} from '../BaseElementType';
 
 @Component({
   selector: 'app-line-element',
   templateUrl: './line-element.component.html',
   styleUrls: ['./line-element.component.less']
 })
-export class LineElementComponent implements OnInit {
+export class LineElementComponent extends BaseElementType implements OnInit {
 
   @Input()
   item: StackItem;
@@ -18,9 +21,11 @@ export class LineElementComponent implements OnInit {
   newHeight = 0;
   newWidth = 0;
   angle: number;
+  lineType = LineType.full;
   color: FormControl;
 
-  constructor(private store: StoreService) {
+  constructor(public store: StoreService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -28,6 +33,7 @@ export class LineElementComponent implements OnInit {
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
+    this.lineType = this.item.element[LINETYPE];
 
     this.setupPolyLineEdit();
   }
@@ -100,6 +106,7 @@ export class LineElementComponent implements OnInit {
     line.top = Number(this.item.element.top);
     line.scaleX = Number(this.newWidth / this.item.element.width);
     line.scaleY = Number(this.newHeight / this.item.element.height);
+    line[LINETYPE] = this.lineType;
     line.set('stroke', this.color.value);
     line.set('strokeWidth', Number(this.item.element.strokeWidth));
     line.setCoords();
