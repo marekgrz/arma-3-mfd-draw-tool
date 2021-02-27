@@ -34,6 +34,7 @@ export class LineElementComponent implements OnInit {
 
   private setupPolyLineEdit(): void {
     const poly: any = this.store.canvas.getActiveObject();
+    poly.objectCaching = false;
     const lastControl = poly.points.length - 1;
     poly.cornerStyle = 'circle';
     poly.cornerColor = 'rgba(0,0,255,0.5)';
