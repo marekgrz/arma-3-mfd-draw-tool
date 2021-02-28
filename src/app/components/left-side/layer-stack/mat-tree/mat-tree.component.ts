@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {StackItem} from '../elements/StackItem';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { StackItem } from '../elements/StackItem';
 
 @Component({
   selector: 'app-mat-tree',
@@ -12,11 +12,11 @@ export class MatTreeComponent implements OnInit {
 
   @Output() selectedItem: EventEmitter<StackItem> = new EventEmitter<StackItem>();
 
-  selectedObject(item: StackItem): void {
-    this.selectedItem.emit(item);
+  constructor() {
   }
 
-  constructor() {
+  selectedObject(item: StackItem): void {
+    this.selectedItem.emit(item);
   }
 
   ngOnInit(): void {

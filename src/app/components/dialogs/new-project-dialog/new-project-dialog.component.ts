@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {GlobalHUDProperties} from '../../../common/ProjectFileStructure';
-import {StoreService} from '../../../utils/store.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { GlobalHUDProperties } from '../../../common/ProjectFileStructure';
+import { StoreService } from '../../../utils/store.service';
 
 @Component({
   selector: 'app-new-project-dialog',

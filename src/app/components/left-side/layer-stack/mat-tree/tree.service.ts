@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ElementType, StackItem} from '../elements/StackItem';
-import {Circle, IText, Polyline, Rect, Triangle} from 'fabric/fabric-impl';
-import {fabric} from 'fabric';
-import {StoreService} from '../../../../utils/store.service';
-import {deleteElementById, findByID, flattenList} from '../../../../common/Utils';
-import {ID} from '../../../../common/ProjectFileStructure';
+import { Injectable } from '@angular/core';
+import { ElementType, StackItem } from '../elements/StackItem';
+import { Circle, Polyline, Rect, Triangle } from 'fabric/fabric-impl';
+import { fabric } from 'fabric';
+import { StoreService } from '../../../../utils/store.service';
+import { deleteElementById, findByID, flattenList } from '../../../../common/Utils';
+import { ID } from '../../../../common/ProjectFileStructure';
 
 @Injectable({
   providedIn: 'root'
@@ -158,18 +158,18 @@ export class TreeService {
     // }
   }
 
+  // UNUSED YET
+  updateItemParent(itemID: string, newParentID: string): void {
+    const selectedItem = findByID(itemID, this.itemList);
+    selectedItem.parent = findByID(newParentID, this.itemList);
+  }
+
   private newGroup(): StackItem {
     const group = new StackItem();
     group.name = 'Group_' + this.groupIndex;
     group.type = ElementType.group;
     group.element = undefined;
     return group;
-  }
-
-  // UNUSED YET
-  updateItemParent(itemID: string, newParentID: string): void {
-    const selectedItem = findByID(itemID, this.itemList);
-    selectedItem.parent = findByID(newParentID, this.itemList);
   }
 
   private wrapItemsInGroup(): void {

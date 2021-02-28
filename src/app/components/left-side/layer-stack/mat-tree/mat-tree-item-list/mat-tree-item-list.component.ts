@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ElementType, StackItem} from '../../elements/StackItem';
-import {TreeService} from '../tree.service';
-import {InteractionService} from '../interaction.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ElementType, StackItem } from '../../elements/StackItem';
+import { TreeService } from '../tree.service';
+import { InteractionService } from '../interaction.service';
 
 @Component({
   selector: 'app-mat-tree-item-list',

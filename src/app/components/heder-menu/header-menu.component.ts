@@ -1,13 +1,13 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {IpcService} from '../../utils/ipc.service';
-import {TreeService} from '../left-side/layer-stack/mat-tree/tree.service';
-import {ToastrService} from 'ngx-toastr';
-import {StoreService} from '../../utils/store.service';
-import {parseProjectToFile, ProjectFileStructure} from '../../common/ProjectFileStructure';
-import {MatDialog} from '@angular/material/dialog';
-import {NewProjectDialogComponent} from '../dialogs/new-project-dialog/new-project-dialog.component';
-import {ConfirmDialogComponent} from '../dialogs/confirm-dialog/confirm-dialog.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { IpcService } from '../../utils/ipc.service';
+import { TreeService } from '../left-side/layer-stack/mat-tree/tree.service';
+import { ToastrService } from 'ngx-toastr';
+import { StoreService } from '../../utils/store.service';
+import { parseProjectToFile, ProjectFileStructure } from '../../common/ProjectFileStructure';
+import { MatDialog } from '@angular/material/dialog';
+import { NewProjectDialogComponent } from '../dialogs/new-project-dialog/new-project-dialog.component';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header-menu',

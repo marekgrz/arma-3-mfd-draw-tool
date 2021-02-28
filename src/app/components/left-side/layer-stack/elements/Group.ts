@@ -1,5 +1,5 @@
-import {BaseElement} from './BaseElement';
+import { BaseElement } from './BaseElement';
 
-export class Group implements BaseElement{
-    name: string;
+export class Group implements BaseElement {
+  name: string;
 }

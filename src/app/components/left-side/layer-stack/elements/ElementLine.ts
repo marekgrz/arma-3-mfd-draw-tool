@@ -1,7 +1,7 @@
-import {BaseElement} from './BaseElement';
-import {Line} from 'fabric/fabric-impl';
+import { BaseElement } from './BaseElement';
+import { Line } from 'fabric/fabric-impl';
 
-export class ElementLine implements BaseElement{
+export class ElementLine implements BaseElement {
   name: string;
   content: Line;
 }

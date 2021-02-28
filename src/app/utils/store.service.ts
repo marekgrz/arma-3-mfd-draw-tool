@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Color} from '@angular-material-components/color-picker';
 import {Canvas} from 'fabric/fabric-impl';
 import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileStructure';
+import {BoneBaseModel} from '../components/left-side/bones-list/BoneBaseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,8 @@ export class StoreService {
     {name: 'Dashed', value: 2},
     {name: 'Dot-dashed', value: 3},
   ];
+
+  bones: BoneBaseModel[] = [];
 
   usedSources: string[] = [];
 
