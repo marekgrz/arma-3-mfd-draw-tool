@@ -1,4 +1,4 @@
-import {StackItem} from '../components/layer-stack/elements/StackItem';
+import {StackItem} from '../components/left-side/layer-stack/elements/StackItem';
 import {fabric} from 'fabric';
 import {Color} from '@angular-material-components/color-picker';
 

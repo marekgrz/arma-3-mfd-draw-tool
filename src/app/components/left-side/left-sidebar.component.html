@@ -1,0 +1,9 @@
+<div class="layer-list-view">
+  <div class="layer-list">
+    <app-layer-list *ngIf="!previewMode"></app-layer-list>
+  </div>
+  <div class="bones-list">
+    <app-bones-list></app-bones-list>
+  </div>
+</div>
+<app-sources-list *ngIf="previewMode" class="layer-list"></app-sources-list>

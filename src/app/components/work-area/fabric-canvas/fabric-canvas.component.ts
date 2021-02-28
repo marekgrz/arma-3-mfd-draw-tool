@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
 import {StoreService} from '../../../utils/store.service';
 import {FabricComponent} from 'ngx-fabric-wrapper';
-import {TreeService} from '../../layer-stack/mat-tree/tree.service';
-import {InteractionService} from '../../layer-stack/mat-tree/interaction.service';
+import {TreeService} from '../../left-side/layer-stack/mat-tree/tree.service';
+import {InteractionService} from '../../left-side/layer-stack/mat-tree/interaction.service';
 import {fabric} from 'fabric';
-import {ElementType} from '../../layer-stack/elements/StackItem';
+import {ElementType} from '../../left-side/layer-stack/elements/StackItem';
 
 @Component({
   selector: 'app-fabric-canvas',

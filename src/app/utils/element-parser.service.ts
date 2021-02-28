@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {ElementType, StackItem} from '../components/layer-stack/elements/StackItem';
+import {ElementType, StackItem} from '../components/left-side/layer-stack/elements/StackItem';
 import {BaseShape} from '../common/BaseShape';
 import {ClassGroup} from '../templates/ClassGroup';
 import {Color} from '@angular-material-components/color-picker';
 import {Line} from '../templates/Line';
 import {Polygon} from '../templates/Polygon';
 import {Point} from '../common/Point';
-import {TreeService} from '../components/layer-stack/mat-tree/tree.service';
+import {TreeService} from '../components/left-side/layer-stack/mat-tree/tree.service';
 import {CIRCLESTEP, LINETYPE, POINTS} from '../common/ProjectFileStructure';
 
 @Injectable({
