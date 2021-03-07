@@ -65,6 +65,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { BonesListComponent } from './components/left-side/bones-list/bones-list.component';
 import { LeftSidebarComponent } from './components/left-side/left-sidebar.component';
 import { NewBoneDialogComponent } from './components/left-side/bones-list/new-bone-dialog/new-bone-dialog.component';
+import { BoneFixedComponent } from './components/left-side/bones-list/new-bone-dialog/bone-fixed/bone-fixed.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { EditBoneComponent } from './components/left-side/bones-list/edit-bone/edit-bone.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +108,8 @@ import { NewBoneDialogComponent } from './components/left-side/bones-list/new-bo
     BonesListComponent,
     LeftSidebarComponent,
     NewBoneDialogComponent,
+    BoneFixedComponent,
+    EditBoneComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +142,7 @@ import { NewBoneDialogComponent } from './components/left-side/bones-list/new-bo
     MatDialogModule,
     MatSelectModule,
     MatSliderModule,
+    MatMenuModule,
   ],
   providers: [
     {

@@ -3,7 +3,7 @@ import { IpcService } from '../../utils/ipc.service';
 import { TreeService } from '../left-side/layer-stack/mat-tree/tree.service';
 import { ToastrService } from 'ngx-toastr';
 import { StoreService } from '../../utils/store.service';
-import { parseProjectToFile, ProjectFileStructure } from '../../common/ProjectFileStructure';
+import { parseFileToProject, parseProjectToFile, ProjectFileStructure } from '../../common/ProjectFileStructure';
 import { MatDialog } from '@angular/material/dialog';
 import { NewProjectDialogComponent } from '../dialogs/new-project-dialog/new-project-dialog.component';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
@@ -94,11 +94,8 @@ export class HeaderMenuComponent implements OnInit {
 
   private setupFileHandling(): void {
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
-      const savedProject: ProjectFileStructure = JSON.parse(message);
-      this.treeService.itemList = savedProject.layerStackContent;
-      this.store.reloadProject(savedProject);
+      parseFileToProject(message, this.treeService, this.store);
       this.toastr.success('Project loaded');
-      this.treeService.refreshItemListFromCanvas(this.store.canvas);
       this.hideSnackBarInfo();
     });
     this.ipc.on('saveFile', (event: Electron.IpcMessageEvent) => {
@@ -111,10 +108,7 @@ export class HeaderMenuComponent implements OnInit {
     });
     this.ipc.on('openDefault', (event: Electron.IpcMessageEvent, message) => {
       if (!!message) {
-        const savedProject: ProjectFileStructure = JSON.parse(message);
-        this.treeService.itemList = savedProject.layerStackContent;
-        this.treeService.refreshItemListFromCanvas(this.store.canvas);
-        this.store.reloadProject(savedProject);
+        parseFileToProject(message, this.treeService, this.store);
         this.toastr.success('Project loaded');
         this.hideSnackBarInfo();
       }

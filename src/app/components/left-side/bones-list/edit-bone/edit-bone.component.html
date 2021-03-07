@@ -1,31 +1,30 @@
-<div mat-dialog-title>Create new bone</div>
+<div mat-dialog-title>Edit bone</div>
 <mat-dialog-content>
-<!--  NAME-->
+  <!--  NAME-->
   <mat-form-field appearance="outline" class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Name</mat-label>
     <input matInput autocomplete="off"
-           [formControl]="nameFormControl"
+           disabled
+           [(ngModel)]="bone.name"
            [type]="'text'">
-    <mat-error *ngIf="nameFormControl.hasError('required')">Field required</mat-error>
-    <mat-error *ngIf="nameFormControl.hasError('exists')">Bone with that name already exists</mat-error>
   </mat-form-field>
-<!--  TYPE-->
+  <!--  TYPE-->
   <mat-form-field appearance="outline" class="medium-input select full-width" color="accent">
     <mat-label>Bone type</mat-label>
-    <mat-select [(ngModel)]="boneType">
+    <mat-select [(ngModel)]="bone.type">
       <mat-option [value]="'fixed'">Fixed</mat-option>
       <mat-option [value]="'linear'">Linear</mat-option>
       <mat-option [value]="'rotational'">Rotational</mat-option>
     </mat-select>
   </mat-form-field>
-<!--  FIXED-->
-  <div *ngIf="boneType==='fixed'">
-    <app-bone-fixed [bone]="fixedBone"></app-bone-fixed>
+  <!--  FIXED-->
+  <div *ngIf="bone.type==='fixed'">
+    <app-bone-fixed [bone]="bone"></app-bone-fixed>
   </div>
-<!--      ROTATIONAL-->
-<!--      LINEAR-->
+  <!--      ROTATIONAL-->
+  <!--      LINEAR-->
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial [disabled]="nameFormControl.invalid" (click)="saveBone()">Create</button>
+  <button mat-button cdkFocusInitial (click)="saveBone()">Create</button>
 </mat-dialog-actions>

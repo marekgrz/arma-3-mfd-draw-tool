@@ -2,12 +2,13 @@ import {StackItem} from '../components/left-side/layer-stack/elements/StackItem'
 import {Color} from '@angular-material-components/color-picker';
 import {TreeService} from '../components/left-side/layer-stack/mat-tree/tree.service';
 import {StoreService} from '../utils/store.service';
+import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
 
 export class ProjectFileStructure {
   canvasContent: string;
   layerStackContent: StackItem[];
   globalHUDProperties: GlobalHUDProperties;
-  bones: any;
+  bones: BoneBaseModel[];
 }
 
 export function parseProjectToFile(treeService: TreeService, store: StoreService): string {
@@ -15,7 +16,15 @@ export function parseProjectToFile(treeService: TreeService, store: StoreService
   project.canvasContent = store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE]);
   project.layerStackContent = treeService.itemList;
   project.globalHUDProperties = store.hudProperties;
+  project.bones = store.bones;
   return JSON.stringify(project);
+}
+
+export function parseFileToProject(message: string, treeService: TreeService, store: StoreService): void {
+  const savedProject: ProjectFileStructure = JSON.parse(message);
+  treeService.itemList = savedProject.layerStackContent;
+  store.reloadProject(savedProject);
+  treeService.refreshItemListFromCanvas(store.canvas);
 }
 
 export function encode(content: string): string {

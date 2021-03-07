@@ -2,7 +2,23 @@
 <div class="section-container">
   <mat-list>
     <mat-list-item *ngFor="let bone of store.bones">
-      <i class="material-icons">{{getTypeIcon(bone.type)}}</i>{{bone.name}}
+      <i class="material-icons">{{getTypeIcon(bone.type)}}</i>
+      <span class="title">{{bone.name}}</span>
+     <div class="more-menu">
+       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+         <mat-icon>more_vert</mat-icon>
+       </button>
+       <mat-menu #menu="matMenu">
+         <button mat-menu-item (click)="editBone(bone)">
+           <mat-icon>edit</mat-icon>
+           <span>Edit</span>
+         </button>
+         <button mat-menu-item (click)="deleteBone(bone)">
+           <mat-icon>delete</mat-icon>
+           <span>Delete</span>
+         </button>
+       </mat-menu>
+     </div>
     </mat-list-item>
   </mat-list>
   <button mat-button class="add-button" (click)="newBone()">Add bone</button>
