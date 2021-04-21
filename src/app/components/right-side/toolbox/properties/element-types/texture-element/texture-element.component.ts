@@ -5,13 +5,15 @@ import {StackItem} from '../../../../../left-side/layer-stack/elements/StackItem
 import {fabric} from 'fabric';
 import {StoreService} from '../../../../../../utils/store.service';
 import TgaLoader from 'tga-js';
+import { BaseElementType } from '../BaseElementType';
+import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'app-texture-element',
   templateUrl: './texture-element.component.html',
   styleUrls: ['./texture-element.component.less']
 })
-export class TextureElementComponent implements OnInit {
+export class TextureElementComponent extends BaseElementType implements OnInit {
 
   @Input()
   item: StackItem;
@@ -24,13 +26,15 @@ export class TextureElementComponent implements OnInit {
   newHeight = 0;
   newWidth = 0;
 
-  constructor(private store: StoreService) {
+  constructor(store: StoreService) {
+    super(store);
   }
 
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
+    this.boneName = this.item.element[BONENAME];
     this.file.setValue(this.item.element['file']);
   }
 

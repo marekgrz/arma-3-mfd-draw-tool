@@ -13,7 +13,7 @@ export class ProjectFileStructure {
 
 export function parseProjectToFile(treeService: TreeService, store: StoreService): string {
   const project: ProjectFileStructure = new ProjectFileStructure();
-  project.canvasContent = store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE]);
+  project.canvasContent = store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME]);
   project.layerStackContent = treeService.itemList;
   project.globalHUDProperties = store.hudProperties;
   project.bones = store.bones;
@@ -63,10 +63,13 @@ export class GlobalHUDProperties {
   screenHeight: number;
 }
 
+
+// TODO Change to MetaData object type
 ///// CUSTOM PROPERTIES /////////////
 ///// DEINE THEM IN THE PARSE FUNCTION ABOVE ////////////
 export const ID = 'id';
 export const POINTS = 'points';
 export const CIRCLESTEP = 'circleStep';
 export const LINETYPE = 'lineType';
+export const BONENAME = 'boneName';
 

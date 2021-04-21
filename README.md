@@ -9,5 +9,7 @@
 7. Fix reloading polyline to be editable - Done
 8. Bones
 
+9. Przesuwanie grupy elementow a ich pozycja bazowa
+
 If you add any element-specific property, define it also in:
 ProjectFileStructure.ts/parseProjectToFile()

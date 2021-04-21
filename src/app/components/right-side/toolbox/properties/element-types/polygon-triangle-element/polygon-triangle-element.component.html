@@ -1,25 +1,28 @@
 <div class="row-container">
+<!--  Name-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Element name</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
   </mat-form-field>
+<!--  Position-->
   <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [X]</mat-label>
+      <mat-label>Position [X] [0-1]</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [(ngModel)]="item.element.left"
+             [(ngModel)]="item.base.position.x"
              (change)="save()">
     </mat-form-field>
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [Y]</mat-label>
+      <mat-label>Position [Y] [0-1]</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [(ngModel)]="item.element.top"
+             [(ngModel)]="item.base.position.y"
              (change)="save()">
     </mat-form-field>
   </div>
   <div class="pair-elements">
+<!--    Width-->
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Width</mat-label>
       <input matInput autocomplete="off"
@@ -27,6 +30,7 @@
              [value]="getWidth()"
              (change)="updateWidth($event)">
     </mat-form-field>
+<!--    Height-->
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Height</mat-label>
       <input matInput autocomplete="off"
@@ -35,13 +39,23 @@
              (change)="updateHeight($event)">
     </mat-form-field>
   </div>
+<!--  Color-->
   <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
     <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
     <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
     <ngx-mat-color-picker #picker></ngx-mat-color-picker>
   </mat-form-field>
+<!--  Angle-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
+  </mat-form-field>
+<!--  Bone-->
+  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+    <mat-label>Bone</mat-label>
+    <mat-select [(ngModel)]="boneName" (selectionChange)="save()">
+      <mat-option [value]="undefined"><i>None</i></mat-option>
+      <mat-option *ngFor="let item of store.bones" [value]="item.name">{{item.name}}</mat-option>
+    </mat-select>
   </mat-form-field>
 </div>

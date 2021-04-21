@@ -161,7 +161,7 @@ export class TreeService {
   // UNUSED YET
   updateItemParent(itemID: string, newParentID: string): void {
     const selectedItem = findByID(itemID, this.itemList);
-    selectedItem.parent = findByID(newParentID, this.itemList);
+    //selectedItem.parent = findByID(newParentID, this.itemList);
   }
 
   private newGroup(): StackItem {

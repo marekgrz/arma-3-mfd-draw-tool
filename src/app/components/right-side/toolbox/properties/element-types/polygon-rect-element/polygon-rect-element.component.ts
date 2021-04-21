@@ -3,13 +3,15 @@ import {StackItem} from '../../../../../left-side/layer-stack/elements/StackItem
 import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../../utils/store.service';
 import {fabric} from 'fabric';
+import { BaseElementType } from '../BaseElementType';
+import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'app-polygon-rect-element',
   templateUrl: './polygon-rect-element.component.html',
   styleUrls: ['./polygon-rect-element.component.less']
 })
-export class PolygonRectElementComponent implements OnInit {
+export class PolygonRectElementComponent extends BaseElementType implements OnInit {
 
   @Input()
   item: StackItem;
@@ -19,20 +21,21 @@ export class PolygonRectElementComponent implements OnInit {
   angle: number;
   color: FormControl;
 
-  constructor(private store: StoreService) {
+  constructor(store: StoreService) {
+    super(store);
   }
 
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
+    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().fill);
   }
 
   save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    rect.left = Number(this.item.element.left);
-    rect.top = Number(this.item.element.top);
+    this.setElementPosition(rect, this.item);
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
     rect.set('fill', this.color.value);

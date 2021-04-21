@@ -5,7 +5,7 @@
   <app-group-element [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-element>
   <app-rectangle-element [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></app-rectangle-element>
   <app-texture-element [item]="treeService.selectedItem" *ngIf="isTexture(treeService.selectedItem)"></app-texture-element>
-  <app-circle-element [item]="treeService.selectedItem" *ngIf="isCircle(treeService.selectedItem)"></app-circle-element>
+  <app-circle-element-properties [item]="treeService.selectedItem" *ngIf="isCircle(treeService.selectedItem)"></app-circle-element-properties>
   <app-triangle-element [item]="treeService.selectedItem" *ngIf="isTriangle(treeService.selectedItem)"></app-triangle-element>
   <app-polygon-triangle-element [item]="treeService.selectedItem" *ngIf="isPolygonTriangle(treeService.selectedItem)"></app-polygon-triangle-element>
   <app-polygon-rect-element [item]="treeService.selectedItem" *ngIf="isPolygonRectangle(treeService.selectedItem)"></app-polygon-rect-element>

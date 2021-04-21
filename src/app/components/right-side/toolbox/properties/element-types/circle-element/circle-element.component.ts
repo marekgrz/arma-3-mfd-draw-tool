@@ -4,12 +4,12 @@ import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../../utils/store.service';
 import {fabric} from 'fabric';
 import {Circle} from 'fabric/fabric-impl';
-import {CIRCLESTEP, LINETYPE} from '../../../../../../common/ProjectFileStructure';
+import { BONENAME, CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import {LineType} from '../../../../../../templates/Line';
 import {BaseElementType} from '../BaseElementType';
 
 @Component({
-  selector: 'app-circle-element',
+  selector: 'app-circle-element-properties',
   templateUrl: './circle-element.component.html',
   styleUrls: ['./circle-element.component.less']
 })
@@ -27,13 +27,14 @@ export class CircleElementComponent extends BaseElementType implements OnInit {
   lineType = LineType.full;
 
   constructor(public store: StoreService) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {
     this.newDiameterX = this.getDiameterX();
     this.newDiameterY = this.getDiameterY();
     this.angle = this.getAngle();
+    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.circleStep = this.item.element[CIRCLESTEP];
     this.lineType = this.item.element[LINETYPE];
@@ -46,7 +47,7 @@ export class CircleElementComponent extends BaseElementType implements OnInit {
     circle.scaleX = Number(this.newDiameterX / this.item.element.width);
     circle.scaleY = Number(this.newDiameterY / this.item.element.height);
     circle[CIRCLESTEP] = this.circleStep;
-    circle[LINETYPE] = this.lineType;
+    this.setElementPosition(circle, this.item);
     this.setElementLineType(circle, this.lineType);
     circle.set('stroke', this.color.value);
     circle.set('strokeWidth', Number(this.item.element.strokeWidth));

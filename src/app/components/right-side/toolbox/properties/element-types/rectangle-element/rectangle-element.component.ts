@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {StackItem} from '../../../../../left-side/layer-stack/elements/StackItem';
-import {fabric} from 'fabric';
-import {StoreService} from '../../../../../../utils/store.service';
-import {FormControl} from '@angular/forms';
-import {LineType} from '../../../../../../templates/Line';
-import {LINETYPE} from '../../../../../../common/ProjectFileStructure';
-import {BaseElementType} from '../BaseElementType';
+import { Component, Input, OnInit } from '@angular/core';
+import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { fabric } from 'fabric';
+import { StoreService } from '../../../../../../utils/store.service';
+import { FormControl } from '@angular/forms';
+import { LineType } from '../../../../../../templates/Line';
+import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementType } from '../BaseElementType';
+import { BoneFixedModel } from '../../../../../left-side/bones-list/BoneBaseModel';
 
 @Component({
   selector: 'app-rectangle-element',
@@ -24,24 +25,23 @@ export class RectangleElementComponent extends BaseElementType implements OnInit
   lineType = LineType.full;
 
   constructor(public store: StoreService) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
+    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
   }
 
   save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    rect.left = Number(this.item.element.left);
-    rect.top = Number(this.item.element.top);
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
-    rect[LINETYPE] = this.lineType;
+    this.setElementPosition(rect, this.item);
     this.setElementLineType(rect, this.lineType);
     rect.set('stroke', this.color.value);
     rect.set('strokeWidth', Number(this.item.element.strokeWidth));

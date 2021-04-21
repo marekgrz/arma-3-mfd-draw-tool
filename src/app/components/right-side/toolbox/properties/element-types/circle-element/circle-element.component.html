@@ -7,17 +7,17 @@
 <!--  POSITION-->
   <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [X]</mat-label>
+      <mat-label>Position [X] [0-1]</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [(ngModel)]="item.element.left"
+             [(ngModel)]="item.base.position.x"
              (change)="save()">
     </mat-form-field>
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [Y]</mat-label>
+      <mat-label>Position [Y] [0-1]</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [(ngModel)]="item.element.top"
+             [(ngModel)]="item.base.position.y"
              (change)="save()">
     </mat-form-field>
   </div>
@@ -87,5 +87,13 @@
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
+  </mat-form-field>
+<!--  Bone-->
+  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+    <mat-label>Bone</mat-label>
+    <mat-select [(ngModel)]="boneName" (selectionChange)="save()">
+      <mat-option [value]="undefined"><i>None</i></mat-option>
+      <mat-option *ngFor="let item of store.bones" [value]="item.name">{{item.name}}</mat-option>
+    </mat-select>
   </mat-form-field>
 </div>

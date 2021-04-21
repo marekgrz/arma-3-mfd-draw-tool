@@ -70,14 +70,14 @@ export class ElementParserService {
     const classGroup: ClassGroup = new ClassGroup();
     classGroup.name = item.name;
     classGroup.color = new Color(1, 1, 1, 1);
-    classGroup.condition = item.groupCondition;
-    classGroup.blinking = item.groupBlinking;
-    classGroup.blinkingPattern = item.groupBlinkingPattern;
-    classGroup.blinkingStartsOn = item.groupBlinkingStartsOn;
-    classGroup.clipTL = item.clipTL;
-    classGroup.clipBR = item.clipBR;
-    classGroup.clipTLParallax = item.clipTLParallax;
-    classGroup.clipBRParallax = item.clipBRParallax;
+    classGroup.condition = item.groupProperties.condition;
+    classGroup.blinking = item.groupProperties.blinking;
+    classGroup.blinkingPattern = item.groupProperties.blinkingPattern;
+    classGroup.blinkingStartsOn = item.groupProperties.blinkingStartsOn;
+    classGroup.clipTL = item.groupProperties.clipTL;
+    classGroup.clipBR = item.groupProperties.clipBR;
+    classGroup.clipTLParallax = item.groupProperties.clipTLParallax;
+    classGroup.clipBRParallax = item.groupProperties.clipBRParallax;
     classGroup.content = content;
     return classGroup;
   }

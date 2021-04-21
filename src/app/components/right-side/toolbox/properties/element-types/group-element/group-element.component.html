@@ -4,16 +4,16 @@
 </mat-form-field>
 <mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" >
   <mat-label>Condition</mat-label>
-  <input matInput autocomplete="off" [(ngModel)]="item.groupCondition">
+  <input matInput autocomplete="off" [(ngModel)]="item.groupProperties.condition">
 </mat-form-field>
-<mat-checkbox class="checkbox" [(ngModel)]="item.groupBlinking">Blinking?</mat-checkbox>
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" *ngIf="item.groupBlinking">
+<mat-checkbox class="checkbox" [(ngModel)]="item.groupProperties.blinking">Blinking?</mat-checkbox>
+<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" *ngIf="item.groupProperties.blinking">
   <mat-label>Blinking pattern as Array (intervals, separated by comma)</mat-label>
-  <input matInput autocomplete="off" [(ngModel)]="item.groupBlinkingPattern" placeholder="0.2, 0.2">
+  <input matInput autocomplete="off" [(ngModel)]="item.groupProperties.blinkingPattern" placeholder="0.2, 0.2">
 </mat-form-field>
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" *ngIf="item.groupBlinking">
+<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" *ngIf="item.groupProperties.blinking">
   <mat-label>Blinking starts on (time in seconds)</mat-label>
-  <input matInput type="number" autocomplete="off" [(ngModel)]="item.groupBlinkingStartsOn" placeholder="1">
+  <input matInput type="number" autocomplete="off" [(ngModel)]="item.groupProperties.blinkingStartsOn" placeholder="1">
 </mat-form-field>
 
 <!--CLIP TL-->
@@ -22,13 +22,13 @@
     <mat-label>Clip TOP LEFT [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipTL.x">
+           [(ngModel)]="item.groupProperties.clipTL.x">
   </mat-form-field>
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipTL.y">
+           [(ngModel)]="item.groupProperties.clipTL.y">
   </mat-form-field>
 </div>
 
@@ -38,13 +38,13 @@
     <mat-label>Clip BOTTOM RIGHT [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipBR.x">
+           [(ngModel)]="item.groupProperties.clipBR.x">
   </mat-form-field>
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipBR.y">
+           [(ngModel)]="item.groupProperties.clipBR.y">
   </mat-form-field>
 </div>
 
@@ -54,13 +54,13 @@
     <mat-label>Clip TOP LEFT PARALLAX [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipTLParallax.x">
+           [(ngModel)]="item.groupProperties.clipTLParallax.x">
   </mat-form-field>
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT PARALLAX [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipTLParallax.y">
+           [(ngModel)]="item.groupProperties.clipTLParallax.y">
   </mat-form-field>
 </div>
 
@@ -70,12 +70,12 @@
     <mat-label>Clip BOTTOM RIGHT PARALLAX [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipBRParallax.x">
+           [(ngModel)]="item.groupProperties.clipBRParallax.x">
   </mat-form-field>
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT PARALLAX [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.clipBRParallax.y">
+           [(ngModel)]="item.groupProperties.clipBRParallax.y">
   </mat-form-field>
 </div>

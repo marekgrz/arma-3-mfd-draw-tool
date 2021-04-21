@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
-import {StoreService} from '../../../utils/store.service';
-import {FabricComponent} from 'ngx-fabric-wrapper';
-import {TreeService} from '../../left-side/layer-stack/mat-tree/tree.service';
-import {InteractionService} from '../../left-side/layer-stack/mat-tree/interaction.service';
-import {fabric} from 'fabric';
-import {ElementType} from '../../left-side/layer-stack/elements/StackItem';
+import { AfterViewInit, Component, HostListener, Input, ViewChild } from '@angular/core';
+import { StoreService } from '../../../utils/store.service';
+import { FabricComponent } from 'ngx-fabric-wrapper';
+import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
+import { InteractionService } from '../../left-side/layer-stack/mat-tree/interaction.service';
+import { fabric } from 'fabric';
 
 @Component({
   selector: 'app-fabric-canvas',
@@ -75,6 +74,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     this.onSelected(canvas);
     this.onDeselected(canvas);
     this.onHighLighted(canvas);
+    this.onObjectMoved(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
@@ -109,6 +109,15 @@ export class FabricCanvasComponent implements AfterViewInit {
       if (e.target) {
         e.target.set('opacity', '1');
         canvas.renderAll();
+      }
+    });
+  }
+
+  private onObjectMoved(canvas): void {
+    canvas.on('object:moving', e => {
+      if (!!this.treeService.selectedItem.base) {
+        this.treeService.selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
+        this.treeService.selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
       }
     });
   }

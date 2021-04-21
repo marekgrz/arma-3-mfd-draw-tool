@@ -4,7 +4,7 @@ import {FormControl} from '@angular/forms';
 import {StoreService} from '../../../../../../utils/store.service';
 import {fabric} from 'fabric';
 import {LineType} from '../../../../../../templates/Line';
-import {LINETYPE} from '../../../../../../common/ProjectFileStructure';
+import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import {BaseElementType} from '../BaseElementType';
 
 @Component({
@@ -24,24 +24,23 @@ export class TriangleElementComponent extends BaseElementType implements OnInit 
   lineType = LineType.full;
 
   constructor(public store: StoreService) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {
     this.newHeight = this.getHeight();
     this.newWidth = this.getWidth();
     this.angle = this.getAngle();
+    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
   }
 
   save(): void {
     const triangle: fabric.Triangle = this.store.canvas.getActiveObject();
-    triangle.left = Number(this.item.element.left);
-    triangle.top = Number(this.item.element.top);
     triangle.scaleX = Number(this.newWidth / this.item.element.width);
     triangle.scaleY = Number(this.newHeight / this.item.element.height);
-    triangle[LINETYPE] = this.lineType;
+    this.setElementPosition(triangle, this.item);
     this.setElementLineType(triangle, this.lineType);
     triangle.set('stroke', this.color.value);
     triangle.set('strokeWidth', Number(this.item.element.strokeWidth));

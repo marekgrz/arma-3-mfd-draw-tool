@@ -4,17 +4,27 @@ export class StackItem {
   id: string = generateId();
   name: string;
   type: ElementType;
+  base: BaseProperties = new BaseProperties();
   element?: any;
   children = new Array<StackItem>();
-  parent?: StackItem;
-  groupCondition?: string;
-  groupBlinking = false;
-  groupBlinkingPattern?: string;
-  groupBlinkingStartsOn?: number;
+  groupProperties: GroupProperties = new GroupProperties();
+  bone: string;
+  // parent?: StackItem;
+}
+
+export class GroupProperties {
+  condition?: string;
+  blinking = false;
+  blinkingPattern?: string;
+  blinkingStartsOn?: number;
   clipTL: Point = new Point();
   clipBR: Point = new Point();
   clipTLParallax: Point = new Point();
   clipBRParallax: Point = new Point();
+}
+
+export class BaseProperties {
+  position: Point = new Point();
 }
 
 export enum ElementType {

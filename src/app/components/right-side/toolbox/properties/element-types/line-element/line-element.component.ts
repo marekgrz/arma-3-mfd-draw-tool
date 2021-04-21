@@ -25,7 +25,7 @@ export class LineElementComponent extends BaseElementType implements OnInit {
   color: FormControl;
 
   constructor(public store: StoreService) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {
