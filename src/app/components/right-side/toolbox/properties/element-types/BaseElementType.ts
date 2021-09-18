@@ -2,7 +2,7 @@ import { LineType } from '../../../../../templates/Line';
 import { StoreService } from '../../../../../utils/store.service';
 import { StackItem } from '../../../../left-side/layer-stack/elements/StackItem';
 import { BONENAME, LINETYPE } from '../../../../../common/ProjectFileStructure';
-import { BoneFixedModel, BoneLinearModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
+import { BoneFixedModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
 
 export class BaseElementType {
 

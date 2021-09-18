@@ -1,14 +1,14 @@
 <div class="section-title">Properties</div>
 <mat-divider class="horizontal-divider"></mat-divider>
 <div *ngIf="treeService.selectedItem" class="properties-container">
-  <app-root-element [item]="treeService.selectedItem"  *ngIf="isRoot(treeService.selectedItem)"></app-root-element>
-  <app-group-element [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-element>
-  <app-rectangle-element [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></app-rectangle-element>
-  <app-texture-element [item]="treeService.selectedItem" *ngIf="isTexture(treeService.selectedItem)"></app-texture-element>
-  <app-circle-element-properties [item]="treeService.selectedItem" *ngIf="isCircle(treeService.selectedItem)"></app-circle-element-properties>
-  <app-triangle-element [item]="treeService.selectedItem" *ngIf="isTriangle(treeService.selectedItem)"></app-triangle-element>
-  <app-polygon-triangle-element [item]="treeService.selectedItem" *ngIf="isPolygonTriangle(treeService.selectedItem)"></app-polygon-triangle-element>
-  <app-polygon-rect-element [item]="treeService.selectedItem" *ngIf="isPolygonRectangle(treeService.selectedItem)"></app-polygon-rect-element>
-  <app-line-element [item]="treeService.selectedItem" *ngIf="isLine(treeService.selectedItem)"></app-line-element>
-  <app-text-element [item]="treeService.selectedItem" *ngIf="isText(treeService.selectedItem)"></app-text-element>
+  <app-root-properties [item]="treeService.selectedItem" *ngIf="isRoot(treeService.selectedItem)"></app-root-properties>
+  <app-group-properties [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></app-group-properties>
+  <app-rectangle-properties [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></app-rectangle-properties>
+  <app-texture-properties [item]="treeService.selectedItem" *ngIf="isTexture(treeService.selectedItem)"></app-texture-properties>
+  <app-circle-properties [item]="treeService.selectedItem" *ngIf="isCircle(treeService.selectedItem)"></app-circle-properties>
+  <app-triangle-properties [item]="treeService.selectedItem" *ngIf="isTriangle(treeService.selectedItem)"></app-triangle-properties>
+  <app-polygon-triangle-properties [item]="treeService.selectedItem" *ngIf="isPolygonTriangle(treeService.selectedItem)"></app-polygon-triangle-properties>
+  <app-polygon-rectangle-properties [item]="treeService.selectedItem" *ngIf="isPolygonRectangle(treeService.selectedItem)"></app-polygon-rectangle-properties>
+  <app-line-properties [item]="treeService.selectedItem" *ngIf="isLine(treeService.selectedItem)"></app-line-properties>
+  <app-text-properties [item]="treeService.selectedItem" *ngIf="isText(treeService.selectedItem)"></app-text-properties>
 </div>

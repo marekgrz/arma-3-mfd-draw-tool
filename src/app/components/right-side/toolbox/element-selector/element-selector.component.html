@@ -1,0 +1,19 @@
+<div class="section-title">Elements</div>
+<mat-divider class="horizontal-divider"></mat-divider>
+<mat-form-field appearance="outline" class="search" [color]="'accent'">
+  <mat-label>Search for element</mat-label>
+  <input matInput autocomplete="off" [(ngModel)]="searchValue" (ngModelChange)="filterOptions()">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+
+<mat-list>
+  <app-line-type></app-line-type>
+  <app-rectangle-type></app-rectangle-type>
+  <app-triangle-type></app-triangle-type>
+  <app-circle-type></app-circle-type>
+  <app-texture-type></app-texture-type>
+  <app-polygon-rectangle-type></app-polygon-rectangle-type>
+  <app-polygon-triangle-type></app-polygon-triangle-type>
+  <app-text-type></app-text-type>
+</mat-list>
