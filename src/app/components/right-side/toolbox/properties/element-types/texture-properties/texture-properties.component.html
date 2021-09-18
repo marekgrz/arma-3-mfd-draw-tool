@@ -40,11 +40,5 @@
     </mat-form-field>
   </div>
 <!--  Bone-->
-  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
-    <mat-label>Bone</mat-label>
-    <mat-select [(ngModel)]="boneName" (selectionChange)="save()">
-      <mat-option [value]="undefined"><i>None</i></mat-option>
-      <mat-option *ngFor="let item of store.bones" [value]="item.name">{{item.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mfd-bones-selector [(ngModel)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>
