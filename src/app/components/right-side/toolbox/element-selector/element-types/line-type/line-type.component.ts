@@ -12,7 +12,7 @@ import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 
 @Component({
-  selector: 'app-line-type',
+  selector: 'mfd-line-type',
   templateUrl: './line-type.component.html',
   styleUrls: ['./line-type.component.less']
 })

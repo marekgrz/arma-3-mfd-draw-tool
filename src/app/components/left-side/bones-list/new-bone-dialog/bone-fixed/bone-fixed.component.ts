@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BoneFixedModel } from '../../BoneBaseModel';
 
 @Component({
-  selector: 'app-bone-fixed',
+  selector: 'mfd-bone-fixed',
   templateUrl: './bone-fixed.component.html',
   styleUrls: ['./bone-fixed.component.less']
 })

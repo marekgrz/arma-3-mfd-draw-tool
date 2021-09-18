@@ -5,7 +5,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
 
 @Component({
-  selector: 'app-text-properties',
+  selector: 'mfd-text-properties',
   templateUrl: './text-properties.component.html',
   styleUrls: ['./text-properties.component.less']
 })

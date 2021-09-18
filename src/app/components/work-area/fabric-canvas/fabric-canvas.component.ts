@@ -6,7 +6,7 @@ import { InteractionService } from '../../left-side/layer-stack/mat-tree/interac
 import { fabric } from 'fabric';
 
 @Component({
-  selector: 'app-fabric-canvas',
+  selector: 'mfd-fabric-canvas',
   templateUrl: './fabric-canvas.component.html',
   styleUrls: ['./fabric-canvas.component.less']
 })

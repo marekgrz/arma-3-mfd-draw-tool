@@ -10,7 +10,7 @@ import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-header-menu',
+  selector: 'mfd-header-menu',
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.less']
 })

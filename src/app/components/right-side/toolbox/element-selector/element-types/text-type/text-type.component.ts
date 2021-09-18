@@ -6,7 +6,7 @@ import { generateId } from '../../../../../left-side/layer-stack/elements/StackI
 import { ID } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-text-type',
+  selector: 'mfd-text-type',
   templateUrl: './text-type.component.html',
   styleUrls: ['./text-type.component.less']
 })

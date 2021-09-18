@@ -6,7 +6,7 @@ import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.
 import { ID } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-texture-type',
+  selector: 'mfd-texture-type',
   templateUrl: './texture-type.component.html',
   styleUrls: ['./texture-type.component.less']
 })

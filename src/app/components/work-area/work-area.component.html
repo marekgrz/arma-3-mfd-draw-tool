@@ -25,13 +25,13 @@
          [width]="store.canvasWidth"
          [src]="store.canvasBackgroundImg"
          [height]="store.canvasHeight">
-    <app-fabric-canvas [style.background]="!store.canvasUseImage ? store.canvasBackGroundColor.rgba : 'transparent'"
+    <mfd-fabric-canvas [style.background]="!store.canvasUseImage ? store.canvasBackGroundColor.rgba : 'transparent'"
                        style="display: block"
-                       [previewOnly]="viewMode==='preview'"></app-fabric-canvas>
+                       [previewOnly]="viewMode==='preview'"></mfd-fabric-canvas>
   </div>
 </div>
 <div class="code-container" *ngIf="viewMode==='text'">
-  <app-code-viewer></app-code-viewer>
+  <mfd-code-viewer></mfd-code-viewer>
 </div>
 
 <div class="bottom-container" *ngIf="viewMode!=='text'">

@@ -9,7 +9,7 @@ import { BaseElementType } from '../BaseElementType';
 import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-texture-properties',
+  selector: 'mfd-texture-properties',
   templateUrl: './texture-properties.component.html',
   styleUrls: ['./texture-properties.component.less']
 })

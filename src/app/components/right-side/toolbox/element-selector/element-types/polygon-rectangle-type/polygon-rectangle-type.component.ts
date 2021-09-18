@@ -7,7 +7,7 @@ import { generateId } from '../../../../../left-side/layer-stack/elements/StackI
 import { ID } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-polygon-rectangle-type',
+  selector: 'mfd-polygon-rectangle-type',
   templateUrl: './polygon-rectangle-type.component.html',
   styleUrls: ['./polygon-rectangle-type.component.less']
 })

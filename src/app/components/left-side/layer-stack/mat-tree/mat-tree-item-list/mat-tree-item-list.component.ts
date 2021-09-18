@@ -4,7 +4,7 @@ import { TreeService } from '../tree.service';
 import { InteractionService } from '../interaction.service';
 
 @Component({
-  selector: 'app-mat-tree-item-list',
+  selector: 'mfd-mat-tree-item-list',
   templateUrl: './mat-tree-item-list.component.html',
   styleUrls: ['./mat-tree-item-list.component.less']
 })

@@ -9,7 +9,7 @@ import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../BaseElementType';
 
 @Component({
-  selector: 'app-circle-properties',
+  selector: 'mfd-circle-properties',
   templateUrl: './circle-properties.component.html',
   styleUrls: ['./circle-properties.component.less']
 })

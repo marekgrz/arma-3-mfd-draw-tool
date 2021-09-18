@@ -10,7 +10,7 @@ import {Point} from '../../../common/Point';
 import {ElementParserService} from '../../../utils/element-parser.service';
 
 @Component({
-  selector: 'app-code-viewer',
+  selector: 'mfd-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.less']
 })

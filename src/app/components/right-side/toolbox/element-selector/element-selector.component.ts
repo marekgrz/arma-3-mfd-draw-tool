@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-element-selector',
+  selector: 'mfd-element-selector',
   templateUrl: './element-selector.component.html',
   styleUrls: ['./element-selector.component.less']
 })

@@ -8,7 +8,7 @@ import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 
 @Component({
-  selector: 'app-triangle-type',
+  selector: 'mfd-triangle-type',
   templateUrl: './triangle-type.component.html',
   styleUrls: ['./triangle-type.component.less']
 })

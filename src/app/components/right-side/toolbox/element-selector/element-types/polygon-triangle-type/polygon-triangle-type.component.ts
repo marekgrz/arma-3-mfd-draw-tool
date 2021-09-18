@@ -7,7 +7,7 @@ import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.
 import { ID } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-polygon-triangle-type',
+  selector: 'mfd-polygon-triangle-type',
   templateUrl: './polygon-triangle-type.component.html',
   styleUrls: ['./polygon-triangle-type.component.less']
 })
