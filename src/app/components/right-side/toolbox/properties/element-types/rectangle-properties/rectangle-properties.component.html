@@ -6,20 +6,9 @@
   </mat-form-field>
 <!--  Position-->
   <div class="pair-elements">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [X] [0-1]</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [(ngModel)]="item.base.position.x"
-             (change)="save()">
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [Y] [0-1]</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [(ngModel)]="item.base.position.y"
-             (change)="save()">
-    </mat-form-field>
+    <mfd-position-input [(positionX)]="item.base.position.x"
+                        [(positionY)]="item.base.position.y"
+                        (save)="save()"></mfd-position-input>
   </div>
 <!--  Width-->
   <div class="pair-elements">
@@ -66,5 +55,5 @@
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()"  (change)="save()">
   </mat-form-field>
 <!--  Bone-->
-  <mfd-bones-selector [(ngModel)]="boneName" (save)="save()"></mfd-bones-selector>
+  <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>

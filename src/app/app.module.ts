@@ -69,6 +69,7 @@ import { BoneFixedComponent } from './components/left-side/bones-list/new-bone-d
 import { MatMenuModule } from '@angular/material/menu';
 import { EditBoneComponent } from './components/left-side/bones-list/edit-bone/edit-bone.component';
 import { BonesSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/bones-selector/bones-selector.component';
+import { PositionInputComponent } from './components/right-side/toolbox/properties/element-types/common/position-input/position-input.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { BonesSelectorComponent } from './components/right-side/toolbox/properti
     BoneFixedComponent,
     EditBoneComponent,
     BonesSelectorComponent,
+    PositionInputComponent,
   ],
   imports: [
     BrowserModule,

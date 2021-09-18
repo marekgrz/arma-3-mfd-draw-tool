@@ -6,18 +6,9 @@
     <mat-icon matSuffix class="clickable">folder</mat-icon>
   </mat-form-field>
 <!--  Position-->
-  <div class="pair-elements">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [X]</mat-label>
-      <input matInput autocomplete="off"
-             [(ngModel)]="item.element.left"
-             (change)="save()">
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [Y]</mat-label>
-      <input matInput autocomplete="off" [(ngModel)]="item.element.top" (change)="save()">
-    </mat-form-field>
-  </div>
+  <mfd-position-input [(positionX)]="item.element.left"
+                      [(positionY)]="item.element.top"
+                      (save)="save()"></mfd-position-input>
   <div class="pair-elements">
 <!--   Width-->
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
@@ -40,5 +31,5 @@
     </mat-form-field>
   </div>
 <!--  Bone-->
-  <mfd-bones-selector [(ngModel)]="boneName" (save)="save()"></mfd-bones-selector>
+  <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>

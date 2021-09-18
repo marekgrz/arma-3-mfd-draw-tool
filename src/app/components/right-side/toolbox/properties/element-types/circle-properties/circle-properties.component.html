@@ -89,5 +89,5 @@
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
   </mat-form-field>
 <!--  Bone-->
-  <mfd-bones-selector [(ngModel)]="boneName" (save)="save()"></mfd-bones-selector>
+  <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>

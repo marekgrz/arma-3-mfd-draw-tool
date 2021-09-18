@@ -8,9 +8,9 @@ import { StoreService } from '../../../../../../../utils/store.service';
 })
 export class BonesSelectorComponent {
 
-  @Input() ngModel: string;
+  @Input() bone: string;
 
-  @Output() ngModelChange = new EventEmitter<string>();
+  @Output() boneChange = new EventEmitter<string>();
 
   @Output() save = new EventEmitter<void>();
 

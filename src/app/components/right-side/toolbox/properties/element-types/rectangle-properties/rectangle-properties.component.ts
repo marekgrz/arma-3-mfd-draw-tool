@@ -37,6 +37,7 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
   }
 
   save(): void {
+    console.log('Position: ' + this.item.base.position.x + ': ' + this.item.base.position.y)
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
     rect.scaleX = Number(this.newWidth / this.item.element.width);
     rect.scaleY = Number(this.newHeight / this.item.element.height);
