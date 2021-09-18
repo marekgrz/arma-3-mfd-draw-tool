@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dia
 import { EditBoneComponent } from './edit-bone/edit-bone.component';
 
 @Component({
-  selector: 'app-bones-list',
+  selector: 'mfd-bones-list',
   templateUrl: './bones-list.component.html',
   styleUrls: ['./bones-list.component.less']
 })

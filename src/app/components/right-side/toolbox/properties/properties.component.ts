@@ -3,7 +3,7 @@ import { TreeService } from '../../../left-side/layer-stack/mat-tree/tree.servic
 import { ElementType, StackItem } from '../../../left-side/layer-stack/elements/StackItem';
 
 @Component({
-  selector: 'app-properties',
+  selector: 'mfd-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.less']
 })

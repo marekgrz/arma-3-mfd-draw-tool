@@ -9,7 +9,7 @@ import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../BaseElementType';
 
 @Component({
-  selector: 'app-line-properties',
+  selector: 'mfd-line-properties',
   templateUrl: './line-properties.component.html',
   styleUrls: ['./line-properties.component.less']
 })

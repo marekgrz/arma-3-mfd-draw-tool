@@ -8,7 +8,7 @@ import { CIRCLESTEP, ID, LINETYPE } from '../../../../../../common/ProjectFileSt
 import { LineType } from '../../../../../../templates/Line';
 
 @Component({
-  selector: 'app-circle-type',
+  selector: 'mfd-circle-type',
   templateUrl: './circle-type.component.html',
   styleUrls: ['./circle-type.component.less']
 })

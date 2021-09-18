@@ -8,7 +8,7 @@ import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructur
 import { BaseElementType } from '../BaseElementType';
 
 @Component({
-  selector: 'app-rectangle-properties',
+  selector: 'mfd-rectangle-properties',
   templateUrl: './rectangle-properties.component.html',
   styleUrls: ['./rectangle-properties.component.less']
 })

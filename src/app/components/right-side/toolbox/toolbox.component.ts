@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-toolbox',
+  selector: 'mfd-toolbox',
   templateUrl: './toolbox.component.html',
   styleUrls: ['./toolbox.component.less']
 })

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StackItem } from '../elements/StackItem';
 
 @Component({
-  selector: 'app-mat-tree',
+  selector: 'mfd-mat-tree',
   templateUrl: './mat-tree.component.html',
   styleUrls: ['./mat-tree.component.less']
 })

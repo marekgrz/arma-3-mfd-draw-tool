@@ -8,7 +8,7 @@ import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructur
 import { BaseElementType } from '../BaseElementType';
 
 @Component({
-  selector: 'app-triangle-properties',
+  selector: 'mfd-triangle-properties',
   templateUrl: './triangle-properties.component.html',
   styleUrls: ['./triangle-properties.component.less']
 })

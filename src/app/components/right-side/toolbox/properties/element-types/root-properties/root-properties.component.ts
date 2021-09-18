@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { FileInput } from 'ngx-material-file-input';
 
 @Component({
-  selector: 'app-root-properties',
+  selector: 'mfd-root-properties',
   templateUrl: './root-properties.component.html',
   styleUrls: ['./root-properties.component.less']
 })

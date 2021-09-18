@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SourceService} from '../../../utils/source.service';
 
 @Component({
-  selector: 'app-sources-list',
+  selector: 'mfd-sources-list',
   templateUrl: './sources-list.component.html',
   styleUrls: ['./sources-list.component.less']
 })

@@ -4,7 +4,7 @@ import {StoreService} from '../../utils/store.service';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-work-area',
+  selector: 'mfd-work-area',
   templateUrl: './work-area.component.html',
   styleUrls: ['./work-area.component.less']
 })

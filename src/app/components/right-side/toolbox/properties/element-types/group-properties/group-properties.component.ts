@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
 
 @Component({
-  selector: 'app-group-properties',
+  selector: 'mfd-group-properties',
   templateUrl: './group-properties.component.html',
   styleUrls: ['./group-properties.component.less']
 })

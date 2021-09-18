@@ -7,7 +7,7 @@ import { BaseElementType } from '../BaseElementType';
 import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
-  selector: 'app-polygon-triangle-properties',
+  selector: 'mfd-polygon-triangle-properties',
   templateUrl: './polygon-triangle-properties.component.html',
   styleUrls: ['./polygon-triangle-properties.component.less']
 })
