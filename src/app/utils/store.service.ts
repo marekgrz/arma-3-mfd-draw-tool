@@ -62,6 +62,7 @@ export class StoreService {
     this.hudProperties = project.globalHUDProperties;
     this.updateCanvas();
     this.canvas.loadFromJSON(project.canvasContent, this.canvas.renderAll.bind(this.canvas));
+    this.canvas.getObjects().forEach(obj => obj.strokeUniform = true);
     this.canvas.requestRenderAll();
     this.isProjectStarted = true;
   }
