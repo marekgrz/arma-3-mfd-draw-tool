@@ -16,7 +16,7 @@ export class ResizeBarComponent implements AfterViewInit {
   minimumWidth = 200;
 
   @Input()
-  vertical = false;
+  horizontal = false;
 
   private container: HTMLDivElement;
 
@@ -41,19 +41,23 @@ export class ResizeBarComponent implements AfterViewInit {
   onMouseMove(event: MouseEvent): void {
     if (this.resizeEnabled) {
       event.preventDefault();
-      this.container.style.width = `${this.calculateWidth(event)}px`;
+      if (this.horizontal) {
+        this.container.style.height = `${this.calculateDistance(event)}px`;
+      } else {
+        this.container.style.width = `${this.calculateDistance(event)}px`;
+      }
     }
   }
 
-  private calculateWidth(event: MouseEvent): number {
-    const mousePos = this.vertical ? event.y : event.x;
+  private calculateDistance(event: MouseEvent): number {
+    const mousePos = this.horizontal ? event.y : event.x;
     if (this.isLast) {
       return mousePos > this.maximumWidth
         ? this.maximumWidth
         : mousePos < this.minimumWidth ? this.minimumWidth : mousePos;
     }
 
-    const edgeOfWindow = this.vertical ? innerHeight : innerWidth;
+    const edgeOfWindow = this.horizontal ? innerHeight : innerWidth;
     return (edgeOfWindow - mousePos) > this.maximumWidth
       ? this.maximumWidth
       : (edgeOfWindow - mousePos) < this.minimumWidth ? this.minimumWidth : (edgeOfWindow - mousePos);

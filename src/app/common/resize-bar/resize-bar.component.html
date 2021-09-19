@@ -1,1 +1,1 @@
-<div class="resize-bar" #resizeBar (mousedown)="onMouseDown()"></div>
+<div [className]="horizontal ? 'resize-bar-horizontal' : 'resize-bar-vertical'" #resizeBar (mousedown)="onMouseDown()"></div>
