@@ -4,6 +4,8 @@ import { FabricComponent } from 'ngx-fabric-wrapper';
 import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
 import { InteractionService } from '../../left-side/layer-stack/mat-tree/interaction.service';
 import { fabric } from 'fabric';
+import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
+import { BONENAME } from '../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -115,9 +117,16 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   private onObjectMoved(canvas): void {
     canvas.on('object:moving', e => {
-      if (!!this.treeService.selectedItem.base) {
-        this.treeService.selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
-        this.treeService.selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
+      const selectedItem = this.treeService.selectedItem;
+      if (!!selectedItem.base) {
+        selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
+        selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
+        // has bone
+        const bone = this.store.bones.find(it => it.name === selectedItem.element[BONENAME]) as BoneFixedModel;
+        if (bone !== undefined) {
+          selectedItem.base.position.x -= bone.pos0.x;
+          selectedItem.base.position.y -= bone.pos0.y;
+        }
       }
     });
   }
