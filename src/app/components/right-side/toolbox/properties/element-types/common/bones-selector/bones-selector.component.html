@@ -1,10 +1,10 @@
 <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
-    <mat-label>Bone</mat-label>
-    <mat-select name="ngModel" ngDefaultControl
-                [(ngModel)]="bone"
-                (ngModelChange)="boneChange.emit($event)"
-                (selectionChange)="save.emit()">
-        <mat-option [value]="undefined"><i>None</i></mat-option>
-        <mat-option *ngFor="let item of store.bones" [value]="item.name">{{item.name}}</mat-option>
-    </mat-select>
+  <mat-label>Bone</mat-label>
+  <mat-select (ngModelChange)="boneChange.emit($event)" (selectionChange)="save.emit()"
+              [(ngModel)]="bone"
+              name="ngModel"
+              ngDefaultControl>
+    <mat-option [value]="undefined"><i>None</i></mat-option>
+    <mat-option *ngFor="let item of store.bones" [value]="item.name">{{item.name}}</mat-option>
+  </mat-select>
 </mat-form-field>

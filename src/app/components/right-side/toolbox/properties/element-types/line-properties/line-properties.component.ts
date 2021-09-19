@@ -18,8 +18,6 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
   @Input()
   item: StackItem;
 
-  newHeight = 0;
-  newWidth = 0;
   angle: number;
   lineType = LineType.full;
   color: FormControl;
@@ -29,12 +27,9 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newHeight = this.getHeight();
-    this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
-
     this.setupPolyLineEdit();
   }
 
@@ -84,32 +79,12 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
     const line: fabric.Object = this.store.canvas.getActiveObject();
     line.left = Number(this.item.element.left);
     line.top = Number(this.item.element.top);
-    line.scaleX = Number(this.newWidth / this.item.element.width);
-    line.scaleY = Number(this.newHeight / this.item.element.height);
     line[LINETYPE] = this.lineType;
     line.set('stroke', this.color.value);
     line.set('strokeWidth', Number(this.item.element.strokeWidth));
     line.setCoords();
     line.rotate(this.angle);
     this.store.canvas.requestRenderAll();
-  }
-
-  updateHeight(event): void {
-    this.newHeight = event.target.value;
-    this.save();
-  }
-
-  updateWidth(event): void {
-    this.newWidth = event.target.value;
-    this.save();
-  }
-
-  getWidth(): number {
-    return this.item.element.width * this.item.element.scaleX;
-  }
-
-  getHeight(): number {
-    return this.item.element.height * this.item.element.scaleY;
   }
 
   getAngle(): number {

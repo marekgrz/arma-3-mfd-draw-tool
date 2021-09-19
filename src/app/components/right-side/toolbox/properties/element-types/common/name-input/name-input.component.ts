@@ -13,5 +13,6 @@ export class NameInputComponent {
 
   @Output() save = new EventEmitter<void>();
 
-  constructor() {}
+  constructor() {
+  }
 }

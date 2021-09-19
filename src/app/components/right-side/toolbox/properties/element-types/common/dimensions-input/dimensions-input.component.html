@@ -1,0 +1,18 @@
+<div class="pair-elements">
+  <!--  Width-->
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Width</mat-label>
+    <input matInput autocomplete="off"
+           [type]="'number'"
+           [value]="getWidth()"
+           (change)="updateWidth($event)">
+  </mat-form-field>
+  <!--    Height-->
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Height</mat-label>
+    <input matInput autocomplete="off"
+           [type]="'number'"
+           [value]="getHeight()"
+           (change)="updateHeight($event)">
+  </mat-form-field>
+</div>

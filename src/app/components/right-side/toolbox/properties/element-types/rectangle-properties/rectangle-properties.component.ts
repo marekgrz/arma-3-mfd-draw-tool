@@ -16,9 +16,6 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
 
   @Input()
   item: StackItem;
-
-  newHeight = 0;
-  newWidth = 0;
   angle: number;
   color: FormControl;
   lineType = LineType.full;
@@ -28,8 +25,6 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
   }
 
   ngOnInit(): void {
-    this.newHeight = this.getHeight();
-    this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
@@ -37,10 +32,7 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
   }
 
   save(): void {
-    console.log('Position: ' + this.item.base.position.x + ': ' + this.item.base.position.y)
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    rect.scaleX = Number(this.newWidth / this.item.element.width);
-    rect.scaleY = Number(this.newHeight / this.item.element.height);
     this.setElementPosition(rect, this.item);
     this.setElementLineType(rect, this.lineType);
     rect.set('stroke', this.color.value);
@@ -48,24 +40,6 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
     rect.setCoords();
     rect.rotate(this.angle);
     this.store.canvas.requestRenderAll();
-  }
-
-  updateHeight(event): void {
-    this.newHeight = event.target.value;
-    this.save();
-  }
-
-  updateWidth(event): void {
-    this.newWidth = event.target.value;
-    this.save();
-  }
-
-  getWidth(): number {
-    return this.item.element.width * this.item.element.scaleX;
-  }
-
-  getHeight(): number {
-    return this.item.element.height * this.item.element.scaleY;
   }
 
   getAngle(): number {

@@ -9,21 +9,10 @@
   <mfd-position-input [(positionX)]="item.element.left"
                       [(positionY)]="item.element.top"
                       (save)="save()"></mfd-position-input>
-<!--   Width-->
+<!--   Dimensions-->
   <div class="pair-elements">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Width</mat-label>
-      <input matInput autocomplete="off"
-             [value]="getWidth()"
-             (change)="updateWidth($event)">
-    </mat-form-field>
-<!--  Height-->
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Height</mat-label>
-      <input matInput autocomplete="off"
-             [value]="getHeight()"
-             (change)="updateHeight($event)">
-    </mat-form-field>
+    <mfd-dimensions-input [(item)]="item"
+                          (save)="save()"></mfd-dimensions-input>
 <!--  Angle-->
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Angle</mat-label>

@@ -5,24 +5,9 @@
   <mfd-position-input [(positionX)]="item.element.left"
                       [(positionY)]="item.element.top"
                       (save)="save()"></mfd-position-input>
-<!--    Width-->
-  <div class="pair-elements">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Width</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [value]="getWidth()"
-             (change)="updateWidth($event)">
-    </mat-form-field>
-<!--    Height-->
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Height</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [value]="getHeight()"
-             (change)="updateHeight($event)">
-    </mat-form-field>
-  </div>
+  <!--  Dimensions-->
+  <mfd-dimensions-input [(item)]="item"
+                        (save)="save()"></mfd-dimensions-input>
 <!--  Stroke-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Stroke</mat-label>

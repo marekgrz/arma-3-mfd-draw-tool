@@ -16,8 +16,6 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
   @Input()
   item: StackItem;
 
-  newHeight = 0;
-  newWidth = 0;
   angle: number;
   color: FormControl;
 
@@ -26,8 +24,6 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
   }
 
   ngOnInit(): void {
-    this.newHeight = this.getHeight();
-    this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().fill);
@@ -36,30 +32,10 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
   save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
     this.setElementPosition(rect, this.item);
-    rect.scaleX = Number(this.newWidth / this.item.element.width);
-    rect.scaleY = Number(this.newHeight / this.item.element.height);
     rect.set('fill', this.color.value);
     rect.setCoords();
     rect.rotate(this.angle);
     this.store.canvas.requestRenderAll();
-  }
-
-  updateHeight(event): void {
-    this.newHeight = event.target.value;
-    this.save();
-  }
-
-  updateWidth(event): void {
-    this.newWidth = event.target.value;
-    this.save();
-  }
-
-  getWidth(): number {
-    return this.item.element.width * this.item.element.scaleX;
-  }
-
-  getHeight(): number {
-    return this.item.element.height * this.item.element.scaleY;
   }
 
   getAngle(): number {

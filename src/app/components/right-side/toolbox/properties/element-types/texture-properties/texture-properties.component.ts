@@ -19,20 +19,14 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
   item: StackItem;
 
   file = new FormControl('');
-
   defaultFile: FileInput;
-
   angle: number;
-  newHeight = 0;
-  newWidth = 0;
 
   constructor(store: StoreService) {
     super(store);
   }
 
   ngOnInit(): void {
-    this.newHeight = this.getHeight();
-    this.newWidth = this.getWidth();
     this.angle = this.getAngle();
     this.boneName = this.item.element[BONENAME];
     this.file.setValue(this.item.element['file']);
@@ -42,8 +36,6 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
     const image: fabric.Image = this.store.canvas.getActiveObject() as fabric.Image;
     image.left = Number(this.item.element.left);
     image.top = Number(this.item.element.top);
-    image.scaleX = Number(this.newWidth / this.item.element.width);
-    image.scaleY = Number(this.newHeight / this.item.element.height);
     image.angle = this.item.element.angle;
     image.setCoords();
     image.rotate(this.angle);
@@ -60,24 +52,6 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
       reader.readAsDataURL(this.file.value.files[0]);
       reader.onload = event => this.swapImageInCanvas(event);
     }
-  }
-
-  updateHeight(event): void {
-    this.newHeight = event.target.value;
-    this.save();
-  }
-
-  updateWidth(event): void {
-    this.newWidth = event.target.value;
-    this.save();
-  }
-
-  getWidth(): number {
-    return this.item.element.width * this.item.element.scaleX;
-  }
-
-  getHeight(): number {
-    return this.item.element.height * this.item.element.scaleY;
   }
 
   getAngle(): number {

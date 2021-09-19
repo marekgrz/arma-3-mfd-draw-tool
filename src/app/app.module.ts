@@ -71,6 +71,7 @@ import { EditBoneComponent } from './components/left-side/bones-list/edit-bone/e
 import { BonesSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/bones-selector/bones-selector.component';
 import { PositionInputComponent } from './components/right-side/toolbox/properties/element-types/common/position-input/position-input.component';
 import { NameInputComponent } from './components/right-side/toolbox/properties/element-types/common/name-input/name-input.component';
+import { DimensionsInputComponent } from './components/right-side/toolbox/properties/element-types/common/dimensions-input/dimensions-input.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { NameInputComponent } from './components/right-side/toolbox/properties/e
     BonesSelectorComponent,
     PositionInputComponent,
     NameInputComponent,
+    DimensionsInputComponent,
   ],
   imports: [
     BrowserModule,

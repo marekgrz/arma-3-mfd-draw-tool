@@ -17,5 +17,6 @@ export class PositionInputComponent {
 
   @Output() save = new EventEmitter<void>();
 
-  constructor() {}
+  constructor() {
+  }
 }
