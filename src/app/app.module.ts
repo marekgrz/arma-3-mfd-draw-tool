@@ -70,6 +70,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { EditBoneComponent } from './components/left-side/bones-list/edit-bone/edit-bone.component';
 import { BonesSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/bones-selector/bones-selector.component';
 import { PositionInputComponent } from './components/right-side/toolbox/properties/element-types/common/position-input/position-input.component';
+import { NameInputComponent } from './components/right-side/toolbox/properties/element-types/common/name-input/name-input.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { PositionInputComponent } from './components/right-side/toolbox/properti
     EditBoneComponent,
     BonesSelectorComponent,
     PositionInputComponent,
+    NameInputComponent,
   ],
   imports: [
     BrowserModule,

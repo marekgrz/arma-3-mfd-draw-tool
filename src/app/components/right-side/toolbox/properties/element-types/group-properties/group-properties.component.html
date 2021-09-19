@@ -1,7 +1,4 @@
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" >
-  <mat-label>Group name</mat-label>
-  <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
-</mat-form-field>
+<mfd-name-input [(name)]="item.name"></mfd-name-input>
 <mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" >
   <mat-label>Condition</mat-label>
   <input matInput autocomplete="off" [(ngModel)]="item.groupProperties.condition">

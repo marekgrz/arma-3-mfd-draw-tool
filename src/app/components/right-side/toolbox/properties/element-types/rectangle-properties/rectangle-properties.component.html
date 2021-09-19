@@ -1,15 +1,10 @@
 <div class="row-container">
 <!--  Name-->
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-    <mat-label>Element name</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
-  </mat-form-field>
+  <mfd-name-input [(name)]="item.name" (save)="save()"></mfd-name-input>
 <!--  Position-->
-  <div class="pair-elements">
-    <mfd-position-input [(positionX)]="item.base.position.x"
-                        [(positionY)]="item.base.position.y"
-                        (save)="save()"></mfd-position-input>
-  </div>
+  <mfd-position-input [(positionX)]="item.base.position.x"
+                      [(positionY)]="item.base.position.y"
+                      (save)="save()"></mfd-position-input>
 <!--  Width-->
   <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">

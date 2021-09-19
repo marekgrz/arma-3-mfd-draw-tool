@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-label>Element name</mat-label>
+  <input matInput autocomplete="off"
+         [(ngModel)]="name"
+         (ngModelChange)="nameChange.emit(name)"
+         (change)="save.emit()"
+         placeholder="Placeholder">
+</mat-form-field>

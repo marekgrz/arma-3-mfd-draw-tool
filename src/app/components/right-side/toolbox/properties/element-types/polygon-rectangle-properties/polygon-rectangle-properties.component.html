@@ -1,28 +1,12 @@
 <div class="row-container">
 <!--  Name-->
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-    <mat-label>Element name</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="item.name" placeholder="Placeholder">
-  </mat-form-field>
-  <div class="pair-elements">
+  <mfd-name-input [(name)]="item.name" (save)="save()"></mfd-name-input>
 <!--    Position-->
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [X] [0-1]</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [(ngModel)]="item.base.position.x"
-             (change)="save()">
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Position [Y] [0-1]</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [(ngModel)]="item.base.position.y"
-             (change)="save()">
-    </mat-form-field>
-  </div>
-  <div class="pair-elements">
+  <mfd-position-input [(positionX)]="item.base.position.x"
+                      [(positionY)]="item.base.position.y"
+                      (save)="save()"></mfd-position-input>
 <!--    Width-->
+  <div class="pair-elements">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Width</mat-label>
       <input matInput autocomplete="off"
