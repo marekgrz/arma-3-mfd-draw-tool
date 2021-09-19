@@ -1,15 +1,23 @@
-.toolbox-container {
-  font-size: 1.3rem;
-  text-align: center;
-  color: #a4a5a7;
-  height: -webkit-fill-available;
+.content {
   display: flex;
-  flex-direction: column;
+  height: 100%;
+  width: 350px;
 
-  mfd-element-selector {
-    height: 60%;
-  }
-  mfd-properties {
-    height: 40%;
+  .toolbox-container {
+    font-size: 1.3rem;
+    text-align: center;
+    color: #a4a5a7;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    mfd-element-selector {
+      height: 60%;
+    }
+
+    mfd-properties {
+      height: 40%;
+    }
   }
 }

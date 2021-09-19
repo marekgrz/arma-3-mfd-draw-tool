@@ -1,9 +1,12 @@
-<div class="layer-list-view">
-  <div class="layer-list">
-    <mfd-layer-list *ngIf="!previewMode"></mfd-layer-list>
+<div class="content">
+  <div class="layer-list-view">
+    <div class="layer-list">
+      <mfd-layer-list *ngIf="!previewMode"></mfd-layer-list>
+    </div>
+    <div class="bones-list">
+      <mfd-bones-list></mfd-bones-list>
+    </div>
   </div>
-  <div class="bones-list">
-    <mfd-bones-list></mfd-bones-list>
-  </div>
+  <mfd-sources-list *ngIf="previewMode" class="layer-list"></mfd-sources-list>
+  <mfd-resize-bar></mfd-resize-bar>
 </div>
-<mfd-sources-list *ngIf="previewMode" class="layer-list"></mfd-sources-list>

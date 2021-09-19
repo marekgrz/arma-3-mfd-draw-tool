@@ -72,6 +72,7 @@ import { BonesSelectorComponent } from './components/right-side/toolbox/properti
 import { PositionInputComponent } from './components/right-side/toolbox/properties/element-types/common/position-input/position-input.component';
 import { NameInputComponent } from './components/right-side/toolbox/properties/element-types/common/name-input/name-input.component';
 import { DimensionsInputComponent } from './components/right-side/toolbox/properties/element-types/common/dimensions-input/dimensions-input.component';
+import { ResizeBarComponent } from './common/resize-bar/resize-bar.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { DimensionsInputComponent } from './components/right-side/toolbox/proper
     PositionInputComponent,
     NameInputComponent,
     DimensionsInputComponent,
+    ResizeBarComponent,
   ],
   imports: [
     BrowserModule,
