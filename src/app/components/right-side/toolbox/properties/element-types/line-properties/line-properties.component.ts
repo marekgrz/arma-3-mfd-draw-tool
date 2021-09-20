@@ -103,6 +103,7 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
         positionHandler: this.polygonPositionHandler,
         actionHandler: this.anchorWrapper(index > 0 ? index - 1 : lastControl, this.actionHandler),
         actionName: 'modifyPolygon',
+        // @ts-ignore
         pointIndex: index
       });
       return acc;
