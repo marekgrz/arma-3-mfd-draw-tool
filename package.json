@@ -50,6 +50,7 @@
     "@angular/platform-browser-dynamic": "~11.0.4",
     "@angular/router": "~11.0.4",
     "@types/fabric": "^4.2.0",
+    "chalk": "^4.1.2",
     "electron-reload": "^1.5.0",
     "ngx-fabric-wrapper": "^11.0.0",
     "ngx-highlightjs": "^4.1.3",

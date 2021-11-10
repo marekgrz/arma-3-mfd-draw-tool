@@ -2,6 +2,7 @@ const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const fs = require('fs')
 const url = require("url");
 const path = require("path");
+const chalk = require('chalk');
 
 require('electron-reload')(__dirname, {
   electron: require(`${__dirname}/node_modules/electron`)
@@ -56,25 +57,25 @@ ipcMain.on('openFile', function (event) {
     .then((e) => {
       if (e.canceled) {
         event.sender.send('Error');
-        console.log('File opening cancelled');
+        console.log(chalk.blue('File opening cancelled'));
         return;
       }
       filePath = e.filePaths[0];
       openProject(event, 'openFile');
-      console.log('File opened');
+      console.log(chalk.blue('File opened'));
     })
 })
 
-ipcMain.on('openDefault', function (event) {
-  filePath = 'C:\\Projects\\arma-mfd-drawer\\src\\assets\\Template.a3mfd'
-  openProject(event, 'openDefault');
-  console.log('File reopened');
+ipcMain.on('reopenLastFile', (event, message) => {
+  filePath = message;
+  openProject(event, 'reopenLastFile');
+  console.log(chalk.blue('File reopened'));
 })
 
 ipcMain.on('saveFile', (event, message) => {
   if (filePath) {
     saveFileToDir(message, event);
-    console.log('File saved');
+    console.log(chalk.green('File saved'));
   } else {
     showSaveDialog(message, event)
   }
@@ -89,13 +90,13 @@ function showSaveDialog(message, event) {
   dialog.showSaveDialog({properties: ['saveFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
     .then((e) => {
       if (e.canceled) {
-        console.log('File save cancelled');
+        console.log(chalk.red('File save cancelled'));
         event.sender.send('Error');
         return;
       }
       filePath = e.filePath;
       saveFileToDir(message, event);
-      console.log('File saved');
+      console.log(chalk.green('File saved'));
     })
 }
 
@@ -106,16 +107,25 @@ function openProject(event, channel) {
       return;
     }
     if (data) {
-      event.sender.send(channel, data);
+      event.sender.send(channel, new ProjectFileData(data, filePath));
     }
   })
 }
 
 function saveFileToDir(content, event) {
-  console.log(content)
   fs.writeFile(filePath, content, err => {
     if (err) {
       event.sender.send('Error');
     }
   });
+}
+
+class ProjectFileData {
+  data;
+  filePath;
+
+  constructor(data, filePath) {
+    this.data = data;
+    this.filePath = filePath;
+  }
 }
