@@ -50,7 +50,7 @@ export class ResizeBarComponent implements AfterViewInit {
   }
 
   private calculateDistance(event: MouseEvent): number {
-    const mousePos = this.horizontal ? event.y : event.x;
+    const mousePos = this.horizontal ? event.y - 30 : event.x;
     if (this.isLast) {
       return mousePos > this.maximumWidth
         ? this.maximumWidth

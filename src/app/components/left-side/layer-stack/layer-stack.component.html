@@ -1,17 +1,22 @@
-<div class="section-title">LAYERS</div>
-<mat-divider class="horizontal-divider"></mat-divider>
-<div class="layer-buttons">
-  <button mat-button matTooltip="Delete selected element" (click)="deleteSelection()">
-    <i class="material-icons">delete</i>
-  </button>
-  <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
-  <button mat-button matTooltip="Create group" (click)="treeService.createGroup()">
-    <i class="material-icons">snippet_folder</i>
-  </button>
-  <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
-  <button mat-button matTooltip="Duplicate selected element">
-    <i class="material-icons">content_copy</i>
-  </button>
+<div class="resize-container">
+ <div class="resize-content">
+   <div class="section-title">LAYERS</div>
+   <mat-divider class="horizontal-divider"></mat-divider>
+   <div class="layer-buttons">
+     <button mat-button matTooltip="Delete selected element" (click)="deleteSelection()">
+       <i class="material-icons">delete</i>
+     </button>
+     <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+     <button mat-button matTooltip="Create group" (click)="treeService.createGroup()">
+       <i class="material-icons">snippet_folder</i>
+     </button>
+     <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+     <button mat-button matTooltip="Duplicate selected element">
+       <i class="material-icons">content_copy</i>
+     </button>
+   </div>
+   <mat-divider class="horizontal-divider"></mat-divider>
+   <mfd-mat-tree [list]="this.treeService.itemList"></mfd-mat-tree>
+ </div>
+  <mfd-resize-bar [horizontal]="true"></mfd-resize-bar>
 </div>
-<mat-divider class="horizontal-divider"></mat-divider>
-<mfd-mat-tree [list]="this.treeService.itemList"></mfd-mat-tree>
