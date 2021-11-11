@@ -73,6 +73,7 @@ import { PositionInputComponent } from './components/right-side/toolbox/properti
 import { NameInputComponent } from './components/right-side/toolbox/properties/element-types/common/name-input/name-input.component';
 import { DimensionsInputComponent } from './components/right-side/toolbox/properties/element-types/common/dimensions-input/dimensions-input.component';
 import { ResizeBarComponent } from './common/resize-bar/resize-bar.component';
+import { TreeModule } from 'primeng/tree';
 
 @NgModule({
   declarations: [
@@ -153,6 +154,7 @@ import { ResizeBarComponent } from './common/resize-bar/resize-bar.component';
     MatSelectModule,
     MatSliderModule,
     MatMenuModule,
+    TreeModule,
   ],
   providers: [
     {
