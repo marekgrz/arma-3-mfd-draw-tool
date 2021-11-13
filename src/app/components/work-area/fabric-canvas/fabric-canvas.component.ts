@@ -6,6 +6,7 @@ import { InteractionService } from '../../left-side/layer-stack/mat-tree/interac
 import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
 import { BONENAME } from '../../../common/ProjectFileStructure';
+import { HistoryService } from '../../../utils/history.service';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -60,7 +61,8 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   constructor(public store: StoreService,
               public treeService: TreeService,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private historyService: HistoryService) {
   }
 
   ngAfterViewInit(): void {
@@ -76,7 +78,8 @@ export class FabricCanvasComponent implements AfterViewInit {
     this.onSelected(canvas);
     this.onDeselected(canvas);
     this.onHighLighted(canvas);
-    this.onObjectMoved(canvas);
+    this.objectMoving(canvas);
+    this.objectMoved(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
@@ -115,7 +118,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     });
   }
 
-  private onObjectMoved(canvas): void {
+  private objectMoving(canvas): void {
     canvas.on('object:moving', e => {
       const selectedItem = this.treeService.selectedItem;
       if (!!selectedItem.base) {
@@ -128,6 +131,12 @@ export class FabricCanvasComponent implements AfterViewInit {
           selectedItem.base.position.y -= bone.pos0.y;
         }
       }
+    });
+  }
+
+  private objectMoved(canvas): void {
+    canvas.on('object:moved', () => {
+      this.historyService.addSnapshot();
     });
   }
 }

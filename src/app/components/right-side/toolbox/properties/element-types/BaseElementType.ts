@@ -3,12 +3,13 @@ import { StoreService } from '../../../../../utils/store.service';
 import { StackItem } from '../../../../left-side/layer-stack/elements/StackItem';
 import { BONENAME, LINETYPE } from '../../../../../common/ProjectFileStructure';
 import { BoneFixedModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
+import { InteractionService } from '../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 export class BaseElementType {
 
   boneName: string;
 
-  constructor(public store: StoreService) {
+  constructor(public store: StoreService, public interactionService: InteractionService) {
   }
 
   setElementLineType(element, lineType: LineType): void {

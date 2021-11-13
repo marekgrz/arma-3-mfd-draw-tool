@@ -7,6 +7,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import TgaLoader from 'tga-js';
 import { BaseElementType } from '../BaseElementType';
 import { BONENAME } from '../../../../../../common/ProjectFileStructure';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-texture-properties',
@@ -22,8 +23,8 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
   defaultFile: FileInput;
   angle: number;
 
-  constructor(store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
     if (fileChange) {
       this.changeTextureImage();
     }
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   changeTextureImage(): void {

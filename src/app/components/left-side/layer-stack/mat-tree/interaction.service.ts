@@ -7,6 +7,7 @@ import { findByID, flattenNode } from '../../../../common/Utils';
 import { ConfirmDialogComponent } from '../../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ID } from '../../../../common/ProjectFileStructure';
+import { HistoryService } from '../../../../utils/history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,13 @@ export class InteractionService {
 
   constructor(private treeService: TreeService,
               private store: StoreService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private historyService: HistoryService) {
+  }
+
+  refreshView(): void {
+    this.store.canvas.requestRenderAll();
+    this.historyService.addSnapshot();
   }
 
   startFreeDrawing(): void {
@@ -26,6 +33,15 @@ export class InteractionService {
 
   stopFreeDrawing(): void {
     this.drawingMode = false;
+  }
+
+  deselectCurrentItems(): void {
+    this.treeService.selectedItem = null;
+    const elements = document.querySelectorAll('.selected-item, .selected-root');
+    elements.forEach(el => {
+      el.classList.remove('selected-item');
+      el.classList.remove('selected-root');
+    });
   }
 
   onItemInLayerStackSelected(item: StackItem): void {
@@ -39,7 +55,7 @@ export class InteractionService {
     }
     // this.treeService.selectedItem = item;
     this.store.canvas.setActiveObject(selection);
-    this.store.canvas.requestRenderAll();
+    this.refreshView();
   }
 
   onItemInCanvasSelected(ids: string[]): void {
@@ -56,6 +72,7 @@ export class InteractionService {
         element.classList.add('selected-item');
       });
     }
+    this.refreshView();
   }
 
   onDeleteSelection(): void {
@@ -72,17 +89,8 @@ export class InteractionService {
           this.treeService.deleteItemByID(this.treeService.selectedItem.id);
         }
         this.store.canvas.discardActiveObject();
-        this.store.canvas.renderAll();
+        this.refreshView();
       }
-    });
-  }
-
-  deselectCurrentItems(): void {
-    this.treeService.selectedItem = null;
-    const elements = document.querySelectorAll('.selected-item, .selected-root');
-    elements.forEach(el => {
-      el.classList.remove('selected-item');
-      el.classList.remove('selected-root');
     });
   }
 }

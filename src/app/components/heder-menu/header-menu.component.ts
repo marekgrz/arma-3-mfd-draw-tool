@@ -9,6 +9,7 @@ import { NewProjectDialogComponent } from '../dialogs/new-project-dialog/new-pro
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from '../../utils/local-storage.service';
+import { HistoryService } from '../../utils/history.service';
 
 @Component({
   selector: 'mfd-header-menu',
@@ -25,7 +26,8 @@ export class HeaderMenuComponent implements OnInit {
               public store: StoreService,
               private snackBar: MatSnackBar,
               private toastr: ToastrService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              public historyService: HistoryService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,13 @@ export class HeaderMenuComponent implements OnInit {
   saveKey(e: KeyboardEvent): void {
     if (e.key === 's' && e.ctrlKey) {
       this.saveProjectAs();
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  undoKey(e: KeyboardEvent): void {
+    if (e.key === 'z' && e.ctrlKey) {
+      this.historyService.undo();
     }
   }
 
@@ -95,12 +104,14 @@ export class HeaderMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       result ? this.hideSnackBarInfo() : this.showSnackBarInfo();
     });
+    this.historyService.addSnapshot();
   }
 
   private setupFileHandling(): void {
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
       parseFileToProject(message.data, this.treeService, this.store);
       this.localStorageService.setLastLoadedProjectPath(message.filePath);
+      this.historyService.addSnapshot();
       this.toastr.success('Project loaded');
       this.hideSnackBarInfo();
     });
@@ -116,6 +127,7 @@ export class HeaderMenuComponent implements OnInit {
       if (!!message) {
         parseFileToProject(message.data, this.treeService, this.store);
         this.localStorageService.setLastLoadedProjectPath(message.filePath);
+        this.historyService.addSnapshot();
         this.toastr.success('Project loaded');
         this.hideSnackBarInfo();
       }

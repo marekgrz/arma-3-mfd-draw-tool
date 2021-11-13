@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import { LineType } from '../../../../../../templates/Line';
 import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../BaseElementType';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-rectangle-properties',
@@ -20,8 +21,8 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
   color: FormControl;
   lineType = LineType.full;
 
-  constructor(public store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -39,7 +40,7 @@ export class RectanglePropertiesComponent extends BaseElementType implements OnI
     rect.set('strokeWidth', Number(this.item.element.strokeWidth));
     rect.setCoords();
     rect.rotate(this.angle);
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   getAngle(): number {

@@ -7,6 +7,7 @@ import { Point } from 'fabric/fabric-impl';
 import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../BaseElementType';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-line-properties',
@@ -22,8 +23,8 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
   lineType = LineType.full;
   color: FormControl;
 
-  constructor(public store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -84,7 +85,7 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
     line.set('strokeWidth', Number(this.item.element.strokeWidth));
     line.setCoords();
     line.rotate(this.angle);
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   getAngle(): number {
@@ -109,6 +110,6 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
       return acc;
     }, {});
     poly.hasBorders = false;
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 }

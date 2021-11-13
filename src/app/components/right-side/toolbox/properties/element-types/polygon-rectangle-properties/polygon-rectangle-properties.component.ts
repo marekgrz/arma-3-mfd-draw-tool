@@ -5,6 +5,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { BaseElementType } from '../BaseElementType';
 import { BONENAME } from '../../../../../../common/ProjectFileStructure';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-polygon-rectangle-properties',
@@ -19,8 +20,8 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
   angle: number;
   color: FormControl;
 
-  constructor(store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
     rect.set('fill', this.color.value);
     rect.setCoords();
     rect.rotate(this.angle);
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   getAngle(): number {

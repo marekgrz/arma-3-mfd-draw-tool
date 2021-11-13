@@ -6,6 +6,7 @@ import { fabric } from 'fabric';
 import { LineType } from '../../../../../../templates/Line';
 import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../BaseElementType';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-triangle-properties',
@@ -21,8 +22,8 @@ export class TrianglePropertiesComponent extends BaseElementType implements OnIn
   color: FormControl;
   lineType = LineType.full;
 
-  constructor(public store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class TrianglePropertiesComponent extends BaseElementType implements OnIn
     triangle.set('strokeWidth', Number(this.item.element.strokeWidth));
     triangle.setCoords();
     triangle.rotate(this.angle);
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   getAngle(): number {

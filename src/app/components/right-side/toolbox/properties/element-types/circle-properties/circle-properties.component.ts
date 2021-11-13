@@ -7,6 +7,7 @@ import { Circle } from 'fabric/fabric-impl';
 import { BONENAME, CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../BaseElementType';
+import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-circle-properties',
@@ -26,8 +27,8 @@ export class CirclePropertiesComponent extends BaseElementType implements OnInit
   circleStep = 0.1;
   lineType = LineType.full;
 
-  constructor(public store: StoreService) {
-    super(store);
+  constructor(public store: StoreService, public interactionService: InteractionService) {
+    super(store, interactionService);
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class CirclePropertiesComponent extends BaseElementType implements OnInit
     circle.set('strokeWidth', Number(this.item.element.strokeWidth));
     circle.setCoords();
     circle.rotate(this.angle);
-    this.store.canvas.requestRenderAll();
+    this.interactionService.refreshView();
   }
 
   updateDiameterX(event): void {

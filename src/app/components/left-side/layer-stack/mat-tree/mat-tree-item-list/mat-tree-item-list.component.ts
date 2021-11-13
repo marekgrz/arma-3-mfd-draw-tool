@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementType, StackItem } from '../../elements/StackItem';
 import { TreeService } from '../tree.service';
 import { InteractionService } from '../interaction.service';
+import { HistoryService } from '../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-mat-tree-item-list',
@@ -26,17 +27,21 @@ export class MatTreeItemListComponent implements OnInit {
     group: 'layer-stack',
     onUpdate: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
     onAdd: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
     onRemove: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
   };
 
   constructor(private treeService: TreeService,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private historyService: HistoryService) {
   }
 
   ngOnInit(): void {
