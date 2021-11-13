@@ -135,7 +135,7 @@ export class FabricCanvasComponent implements AfterViewInit {
   }
 
   private objectMoved(canvas): void {
-    canvas.on('object:moved', () => {
+    canvas.on('object:modified', () => {
       this.historyService.addSnapshot();
     });
   }

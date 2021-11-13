@@ -110,6 +110,5 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
       return acc;
     }, {});
     poly.hasBorders = false;
-    this.interactionService.refreshView();
   }
 }
