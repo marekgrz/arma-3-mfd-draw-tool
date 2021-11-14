@@ -1,6 +1,6 @@
 <mfd-header-menu></mfd-header-menu>
 <div class="main" [ngClass]="!store.isProjectStarted ? 'disabled-container' : ''">
-  <mfd-left-sidebar [previewMode]="previewMode"></mfd-left-sidebar>
+  <mfd-left-sidebar [previewMode]="previewMode" class="sidebar"></mfd-left-sidebar>
   <mfd-work-area (showDesigner)="showToolbox = $event" (showPreview)="previewMode = $event" class="work-area"></mfd-work-area>
-  <mfd-toolbox *ngIf="showToolbox" class="toolbox"></mfd-toolbox>
+  <mfd-right-sidebar *ngIf="showToolbox" class="sidebar"></mfd-right-sidebar>
 </div>

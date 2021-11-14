@@ -7,7 +7,7 @@ import { HeaderMenuComponent } from './components/heder-menu/header-menu.compone
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { ToolboxComponent } from './components/right-side/toolbox/toolbox.component';
+import { RightSidebarComponent } from './components/right-side/toolbox/right-sidebar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WorkAreaComponent } from './components/work-area/work-area.component';
 import { ElementSelectorComponent } from './components/right-side/toolbox/element-selector/element-selector.component';
@@ -74,13 +74,14 @@ import { NameInputComponent } from './components/right-side/toolbox/properties/e
 import { DimensionsInputComponent } from './components/right-side/toolbox/properties/element-types/common/dimensions-input/dimensions-input.component';
 import { ResizeBarComponent } from './common/resize-bar/resize-bar.component';
 import { TreeModule } from 'primeng/tree';
+import { SectionHeaderComponent } from './components/right-side/toolbox/section-header/section-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderMenuComponent,
     LayerStackComponent,
-    ToolboxComponent,
+    RightSidebarComponent,
     WorkAreaComponent,
     ElementSelectorComponent,
     PropertiesComponent,
@@ -121,6 +122,7 @@ import { TreeModule } from 'primeng/tree';
     NameInputComponent,
     DimensionsInputComponent,
     ResizeBarComponent,
+    SectionHeaderComponent,
   ],
   imports: [
     BrowserModule,

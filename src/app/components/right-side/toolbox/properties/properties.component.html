@@ -1,5 +1,3 @@
-<div class="section-title">Properties</div>
-<mat-divider class="horizontal-divider"></mat-divider>
 <div *ngIf="treeService.selectedItem" class="properties-container">
   <mfd-root-properties [item]="treeService.selectedItem" *ngIf="isRoot(treeService.selectedItem)"></mfd-root-properties>
   <mfd-group-properties [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></mfd-group-properties>
