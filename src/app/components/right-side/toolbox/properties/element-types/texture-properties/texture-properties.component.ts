@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FileInput } from 'ngx-material-file-input';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../../../utils/store.service';
 import TgaLoader from 'tga-js';
-import { BaseElementType } from '../BaseElementType';
+import { BaseElementProperties } from '../base-element-properties.directive';
 import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
@@ -14,10 +13,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
   templateUrl: './texture-properties.component.html',
   styleUrls: ['./texture-properties.component.less']
 })
-export class TexturePropertiesComponent extends BaseElementType implements OnInit {
-
-  @Input()
-  item: StackItem;
+export class TexturePropertiesComponent extends BaseElementProperties implements OnInit {
 
   file = new FormControl('');
   defaultFile: FileInput;
@@ -28,8 +24,8 @@ export class TexturePropertiesComponent extends BaseElementType implements OnIni
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.angle = this.getAngle();
-    this.boneName = this.item.element[BONENAME];
     this.file.setValue(this.item.element['file']);
   }
 

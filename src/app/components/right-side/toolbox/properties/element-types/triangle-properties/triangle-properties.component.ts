@@ -5,7 +5,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { LineType } from '../../../../../../templates/Line';
 import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
-import { BaseElementType } from '../BaseElementType';
+import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
@@ -13,10 +13,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
   templateUrl: './triangle-properties.component.html',
   styleUrls: ['./triangle-properties.component.less']
 })
-export class TrianglePropertiesComponent extends BaseElementType implements OnInit {
-
-  @Input()
-  item: StackItem;
+export class TrianglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
   color: FormControl;
@@ -27,8 +24,8 @@ export class TrianglePropertiesComponent extends BaseElementType implements OnIn
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.angle = this.getAngle();
-    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
   }

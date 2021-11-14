@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
-import { BaseElementType } from '../BaseElementType';
-import { BONENAME } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
@@ -12,10 +10,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
   templateUrl: './polygon-rectangle-properties.component.html',
   styleUrls: ['./polygon-rectangle-properties.component.less']
 })
-export class PolygonRectanglePropertiesComponent extends BaseElementType implements OnInit {
-
-  @Input()
-  item: StackItem;
+export class PolygonRectanglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
   color: FormControl;
@@ -25,8 +20,8 @@ export class PolygonRectanglePropertiesComponent extends BaseElementType impleme
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.angle = this.getAngle();
-    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().fill);
   }
 

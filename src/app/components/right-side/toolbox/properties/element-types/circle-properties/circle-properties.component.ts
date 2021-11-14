@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Circle } from 'fabric/fabric-impl';
-import { BONENAME, CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
-import { BaseElementType } from '../BaseElementType';
+import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
@@ -14,10 +13,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
   templateUrl: './circle-properties.component.html',
   styleUrls: ['./circle-properties.component.less']
 })
-export class CirclePropertiesComponent extends BaseElementType implements OnInit {
-
-  @Input()
-  item: StackItem;
+export class CirclePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
   color: FormControl;
@@ -32,10 +28,10 @@ export class CirclePropertiesComponent extends BaseElementType implements OnInit
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.newDiameterX = this.getDiameterX();
     this.newDiameterY = this.getDiameterY();
     this.angle = this.getAngle();
-    this.boneName = this.item.element[BONENAME];
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.circleStep = this.item.element[CIRCLESTEP];
     this.lineType = this.item.element[LINETYPE];
@@ -50,8 +46,7 @@ export class CirclePropertiesComponent extends BaseElementType implements OnInit
     circle[CIRCLESTEP] = this.circleStep;
     this.setElementPosition(circle, this.item);
     this.setElementLineType(circle, this.lineType);
-    circle.set('stroke', this.color.value);
-    circle.set('strokeWidth', Number(this.item.element.strokeWidth));
+    this.setElementStroke(circle, this.color.value, this.item.element.strokeWidth);
     circle.setCoords();
     circle.rotate(this.angle);
     this.interactionService.refreshView();

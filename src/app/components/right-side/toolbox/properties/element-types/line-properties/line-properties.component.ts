@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Point } from 'fabric/fabric-impl';
 import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
-import { BaseElementType } from '../BaseElementType';
+import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({
@@ -14,10 +13,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
   templateUrl: './line-properties.component.html',
   styleUrls: ['./line-properties.component.less']
 })
-export class LinePropertiesComponent extends BaseElementType implements OnInit {
-
-  @Input()
-  item: StackItem;
+export class LinePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
   lineType = LineType.full;
@@ -28,6 +24,7 @@ export class LinePropertiesComponent extends BaseElementType implements OnInit {
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.angle = this.getAngle();
     this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];

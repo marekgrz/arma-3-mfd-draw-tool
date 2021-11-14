@@ -4,12 +4,22 @@ import { StackItem } from '../../../../left-side/layer-stack/elements/StackItem'
 import { BONENAME, LINETYPE } from '../../../../../common/ProjectFileStructure';
 import { BoneFixedModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
 import { InteractionService } from '../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { Directive, Input, OnInit } from '@angular/core';
 
-export class BaseElementType {
+@Directive()
+// tslint:disable-next-line:directive-class-suffix
+export class BaseElementProperties implements OnInit {
+
+  @Input()
+  item: StackItem;
 
   boneName: string;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
+  }
+
+  ngOnInit(): void {
+    this.boneName = this.item.element[BONENAME];
   }
 
   setElementLineType(element, lineType: LineType): void {
@@ -65,5 +75,10 @@ export class BaseElementType {
     }
     console.log('Left after: ' + element.left);
     console.log('Top after: ' + element.top);
+  }
+
+  setElementStroke(element, strokeColor, strokeWidth): void {
+    element.set('stroke', strokeColor);
+    element.set('strokeWidth', Number(strokeWidth));
   }
 }
