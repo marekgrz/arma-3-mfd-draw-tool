@@ -3,6 +3,7 @@
         <mat-label>Position [X]</mat-label>
         <input matInput autocomplete="off"
                name="positionX" ngDefaultControl
+               type="number"
                [(ngModel)]="positionX"
                (ngModelChange)="positionXChange.emit(positionX)"
                (change)="save.emit()">
@@ -11,6 +12,7 @@
         <mat-label>Position [Y]</mat-label>
         <input matInput autocomplete="off"
                name="positionY" ngDefaultControl
+               type="number"
                [(ngModel)]="positionY"
                (ngModelChange)="positionYChange.emit(positionY)"
                (change)="save.emit()">

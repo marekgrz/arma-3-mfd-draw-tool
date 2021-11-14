@@ -52,19 +52,20 @@ export class BaseElementProperties implements OnInit {
     console.log('Left before: ' + element.left);
     console.log('Top before: ' + element.top);
     const bone = this.store.bones.find(it => it.name === this.boneName);
-    const basePositionX = item.base.position.x * this.store.canvasWidth;
-    const basePositionY = item.base.position.y * this.store.canvasHeight;
+    const basePosition = this.store.getCanvasPositionFromDiscrete(item.base.position);
     element[BONENAME] = this.boneName;
     if (bone === undefined) {
-      element.left = basePositionX;
-      element.top = basePositionY;
+      element.left = basePosition.x;
+      element.top = basePosition.y;
+      console.log('Left after: ' + element.left);
+      console.log('Top after: ' + element.top);
       return;
     }
 
     switch (bone.type) {
       case BoneType.fixed: {
-        element.left = basePositionX + (bone as BoneFixedModel).pos0.x * this.store.canvasWidth;
-        element.top = basePositionY + (bone as BoneFixedModel).pos0.y * this.store.canvasHeight;
+        element.left = basePosition.x + (bone as BoneFixedModel).pos0.x * this.store.canvasWidth;
+        element.top = basePosition.y + (bone as BoneFixedModel).pos0.y * this.store.canvasHeight;
         break;
       }
       // case BoneType.linear: {

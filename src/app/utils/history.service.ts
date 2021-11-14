@@ -17,6 +17,7 @@ export class HistoryService {
   }
 
   undo(): void {
+    this.treeService.resetProjectStack();
     const previous = this.getPreviousSnapshot();
     parseFileToProject(JSON.stringify(previous.projectData), this.treeService, this.store);
     console.debug('Undo. Snapshots left ' + (this.appSnapshotList.length));
@@ -39,7 +40,7 @@ export class HistoryService {
     projectData.layerStackContent = this.treeService.itemList;
     projectData.globalHUDProperties = this.store.hudProperties;
     projectData.bones = this.store.bones;
-    return projectData;
+    return JSON.parse(JSON.stringify(projectData));
   }
 
   private getPreviousSnapshot(): ProjectSnapshot {

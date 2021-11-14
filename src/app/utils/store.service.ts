@@ -3,6 +3,8 @@ import {Color} from '@angular-material-components/color-picker';
 import {Canvas} from 'fabric/fabric-impl';
 import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileStructure';
 import {BoneBaseModel} from '../components/left-side/bones-list/BoneBaseModel';
+import { Point } from '../common/Point';
+import { Builder } from 'builder-pattern';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +87,14 @@ export class StoreService {
       this.isProjectStarted = false;
     }
   }
+
+  getCanvasPositionFromDiscrete(point: Point): Point {
+    return Builder(Point)
+      .x(point.x * this.canvasWidth)
+      .y(point.y * this.canvasHeight)
+      .build();
+  }
+
 
   addUsedSource(sourceName: string): void {
     if (this.usedSources.find(it => it === sourceName)) {
