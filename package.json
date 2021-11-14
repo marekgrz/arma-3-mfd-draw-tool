@@ -53,6 +53,7 @@
     "builder-pattern": "^1.3.0",
     "chalk": "^4.1.2",
     "electron-reload": "^1.5.0",
+    "ngx-color-picker": "^11.0.0",
     "ngx-fabric-wrapper": "^11.0.0",
     "ngx-highlightjs": "^4.1.3",
     "ngx-material-file-input": "^2.1.1",

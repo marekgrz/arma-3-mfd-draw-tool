@@ -16,7 +16,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
 export class TrianglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  color: FormControl;
+  color: string;
   lineType = LineType.full;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
@@ -26,18 +26,16 @@ export class TrianglePropertiesComponent extends BaseElementProperties implement
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
+    this.color = this.store.canvas.getActiveObject().stroke;
   }
 
   save(): void {
     const triangle: fabric.Triangle = this.store.canvas.getActiveObject();
-    this.setElementPosition(triangle, this.item);
+    this.setElementPosition(triangle);
     this.setElementLineType(triangle, this.lineType);
-    triangle.set('stroke', this.color.value);
-    triangle.set('strokeWidth', Number(this.item.element.strokeWidth));
-    triangle.setCoords();
-    triangle.rotate(this.angle);
+    this.setElementStroke(triangle);
+    this.setElementRotation(triangle);
     this.interactionService.refreshView();
   }
 

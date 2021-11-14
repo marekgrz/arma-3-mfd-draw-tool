@@ -79,7 +79,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     this.onDeselected(canvas);
     this.onHighLighted(canvas);
     this.objectMoving(canvas);
-    this.objectMoved(canvas);
+    this.objectModified(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
@@ -134,7 +134,7 @@ export class FabricCanvasComponent implements AfterViewInit {
     });
   }
 
-  private objectMoved(canvas): void {
+  private objectModified(canvas): void {
     canvas.on('object:modified', () => {
       this.historyService.addSnapshot();
     });

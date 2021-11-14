@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Point } from 'fabric/fabric-impl';
@@ -17,7 +16,6 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
 
   angle: number;
   lineType = LineType.full;
-  color: FormControl;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
     super(store, interactionService);
@@ -26,8 +24,8 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
+    this.color = this.store.canvas.getActiveObject().stroke;
     this.setupPolyLineEdit();
   }
 
@@ -78,10 +76,9 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
     line.left = Number(this.item.element.left);
     line.top = Number(this.item.element.top);
     line[LINETYPE] = this.lineType;
-    line.set('stroke', this.color.value);
-    line.set('strokeWidth', Number(this.item.element.strokeWidth));
-    line.setCoords();
-    line.rotate(this.angle);
+    this.setElementStroke(line);
+    this.setElementStroke(line);
+    this.setElementRotation(line);
     this.interactionService.refreshView();
   }
 

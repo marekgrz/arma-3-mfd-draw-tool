@@ -13,7 +13,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
 export class PolygonTrianglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  color: FormControl;
+  color: string;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
     super(store, interactionService);
@@ -22,15 +22,14 @@ export class PolygonTrianglePropertiesComponent extends BaseElementProperties im
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().fill);
+    this.color = this.store.canvas.getActiveObject().fill as string;
   }
 
   save(): void {
     const triangle: fabric.Rect = this.store.canvas.getActiveObject();
-    this.setElementPosition(triangle, this.item);
-    triangle.set('fill', this.color.value);
-    triangle.setCoords();
-    triangle.rotate(this.angle);
+    this.setElementPosition(triangle);
+    this.setElementFill(triangle);
+    this.setElementRotation(triangle);
     this.interactionService.refreshView();
   }
 

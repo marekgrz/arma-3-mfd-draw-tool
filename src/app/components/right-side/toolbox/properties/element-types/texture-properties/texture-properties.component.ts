@@ -5,7 +5,6 @@ import { fabric } from 'fabric';
 import { StoreService } from '../../../../../../utils/store.service';
 import TgaLoader from 'tga-js';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { BONENAME } from '../../../../../../common/ProjectFileStructure';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 
 @Component({

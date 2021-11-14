@@ -14,7 +14,7 @@ export class TextPropertiesComponent implements OnInit {
   @Input()
   item: StackItem;
 
-  color: FormControl;
+  color: string;
   fontName: string;
   source: string;
   staticText = true;
@@ -25,8 +25,8 @@ export class TextPropertiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.color = new FormControl(this.store.canvas.getActiveObject().fill);
     this.fontName = this.item.element.fontFamily;
+    this.color = this.store.canvas.getActiveObject().fill as string;
   }
 
   save(): void {
@@ -34,7 +34,7 @@ export class TextPropertiesComponent implements OnInit {
     text.left = Number(this.item.element.left);
     text.top = Number(this.item.element.top);
     text.set('fontFamily', this.fontName);
-    text.set('fill', this.color.value);
+    text.set('fill', this.color);
     text.setCoords();
     text['source'] = this.source;
     this.store.canvas.requestRenderAll();

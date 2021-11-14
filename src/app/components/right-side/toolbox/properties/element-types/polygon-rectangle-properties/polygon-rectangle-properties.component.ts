@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { BaseElementProperties } from '../base-element-properties.directive';
@@ -13,7 +12,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
 export class PolygonRectanglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  color: FormControl;
+  color: string;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
     super(store, interactionService);
@@ -22,15 +21,14 @@ export class PolygonRectanglePropertiesComponent extends BaseElementProperties i
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().fill);
+    this.color = this.store.canvas.getActiveObject().fill as string;
   }
 
   save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    this.setElementPosition(rect, this.item);
-    rect.set('fill', this.color.value);
-    rect.setCoords();
-    rect.rotate(this.angle);
+    this.setElementPosition(rect);
+    this.setElementFill(rect);
+    this.setElementRotation(rect);
     this.interactionService.refreshView();
   }
 

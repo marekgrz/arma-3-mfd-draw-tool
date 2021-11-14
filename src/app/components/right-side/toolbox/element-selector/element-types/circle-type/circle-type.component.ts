@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
@@ -22,7 +21,7 @@ export class CircleTypeComponent {
     const circle = new fabric.Circle({
       radius: 50,
       fill: 'rgba(0,0,0,0)',
-      stroke: new Color(0, 0, 0, 1) as any,
+      stroke: '#000000',
       strokeWidth: 1,
       strokeUniform: true,
       left: 50, top: 50

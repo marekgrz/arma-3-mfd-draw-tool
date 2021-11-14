@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Circle } from 'fabric/fabric-impl';
@@ -16,7 +15,6 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
 export class CirclePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  color: FormControl;
   newDiameterX: number;
   newDiameterY: number;
   uniformDiameter = true;
@@ -32,9 +30,9 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
     this.newDiameterX = this.getDiameterX();
     this.newDiameterY = this.getDiameterY();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.circleStep = this.item.element[CIRCLESTEP];
     this.lineType = this.item.element[LINETYPE];
+    this.color = this.store.canvas.getActiveObject().stroke;
   }
 
   save(): void {
@@ -44,11 +42,10 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
     circle.scaleX = Number(this.newDiameterX / this.item.element.width);
     circle.scaleY = Number(this.newDiameterY / this.item.element.height);
     circle[CIRCLESTEP] = this.circleStep;
-    this.setElementPosition(circle, this.item);
+    this.setElementPosition(circle);
     this.setElementLineType(circle, this.lineType);
-    this.setElementStroke(circle, this.color.value, this.item.element.strokeWidth);
-    circle.setCoords();
-    circle.rotate(this.angle);
+    this.setElementStroke(circle);
+    this.setElementRotation(circle);
     this.interactionService.refreshView();
   }
 

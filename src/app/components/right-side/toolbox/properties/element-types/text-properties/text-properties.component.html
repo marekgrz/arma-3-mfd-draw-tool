@@ -47,9 +47,5 @@
     </div>
   </div>
 
-  <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
-    <input matInput [ngxMatColorPicker]="picker" [formControl]="color" (colorChange)="save()">
-    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-    <ngx-mat-color-picker #picker></ngx-mat-color-picker>
-  </mat-form-field>
+  <mfd-color-selector [(color)]="color" (colorChange)="save()"></mfd-color-selector>
 </div>

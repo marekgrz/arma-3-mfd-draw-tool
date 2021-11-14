@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../../../utils/store.service';
-import { FormControl } from '@angular/forms';
 import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
@@ -15,7 +14,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack/mat-tre
 export class RectanglePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  color: FormControl;
+  color: string;
   lineType = LineType.full;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
@@ -25,17 +24,16 @@ export class RectanglePropertiesComponent extends BaseElementProperties implemen
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.color = new FormControl(this.store.canvas.getActiveObject().stroke);
     this.lineType = this.item.element[LINETYPE];
+    this.color = this.store.canvas.getActiveObject().stroke;
   }
 
   save(): void {
     const rect: fabric.Rect = this.store.canvas.getActiveObject();
-    this.setElementPosition(rect, this.item);
+    this.setElementPosition(rect);
     this.setElementLineType(rect, this.lineType);
-    this.setElementStroke(rect, this.color.value, this.item.element.strokeWidth);
-    rect.setCoords();
-    rect.rotate(this.angle);
+    this.setElementStroke(rect);
+    this.setElementRotation(rect);
     this.interactionService.refreshView();
   }
 

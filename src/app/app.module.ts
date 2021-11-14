@@ -75,6 +75,8 @@ import { DimensionsInputComponent } from './components/right-side/toolbox/proper
 import { ResizeBarComponent } from './common/resize-bar/resize-bar.component';
 import { TreeModule } from 'primeng/tree';
 import { SectionHeaderComponent } from './components/right-side/toolbox/section-header/section-header.component';
+import { ColorSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/color-selector/color-selector.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,7 @@ import { SectionHeaderComponent } from './components/right-side/toolbox/section-
     DimensionsInputComponent,
     ResizeBarComponent,
     SectionHeaderComponent,
+    ColorSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -146,6 +149,7 @@ import { SectionHeaderComponent } from './components/right-side/toolbox/section-
     MaterialFileInputModule,
     ReactiveFormsModule,
     NgxMatColorPickerModule,
+    ColorPickerModule,
     MatCheckboxModule,
     MatSnackBarModule,
     MatButtonToggleModule,

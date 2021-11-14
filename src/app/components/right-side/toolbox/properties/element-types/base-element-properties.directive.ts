@@ -13,6 +13,9 @@ export class BaseElementProperties implements OnInit {
   @Input()
   item: StackItem;
 
+  color: string;
+  angle: number;
+
   boneName: string;
 
   constructor(public store: StoreService, public interactionService: InteractionService) {
@@ -48,11 +51,11 @@ export class BaseElementProperties implements OnInit {
     }
   }
 
-  setElementPosition(element, item: StackItem): void {
+  setElementPosition(element): void {
     console.log('Left before: ' + element.left);
     console.log('Top before: ' + element.top);
     const bone = this.store.bones.find(it => it.name === this.boneName);
-    const basePosition = this.store.getCanvasPositionFromDiscrete(item.base.position);
+    const basePosition = this.store.getCanvasPositionFromDiscrete(this.item.base.position);
     element[BONENAME] = this.boneName;
     if (bone === undefined) {
       element.left = basePosition.x;
@@ -78,8 +81,17 @@ export class BaseElementProperties implements OnInit {
     console.log('Top after: ' + element.top);
   }
 
-  setElementStroke(element, strokeColor, strokeWidth): void {
-    element.set('stroke', strokeColor);
-    element.set('strokeWidth', Number(strokeWidth));
+  setElementStroke(element): void {
+    element.set('stroke', this.color);
+    element.set('strokeWidth', Number(this.item.element.strokeWidth));
+  }
+
+  setElementFill(element): void {
+    element.set('fill', this.color);
+  }
+
+  setElementRotation(element): void {
+    element.setCoords();
+    element.rotate(this.angle);
   }
 }

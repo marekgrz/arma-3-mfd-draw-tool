@@ -26,7 +26,7 @@ export class TriangleTypeComponent implements OnInit {
       width: 50, height: 50,
       left: 0, top: 0,
       fill: 'rgba(0,0,0,0)',
-      stroke: new Color(0, 0, 0, 1) as any,
+      stroke: '#000000',
       centeredRotation: true,
       strokeWidth: 1,
       strokeUniform: true

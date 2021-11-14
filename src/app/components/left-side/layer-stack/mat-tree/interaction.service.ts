@@ -55,7 +55,7 @@ export class InteractionService {
     }
     // this.treeService.selectedItem = item;
     this.store.canvas.setActiveObject(selection);
-    this.refreshView();
+    this.store.canvas.requestRenderAll();
   }
 
   onItemInCanvasSelected(ids: string[]): void {
@@ -72,7 +72,7 @@ export class InteractionService {
         element.classList.add('selected-item');
       });
     }
-    this.refreshView();
+    this.store.canvas.requestRenderAll();
   }
 
   onDeleteSelection(): void {

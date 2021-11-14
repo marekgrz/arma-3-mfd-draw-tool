@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
 import { fromEvent } from 'rxjs';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
@@ -76,7 +75,7 @@ export class LineTypeComponent {
       coords,
       {
         fill: 'rgba(0,0,0,0)',
-        stroke: new Color(0, 0, 0, 1) as any,
+        stroke: '#000000',
         strokeWidth: 5,
         strokeUniform: true,
         objectCaching: false,
