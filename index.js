@@ -16,7 +16,8 @@ function createWindow() {
     width: 1920,
     height: 1080,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation:false
     }
   })
   mainWindow.maximize();
