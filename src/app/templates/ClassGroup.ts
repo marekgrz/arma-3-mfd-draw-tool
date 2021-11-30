@@ -5,7 +5,7 @@ import {Point} from '../common/Point';
 
 export class ClassGroup implements BaseShape {
   name: string;
-  content: BaseShape[] = [];
+  content: any = [];
   color?: Color;
   alpha?: number;
   clipTL?: Point;

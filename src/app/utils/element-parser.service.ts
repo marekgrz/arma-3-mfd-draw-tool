@@ -7,14 +7,15 @@ import {Line} from '../templates/Line';
 import {Polygon} from '../templates/Polygon';
 import {Point} from '../common/Point';
 import {TreeService} from '../components/left-side/layer-stack/mat-tree/tree.service';
-import {CIRCLESTEP, LINETYPE, POINTS} from '../common/ProjectFileStructure';
+import { CIRCLESTEP, ID, LINETYPE, POINTS } from '../common/ProjectFileStructure';
+import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementParserService {
 
-  constructor(private treeService: TreeService) { }
+  constructor(private treeService: TreeService, private store: StoreService) { }
 
   public getMFDClass(): string {
     const bonesClass: ClassGroup = new ClassGroup();
@@ -70,14 +71,14 @@ export class ElementParserService {
     const classGroup: ClassGroup = new ClassGroup();
     classGroup.name = item.name;
     classGroup.color = new Color(1, 1, 1, 1);
-    classGroup.condition = item.groupProperties.condition;
-    classGroup.blinking = item.groupProperties.blinking;
-    classGroup.blinkingPattern = item.groupProperties.blinkingPattern;
-    classGroup.blinkingStartsOn = item.groupProperties.blinkingStartsOn;
-    classGroup.clipTL = item.groupProperties.clipTL;
-    classGroup.clipBR = item.groupProperties.clipBR;
-    classGroup.clipTLParallax = item.groupProperties.clipTLParallax;
-    classGroup.clipBRParallax = item.groupProperties.clipBRParallax;
+    classGroup.condition = item.groupProperties?.condition;
+    classGroup.blinking = item.groupProperties?.blinking;
+    classGroup.blinkingPattern = item.groupProperties?.blinkingPattern;
+    classGroup.blinkingStartsOn = item.groupProperties?.blinkingStartsOn;
+    classGroup.clipTL = item.groupProperties?.clipTL;
+    classGroup.clipBR = item.groupProperties?.clipBR;
+    classGroup.clipTLParallax = item.groupProperties?.clipTLParallax;
+    classGroup.clipBRParallax = item.groupProperties?.clipBRParallax;
     classGroup.content = content;
     return classGroup;
   }
@@ -121,7 +122,7 @@ export class ElementParserService {
   }
 
   private addPointsFromCoords(item: StackItem): StackItem {
-    const element = item.element;
+    const element = this.store.canvas.getObjects().find(it => it[ID] === item.id);
     item.element[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
     return item;
   }

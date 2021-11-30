@@ -1,0 +1,11 @@
+class {{name}}
+  {
+    {{#color}}
+    color[] = { {{color.r}}, {{color.g}}, {{color.b}}, {{color.a}} };
+    {{/color}}
+    class Line {
+      type = "line";
+      lineType = "{{lineType}}";
+      width = {{width}};
+    }
+  }

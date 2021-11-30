@@ -77,6 +77,7 @@ import { TreeModule } from 'primeng/tree';
 import { SectionHeaderComponent } from './components/right-side/toolbox/section-header/section-header.component';
 import { ColorSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/color-selector/color-selector.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatDividerModule,
     MatButtonModule,
