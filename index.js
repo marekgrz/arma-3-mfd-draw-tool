@@ -1,5 +1,5 @@
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
-const fs = require('fs')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
+const fs = require('fs');
 const url = require("url");
 const path = require("path");
 const chalk = require('chalk');
@@ -8,8 +8,8 @@ require('electron-reload')(__dirname, {
   electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let mainWindow
-let filePath
+let mainWindow;
+let filePath;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -17,9 +17,9 @@ function createWindow() {
     height: 1080,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation:false
+      contextIsolation: false
     }
-  })
+  });
   mainWindow.maximize();
 
   // mainWindow.loadURL(
@@ -29,29 +29,29 @@ function createWindow() {
   //     slashes: true
   //   })
   // );
-  mainWindow.loadURL('http://localhost:4200')
+  mainWindow.loadURL('http://localhost:4200');
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function () {
-    mainWindow = null
-  })
+    mainWindow = null;
+  });
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+  if (process.platform !== 'darwin') app.quit();
+});
 
 app.on('activate', function () {
-  if (mainWindow === null) createWindow()
-})
+  if (mainWindow === null) createWindow();
+});
 
 
 ipcMain.on('new', function (event) {
   filePath = undefined;
-})
+});
 
 ipcMain.on('openFile', function (event) {
   dialog.showOpenDialog({properties: ['openFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
@@ -64,28 +64,38 @@ ipcMain.on('openFile', function (event) {
       filePath = e.filePaths[0];
       openProject(event, 'openFile');
       console.log(chalk.blue('File opened'));
-    })
-})
+    });
+});
+
+ipcMain.on('loadTemplates', event => {
+  const templatesPath = './src/assets/templates';
+  const templates = [];
+  fs.readdirSync(templatesPath).forEach(fileName => {
+    const file = (fs.readFileSync(`${templatesPath}/${fileName}`, 'utf8'));
+    templates.push(new TemplateData(fileName.replace('.mustache', ''), file));
+  });
+  event.sender.send('loadTemplates', templates)
+});
 
 ipcMain.on('reopenLastFile', (event, message) => {
   filePath = message;
   openProject(event, 'reopenLastFile');
   console.log(chalk.blue('File reopened'));
-})
+});
 
 ipcMain.on('saveFile', (event, message) => {
   if (filePath) {
     saveFileToDir(message, event);
     console.log(chalk.green('File saved'));
   } else {
-    showSaveDialog(message, event)
+    showSaveDialog(message, event);
   }
-  event.sender.send('saveFile')
-})
+  event.sender.send('saveFile');
+});
 
 ipcMain.on('saveFileAs', (event, message) => {
-  showSaveDialog(message, event)
-})
+  showSaveDialog(message, event);
+});
 
 function showSaveDialog(message, event) {
   dialog.showSaveDialog({properties: ['saveFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
@@ -98,7 +108,7 @@ function showSaveDialog(message, event) {
       filePath = e.filePath;
       saveFileToDir(message, event);
       console.log(chalk.green('File saved'));
-    })
+    });
 }
 
 function openProject(event, channel) {
@@ -110,7 +120,7 @@ function openProject(event, channel) {
     if (data) {
       event.sender.send(channel, new ProjectFileData(data, filePath));
     }
-  })
+  });
 }
 
 function saveFileToDir(content, event) {
@@ -128,5 +138,15 @@ class ProjectFileData {
   constructor(data, filePath) {
     this.data = data;
     this.filePath = filePath;
+  }
+}
+
+class TemplateData {
+  name;
+  template;
+
+  constructor(name, template) {
+    this.name = name;
+    this.template = template;
   }
 }

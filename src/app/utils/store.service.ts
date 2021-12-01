@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Color} from '@angular-material-components/color-picker';
-import {Canvas} from 'fabric/fabric-impl';
-import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileStructure';
-import {BoneBaseModel} from '../components/left-side/bones-list/BoneBaseModel';
+import { Injectable } from '@angular/core';
+import { Color } from '@angular-material-components/color-picker';
+import { Canvas } from 'fabric/fabric-impl';
+import { GlobalHUDProperties, ProjectFileStructure } from '../common/ProjectFileStructure';
+import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
 import { Point } from '../common/Point';
 import { Builder } from 'builder-pattern';
 
@@ -26,7 +26,7 @@ export class StoreService {
     'TahomaB',
   ];
 
-  LINE_TYPE_LIST: {name: string, value: number}[] = [
+  LINE_TYPE_LIST: { name: string, value: number }[] = [
     {name: 'Full', value: 0},
     {name: 'Dotted', value: 1},
     {name: 'Dashed', value: 2},

@@ -1,34 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
 import { ClassGroup } from '../../../templates/ClassGroup';
 import { Line, LineType } from '../../../templates/Line';
 import { Color } from '@angular-material-components/color-picker';
 import { ElementParserService } from '../../../utils/element-parser.service';
-import * as Mustache from 'mustache'
-import { HttpClient } from '@angular/common/http';
+import * as Mustache from 'mustache';
+import { MustacheTemplates, MustacheTemplatesService } from './mustache-templates.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mfd-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.less']
 })
-export class CodeViewerComponent implements OnInit {
+export class CodeViewerComponent implements OnDestroy {
 
-  structuredText = '';
+  ready = false;
+
+  private templates: MustacheTemplates;
+
+  private subscription: Subscription = null;
 
   constructor(private elementParser: ElementParserService,
               private treeService: TreeService,
-              private http: HttpClient) {
+              private templatesService: MustacheTemplatesService) {
+    this.subscription = this.templatesService.loadTemplates().subscribe(value => {
+        this.templates = value;
+        this.ready = true;
+      }
+    );
   }
 
-  ngOnInit(): void {
-    this.loadTemplate('line.mustache');
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  // MUST BE STRING
-
-
-  loadTemplate(templateName: string): void {
+  loadText(): string {
     //console.log(this.elementParser.getMFDClass())
     const line = new Line();
     line.color = {r: 0.5, g: 0.5, b: 0.5, a: 0.5} as Color;
@@ -36,26 +43,50 @@ export class CodeViewerComponent implements OnInit {
     line.lineType = LineType.dashed;
     line.width = 2;
 
+    const groupInnerInner = new ClassGroup();
+    groupInnerInner.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
+    groupInnerInner.name = 'HorizonGroup';
+    groupInnerInner.condition = 'on';
+    groupInnerInner.content = line;
+
     const groupInner = new ClassGroup();
-    groupInner.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
-    groupInner.name = 'HorizonGroup';
-    groupInner.condition = 'on';
-    groupInner.content = line;
+    groupInner.name = 'OuterGroup';
+    groupInner.content = groupInnerInner;
 
     const groupOuter = new ClassGroup();
     groupOuter.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
     groupOuter.name = 'Draw';
-    groupOuter.content = line;
+    groupOuter.content = groupInner;
 
-    this.http.get(`./assets/templates/${templateName}`, {responseType: 'text'}).subscribe(data => {
-      groupInner.content = Mustache.render(data, line);
-      this.http.get(`./assets/templates/group.mustache`, {responseType: 'text'}).subscribe(resp => {
-        groupOuter.content = Mustache.render(data, groupInner);
-        this.http.get(`./assets/templates/group.mustache`, {responseType: 'text'}).subscribe(resp => {
-          this.structuredText = Mustache.render(resp, groupOuter);
-          console.log(this.structuredText);
-        });
-      });
-    });
+    return this.renderObjectToString(groupOuter);
   }
+
+  private renderObjectToString(content: any): string {
+    const objectType = this.getObjectType(content);
+    switch (objectType) {
+      case ObjectType.group: {
+        const input = content as ClassGroup;
+        if (input.content) {
+          input.content = this.renderObjectToString(input.content);
+        }
+        return Mustache.render(this.templates.group, input);
+      }
+      case ObjectType.line: {
+        return Mustache.render(this.templates.line, content);
+      }
+    }
+  }
+
+  private getObjectType(object: any): ObjectType {
+    if (object instanceof ClassGroup) {
+      return ObjectType.group;
+    } else if (object instanceof Line) {
+      return ObjectType.line;
+    }
+  }
+}
+
+export enum ObjectType {
+  group,
+  line
 }
