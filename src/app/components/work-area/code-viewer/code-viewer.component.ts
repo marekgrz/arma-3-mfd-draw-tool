@@ -15,9 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CodeViewerComponent implements OnDestroy {
 
-  ready = false;
-
-  private templates: MustacheTemplates;
+  templates: MustacheTemplates;
 
   private subscription: Subscription = null;
 
@@ -26,7 +24,6 @@ export class CodeViewerComponent implements OnDestroy {
               private templatesService: MustacheTemplatesService) {
     this.subscription = this.templatesService.loadTemplates().subscribe(value => {
         this.templates = value;
-        this.ready = true;
       }
     );
   }
@@ -58,7 +55,12 @@ export class CodeViewerComponent implements OnDestroy {
     groupOuter.name = 'Draw';
     groupOuter.content = groupInner;
 
-    return this.renderObjectToString(groupOuter);
+    const groupOuterOuter = new ClassGroup();
+    groupOuterOuter.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
+    groupOuterOuter.name = 'External';
+    groupOuterOuter.content = groupInner;
+
+    return this.renderObjectToString(groupOuterOuter);
   }
 
   private renderObjectToString(content: any): string {
@@ -67,7 +69,7 @@ export class CodeViewerComponent implements OnDestroy {
       case ObjectType.group: {
         const input = content as ClassGroup;
         if (input.content) {
-          input.content = this.renderObjectToString(input.content);
+          input.content = this.addIndentForEachLine(this.renderObjectToString(input.content));
         }
         return Mustache.render(this.templates.group, input);
       }
@@ -75,6 +77,12 @@ export class CodeViewerComponent implements OnDestroy {
         return Mustache.render(this.templates.line, content);
       }
     }
+  }
+
+  private addIndentForEachLine(content: string): string {
+    const regexSearch = content.includes('\n\t') ? /\n /g : /\n/g;
+    const indent = content.includes('\n\t') ? '\n   ' : '\n  ';
+    return content.replace(regexSearch, indent);
   }
 
   private getObjectType(object: any): ObjectType {

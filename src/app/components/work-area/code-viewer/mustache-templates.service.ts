@@ -10,8 +10,7 @@ export class MustacheTemplatesService {
 
   templates: MustacheTemplates;
 
-  constructor(private ipc: IpcService) {
-  }
+  constructor(private ipc: IpcService) {}
 
   loadTemplates(): Observable<MustacheTemplates> {
     if (this.templates) {
