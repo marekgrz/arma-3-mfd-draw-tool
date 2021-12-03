@@ -78,6 +78,7 @@ import { SectionHeaderComponent } from './components/right-side/toolbox/section-
 import { ColorSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/color-selector/color-selector.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -163,6 +164,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     MatMenuModule,
     TreeModule,
+    ClipboardModule,
   ],
   providers: [
     {

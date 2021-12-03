@@ -7,6 +7,7 @@ import { ElementParserService } from '../../../utils/element-parser.service';
 import * as Mustache from 'mustache';
 import { MustacheTemplates, MustacheTemplatesService } from './mustache-templates.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'mfd-code-viewer',
@@ -19,11 +20,15 @@ export class CodeViewerComponent implements OnDestroy {
 
   private subscription: Subscription = null;
 
+  structuredText = '';
+
   constructor(private elementParser: ElementParserService,
               private treeService: TreeService,
-              private templatesService: MustacheTemplatesService) {
+              private templatesService: MustacheTemplatesService,
+              private toastrService: ToastrService) {
     this.subscription = this.templatesService.loadTemplates().subscribe(value => {
         this.templates = value;
+        this.loadText();
       }
     );
   }
@@ -32,7 +37,12 @@ export class CodeViewerComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  loadText(): string {
+  onCopy(): void {
+    this.toastrService.info('Copied to clipboard');
+  }
+
+  loadText(): void {
+
     //console.log(this.elementParser.getMFDClass())
     const line = new Line();
     line.color = {r: 0.5, g: 0.5, b: 0.5, a: 0.5} as Color;
@@ -40,27 +50,33 @@ export class CodeViewerComponent implements OnDestroy {
     line.lineType = LineType.dashed;
     line.width = 2;
 
+    const group = new ClassGroup();
+    group.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
+    group.name = 'Group';
+    group.condition = 'on';
+    group.content = [line];
+
     const groupInnerInner = new ClassGroup();
     groupInnerInner.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
     groupInnerInner.name = 'HorizonGroup';
     groupInnerInner.condition = 'on';
-    groupInnerInner.content = line;
+    groupInnerInner.content = [line, line, line, group, line];
 
     const groupInner = new ClassGroup();
     groupInner.name = 'OuterGroup';
-    groupInner.content = groupInnerInner;
+    groupInner.content = [groupInnerInner];
 
     const groupOuter = new ClassGroup();
     groupOuter.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
     groupOuter.name = 'Draw';
-    groupOuter.content = groupInner;
+    groupOuter.content = [groupInner];
 
     const groupOuterOuter = new ClassGroup();
     groupOuterOuter.color = {r: 0.1, g: 0.2, b: 0.3, a: 1} as Color;
     groupOuterOuter.name = 'External';
-    groupOuterOuter.content = groupInner;
+    groupOuterOuter.content = [groupInner];
 
-    return this.renderObjectToString(groupOuterOuter);
+    this.structuredText = this.renderObjectToString(groupOuterOuter);
   }
 
   private renderObjectToString(content: any): string {
@@ -69,7 +85,7 @@ export class CodeViewerComponent implements OnDestroy {
       case ObjectType.group: {
         const input = content as ClassGroup;
         if (input.content) {
-          input.content = this.addIndentForEachLine(this.renderObjectToString(input.content));
+          input.content = this.addIndentForEachLine(this.getInnerContent(input));
         }
         return Mustache.render(this.templates.group, input);
       }
@@ -79,7 +95,17 @@ export class CodeViewerComponent implements OnDestroy {
     }
   }
 
+  private getInnerContent(input: ClassGroup): string {
+    // concat all group items, separated by \n
+    let element = '';
+    input.content.map((item, index) => element += this.renderObjectToString(item).concat(index !== input.content.length - 1 ? '\n' : ''));
+    return element;
+  }
+
   private addIndentForEachLine(content: string): string {
+    if (content.length < 1) {
+      return content;
+    }
     const regexSearch = content.includes('\n\t') ? /\n /g : /\n/g;
     const indent = content.includes('\n\t') ? '\n   ' : '\n  ';
     return content.replace(regexSearch, indent);
