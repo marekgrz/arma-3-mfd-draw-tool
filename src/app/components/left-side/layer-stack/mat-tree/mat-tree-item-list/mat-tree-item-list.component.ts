@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ElementType, StackItem } from '../../elements/StackItem';
+import { ItemType, StackItem } from '../../elements/StackItem';
 import { TreeService } from '../tree.service';
 import { InteractionService } from '../interaction.service';
 import { HistoryService } from '../../../../../utils/history.service';
@@ -46,7 +46,7 @@ export class MatTreeItemListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isRoot) {
-      this.item.type = ElementType.root;
+      this.item.type = ItemType.root;
     }
     this.temporaryName = '' + this.item.name;
   }
@@ -91,7 +91,7 @@ export class MatTreeItemListComponent implements OnInit {
   }
 
   isContainer(item: StackItem): boolean {
-    return item.type === ElementType.group;
+    return item.type === ItemType.group;
   }
 
   toggleExpand(event: Event): void {

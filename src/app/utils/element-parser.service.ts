@@ -1,108 +1,117 @@
 import { Injectable } from '@angular/core';
-import {ElementType, StackItem} from '../components/left-side/layer-stack/elements/StackItem';
-import {BaseShape} from '../common/BaseShape';
-import {ClassGroup} from '../templates/ClassGroup';
-import {Color} from '@angular-material-components/color-picker';
-import {Line} from '../templates/Line';
-import {Polygon} from '../templates/Polygon';
-import {Point} from '../common/Point';
-import {TreeService} from '../components/left-side/layer-stack/mat-tree/tree.service';
+import { ItemType, StackItem } from '../components/left-side/layer-stack/elements/StackItem';
+import { BaseElementModel, ElementType } from '../common/BaseElementModel';
+import { ClassGroup } from '../templates/ClassGroup';
+import { Color } from '@angular-material-components/color-picker';
+import { Line } from '../templates/Line';
+import { Polygon } from '../templates/Polygon';
+import { Point } from '../common/Point';
+import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.service';
 import { CIRCLESTEP, ID, LINETYPE, POINTS } from '../common/ProjectFileStructure';
 import { StoreService } from './store.service';
+import { Builder } from 'builder-pattern';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementParserService {
 
-  constructor(private treeService: TreeService, private store: StoreService) { }
+  constructor(private treeService: TreeService, private store: StoreService) {}
 
-  public getMFDClass(): string {
-    const bonesClass: ClassGroup = new ClassGroup();
-    bonesClass.name = 'Bones';
+  public getMFDClass(): ClassGroup {
+    const bonesClass = Builder(ClassGroup)
+      .name('Bones')
+      .type(ElementType.group)
+      .build();
 
-    const drawClass: ClassGroup = new ClassGroup();
-    drawClass.name = 'Draw';
-    drawClass.content = this.convertToA3Format(this.treeService.itemList);
+    const drawClass = Builder(ClassGroup)
+      .name('Draw')
+      .type(ElementType.group)
+      .content( this.convertToA3Format(this.treeService.itemList))
+      .build();
 
-    const mfdClass: ClassGroup = new ClassGroup();
-    mfdClass.name = 'MFD';
-    mfdClass.content = [bonesClass, drawClass];
-
-    return mfdClass.getElement();
+    return Builder(ClassGroup)
+      .name('MFD')
+      .type(ElementType.group)
+      .content([bonesClass, drawClass])
+      .build();
   }
 
-  private convertToA3Format(itemList: StackItem[]): BaseShape[] {
-    const classList: BaseShape[] = [];
+  private convertToA3Format(itemList: StackItem[]): BaseElementModel[] {
+    const classList: BaseElementModel[] = [];
     itemList.forEach(item => {
-      if (item.type === ElementType.group) {
+      if (item.type === ItemType.group) {
         classList.push(this.createGroup(item, this.convertToA3Format(item.children)));
       } else {
         classList.push(this.resolveElement(item));
       }
     });
-    return classList;
+    return classList.filter(it => it !== undefined);
   }
 
-  private resolveElement(item: StackItem): BaseShape {
+  private resolveElement(item: StackItem): BaseElementModel {
     switch (item.type) {
-      case ElementType.line: {
+      case ItemType.line: {
         return this.createLine(item);
       }
-      case ElementType.circle: {
+      case ItemType.circle: {
         return this.createLine(this.lineFromCircle(item));
       }
-      case ElementType.rectangle: {
+      case ItemType.rectangle: {
         return this.createLine(this.addPointsFromCoords(item));
       }
-      case ElementType.triangle: {
+      case ItemType.triangle: {
         return this.createLine(this.addPointsFromCoords(item));
       }
-      case ElementType.polygonRect: {
+      case ItemType.polygonRect: {
         return this.createPolygon(this.addPointsFromCoords(item));
       }
-      case ElementType.polygonTriangle: {
+      case ItemType.polygonTriangle: {
         return this.createPolygon(this.addPointsFromCoords(item));
       }
     }
   }
 
-  private createGroup(item: StackItem, content: BaseShape[]): ClassGroup {
-    const classGroup: ClassGroup = new ClassGroup();
-    classGroup.name = item.name;
-    classGroup.color = new Color(1, 1, 1, 1);
-    classGroup.condition = item.groupProperties?.condition;
-    classGroup.blinking = item.groupProperties?.blinking;
-    classGroup.blinkingPattern = item.groupProperties?.blinkingPattern;
-    classGroup.blinkingStartsOn = item.groupProperties?.blinkingStartsOn;
-    classGroup.clipTL = item.groupProperties?.clipTL;
-    classGroup.clipBR = item.groupProperties?.clipBR;
-    classGroup.clipTLParallax = item.groupProperties?.clipTLParallax;
-    classGroup.clipBRParallax = item.groupProperties?.clipBRParallax;
-    classGroup.content = content;
-    return classGroup;
+  private createGroup(item: StackItem, content: BaseElementModel[]): ClassGroup {
+    return Builder(ClassGroup)
+      .name(item.name)
+      .type(ElementType.group)
+      .color(new Color(1, 1, 1, 1))
+      .condition(item.groupProperties?.condition)
+      .blinking(item.groupProperties?.blinking)
+      .blinkingPattern(item.groupProperties?.blinkingPattern)
+      .blinkingStartsOn(item.groupProperties?.blinkingStartsOn)
+      .clipTL(item.groupProperties?.clipTL)
+      .clipBR(item.groupProperties?.clipBR)
+      .clipTLParallax(item.groupProperties?.clipTLParallax)
+      .clipBRParallax(item.groupProperties?.clipBRParallax)
+      .content(content)
+      .build();
   }
 
   private createLine(item: StackItem): Line {
     const element = item.element;
-    const line: Line = new Line();
-    line.name = item.name;
-    line.color = element.stroke as any;
-    line.points = element.points;
-    line.bone = 'Center';
-    line.lineType = element[LINETYPE];
-    line.width = Number(element.strokeWidth);
-    return line;
+    return Builder(Line)
+      .name(item.name)
+      .type(ElementType.line)
+      .type(ElementType.line)
+      .color(element.stroke as any)
+      .points(element.points)
+      .bone('Center')
+      .lineType(element[LINETYPE])
+      .width(Number(element.strokeWidth))
+      .build();
   }
 
   private createPolygon(item: StackItem): Polygon {
     const element = item.element;
-    const polygon: Polygon = new Polygon();
-    polygon.name = item.name;
-    polygon.color = element['texturePath'] ? undefined : element.fill as any;
-    polygon.texturePath = element['texturePath'] ? element['texturePath'] : '';
-    polygon.points = element.points;
-    return polygon;
+    return Builder(Polygon)
+      .name(item.name)
+      .type(ElementType.polygon)
+      .type(ElementType.polygon)
+      .color(element['texturePath'] ? undefined : element.fill as any)
+      .points(element.points)
+      .build();
   }
 
   private lineFromCircle(item: StackItem): StackItem {
@@ -127,3 +136,4 @@ export class ElementParserService {
     return item;
   }
 }
+

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from './tree.service';
-import { ElementType, StackItem } from '../elements/StackItem';
+import { ItemType, StackItem } from '../elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../utils/store.service';
 import { findByID, flattenNode } from '../../../../common/Utils';
@@ -47,7 +47,7 @@ export class InteractionService {
   onItemInLayerStackSelected(item: StackItem): void {
     this.store.canvas.discardActiveObject();
     let selection;
-    if (item.type === ElementType.group) {
+    if (item.type === ItemType.group) {
       const elementListOriginal = flattenNode(item);
       selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     } else {
@@ -59,7 +59,7 @@ export class InteractionService {
   }
 
   onItemInCanvasSelected(ids: string[]): void {
-    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
       return;
     }
     if (!this.drawingMode) {
@@ -85,7 +85,7 @@ export class InteractionService {
           this.store.canvas.remove(it);
           this.treeService.deleteItemByID(it[ID]);
         });
-        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
           this.treeService.deleteItemByID(this.treeService.selectedItem.id);
         }
         this.store.canvas.discardActiveObject();

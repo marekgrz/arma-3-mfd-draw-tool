@@ -3,7 +3,7 @@ import { Point } from '../../../../common/Point';
 export class StackItem {
   id: string = generateId();
   name: string;
-  type: ElementType;
+  type: ItemType;
   base: BaseProperties = new BaseProperties();
   element?: any;
   children = new Array<StackItem>();
@@ -27,7 +27,7 @@ export class BaseProperties {
   position: Point = new Point();
 }
 
-export enum ElementType {
+export enum ItemType {
   root,
   group,
   line,
