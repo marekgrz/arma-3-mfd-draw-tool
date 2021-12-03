@@ -10,6 +10,7 @@ import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.s
 import { CIRCLESTEP, ID, LINETYPE, POINTS } from '../common/ProjectFileStructure';
 import { StoreService } from './store.service';
 import { Builder } from 'builder-pattern';
+import hexRgb from 'hex-rgb';
 
 @Injectable({
   providedIn: 'root'
@@ -94,10 +95,9 @@ export class ElementParserService {
     return Builder(Line)
       .name(item.name)
       .type(ElementType.line)
-      .type(ElementType.line)
-      .color(element.stroke as any)
+      .color(this.toRgba(element.stroke))
       .points(element.points)
-      .bone('Center')
+      .bone(item.bone)
       .lineType(element[LINETYPE])
       .width(Number(element.strokeWidth))
       .build();
@@ -134,6 +134,11 @@ export class ElementParserService {
     const element = this.store.canvas.getObjects().find(it => it[ID] === item.id);
     item.element[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
     return item;
+  }
+
+  private toRgba(hexString: string): Color {
+    const color = hexRgb(hexString);
+    return new Color(color.red / 255, color.green / 255, color.blue / 255, color.alpha);
   }
 }
 

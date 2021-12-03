@@ -6,7 +6,8 @@ import * as Mustache from 'mustache';
 import { MustacheTemplates, MustacheTemplatesService } from './mustache-templates.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { ElementType } from '../../../common/BaseElementModel';
+import { BaseElementModel, ElementType } from '../../../common/BaseElementModel';
+import { Line } from '../../../templates/Line';
 
 @Component({
   selector: 'mfd-code-viewer',
@@ -42,9 +43,10 @@ export class CodeViewerComponent implements OnDestroy {
 
   loadText(): void {
     this.structuredText = this.renderObjectToString(this.elementParser.getMFDClass());
+    console.log(this.elementParser.getMFDClass())
   }
 
-  private renderObjectToString(content: any): string {
+  private renderObjectToString(content: BaseElementModel): string {
     switch (content.type) {
       case ElementType.group: {
         const input = content as ClassGroup;
@@ -54,6 +56,8 @@ export class CodeViewerComponent implements OnDestroy {
         return Mustache.render(this.templates.group, input);
       }
       case ElementType.line: {
+        const line = content as Line;
+        line.points.map((point, index) => point['comma'] = index < line.points.length - 1);
         return Mustache.render(this.templates.line, content);
       }
     }

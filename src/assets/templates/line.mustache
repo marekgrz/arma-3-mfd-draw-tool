@@ -7,5 +7,10 @@ class {{name}}
     type = "line";
     lineType = "{{lineType}}";
     width = {{width}};
+    points[] = {
+      {{#points}}
+        { {{#bone}}"{{bone}}",{{/bone}} { {{x}}, {{y}} }, 1}{{#comma}},{{/comma}}
+      {{/points}}
+    };
   };
 };
