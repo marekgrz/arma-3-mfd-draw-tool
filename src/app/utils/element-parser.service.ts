@@ -70,6 +70,9 @@ export class ElementParserService {
       case ItemType.polygonTriangle: {
         return this.createPolygon(this.addPointsFromCoords(item));
       }
+      case ItemType.texture: {
+        return this.createPolygon(this.addPointsFromCoords(item));
+      }
     }
   }
 
@@ -107,7 +110,6 @@ export class ElementParserService {
     const element = item.element;
     return Builder(Polygon)
       .name(item.name)
-      .type(ElementType.polygon)
       .type(ElementType.polygon)
       .color(element['texturePath'] ? undefined : element.fill as any)
       .points(element.points)

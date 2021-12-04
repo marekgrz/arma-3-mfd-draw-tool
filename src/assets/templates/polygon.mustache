@@ -1,0 +1,17 @@
+class {{name}}
+{
+  {{#color}}
+  color[] = { {{color.r}}, {{color.g}}, {{color.b}}, {{color.a}} };
+  {{/color}}
+  class Polygon {
+    type = "polygon";
+    {{#texturePath}}
+    texturePath = "{{texturePath}}";
+    {{/texturePath}}
+    points[] = {
+    {{#points}}
+      { {{#bone}}"{{bone}}",{{/bone}} { {{x}}, {{y}} }, 1}{{#comma}},{{/comma}}
+    {{/points}}
+    };
+  };
+};//End of {{name}}
