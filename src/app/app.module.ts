@@ -79,6 +79,8 @@ import { ColorSelectorComponent } from './components/right-side/toolbox/properti
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { TextureFileSelectorComponent } from './components/right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
+import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/spinner-overlay.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +130,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     ResizeBarComponent,
     SectionHeaderComponent,
     ColorSelectorComponent,
+    TextureFileSelectorComponent,
+    SpinnerOverlayComponent,
   ],
   imports: [
     BrowserModule,

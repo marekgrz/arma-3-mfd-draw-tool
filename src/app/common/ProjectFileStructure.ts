@@ -1,7 +1,7 @@
-import {StackItem} from '../components/left-side/layer-stack/elements/StackItem';
-import {Color} from '@angular-material-components/color-picker';
-import {TreeService} from '../components/left-side/layer-stack/mat-tree/tree.service';
-import {StoreService} from '../utils/store.service';
+import { StackItem } from '../components/left-side/layer-stack/elements/StackItem';
+import { Color } from '@angular-material-components/color-picker';
+import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.service';
+import { StoreService } from '../utils/store.service';
 import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
 
 export class ProjectFileStructure {

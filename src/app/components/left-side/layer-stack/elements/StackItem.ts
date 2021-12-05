@@ -1,4 +1,5 @@
 import { Point } from '../../../../common/Point';
+import { TextureFile } from '../../../right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
 
 export class StackItem {
   id: string = generateId();
@@ -9,6 +10,7 @@ export class StackItem {
   children = new Array<StackItem>();
   groupProperties: GroupProperties = new GroupProperties();
   bone: string;
+  textureFile?: TextureFile = new TextureFile();
   // parent?: StackItem;
 }
 

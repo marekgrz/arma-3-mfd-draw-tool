@@ -17,7 +17,7 @@ function createWindow() {
     height: 1080,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     }
   });
   mainWindow.maximize();
@@ -30,30 +30,24 @@ function createWindow() {
   //   })
   // );
   mainWindow.loadURL('http://localhost:4200');
-  // Open the DevTools.
   mainWindow.webContents.openDevTools();
-
-  mainWindow.on('closed', function () {
-    mainWindow = null;
-  });
+  mainWindow.on('closed', () => mainWindow = null);
 }
 
 app.on('ready', createWindow);
-
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
-
 app.on('activate', function () {
   if (mainWindow === null) createWindow();
 });
 
 
-ipcMain.on('new', function (event) {
+ipcMain.on('new', event => {
   filePath = undefined;
 });
 
-ipcMain.on('openFile', function (event) {
+ipcMain.on('openFile', event => {
   dialog.showOpenDialog({properties: ['openFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
     .then((e) => {
       if (e.canceled) {
@@ -138,6 +132,18 @@ class ProjectFileData {
   constructor(data, filePath) {
     this.data = data;
     this.filePath = filePath;
+  }
+}
+
+class TextureFileData {
+  data;
+  filePath;
+  fileName;
+
+  constructor(data, filePath, filename) {
+    this.data = data;
+    this.filePath = filePath;
+    this.fileName = filename;
   }
 }
 

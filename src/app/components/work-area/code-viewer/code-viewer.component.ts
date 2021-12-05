@@ -44,7 +44,7 @@ export class CodeViewerComponent implements OnDestroy {
 
   loadText(): void {
     this.structuredText = this.renderObjectToString(this.elementParser.getMFDClass());
-    console.log(this.elementParser.getMFDClass())
+    console.log(this.elementParser.getMFDClass());
   }
 
   private renderObjectToString(content: BaseElementModel): string {

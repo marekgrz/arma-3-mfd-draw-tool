@@ -111,7 +111,8 @@ export class ElementParserService {
     return Builder(Polygon)
       .name(item.name)
       .type(ElementType.polygon)
-      .color(element['texturePath'] ? undefined : element.fill as any)
+      .color(element.fill)
+      .texturePath(item.textureFile?.relativePath)
       .points(element.points)
       .build();
   }
