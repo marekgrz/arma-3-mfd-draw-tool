@@ -5,7 +5,7 @@ import { StoreService } from '../../../../utils/store.service';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-new-bone-dialog',
+  selector: 'mfd-new-bone-dialog',
   templateUrl: './new-bone-dialog.component.html',
   styleUrls: ['./new-bone-dialog.component.less']
 })

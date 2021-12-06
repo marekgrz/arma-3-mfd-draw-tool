@@ -3,14 +3,16 @@ import { IpcService } from '../../utils/ipc.service';
 import { TreeService } from '../left-side/layer-stack/mat-tree/tree.service';
 import { ToastrService } from 'ngx-toastr';
 import { StoreService } from '../../utils/store.service';
-import { parseFileToProject, parseProjectToFile, ProjectFileStructure } from '../../common/ProjectFileStructure';
+import { parseFileToProject, parseProjectToFile } from '../../common/ProjectFileStructure';
 import { MatDialog } from '@angular/material/dialog';
 import { NewProjectDialogComponent } from '../dialogs/new-project-dialog/new-project-dialog.component';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalStorageService } from '../../utils/local-storage.service';
+import { HistoryService } from '../../utils/history.service';
 
 @Component({
-  selector: 'app-header-menu',
+  selector: 'mfd-header-menu',
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.less']
 })
@@ -23,7 +25,9 @@ export class HeaderMenuComponent implements OnInit {
               private treeService: TreeService,
               public store: StoreService,
               private snackBar: MatSnackBar,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private localStorageService: LocalStorageService,
+              public historyService: HistoryService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +40,13 @@ export class HeaderMenuComponent implements OnInit {
   saveKey(e: KeyboardEvent): void {
     if (e.key === 's' && e.ctrlKey) {
       this.saveProjectAs();
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  undoKey(e: KeyboardEvent): void {
+    if (e.key === 'z' && e.ctrlKey) {
+      this.historyService.undo();
     }
   }
 
@@ -59,7 +70,10 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   reopenProject(): void {
-    this.ipc.send('openDefault', '');
+    const lastPath = this.localStorageService.getLastLoadedProjectPath();
+    if (lastPath) {
+      this.ipc.send('reopenLastFile', lastPath);
+    }
   }
 
   saveProjectAs(): void {
@@ -90,28 +104,38 @@ export class HeaderMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       result ? this.hideSnackBarInfo() : this.showSnackBarInfo();
     });
+    this.historyService.addSnapshot();
   }
 
   private setupFileHandling(): void {
-    this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message) => {
-      parseFileToProject(message, this.treeService, this.store);
+    this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
+      parseFileToProject(message.data, this.treeService, this.store);
+      this.localStorageService.setLastLoadedProjectPath(message.filePath);
+      this.historyService.addSnapshot();
       this.toastr.success('Project loaded');
       this.hideSnackBarInfo();
     });
-    this.ipc.on('saveFile', (event: Electron.IpcMessageEvent) => {
+    this.ipc.on('saveFile', () => {
       this.toastr.success('Project saved');
       this.loading = false;
     });
-    this.ipc.on('saveFileAs', (event: Electron.IpcMessageEvent) => {
+    this.ipc.on('saveFileAs', () => {
       this.toastr.success('Project saved');
       this.loading = false;
     });
-    this.ipc.on('openDefault', (event: Electron.IpcMessageEvent, message) => {
+    this.ipc.on('reopenLastFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
       if (!!message) {
-        parseFileToProject(message, this.treeService, this.store);
+        parseFileToProject(message.data, this.treeService, this.store);
+        this.localStorageService.setLastLoadedProjectPath(message.filePath);
+        this.historyService.addSnapshot();
         this.toastr.success('Project loaded');
         this.hideSnackBarInfo();
       }
     });
   }
+}
+
+interface ProjectFileData {
+  data: string;
+  filePath: string;
 }

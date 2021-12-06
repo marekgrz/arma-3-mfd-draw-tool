@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ElementType, StackItem } from '../../elements/StackItem';
+import { ItemType, StackItem } from '../../elements/StackItem';
 import { TreeService } from '../tree.service';
 import { InteractionService } from '../interaction.service';
+import { HistoryService } from '../../../../../utils/history.service';
 
 @Component({
-  selector: 'app-mat-tree-item-list',
+  selector: 'mfd-mat-tree-item-list',
   templateUrl: './mat-tree-item-list.component.html',
   styleUrls: ['./mat-tree-item-list.component.less']
 })
@@ -26,22 +27,26 @@ export class MatTreeItemListComponent implements OnInit {
     group: 'layer-stack',
     onUpdate: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
     onAdd: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
     onRemove: () => {
       this.treeService.refreshStackPosition();
+      this.historyService.addSnapshot();
     },
   };
 
   constructor(private treeService: TreeService,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private historyService: HistoryService) {
   }
 
   ngOnInit(): void {
     if (this.isRoot) {
-      this.item.type = ElementType.root;
+      this.item.type = ItemType.root;
     }
     this.temporaryName = '' + this.item.name;
   }
@@ -86,7 +91,7 @@ export class MatTreeItemListComponent implements OnInit {
   }
 
   isContainer(item: StackItem): boolean {
-    return item.type === ElementType.group;
+    return item.type === ItemType.group;
   }
 
   toggleExpand(event: Event): void {

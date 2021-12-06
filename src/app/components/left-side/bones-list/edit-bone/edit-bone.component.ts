@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { StoreService } from '../../../../utils/store.service';
 
 @Component({
-  selector: 'app-edit-bone',
+  selector: 'mfd-edit-bone',
   templateUrl: './edit-bone.component.html',
   styleUrls: ['./edit-bone.component.less']
 })

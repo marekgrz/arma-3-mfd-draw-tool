@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from './tree.service';
-import { ElementType, StackItem } from '../elements/StackItem';
+import { ItemType, StackItem } from '../elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../utils/store.service';
 import { findByID, flattenNode } from '../../../../common/Utils';
 import { ConfirmDialogComponent } from '../../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ID } from '../../../../common/ProjectFileStructure';
+import { HistoryService } from '../../../../utils/history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,13 @@ export class InteractionService {
 
   constructor(private treeService: TreeService,
               private store: StoreService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private historyService: HistoryService) {
+  }
+
+  refreshView(): void {
+    this.store.canvas.requestRenderAll();
+    this.historyService.addSnapshot();
   }
 
   startFreeDrawing(): void {
@@ -28,10 +35,19 @@ export class InteractionService {
     this.drawingMode = false;
   }
 
+  deselectCurrentItems(): void {
+    this.treeService.selectedItem = null;
+    const elements = document.querySelectorAll('.selected-item, .selected-root');
+    elements.forEach(el => {
+      el.classList.remove('selected-item');
+      el.classList.remove('selected-root');
+    });
+  }
+
   onItemInLayerStackSelected(item: StackItem): void {
     this.store.canvas.discardActiveObject();
     let selection;
-    if (item.type === ElementType.group) {
+    if (item.type === ItemType.group) {
       const elementListOriginal = flattenNode(item);
       selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     } else {
@@ -43,7 +59,7 @@ export class InteractionService {
   }
 
   onItemInCanvasSelected(ids: string[]): void {
-    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
       return;
     }
     if (!this.drawingMode) {
@@ -56,6 +72,7 @@ export class InteractionService {
         element.classList.add('selected-item');
       });
     }
+    this.store.canvas.requestRenderAll();
   }
 
   onDeleteSelection(): void {
@@ -68,21 +85,12 @@ export class InteractionService {
           this.store.canvas.remove(it);
           this.treeService.deleteItemByID(it[ID]);
         });
-        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ElementType.group) {
+        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
           this.treeService.deleteItemByID(this.treeService.selectedItem.id);
         }
         this.store.canvas.discardActiveObject();
-        this.store.canvas.renderAll();
+        this.refreshView();
       }
-    });
-  }
-
-  deselectCurrentItems(): void {
-    this.treeService.selectedItem = null;
-    const elements = document.querySelectorAll('.selected-item, .selected-root');
-    elements.forEach(el => {
-      el.classList.remove('selected-item');
-      el.classList.remove('selected-root');
     });
   }
 }

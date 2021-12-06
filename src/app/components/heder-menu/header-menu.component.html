@@ -18,5 +18,10 @@
   <button *ngIf="store.isProjectStarted" mat-button>
     <i class="material-icons">exit_to_app</i>Export to A3
   </button>
+  <button *ngIf="store.isProjectStarted" mat-button
+          (click)="historyService.undo()"
+          [disabled]="!historyService.snapshotsExist()">
+    <i class="material-icons">undo</i>Undo
+  </button>
   <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 </mat-toolbar>

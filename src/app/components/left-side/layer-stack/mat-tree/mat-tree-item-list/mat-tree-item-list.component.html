@@ -16,7 +16,7 @@
     <div *ngIf="item.children" class="item-child-container" [sortablejs]="item.children" [sortablejsOptions]="options"
          [ngClass]="expanded ? 'expanded' : 'collapsed'" [attr.itemID]="item.id">
       <div *ngFor="let listChild of item.children">
-        <app-mat-tree-item-list [item]="listChild"></app-mat-tree-item-list>
+        <mfd-mat-tree-item-list [item]="listChild"></mfd-mat-tree-item-list>
       </div>
     </div>
   </div>

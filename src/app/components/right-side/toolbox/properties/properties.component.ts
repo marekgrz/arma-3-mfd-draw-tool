@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {TreeService} from '../../../left-side/layer-stack/mat-tree/tree.service';
-import {ElementType, StackItem} from '../../../left-side/layer-stack/elements/StackItem';
+import { Component, OnInit } from '@angular/core';
+import { TreeService } from '../../../left-side/layer-stack/mat-tree/tree.service';
+import { ItemType, StackItem } from '../../../left-side/layer-stack/elements/StackItem';
 
 @Component({
-  selector: 'app-properties',
+  selector: 'mfd-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.less']
 })
@@ -16,42 +16,42 @@ export class PropertiesComponent implements OnInit {
   }
 
   isRoot(item: StackItem): boolean {
-    return item.type === ElementType.root;
+    return item.type === ItemType.root;
   }
 
   isGroup(item: StackItem): boolean {
-    return item.type === ElementType.group;
+    return item.type === ItemType.group;
   }
 
   isLine(item: StackItem): boolean {
-    return item.type === ElementType.line;
+    return item.type === ItemType.line;
   }
 
   isText(item: StackItem): boolean {
-    return item.type === ElementType.text;
+    return item.type === ItemType.text;
   }
 
   isRectangle(item: StackItem): boolean {
-    return item.type === ElementType.rectangle;
+    return item.type === ItemType.rectangle;
   }
 
   isTexture(item: StackItem): boolean {
-    return item.type === ElementType.texture;
+    return item.type === ItemType.texture;
   }
 
   isCircle(item: StackItem): boolean {
-    return item.type === ElementType.circle;
+    return item.type === ItemType.circle;
   }
 
   isTriangle(item: StackItem): boolean {
-    return item.type === ElementType.triangle;
+    return item.type === ItemType.triangle;
   }
 
   isPolygonTriangle(item: StackItem): boolean {
-    return item.type === ElementType.polygonTriangle;
+    return item.type === ItemType.polygonTriangle;
   }
 
   isPolygonRectangle(item: StackItem): boolean {
-    return item.type === ElementType.polygonRect;
+    return item.type === ItemType.polygonRect;
   }
 }

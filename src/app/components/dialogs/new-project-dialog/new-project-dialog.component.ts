@@ -5,7 +5,7 @@ import { GlobalHUDProperties } from '../../../common/ProjectFileStructure';
 import { StoreService } from '../../../utils/store.service';
 
 @Component({
-  selector: 'app-new-project-dialog',
+  selector: 'mfd-new-project-dialog',
   templateUrl: './new-project-dialog.component.html',
   styleUrls: ['./new-project-dialog.component.less']
 })

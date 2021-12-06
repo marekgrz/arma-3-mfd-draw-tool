@@ -3,7 +3,7 @@ import {TreeService} from './mat-tree/tree.service';
 import {InteractionService} from './mat-tree/interaction.service';
 
 @Component({
-  selector: 'app-layer-list',
+  selector: 'mfd-layer-list',
   templateUrl: './layer-stack.component.html',
   styleUrls: ['./layer-stack.component.less']
 })

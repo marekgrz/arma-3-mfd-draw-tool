@@ -1,18 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-left-sidebar',
+  selector: 'mfd-left-sidebar',
   templateUrl: './left-sidebar.component.html',
   styleUrls: ['./left-sidebar.component.less']
 })
-export class LeftSidebarComponent implements OnInit {
+export class LeftSidebarComponent {
 
   @Input()
   previewMode: boolean;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../../utils/store.service';
-import { BoneBaseModel, BoneFixedModel, BoneLinearModel, BoneType } from './BoneBaseModel';
+import { BoneBaseModel, BoneType } from './BoneBaseModel';
 import { MatDialog } from '@angular/material/dialog';
 import { NewBoneDialogComponent } from './new-bone-dialog/new-bone-dialog.component';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { EditBoneComponent } from './edit-bone/edit-bone.component';
 
 @Component({
-  selector: 'app-bones-list',
+  selector: 'mfd-bones-list',
   templateUrl: './bones-list.component.html',
   styleUrls: ['./bones-list.component.less']
 })

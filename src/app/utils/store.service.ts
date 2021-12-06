@@ -1,8 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Color} from '@angular-material-components/color-picker';
-import {Canvas} from 'fabric/fabric-impl';
-import {GlobalHUDProperties, ProjectFileStructure} from '../common/ProjectFileStructure';
-import {BoneBaseModel} from '../components/left-side/bones-list/BoneBaseModel';
+import { Injectable } from '@angular/core';
+import { Color } from '@angular-material-components/color-picker';
+import { Canvas } from 'fabric/fabric-impl';
+import { GlobalHUDProperties, ProjectFileStructure } from '../common/ProjectFileStructure';
+import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
+import { Point } from '../common/Point';
+import { Builder } from 'builder-pattern';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class StoreService {
     'TahomaB',
   ];
 
-  LINE_TYPE_LIST: {name: string, value: number}[] = [
+  LINE_TYPE_LIST: { name: string, value: number }[] = [
     {name: 'Full', value: 0},
     {name: 'Dotted', value: 1},
     {name: 'Dashed', value: 2},
@@ -62,6 +64,7 @@ export class StoreService {
     this.hudProperties = project.globalHUDProperties;
     this.updateCanvas();
     this.canvas.loadFromJSON(project.canvasContent, this.canvas.renderAll.bind(this.canvas));
+    this.canvas.getObjects().forEach(obj => obj.strokeUniform = true);
     this.canvas.requestRenderAll();
     this.isProjectStarted = true;
   }
@@ -84,6 +87,14 @@ export class StoreService {
       this.isProjectStarted = false;
     }
   }
+
+  getCanvasPositionFromDiscrete(point: Point): Point {
+    return Builder(Point)
+      .x(point.x * this.canvasWidth)
+      .y(point.y * this.canvasHeight)
+      .build();
+  }
+
 
   addUsedSource(sourceName: string): void {
     if (this.usedSources.find(it => it === sourceName)) {

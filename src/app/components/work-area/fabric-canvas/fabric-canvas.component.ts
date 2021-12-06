@@ -1,13 +1,15 @@
-import {AfterViewInit, Component, HostListener, Input, ViewChild} from '@angular/core';
-import {StoreService} from '../../../utils/store.service';
-import {FabricComponent} from 'ngx-fabric-wrapper';
-import {TreeService} from '../../left-side/layer-stack/mat-tree/tree.service';
-import {InteractionService} from '../../left-side/layer-stack/mat-tree/interaction.service';
-import {fabric} from 'fabric';
-import {ElementType} from '../../left-side/layer-stack/elements/StackItem';
+import { AfterViewInit, Component, HostListener, Input, ViewChild } from '@angular/core';
+import { StoreService } from '../../../utils/store.service';
+import { FabricComponent } from 'ngx-fabric-wrapper';
+import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
+import { InteractionService } from '../../left-side/layer-stack/mat-tree/interaction.service';
+import { fabric } from 'fabric';
+import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
+import { BONENAME } from '../../../common/ProjectFileStructure';
+import { HistoryService } from '../../../utils/history.service';
 
 @Component({
-  selector: 'app-fabric-canvas',
+  selector: 'mfd-fabric-canvas',
   templateUrl: './fabric-canvas.component.html',
   styleUrls: ['./fabric-canvas.component.less']
 })
@@ -59,7 +61,8 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   constructor(public store: StoreService,
               public treeService: TreeService,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private historyService: HistoryService) {
   }
 
   ngAfterViewInit(): void {
@@ -75,6 +78,8 @@ export class FabricCanvasComponent implements AfterViewInit {
     this.onSelected(canvas);
     this.onDeselected(canvas);
     this.onHighLighted(canvas);
+    this.objectMoving(canvas);
+    this.objectModified(canvas);
     this.store.canvas = canvas;
     this.store.canvas.setWidth(this.store.canvasWidth);
     this.store.canvas.setHeight(this.store.canvasHeight);
@@ -110,6 +115,28 @@ export class FabricCanvasComponent implements AfterViewInit {
         e.target.set('opacity', '1');
         canvas.renderAll();
       }
+    });
+  }
+
+  private objectMoving(canvas): void {
+    canvas.on('object:moving', e => {
+      const selectedItem = this.treeService.selectedItem;
+      if (!!selectedItem.base) {
+        selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
+        selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
+        // has bone
+        const bone = this.store.bones.find(it => it.name === selectedItem.element[BONENAME]) as BoneFixedModel;
+        if (bone !== undefined) {
+          selectedItem.base.position.x -= bone.pos0.x;
+          selectedItem.base.position.y -= bone.pos0.y;
+        }
+      }
+    });
+  }
+
+  private objectModified(canvas): void {
+    canvas.on('object:modified', () => {
+      this.historyService.addSnapshot();
     });
   }
 }

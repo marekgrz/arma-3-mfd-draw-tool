@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElementType, StackItem } from '../elements/StackItem';
+import { ItemType, StackItem } from '../elements/StackItem';
 import { Circle, Polyline, Rect, Triangle } from 'fabric/fabric-impl';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../utils/store.service';
@@ -35,7 +35,7 @@ export class TreeService {
 
   refreshStackPosition(): void {
     let index = 1;
-    const flatItemList = flattenList(this.itemList).filter(el => el.type !== ElementType.group);
+    const flatItemList = flattenList(this.itemList).filter(el => el.type !== ItemType.group);
     const objects = this.store.canvas.getObjects();
     flatItemList.map(item => {
       objects.find(obj => obj[ID] === item.id)
@@ -55,7 +55,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = line[ID];
     item.name = 'Line_' + this.lineIndex++;
-    item.type = ElementType.line;
+    item.type = ItemType.line;
     item.element = line;
     item.children = null;
     return item;
@@ -65,7 +65,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = rectangle[ID];
     item.name = 'Rectangle_' + this.rectangleIndex++;
-    item.type = ElementType.rectangle;
+    item.type = ItemType.rectangle;
     item.element = rectangle;
     item.children = null;
     return item;
@@ -75,7 +75,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = text[ID];
     item.name = 'TextElement_' + this.textIndex++;
-    item.type = ElementType.text;
+    item.type = ItemType.text;
     item.element = text;
     item.children = null;
     return item;
@@ -85,7 +85,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = triangle[ID];
     item.name = 'Triangle' + this.triangleIndex++;
-    item.type = ElementType.triangle;
+    item.type = ItemType.triangle;
     item.element = triangle;
     item.children = null;
     return item;
@@ -95,7 +95,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = circle[ID];
     item.name = 'Circle_' + this.circleIndex++;
-    item.type = ElementType.circle;
+    item.type = ItemType.circle;
     item.element = circle;
     item.children = null;
     return item;
@@ -105,7 +105,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = rectangle[ID];
     item.name = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
-    item.type = ElementType.polygonRect;
+    item.type = ItemType.polygonRect;
     item.element = rectangle;
     item.children = null;
     return item;
@@ -115,7 +115,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = triangle[ID];
     item.name = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
-    item.type = ElementType.polygonTriangle;
+    item.type = ItemType.polygonTriangle;
     item.element = triangle;
     item.children = null;
     return item;
@@ -125,14 +125,14 @@ export class TreeService {
     const item = new StackItem();
     item.id = texture[ID];
     item.name = 'Texture_' + this.textureIndex++;
-    item.type = ElementType.texture;
+    item.type = ItemType.texture;
     item.element = texture;
     item.children = null;
     return item;
   }
 
   createGroup(): void {
-    // if (this.selectedItem && this.selectedItem.type !== ElementType.root) {
+    // if (this.selectedItem && this.selectedItem.type !== ItemType.root) {
     //   this.wrapItemsInGroup();
     // } else {
     //
@@ -152,7 +152,7 @@ export class TreeService {
     //   //isRoot
     //   this.itemList.push(item);
     // } else {
-    //   this.selectedItem.type === ElementType.group
+    //   this.selectedItem.type === ItemType.group
     //     ? this.selectedItem.children.push(item)
     //     : this.selectedItem.parent.children.push(item);
     // }
@@ -161,13 +161,13 @@ export class TreeService {
   // UNUSED YET
   updateItemParent(itemID: string, newParentID: string): void {
     const selectedItem = findByID(itemID, this.itemList);
-    selectedItem.parent = findByID(newParentID, this.itemList);
+    //selectedItem.parent = findByID(newParentID, this.itemList);
   }
 
   private newGroup(): StackItem {
     const group = new StackItem();
     group.name = 'Group_' + this.groupIndex;
-    group.type = ElementType.group;
+    group.type = ItemType.group;
     group.element = undefined;
     return group;
   }

@@ -1,1 +1,8 @@
-<pre><code [highlight]="getCode()" [lineNumbers]="true" [lang]="'cpp'"></code></pre>
+<div *ngIf="templates">
+  <div class="action-button">
+    <button mat-button [cdkCopyToClipboard]="structuredText" (click)="onCopy()">
+      <i class="material-icons">content_copy</i>Copy
+    </button>
+  </div>
+  <pre><code [highlight]="structuredText" [lang]="'cpp'"></code></pre>
+</div>

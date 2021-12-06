@@ -1,29 +1,87 @@
-import {Component, OnInit} from '@angular/core';
-import {TreeService} from '../../left-side/layer-stack/mat-tree/tree.service';
-import {BaseShape} from '../../../common/BaseShape';
-import {ClassGroup} from '../../../templates/ClassGroup';
-import {Line} from '../../../templates/Line';
-import {ElementType, StackItem} from '../../left-side/layer-stack/elements/StackItem';
-import {Color} from '@angular-material-components/color-picker';
-import {Polygon} from '../../../templates/Polygon';
-import {Point} from '../../../common/Point';
-import {ElementParserService} from '../../../utils/element-parser.service';
+import { Component, OnDestroy } from '@angular/core';
+import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
+import { ClassGroup } from '../../../templates/ClassGroup';
+import { ElementParserService } from '../../../utils/element-parser.service';
+import * as Mustache from 'mustache';
+import { MustacheTemplates, MustacheTemplatesService } from './mustache-templates.service';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { BaseElementModel, ElementType } from '../../../common/BaseElementModel';
+import { Line } from '../../../templates/Line';
+import { Polygon } from '../../../templates/Polygon';
 
 @Component({
-  selector: 'app-code-viewer',
+  selector: 'mfd-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.less']
 })
-export class CodeViewerComponent implements OnInit {
+export class CodeViewerComponent implements OnDestroy {
 
-  constructor(private elementParser: ElementParserService) {
+  templates: MustacheTemplates;
+
+  private subscription: Subscription = null;
+
+  structuredText = '';
+
+  constructor(private elementParser: ElementParserService,
+              private treeService: TreeService,
+              private templatesService: MustacheTemplatesService,
+              private toastrService: ToastrService) {
+    this.subscription = this.templatesService.loadTemplates().subscribe(value => {
+        this.templates = value;
+        this.loadText();
+      }
+    );
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  // MUST BE STRING
-  getCode(): string {
-    return this.elementParser.getMFDClass();
+  onCopy(): void {
+    this.toastrService.info('Copied to clipboard', '', {timeOut: 1000});
+  }
+
+  loadText(): void {
+    this.structuredText = this.renderObjectToString(this.elementParser.getMFDClass());
+    console.log(this.elementParser.getMFDClass());
+  }
+
+  private renderObjectToString(content: BaseElementModel): string {
+    switch (content.type) {
+      case ElementType.group: {
+        const input = content as ClassGroup;
+        if (input.content) {
+          input.contentText = this.addIndentForEachLine(this.getInnerContent(input));
+        }
+        return Mustache.render(this.templates.group, input);
+      }
+      case ElementType.line: {
+        const line = content as Line;
+        line.points.map((point, index) => point['comma'] = index < line.points.length - 1);
+        return Mustache.render(this.templates.line, content);
+      }
+      case ElementType.polygon: {
+        const line = content as Polygon;
+        line.points.map((point, index) => point['comma'] = index < line.points.length - 1);
+        return Mustache.render(this.templates.polygon, content);
+      }
+    }
+  }
+
+  private getInnerContent(input: ClassGroup): string {
+    // concat all group items, separated by \n
+    let element = '';
+    input.content.map((item, index) => element += this.renderObjectToString(item).concat(index !== input.content.length - 1 ? '\n' : ''));
+    return element;
+  }
+
+  private addIndentForEachLine(content: string): string {
+    if (content.length < 1) {
+      return content;
+    }
+    const regexSearch = content.includes('\n\t') ? /\n /g : /\n/g;
+    const indent = content.includes('\n\t') ? '\n   ' : '\n  ';
+    return content.replace(regexSearch, indent);
   }
 }
