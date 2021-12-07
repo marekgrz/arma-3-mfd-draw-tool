@@ -5,6 +5,7 @@ import { fabric } from 'fabric';
 import { StoreService } from '../../../../utils/store.service';
 import { deleteElementById, findByID, flattenList } from '../../../../common/Utils';
 import { ID } from '../../../../common/ProjectFileStructure';
+import { Builder } from 'builder-pattern';
 
 @Injectable({
   providedIn: 'root'
@@ -47,16 +48,16 @@ export class TreeService {
   refreshItemListFromCanvas(canvas: fabric.Canvas): void {
     const elements: fabric.Object[] = canvas.getObjects();
     elements.forEach(element => {
-      findByID(element[ID], this.itemList).element = element;
+      findByID(element[ID], this.itemList).data = element;
     });
   }
 
   itemFromLine(line: Polyline): StackItem {
     const item = new StackItem();
     item.id = line[ID];
-    item.name = 'Line_' + this.lineIndex++;
+    item.label = 'Line_' + this.lineIndex++;
     item.type = ItemType.line;
-    item.element = line;
+    item.data = line;
     item.children = null;
     return item;
   }
@@ -64,9 +65,9 @@ export class TreeService {
   itemFromRectangle(rectangle: Rect): StackItem {
     const item = new StackItem();
     item.id = rectangle[ID];
-    item.name = 'Rectangle_' + this.rectangleIndex++;
+    item.label = 'Rectangle_' + this.rectangleIndex++;
     item.type = ItemType.rectangle;
-    item.element = rectangle;
+    item.data = rectangle;
     item.children = null;
     return item;
   }
@@ -74,9 +75,9 @@ export class TreeService {
   itemFromText(text: fabric.Text): StackItem {
     const item = new StackItem();
     item.id = text[ID];
-    item.name = 'TextElement_' + this.textIndex++;
+    item.label = 'TextElement_' + this.textIndex++;
     item.type = ItemType.text;
-    item.element = text;
+    item.data = text;
     item.children = null;
     return item;
   }
@@ -84,9 +85,9 @@ export class TreeService {
   itemFromTriangle(triangle: Triangle): StackItem {
     const item = new StackItem();
     item.id = triangle[ID];
-    item.name = 'Triangle' + this.triangleIndex++;
+    item.label = 'Triangle' + this.triangleIndex++;
     item.type = ItemType.triangle;
-    item.element = triangle;
+    item.data = triangle;
     item.children = null;
     return item;
   }
@@ -94,9 +95,9 @@ export class TreeService {
   itemFromCircle(circle: Circle): StackItem {
     const item = new StackItem();
     item.id = circle[ID];
-    item.name = 'Circle_' + this.circleIndex++;
+    item.label = 'Circle_' + this.circleIndex++;
     item.type = ItemType.circle;
-    item.element = circle;
+    item.data = circle;
     item.children = null;
     return item;
   }
@@ -104,9 +105,9 @@ export class TreeService {
   itemFromPolygonRectangle(rectangle: Rect): StackItem {
     const item = new StackItem();
     item.id = rectangle[ID];
-    item.name = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
+    item.label = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
     item.type = ItemType.polygonRect;
-    item.element = rectangle;
+    item.data = rectangle;
     item.children = null;
     return item;
   }
@@ -114,9 +115,9 @@ export class TreeService {
   itemFromPolygonTriangle(triangle: Triangle): StackItem {
     const item = new StackItem();
     item.id = triangle[ID];
-    item.name = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
+    item.label = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
     item.type = ItemType.polygonTriangle;
-    item.element = triangle;
+    item.data = triangle;
     item.children = null;
     return item;
   }
@@ -124,9 +125,9 @@ export class TreeService {
   itemFromTexture(texture: fabric.Image): StackItem {
     const item = new StackItem();
     item.id = texture[ID];
-    item.name = 'Texture_' + this.textureIndex++;
+    item.label = 'Texture_' + this.textureIndex++;
     item.type = ItemType.texture;
-    item.element = texture;
+    item.data = texture;
     item.children = null;
     return item;
   }
@@ -165,19 +166,23 @@ export class TreeService {
   }
 
   private newGroup(): StackItem {
-    const group = new StackItem();
-    group.name = 'Group_' + this.groupIndex;
-    group.type = ItemType.group;
-    group.element = undefined;
-    return group;
+    return Builder(StackItem)
+      .label('Group_' + this.groupIndex)
+      .type(ItemType.group)
+      .data(undefined)
+      .droppable(true)
+      .icon('pi pi-folder')
+      .expandedIcon('pi pi-folder-open')
+      .collapsedIcon('pi pi-folder')
+      .build();
   }
 
   private wrapItemsInGroup(): void {
     const group = this.newGroup();
     const children = [Object.assign({}, this.selectedItem)];
-    this.selectedItem.name = group.name;
+    this.selectedItem.label = group.label;
     this.selectedItem.id = group.id;
-    this.selectedItem.element = group.element;
+    this.selectedItem.data = group.data;
     this.selectedItem.type = group.type;
     this.selectedItem.children = children;
   }

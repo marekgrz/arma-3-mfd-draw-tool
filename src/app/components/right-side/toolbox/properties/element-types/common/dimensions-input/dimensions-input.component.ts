@@ -32,8 +32,8 @@ export class DimensionsInputComponent implements OnInit {
 
   onSave(): void {
     const element: fabric.Object = this.store.canvas.getActiveObject();
-    element.scaleX = Number(this.newWidth / this.item.element.width);
-    element.scaleY = Number(this.newHeight / this.item.element.height);
+    element.scaleX = Number(this.newWidth / this.item.data.width);
+    element.scaleY = Number(this.newHeight / this.item.data.height);
     this.itemChange.emit(this.item);
     this.save.emit();
   }
@@ -49,10 +49,10 @@ export class DimensionsInputComponent implements OnInit {
   }
 
   getWidth(): number {
-    return this.item.element.width * this.item.element.scaleX;
+    return this.item.data.width * this.item.data.scaleX;
   }
 
   getHeight(): number {
-    return this.item.element.height * this.item.element.scaleY;
+    return this.item.data.height * this.item.data.scaleY;
   }
 }

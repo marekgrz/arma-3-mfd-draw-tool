@@ -78,7 +78,7 @@ export class ElementParserService {
 
   private createGroup(item: StackItem, content: BaseElementModel[]): ClassGroup {
     return Builder(ClassGroup)
-      .name(item.name)
+      .name(item.label)
       .type(ElementType.group)
       .color(new Color(1, 1, 1, 1))
       .condition(item.groupProperties?.condition)
@@ -94,9 +94,9 @@ export class ElementParserService {
   }
 
   private createLine(item: StackItem): Line {
-    const element = item.element;
+    const element = item.data;
     return Builder(Line)
-      .name(item.name)
+      .name(item.label)
       .type(ElementType.line)
       .color(this.toRgba(element.stroke))
       .points(element.points)
@@ -107,9 +107,9 @@ export class ElementParserService {
   }
 
   private createPolygon(item: StackItem): Polygon {
-    const element = item.element;
+    const element = item.data;
     return Builder(Polygon)
-      .name(item.name)
+      .name(item.label)
       .type(ElementType.polygon)
       .color(element.fill)
       .texturePath(item.textureFile?.relativePath)
@@ -118,7 +118,7 @@ export class ElementParserService {
   }
 
   private lineFromCircle(item: StackItem): StackItem {
-    const element = item.element;
+    const element = item.data;
     const radiusX = element.width / 2;
     const radiusY = element.height / 2;
     const centerX = 317.5;
@@ -129,13 +129,13 @@ export class ElementParserService {
       const y = centerY + radiusY * Math.sin(a);
       points.push({x, y} as Point);
     }
-    item.element[POINTS] = points;
+    item.data[POINTS] = points;
     return item;
   }
 
   private addPointsFromCoords(item: StackItem): StackItem {
     const element = this.store.canvas.getObjects().find(it => it[ID] === item.id);
-    item.element[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
+    item.data[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
     return item;
   }
 

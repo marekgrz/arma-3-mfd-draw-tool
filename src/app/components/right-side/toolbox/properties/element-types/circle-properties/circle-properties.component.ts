@@ -30,17 +30,17 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
     this.newDiameterX = this.getDiameterX();
     this.newDiameterY = this.getDiameterY();
     this.angle = this.getAngle();
-    this.circleStep = this.item.element[CIRCLESTEP];
-    this.lineType = this.item.element[LINETYPE];
+    this.circleStep = this.item.data[CIRCLESTEP];
+    this.lineType = this.item.data[LINETYPE];
     this.color = this.store.canvas.getActiveObject().stroke;
   }
 
   save(): void {
     const circle: fabric.Circle = this.store.canvas.getActiveObject() as Circle;
-    circle.left = Number(this.item.element.left);
-    circle.top = Number(this.item.element.top);
-    circle.scaleX = Number(this.newDiameterX / this.item.element.width);
-    circle.scaleY = Number(this.newDiameterY / this.item.element.height);
+    circle.left = Number(this.item.data.left);
+    circle.top = Number(this.item.data.top);
+    circle.scaleX = Number(this.newDiameterX / this.item.data.width);
+    circle.scaleY = Number(this.newDiameterY / this.item.data.height);
     circle[CIRCLESTEP] = this.circleStep;
     this.setElementPosition(circle);
     this.setElementLineType(circle, this.lineType);
@@ -66,15 +66,15 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
   }
 
   getDiameterX(): number {
-    return this.item.element.width * this.item.element.scaleX;
+    return this.item.data.width * this.item.data.scaleX;
   }
 
   getDiameterY(): number {
-    return this.item.element.height * this.item.element.scaleY;
+    return this.item.data.height * this.item.data.scaleY;
   }
 
   getAngle(): number {
-    return this.item.element.angle * 1;
+    return this.item.data.angle * 1;
   }
 
   makeDiameterUniform(): void {

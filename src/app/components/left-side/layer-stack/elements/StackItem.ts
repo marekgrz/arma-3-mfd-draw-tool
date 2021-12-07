@@ -1,15 +1,20 @@
 import { Point } from '../../../../common/Point';
 import { TextureFile } from '../../../right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
+import { TreeNode } from 'primeng/api';
 
-export class StackItem {
+export class StackItem implements TreeNode {
   id: string = generateId();
-  name: string;
+  label: string;
   type: ItemType;
   base: BaseProperties = new BaseProperties();
-  element?: any;
-  children = new Array<StackItem>();
+  data?: any;
+  children = [];
   groupProperties: GroupProperties = new GroupProperties();
   bone: string;
+  icon = 'pi pi-directions';
+  droppable = false;
+  expandedIcon?: string;
+  collapsedIcon?: string;
   textureFile?: TextureFile = new TextureFile();
   // parent?: StackItem;
 }
@@ -30,16 +35,16 @@ export class BaseProperties {
 }
 
 export enum ItemType {
-  root,
-  group,
-  line,
-  rectangle,
-  circle,
-  triangle,
-  polygonRect,
-  polygonTriangle,
-  texture,
-  text
+  root = 'root',
+  group = 'group',
+  line = 'line',
+  rectangle = 'rectangle',
+  circle = 'circle',
+  triangle = 'triangle',
+  polygonRect = 'polygonRect',
+  polygonTriangle = 'polygonTriangle',
+  texture = 'texture',
+  text = 'text'
 }
 
 export function generateId(): string {

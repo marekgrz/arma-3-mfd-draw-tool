@@ -47,18 +47,18 @@ export function flattenList(nodes: StackItem[]): StackItem[] {
 
 export function flattenNode(node: StackItem): fabric.Object[] {
   if (!node.children) {
-    if (!node.element) {
+    if (!node.data) {
       return [];
     }
-    return [node.element];
+    return [node.data];
   }
   let elements = [];
   node.children.map(item => {
       if (item.children) {
         elements = [...elements, ...flattenNode(item)];
       }
-      if (item.element) {
-        elements.push(item.element);
+      if (item.data) {
+        elements.push(item.data);
       }
     }
   );

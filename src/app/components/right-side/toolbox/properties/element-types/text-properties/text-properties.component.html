@@ -1,5 +1,5 @@
 <div class="row-container">
-  <mfd-name-input [(name)]="item.name" (save)="save()"></mfd-name-input>
+  <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
   <mfd-position-input [(positionX)]="item.base.position.x"
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
@@ -14,7 +14,7 @@
       <mat-label>Font size</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [(ngModel)]="item.element.fontSize"
+             [(ngModel)]="item.data.fontSize"
              (change)="refreshText()">
     </mat-form-field>
   </div>
@@ -25,7 +25,7 @@
       <mat-label>Static text</mat-label>
       <input matInput autocomplete="off"
              [type]="'text'"
-             [(ngModel)]="item.element.text"
+             [(ngModel)]="item.data.text"
              (change)="refreshText()">
     </mat-form-field>
   </div>
@@ -41,7 +41,7 @@
         <mat-label>Source scale</mat-label>
         <input matInput autocomplete="off"
                [type]="'number'"
-               [(ngModel)]="item.element.sourceScale"
+               [(ngModel)]="item.data.sourceScale"
                (change)="save()">
       </mat-form-field>
     </div>

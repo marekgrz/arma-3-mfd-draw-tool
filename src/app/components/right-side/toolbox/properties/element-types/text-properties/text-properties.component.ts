@@ -25,14 +25,14 @@ export class TextPropertiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fontName = this.item.element.fontFamily;
+    this.fontName = this.item.data.fontFamily;
     this.color = this.store.canvas.getActiveObject().fill as string;
   }
 
   save(): void {
     const text = this.store.canvas.getActiveObject() as any;
-    text.left = Number(this.item.element.left);
-    text.top = Number(this.item.element.top);
+    text.left = Number(this.item.data.left);
+    text.top = Number(this.item.data.top);
     text.set('fontFamily', this.fontName);
     text.set('fill', this.color);
     text.setCoords();

@@ -24,7 +24,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTreeComponent } from './components/left-side/layer-stack/mat-tree/mat-tree.component';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { MatTreeItemListComponent } from './components/left-side/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
-import { LayerStackComponent } from './components/left-side/layer-stack/layer-stack.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { GroupPropertiesComponent } from './components/right-side/toolbox/properties/element-types/group-properties/group-properties.component';
 import { RectanglePropertiesComponent } from './components/right-side/toolbox/properties/element-types/rectangle-properties/rectangle-properties.component';
@@ -81,6 +80,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { TextureFileSelectorComponent } from './components/right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
 import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/spinner-overlay.component';
+import { LayerStackComponent } from './components/left-side/layer-stack-ng/layer-stack.component';
+import { LayerListComponent } from './components/left-side/layer-stack/layer-list.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,8 @@ import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/sp
     ColorSelectorComponent,
     TextureFileSelectorComponent,
     SpinnerOverlayComponent,
+    LayerStackComponent,
+    LayerListComponent,
   ],
   imports: [
     BrowserModule,

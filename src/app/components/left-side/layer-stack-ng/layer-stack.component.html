@@ -1,0 +1,12 @@
+<h5>Single Tree</h5>
+<p-tree [value]="treeService.itemList"
+        [(selection)]="treeService.selectedItem"
+        selectionMode="single"
+        [draggableNodes]="true"
+        [droppableNodes]="true"
+        (onNodeSelect)="onSelectionChange($event)"
+        draggableScope="self"
+        droppableScope="self"
+        class="tree"
+        styleClass="tree">
+</p-tree>

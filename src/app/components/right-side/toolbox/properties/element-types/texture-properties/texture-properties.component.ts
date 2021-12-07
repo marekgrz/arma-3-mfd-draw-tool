@@ -30,9 +30,9 @@ export class TexturePropertiesComponent extends BaseElementProperties implements
 
   save(file?: TextureFile): void {
     const image: fabric.Image = this.store.canvas.getActiveObject() as fabric.Image;
-    image.left = Number(this.item.element.left);
-    image.top = Number(this.item.element.top);
-    image.angle = this.item.element.angle;
+    image.left = Number(this.item.data.left);
+    image.top = Number(this.item.data.top);
+    image.angle = this.item.data.angle;
     image.setCoords();
     image.rotate(this.angle);
     this.loadTextureFile(file);
@@ -48,13 +48,13 @@ export class TexturePropertiesComponent extends BaseElementProperties implements
   }
 
   getAngle(): number {
-    return this.item.element.angle * 1;
+    return this.item.data.angle * 1;
   }
 
   private swapImageInCanvas(data: string): void {
     this.tga.open(data, () => {
       this.loading = false;
-      this.item.element.setSrc(this.tga.getDataURL('image/png'));
+      this.item.data.setSrc(this.tga.getDataURL('image/png'));
       this.store.canvas.requestRenderAll();
     });
   }

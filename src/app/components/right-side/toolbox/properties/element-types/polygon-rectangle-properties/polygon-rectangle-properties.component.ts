@@ -33,6 +33,6 @@ export class PolygonRectanglePropertiesComponent extends BaseElementProperties i
   }
 
   getAngle(): number {
-    return this.item.element.angle * 1;
+    return this.item.data.angle * 1;
   }
 }

@@ -4,10 +4,10 @@ import {InteractionService} from './mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-layer-list',
-  templateUrl: './layer-stack.component.html',
-  styleUrls: ['./layer-stack.component.less']
+  templateUrl: './layer-list.component.html',
+  styleUrls: ['./layer-list.component.less']
 })
-export class LayerStackComponent {
+export class LayerListComponent {
 
   constructor(public treeService: TreeService,
               private interaction: InteractionService) {

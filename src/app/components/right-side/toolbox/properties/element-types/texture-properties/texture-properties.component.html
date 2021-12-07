@@ -2,8 +2,8 @@
 <!--  FileName-->
   <mfd-texture-file-selector class="full-width" [(file)]="item.textureFile" (fileChange)="save($event)"></mfd-texture-file-selector>
 <!--  Position-->
-  <mfd-position-input [(positionX)]="item.element.left"
-                      [(positionY)]="item.element.top"
+  <mfd-position-input [(positionX)]="item.data.left"
+                      [(positionY)]="item.data.top"
                       (save)="save()"></mfd-position-input>
 <!--   Dimensions-->
   <div class="pair-elements">

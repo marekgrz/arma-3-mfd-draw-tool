@@ -1,9 +1,9 @@
 <div class="row-container">
 <!--  Name-->
-  <mfd-name-input [(name)]="item.name" (save)="save()"></mfd-name-input>
+  <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
 <!--  Position-->
-  <mfd-position-input [(positionX)]="item.element.left"
-                      [(positionY)]="item.element.top"
+  <mfd-position-input [(positionX)]="item.data.left"
+                      [(positionY)]="item.data.top"
                       (save)="save()"></mfd-position-input>
   <!--  Dimensions-->
   <mfd-dimensions-input [(item)]="item"
@@ -13,7 +13,7 @@
     <mat-label>Stroke</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
-           [(ngModel)]="item.element.strokeWidth"
+           [(ngModel)]="item.data.strokeWidth"
            (change)="save()">
   </mat-form-field>
 <!--  Line Type-->

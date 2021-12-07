@@ -125,7 +125,7 @@ export class FabricCanvasComponent implements AfterViewInit {
         selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
         selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
         // has bone
-        const bone = this.store.bones.find(it => it.name === selectedItem.element[BONENAME]) as BoneFixedModel;
+        const bone = this.store.bones.find(it => it.name === selectedItem.data[BONENAME]) as BoneFixedModel;
         if (bone !== undefined) {
           selectedItem.base.position.x -= bone.pos0.x;
           selectedItem.base.position.y -= bone.pos0.y;

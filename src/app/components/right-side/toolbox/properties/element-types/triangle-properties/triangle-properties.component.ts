@@ -26,7 +26,7 @@ export class TrianglePropertiesComponent extends BaseElementProperties implement
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.lineType = this.item.element[LINETYPE];
+    this.lineType = this.item.data[LINETYPE];
     this.color = this.store.canvas.getActiveObject().stroke;
   }
 
@@ -40,6 +40,6 @@ export class TrianglePropertiesComponent extends BaseElementProperties implement
   }
 
   getAngle(): number {
-    return this.item.element.angle * 1;
+    return this.item.data.angle * 1;
   }
 }

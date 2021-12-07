@@ -22,7 +22,7 @@ export class BaseElementProperties implements OnInit {
   }
 
   ngOnInit(): void {
-    this.boneName = this.item.element[BONENAME];
+    this.boneName = this.item.data[BONENAME];
   }
 
   setElementLineType(element, lineType: LineType): void {
@@ -83,7 +83,7 @@ export class BaseElementProperties implements OnInit {
 
   setElementStroke(element): void {
     element.set('stroke', this.color);
-    element.set('strokeWidth', Number(this.item.element.strokeWidth));
+    element.set('strokeWidth', Number(this.item.data.strokeWidth));
   }
 
   setElementFill(element): void {

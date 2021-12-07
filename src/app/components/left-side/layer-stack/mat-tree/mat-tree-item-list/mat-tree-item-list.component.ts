@@ -48,7 +48,7 @@ export class MatTreeItemListComponent implements OnInit {
     if (this.isRoot) {
       this.item.type = ItemType.root;
     }
-    this.temporaryName = '' + this.item.name;
+    this.temporaryName = '' + this.item.label;
   }
 
   hasSomeParentTheClass(element, classname): boolean {
@@ -64,11 +64,11 @@ export class MatTreeItemListComponent implements OnInit {
   onKeydownHandler(evt: KeyboardEvent): void {
     if (evt.key === 'Enter' && this.renaming) {
       this.renaming = false;
-      this.item.name = '' + this.temporaryName;
+      this.item.label = '' + this.temporaryName;
     }
     if (evt.key === 'Escape') {
       this.renaming = false;
-      this.temporaryName = '' + this.item.name;
+      this.temporaryName = '' + this.item.label;
     }
   }
 

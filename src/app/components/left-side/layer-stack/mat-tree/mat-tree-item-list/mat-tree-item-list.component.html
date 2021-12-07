@@ -9,7 +9,7 @@
       </button>
       <i class="material-icons" *ngIf="isContainer(item)">folder</i>
       <i class="material-icons type-icon" *ngIf="!isContainer(item)">code</i>
-      <span class="title" *ngIf="!renaming" (dblclick)="renaming = true">{{item.name}}</span>
+      <span class="title" *ngIf="!renaming" (dblclick)="renaming = true">{{item.label}}</span>
       <input class="title" *ngIf="renaming" [(ngModel)]="temporaryName" (keyup)="onKeydownHandler($event)">
       <mat-icon *ngIf="renaming" (click)="renaming =! renaming; $event.stopPropagation()">cancel</mat-icon>
     </div>

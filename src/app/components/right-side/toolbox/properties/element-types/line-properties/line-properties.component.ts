@@ -24,7 +24,7 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.lineType = this.item.element[LINETYPE];
+    this.lineType = this.item.data[LINETYPE];
     this.color = this.store.canvas.getActiveObject().stroke;
     this.setupPolyLineEdit();
   }
@@ -73,8 +73,8 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
 
   save(): void {
     const line: fabric.Object = this.store.canvas.getActiveObject();
-    line.left = Number(this.item.element.left);
-    line.top = Number(this.item.element.top);
+    line.left = Number(this.item.data.left);
+    line.top = Number(this.item.data.top);
     line[LINETYPE] = this.lineType;
     this.setElementStroke(line);
     this.setElementStroke(line);
@@ -83,7 +83,7 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   }
 
   getAngle(): number {
-    return this.item.element.angle * 1;
+    return this.item.data.angle * 1;
   }
 
   private setupPolyLineEdit(): void {

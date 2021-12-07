@@ -2,6 +2,10 @@
   <div class="layer-list-view">
     <mfd-section-header [label]="'Layers'"></mfd-section-header>
     <mfd-layer-list *ngIf="!previewMode"></mfd-layer-list>
+
+    <mfd-layer-stack></mfd-layer-stack>
+
+
     <mfd-section-header [label]="'Bones stack (anchors)'"></mfd-section-header>
     <mfd-bones-list class="scrollable"></mfd-bones-list>
   </div>
