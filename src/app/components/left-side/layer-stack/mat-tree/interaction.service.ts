@@ -24,7 +24,7 @@ export class InteractionService {
 
   refreshView(): void {
     this.store.canvas.requestRenderAll();
-    this.historyService.addSnapshot();
+    //this.historyService.addSnapshot();
   }
 
   startFreeDrawing(): void {
@@ -47,7 +47,7 @@ export class InteractionService {
   onItemInLayerStackSelected(item: StackItem): void {
     this.store.canvas.discardActiveObject();
     let selection;
-    if (item.type === ItemType.group) {
+    if (item.itemType === ItemType.group) {
       const elementListOriginal = flattenNode(item);
       selection = new fabric.ActiveSelection(elementListOriginal, {canvas: this.store.canvas});
     } else {
@@ -59,7 +59,7 @@ export class InteractionService {
   }
 
   onItemInCanvasSelected(ids: string[]): void {
-    if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
+    if (this.treeService.selectedItem && this.treeService.selectedItem.itemType === ItemType.group) {
       return;
     }
     if (!this.drawingMode) {
@@ -85,7 +85,7 @@ export class InteractionService {
           this.store.canvas.remove(it);
           this.treeService.deleteItemByID(it[ID]);
         });
-        if (this.treeService.selectedItem && this.treeService.selectedItem.type === ItemType.group) {
+        if (this.treeService.selectedItem && this.treeService.selectedItem.itemType === ItemType.group) {
           this.treeService.deleteItemByID(this.treeService.selectedItem.id);
         }
         this.store.canvas.discardActiveObject();

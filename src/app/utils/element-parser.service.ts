@@ -41,7 +41,7 @@ export class ElementParserService {
   private convertToA3Format(itemList: StackItem[]): BaseElementModel[] {
     const classList: BaseElementModel[] = [];
     itemList.forEach(item => {
-      if (item.type === ItemType.group) {
+      if (item.itemType === ItemType.group) {
         classList.push(this.createGroup(item, this.convertToA3Format(item.children)));
       } else {
         classList.push(this.resolveElement(item));
@@ -51,7 +51,7 @@ export class ElementParserService {
   }
 
   private resolveElement(item: StackItem): BaseElementModel {
-    switch (item.type) {
+    switch (item.itemType) {
       case ItemType.line: {
         return this.createLine(item);
       }

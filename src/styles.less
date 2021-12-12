@@ -40,10 +40,27 @@ p[hidden] {
 
 .p-tree {
   background: none;
+  padding: 0;
 
   .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
     color: white;
+    margin-left: 40px;
   }
+  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+
+  .p-treenode-leaf>.p-treenode-content .p-tree-toggler {
+    width: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.p-tree .p-tree-container .p-treenode {
+  padding: 0;
+  border: 1px solid #817676d6
 }
 
 .hljs-ln-numbers {

@@ -16,42 +16,42 @@ export class PropertiesComponent implements OnInit {
   }
 
   isRoot(item: StackItem): boolean {
-    return item.type === ItemType.root;
+    return item.itemType === ItemType.root;
   }
 
   isGroup(item: StackItem): boolean {
-    return item.type === ItemType.group;
+    return item.itemType === ItemType.group;
   }
 
   isLine(item: StackItem): boolean {
-    return item.type === ItemType.line;
+    return item.itemType === ItemType.line;
   }
 
   isText(item: StackItem): boolean {
-    return item.type === ItemType.text;
+    return item.itemType === ItemType.text;
   }
 
   isRectangle(item: StackItem): boolean {
-    return item.type === ItemType.rectangle;
+    return item.itemType === ItemType.rectangle;
   }
 
   isTexture(item: StackItem): boolean {
-    return item.type === ItemType.texture;
+    return item.itemType === ItemType.texture;
   }
 
   isCircle(item: StackItem): boolean {
-    return item.type === ItemType.circle;
+    return item.itemType === ItemType.circle;
   }
 
   isTriangle(item: StackItem): boolean {
-    return item.type === ItemType.triangle;
+    return item.itemType === ItemType.triangle;
   }
 
   isPolygonTriangle(item: StackItem): boolean {
-    return item.type === ItemType.polygonTriangle;
+    return item.itemType === ItemType.polygonTriangle;
   }
 
   isPolygonRectangle(item: StackItem): boolean {
-    return item.type === ItemType.polygonRect;
+    return item.itemType === ItemType.polygonRect;
   }
 }

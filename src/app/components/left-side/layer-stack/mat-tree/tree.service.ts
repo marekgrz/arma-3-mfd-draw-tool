@@ -36,7 +36,7 @@ export class TreeService {
 
   refreshStackPosition(): void {
     let index = 1;
-    const flatItemList = flattenList(this.itemList).filter(el => el.type !== ItemType.group);
+    const flatItemList = flattenList(this.itemList).filter(el => el.itemType !== ItemType.group);
     const objects = this.store.canvas.getObjects();
     flatItemList.map(item => {
       objects.find(obj => obj[ID] === item.id)
@@ -56,7 +56,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = line[ID];
     item.label = 'Line_' + this.lineIndex++;
-    item.type = ItemType.line;
+    item.itemType = ItemType.line;
     item.data = line;
     item.children = null;
     return item;
@@ -66,7 +66,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = rectangle[ID];
     item.label = 'Rectangle_' + this.rectangleIndex++;
-    item.type = ItemType.rectangle;
+    item.itemType = ItemType.rectangle;
     item.data = rectangle;
     item.children = null;
     return item;
@@ -76,7 +76,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = text[ID];
     item.label = 'TextElement_' + this.textIndex++;
-    item.type = ItemType.text;
+    item.itemType = ItemType.text;
     item.data = text;
     item.children = null;
     return item;
@@ -86,7 +86,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = triangle[ID];
     item.label = 'Triangle' + this.triangleIndex++;
-    item.type = ItemType.triangle;
+    item.itemType = ItemType.triangle;
     item.data = triangle;
     item.children = null;
     return item;
@@ -96,7 +96,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = circle[ID];
     item.label = 'Circle_' + this.circleIndex++;
-    item.type = ItemType.circle;
+    item.itemType = ItemType.circle;
     item.data = circle;
     item.children = null;
     return item;
@@ -106,7 +106,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = rectangle[ID];
     item.label = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
-    item.type = ItemType.polygonRect;
+    item.itemType = ItemType.polygonRect;
     item.data = rectangle;
     item.children = null;
     return item;
@@ -116,7 +116,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = triangle[ID];
     item.label = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
-    item.type = ItemType.polygonTriangle;
+    item.itemType = ItemType.polygonTriangle;
     item.data = triangle;
     item.children = null;
     return item;
@@ -126,7 +126,7 @@ export class TreeService {
     const item = new StackItem();
     item.id = texture[ID];
     item.label = 'Texture_' + this.textureIndex++;
-    item.type = ItemType.texture;
+    item.itemType = ItemType.texture;
     item.data = texture;
     item.children = null;
     return item;
@@ -138,7 +138,7 @@ export class TreeService {
     // } else {
     //
     // }
-    this.itemList.push(this.newGroup());
+    this.itemList.unshift(this.newGroup());
     this.groupIndex++;
   }
 
@@ -168,7 +168,7 @@ export class TreeService {
   private newGroup(): StackItem {
     return Builder(StackItem)
       .label('Group_' + this.groupIndex)
-      .type(ItemType.group)
+      .itemType(ItemType.group)
       .data(undefined)
       .droppable(true)
       .icon('pi pi-folder')
@@ -183,7 +183,7 @@ export class TreeService {
     this.selectedItem.label = group.label;
     this.selectedItem.id = group.id;
     this.selectedItem.data = group.data;
-    this.selectedItem.type = group.type;
+    this.selectedItem.itemType = group.itemType;
     this.selectedItem.children = children;
   }
 }

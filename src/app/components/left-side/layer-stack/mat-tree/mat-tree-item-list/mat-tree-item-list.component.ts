@@ -46,7 +46,7 @@ export class MatTreeItemListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isRoot) {
-      this.item.type = ItemType.root;
+      this.item.itemType = ItemType.root;
     }
     this.temporaryName = '' + this.item.label;
   }
@@ -91,7 +91,7 @@ export class MatTreeItemListComponent implements OnInit {
   }
 
   isContainer(item: StackItem): boolean {
-    return item.type === ItemType.group;
+    return item.itemType === ItemType.group;
   }
 
   toggleExpand(event: Event): void {
