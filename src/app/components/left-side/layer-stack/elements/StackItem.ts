@@ -2,7 +2,7 @@ import { Point } from '../../../../common/Point';
 import { TextureFile } from '../../../right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
 import { TreeNode } from 'primeng/api';
 
-export class StackItem implements TreeNode{
+export class StackItem implements TreeNode {
   id: string = generateId();
   label: string;
   itemType: ItemType;
@@ -18,6 +18,7 @@ export class StackItem implements TreeNode{
   textureFile?: TextureFile = new TextureFile();
   layerVisible = true;
   type = 'treeNode';
+  styleClass: string;
   // parent?: StackItem;
 }
 

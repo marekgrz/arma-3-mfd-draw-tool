@@ -3,7 +3,6 @@ import { MessageService, TreeDragDropService, TreeNode } from 'primeng/api';
 import { TreeService } from '../layer-stack/mat-tree/tree.service';
 import { InteractionService } from '../layer-stack/mat-tree/interaction.service';
 import { ItemType, StackItem } from '../layer-stack/elements/StackItem';
-import { StoreService } from '../../../utils/store.service';
 
 @Component({
   selector: 'mfd-layer-stack',
@@ -13,7 +12,7 @@ import { StoreService } from '../../../utils/store.service';
 })
 export class LayerStackComponent implements OnInit {
 
-  constructor(public treeService: TreeService, private interaction: InteractionService, private store: StoreService) {
+  constructor(public treeService: TreeService, private interaction: InteractionService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +23,11 @@ export class LayerStackComponent implements OnInit {
     this.interaction.onItemInLayerStackSelected(this.treeService.selectedItem);
   }
 
-  onToggleVisibility(item: StackItem, groupVisibility = undefined): void {
+  onNodeDrop(): void {
+    this.interaction.refreshView();
+  }
+
+  onToggleVisibility(item: StackItem, groupVisibility: boolean = undefined): void {
     item.layerVisible = groupVisibility !== undefined ? groupVisibility : !item.layerVisible;
     if (item.data) {
       item.data.visible = item.layerVisible ? true : false;
@@ -32,7 +35,7 @@ export class LayerStackComponent implements OnInit {
     if (item.itemType === ItemType.group) {
       item.children.forEach(it => this.onToggleVisibility(it, item.layerVisible));
     }
-    this.interaction.refreshView();
+    this.interaction.refreshView(true);
   }
 
   //TODO add expand

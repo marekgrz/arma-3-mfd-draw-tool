@@ -46,7 +46,7 @@ p[hidden] {
     color: white;
     margin-left: 40px;
   }
-  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+  .p-tree-container .p-treenode .p-treenode-leaf .p-treenode-content .p-tree-toggler:focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: none;
@@ -55,6 +55,12 @@ p[hidden] {
   .p-treenode-leaf>.p-treenode-content .p-tree-toggler {
     width: 0 !important;
     margin: 0 !important;
+  }
+}
+
+.group-class {
+  >div:first-child {
+    background: #6e9fb7ad !important;
   }
 }
 

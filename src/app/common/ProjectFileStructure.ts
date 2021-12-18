@@ -3,6 +3,7 @@ import { Color } from '@angular-material-components/color-picker';
 import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.service';
 import { StoreService } from '../utils/store.service';
 import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
+import * as CircularJSON from 'flatted';
 
 export class ProjectFileStructure {
   canvasContent: string;
@@ -17,11 +18,13 @@ export function parseProjectToFile(treeService: TreeService, store: StoreService
   project.layerStackContent = treeService.itemList;
   project.globalHUDProperties = store.hudProperties;
   project.bones = store.bones;
-  return JSON.stringify(project);
+  return CircularJSON.stringify(project);
+  // return JSON.stringify(project);
 }
 
 export function parseFileToProject(message: string, treeService: TreeService, store: StoreService): void {
-  const savedProject: ProjectFileStructure = JSON.parse(message);
+  const savedProject: ProjectFileStructure = CircularJSON.parse(message);
+  // const savedProject: ProjectFileStructure = JSON.parse(message);
   treeService.itemList = savedProject.layerStackContent;
   store.reloadProject(savedProject);
   treeService.refreshItemListFromCanvas(store.canvas);

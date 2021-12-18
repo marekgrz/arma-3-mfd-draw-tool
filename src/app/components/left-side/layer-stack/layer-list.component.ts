@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {TreeService} from './mat-tree/tree.service';
-import {InteractionService} from './mat-tree/interaction.service';
+import { Component } from '@angular/core';
+import { TreeService } from './mat-tree/tree.service';
+import { InteractionService } from './mat-tree/interaction.service';
 
 @Component({
   selector: 'mfd-layer-list',
@@ -15,5 +15,10 @@ export class LayerListComponent {
 
   deleteSelection(): void {
     this.interaction.onDeleteSelection();
+  }
+
+  onNewGroup(): void {
+    this.treeService.createGroup();
+    this.interaction.refreshView();
   }
 }

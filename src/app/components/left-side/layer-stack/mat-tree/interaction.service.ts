@@ -22,9 +22,11 @@ export class InteractionService {
               private historyService: HistoryService) {
   }
 
-  refreshView(): void {
+  refreshView(skipSnapshot: boolean = false): void {
     this.store.canvas.requestRenderAll();
-    //this.historyService.addSnapshot();
+    if (!skipSnapshot) {
+      this.historyService.addSnapshot();
+    }
   }
 
   startFreeDrawing(): void {

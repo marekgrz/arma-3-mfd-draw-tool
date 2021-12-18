@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.service';
 import { StoreService } from './store.service';
 import { BONENAME, CIRCLESTEP, ID, LINETYPE, parseFileToProject, POINTS, ProjectFileStructure } from '../common/ProjectFileStructure';
+import * as CircularJSON from 'flatted';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class HistoryService {
   undo(): void {
     this.treeService.resetProjectStack();
     const previous = this.getPreviousSnapshot();
-    parseFileToProject(JSON.stringify(previous.projectData), this.treeService, this.store);
+    parseFileToProject(CircularJSON.stringify(previous.projectData), this.treeService, this.store);
     console.debug('Undo. Snapshots left ' + (this.appSnapshotList.length));
   }
 
@@ -40,7 +41,7 @@ export class HistoryService {
     projectData.layerStackContent = this.treeService.itemList;
     projectData.globalHUDProperties = this.store.hudProperties;
     projectData.bones = this.store.bones;
-    return JSON.parse(JSON.stringify(projectData));
+    return CircularJSON.parse(CircularJSON.stringify(projectData));
   }
 
   private getPreviousSnapshot(): ProjectSnapshot {
