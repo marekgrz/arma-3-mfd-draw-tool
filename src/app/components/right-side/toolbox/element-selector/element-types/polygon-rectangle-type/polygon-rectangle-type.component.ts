@@ -5,16 +5,21 @@ import { fabric } from 'fabric';
 import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { ID } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-polygon-rectangle-type',
   templateUrl: './polygon-rectangle-type.component.html',
   styleUrls: ['./polygon-rectangle-type.component.less']
 })
-export class PolygonRectangleTypeComponent {
+export class PolygonRectangleTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addPolygonRect(): void {
@@ -24,7 +29,6 @@ export class PolygonRectangleTypeComponent {
       fill: new Color(0, 0, 0, 1) as any,
     });
     rect[ID] = generateId();
-    this.store.canvas.add(rect);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonRectangle(rect));
+    this.createNewElement(this.treeService.itemFromPolygonRectangle(rect));
   }
 }

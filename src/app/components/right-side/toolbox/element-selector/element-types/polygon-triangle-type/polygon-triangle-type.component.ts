@@ -5,16 +5,21 @@ import { generateId } from '../../../../../left-side/layer-stack/elements/StackI
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
 import { ID } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-polygon-triangle-type',
   templateUrl: './polygon-triangle-type.component.html',
   styleUrls: ['./polygon-triangle-type.component.less']
 })
-export class PolygonTriangleTypeComponent {
+export class PolygonTriangleTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addPolygonTriangle(): void {
@@ -24,7 +29,6 @@ export class PolygonTriangleTypeComponent {
       fill: new Color(0, 0, 0, 1) as any,
     });
     triangle[ID] = generateId();
-    this.store.canvas.add(triangle);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromPolygonTriangle(triangle));
+    this.createNewElement(this.treeService.itemFromPolygonTriangle(triangle));
   }
 }

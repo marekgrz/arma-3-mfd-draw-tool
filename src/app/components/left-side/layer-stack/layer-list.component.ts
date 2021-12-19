@@ -14,7 +14,9 @@ export class LayerListComponent {
   }
 
   deleteSelection(): void {
-    this.interaction.onDeleteSelection();
+    if (this.treeService.selectedItem) {
+      this.interaction.onDeleteSelection();
+    }
   }
 
   onNewGroup(): void {

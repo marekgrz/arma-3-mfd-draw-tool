@@ -5,16 +5,21 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
 import { CIRCLESTEP, ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-circle-type',
   templateUrl: './circle-type.component.html',
   styleUrls: ['./circle-type.component.less']
 })
-export class CircleTypeComponent {
+export class CircleTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addCircle(): void {
@@ -29,7 +34,6 @@ export class CircleTypeComponent {
     circle[ID] = generateId();
     circle[CIRCLESTEP] = 0.1;
     circle[LINETYPE] = LineType.full;
-    this.store.canvas.add(circle);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromCircle(circle));
+    this.createNewElement(this.treeService.itemFromCircle(circle));
   }
 }

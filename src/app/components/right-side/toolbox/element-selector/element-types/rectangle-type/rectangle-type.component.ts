@@ -2,20 +2,24 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-rectangle-type',
   templateUrl: './rectangle-type.component.html',
   styleUrls: ['./rectangle-type.component.less']
 })
-export class RectangleTypeComponent {
+export class RectangleTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addRect(): void {
@@ -29,7 +33,6 @@ export class RectangleTypeComponent {
     });
     rect[ID] = generateId();
     rect[LINETYPE] = LineType.full;
-    this.store.canvas.add(rect);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromRectangle(rect));
+    this.createNewElement(this.treeService.itemFromRectangle(rect));
   }
 }

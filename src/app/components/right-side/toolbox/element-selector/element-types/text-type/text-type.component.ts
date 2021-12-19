@@ -4,16 +4,21 @@ import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.
 import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { ID } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-text-type',
   templateUrl: './text-type.component.html',
   styleUrls: ['./text-type.component.less']
 })
-export class TextTypeComponent {
+export class TextTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addText(): void {
@@ -24,7 +29,6 @@ export class TextTypeComponent {
       fontSize: 50,
     });
     text[ID] = generateId();
-    this.store.canvas.add(text);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromText(text));
+    this.createNewElement(this.treeService.itemFromText(text));
   }
 }

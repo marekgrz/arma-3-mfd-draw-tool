@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
 import { StoreService } from '../../../../../../utils/store.service';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-triangle-type',
   templateUrl: './triangle-type.component.html',
   styleUrls: ['./triangle-type.component.less']
 })
-export class TriangleTypeComponent implements OnInit {
+export class TriangleTypeComponent extends BaseElementType {
 
-  constructor(private treeService: TreeService,
-              private store: StoreService) {
-  }
 
-  ngOnInit(): void {
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addTriangle(): void {
@@ -33,7 +34,6 @@ export class TriangleTypeComponent implements OnInit {
     });
     triangle[ID] = generateId();
     triangle[LINETYPE] = LineType.full;
-    this.store.canvas.add(triangle);
-    this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTriangle(triangle));
+    this.createNewElement(this.treeService.itemFromTriangle(triangle));
   }
 }

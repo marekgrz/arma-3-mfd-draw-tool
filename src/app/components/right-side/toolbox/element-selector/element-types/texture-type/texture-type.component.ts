@@ -4,16 +4,21 @@ import { generateId } from '../../../../../left-side/layer-stack/elements/StackI
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
 import { ID } from '../../../../../../common/ProjectFileStructure';
+import { BaseElementType } from '../base-element-type.directive';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-texture-type',
   templateUrl: './texture-type.component.html',
   styleUrls: ['./texture-type.component.less']
 })
-export class TextureTypeComponent {
+export class TextureTypeComponent extends BaseElementType {
 
-  constructor(private store: StoreService,
-              private treeService: TreeService) {
+
+  constructor(store: StoreService,
+              historyService: HistoryService,
+              treeService: TreeService) {
+    super(store, historyService, treeService);
   }
 
   addTexture(): void {
@@ -28,8 +33,7 @@ export class TextureTypeComponent {
       image.scaleToWidth(100);
       image.scaleToHeight(100);
       image[ID] = generateId();
-      this.store.canvas.add(image);
-      this.treeService.pushToListInCorrectPlace(this.treeService.itemFromTexture(image));
+      this.createNewElement(this.treeService.itemFromTexture(image));
     };
     htmlImage.src = 'assets/image-placeholder.webp';
   }

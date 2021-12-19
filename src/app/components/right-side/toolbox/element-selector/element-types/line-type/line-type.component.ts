@@ -9,6 +9,7 @@ import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
+import { HistoryService } from '../../../../../../utils/history.service';
 
 @Component({
   selector: 'mfd-line-type',
@@ -23,7 +24,8 @@ export class LineTypeComponent {
   constructor(private store: StoreService,
               private treeService: TreeService,
               private snackBar: MatSnackBar,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private historyService: HistoryService) {
   }
 
   startLineDrawing(): void {
@@ -94,6 +96,7 @@ export class LineTypeComponent {
       this.treeService.pushToListInCorrectPlace(
         this.treeService.itemFromLine(this.drawLineBetweenPoints(this.points, false))
       );
+      this.historyService.addSnapshot();
     } else {
       this.cancelDrawing();
     }
