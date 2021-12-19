@@ -82,6 +82,7 @@ import { TextureFileSelectorComponent } from './components/right-side/toolbox/pr
 import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/spinner-overlay.component';
 import { LayerStackComponent } from './components/left-side/layer-stack-ng/layer-stack.component';
 import { LayerListComponent } from './components/left-side/layer-stack/layer-list.component';
+import { LayerStackActionsHeaderComponent } from './components/left-side/layer-stack-ng/layer-stack-actions-header/layer-stack-actions-header.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { LayerListComponent } from './components/left-side/layer-stack/layer-lis
     SpinnerOverlayComponent,
     LayerStackComponent,
     LayerListComponent,
+    LayerStackActionsHeaderComponent,
   ],
   imports: [
     BrowserModule,
