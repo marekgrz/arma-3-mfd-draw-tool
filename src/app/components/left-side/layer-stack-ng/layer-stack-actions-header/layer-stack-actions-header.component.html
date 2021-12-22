@@ -1,26 +1,39 @@
-<div class="layer-buttons">
-  <button mat-button>
+<div class="layer-buttons" #wrapper>
+  <button mat-button class="project-settings-btn">
     Project settings
   </button>
   <div class="action-icons">
-    <button mat-button matTooltip="Delete selected element" [disabled]="!treeService.selectedItem" (click)="deleteSelection()">
-      <i class="material-icons">delete</i>
-    </button>
-    <button mat-button matTooltip="Create group" (click)="onNewGroup()">
-      <i class="material-icons">snippet_folder</i>
-    </button>
-    <button mat-button matTooltip="Duplicate selected element" disabled>
-      <i class="material-icons">content_copy</i>
-    </button>
-    <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
-    <button mat-button matTooltip="Locate selected" [disabled]="!treeService.selectedItem" (click)="onLocateElement()">
-      <i class="material-icons">my_location</i>
-    </button>
-    <button mat-button matTooltip="Expand all" (click)="onExpandAll()">
-      <img src="assets/icons/expand.svg">
-    </button>
-    <button mat-button matTooltip="Collapse all" (click)="onCollapseAll()">
-      <img src="assets/icons/collapse.svg">
+    <ng-container *ngIf="wrapper.offsetWidth > 300">
+      <ng-container *ngTemplateOutlet="actionList"></ng-container>
+    </ng-container>
+    <button *ngIf="wrapper.offsetWidth < 300" mat-button [matMenuTriggerFor]="menu">
+      <i class="material-icons">more_vert</i>
     </button>
   </div>
 </div>
+
+<mat-menu #menu="matMenu" class="layer-buttons">
+  <ng-container *ngTemplateOutlet="actionList"></ng-container>
+</mat-menu>
+
+<ng-template #actionList>
+    <button class="action-button-color" mat-button matTooltip="Delete selected element" [disabled]="!treeService.selectedItem" (click)="deleteSelection()">
+      <i class="material-icons">delete</i>
+    </button>
+    <button class="action-button-color" mat-button matTooltip="Create group" (click)="onNewGroup()">
+      <i class="material-icons">snippet_folder</i>
+    </button>
+    <button class="action-button-color" mat-button matTooltip="Duplicate selected element" disabled>
+      <i class="material-icons">content_copy</i>
+    </button>
+    <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+    <button class="action-button-color" mat-button matTooltip="Locate selected" [disabled]="!treeService.selectedItem" (click)="onLocateElement()">
+      <i class="material-icons">my_location</i>
+    </button>
+    <button class="action-button-color" mat-button matTooltip="Expand all" (click)="onExpandAll()">
+      <img src="assets/icons/expand.svg">
+    </button>
+    <button class="action-button-color" mat-button matTooltip="Collapse all" (click)="onCollapseAll()">
+      <img src="assets/icons/collapse.svg">
+    </button>
+</ng-template>
