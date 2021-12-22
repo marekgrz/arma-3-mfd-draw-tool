@@ -175,6 +175,7 @@ export class TreeService {
       .expandedIcon('pi pi-folder-open')
       .collapsedIcon('pi pi-folder')
       .styleClass('group-class')
+      .leaf(false)
       .build();
   }
 

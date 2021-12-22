@@ -46,15 +46,43 @@ p[hidden] {
     color: white;
     margin-left: 40px;
   }
+
   .p-tree-container .p-treenode .p-treenode-leaf .p-treenode-content .p-tree-toggler:focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: none;
   }
 
-  .p-treenode-leaf>.p-treenode-content .p-tree-toggler {
+  .p-treenode-leaf > .p-treenode-content .p-tree-toggler {
     width: 0 !important;
     margin: 0 !important;
+  }
+
+  //selected-background
+  .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+    background: #b7b7b7;
+  }
+
+  //children-padding
+  .p-treenode-children {
+    padding: 0 0 0 40px;
+  }
+
+  //item-padding
+  .p-tree-container .p-treenode .p-treenode-content {
+    border-radius: 0;
+    transition: box-shadow 0.15s;
+    padding: 0 5px 0 5px;
+    border: none;
+  }
+
+  //expand-button-outline
+  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+    outline: 0 none !important;
+  }
+
+  .p-tree-container .p-treenode {
+    padding: 0;
   }
 }
 
@@ -63,11 +91,6 @@ p[hidden] {
 //    background: #6e9fb7ad !important;
 //  }
 //}
-
-.p-tree .p-tree-container .p-treenode {
-  padding: 0;
-  border: 1px solid #817676d6
-}
 
 .hljs-ln-numbers {
   border-right: 1px solid #b3b3b3;

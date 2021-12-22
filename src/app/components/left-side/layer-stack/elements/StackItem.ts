@@ -19,6 +19,7 @@ export class StackItem implements TreeNode {
   layerVisible = true;
   type = 'treeNode';
   styleClass: string;
+  leaf = true;
   // parent?: StackItem;
 }
 
