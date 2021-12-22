@@ -83,6 +83,7 @@ import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/sp
 import { LayerStackComponent } from './components/left-side/layer-stack-ng/layer-stack.component';
 import { LayerListComponent } from './components/left-side/layer-stack/layer-list.component';
 import { LayerStackActionsHeaderComponent } from './components/left-side/layer-stack-ng/layer-stack-actions-header/layer-stack-actions-header.component';
+import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-panel.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import { LayerStackActionsHeaderComponent } from './components/left-side/layer-s
     LayerStackComponent,
     LayerListComponent,
     LayerStackActionsHeaderComponent,
+    ResizeablePanelComponent,
   ],
   imports: [
     BrowserModule,

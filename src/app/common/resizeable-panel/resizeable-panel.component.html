@@ -1,0 +1,15 @@
+<div [ngClass]="horizontal ? 'resize-container-horizontal' : 'resize-container-vertical'">
+  <mfd-resize-bar [horizontal]="horizontal"
+                  [panelName]="panelName"
+                  [maximumWidth]="maximumWidth"
+                  [minimumWidth]="minimumWidth"
+                  [ngClass]="(position !== 'left' && position !== 'top') ? 'hidden' : ''"></mfd-resize-bar>
+  <div class="resize-content">
+    <ng-content></ng-content>
+  </div>
+  <mfd-resize-bar [horizontal]="horizontal"
+                  [panelName]="panelName"
+                  [maximumWidth]="maximumWidth"
+                  [minimumWidth]="minimumWidth"
+                  [ngClass]="(position !== 'right' && position !== 'bottom') ? 'hidden' : ''"></mfd-resize-bar>
+</div>

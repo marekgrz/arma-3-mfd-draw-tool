@@ -1,0 +1,23 @@
+.resize-container-horizontal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.resize-container-vertical {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .resize-content{
+    width: 100%;
+  }
+}
+
+.resize-content {
+  overflow-y: auto;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
