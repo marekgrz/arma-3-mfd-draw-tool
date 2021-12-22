@@ -1,14 +1,15 @@
 <div class="content">
   <div class="layer-list-view">
-    <mfd-section-header [label]="'Layers'"></mfd-section-header>
-<!--    <mfd-layer-list *ngIf="!previewMode"></mfd-layer-list>-->
-
-    <mfd-layer-stack></mfd-layer-stack>
-
-
+    <div class="resize-container">
+      <div class="resize-content">
+        <mfd-section-header [label]="'Layers'"></mfd-section-header>
+        <mfd-layer-stack></mfd-layer-stack>
+      </div>
+      <mfd-resize-bar [horizontal]="true" panelName="layer-stack"></mfd-resize-bar>
+    </div>
     <mfd-section-header [label]="'Bones stack (anchors)'"></mfd-section-header>
     <mfd-bones-list class="scrollable"></mfd-bones-list>
   </div>
   <mfd-sources-list *ngIf="previewMode" class="layer-list"></mfd-sources-list>
-  <mfd-resize-bar></mfd-resize-bar>
+  <mfd-resize-bar panelName="left-sidebar"></mfd-resize-bar>
 </div>

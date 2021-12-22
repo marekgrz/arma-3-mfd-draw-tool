@@ -1,8 +1,13 @@
 <div class="content">
-  <mfd-resize-bar></mfd-resize-bar>
+  <mfd-resize-bar panelName="right-sidebar"></mfd-resize-bar>
   <div class="toolbox-container" #toolbox>
-    <mfd-section-header [label]="'Elements'"></mfd-section-header>
-    <mfd-element-selector></mfd-element-selector>
+    <div class="resize-container">
+      <div class="resize-content">
+        <mfd-section-header [label]="'Elements'"></mfd-section-header>
+        <mfd-element-selector></mfd-element-selector>
+      </div>
+      <mfd-resize-bar [horizontal]="true" panelName="element-selector"></mfd-resize-bar>
+    </div>
     <mfd-section-header [label]="'Properties'"></mfd-section-header>
     <mfd-properties class="scrollable"></mfd-properties>
   </div>

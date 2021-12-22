@@ -18,6 +18,9 @@ export class ResizeBarComponent implements AfterViewInit {
   @Input()
   horizontal = false;
 
+  @Input()
+  panelName: string = undefined;
+
   private container: HTMLDivElement;
 
   private resizeEnabled = false;
@@ -30,6 +33,7 @@ export class ResizeBarComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.container = this.resizeBar.nativeElement.parentNode.parentNode;
     this.isLast = this.resizeBar.nativeElement.parentNode.nextSibling == null;
+    this.loadSavedSize();
   }
 
   @HostListener('document:mouseup')
@@ -41,10 +45,12 @@ export class ResizeBarComponent implements AfterViewInit {
   onMouseMove(event: MouseEvent): void {
     if (this.resizeEnabled) {
       event.preventDefault();
+      const distance = this.calculateDistance(event);
+      this.savePanelSize(distance);
       if (this.horizontal) {
-        this.container.style.height = `${this.calculateDistance(event)}px`;
+        this.container.style.height = `${distance}px`;
       } else {
-        this.container.style.width = `${this.calculateDistance(event)}px`;
+        this.container.style.width = `${distance}px`;
       }
     }
   }
@@ -61,6 +67,25 @@ export class ResizeBarComponent implements AfterViewInit {
     return (edgeOfWindow - mousePos) > this.maximumWidth
       ? this.maximumWidth
       : (edgeOfWindow - mousePos) < this.minimumWidth ? this.minimumWidth : (edgeOfWindow - mousePos);
+  }
+
+  private savePanelSize(size: number): void {
+    if (this.panelName) {
+      localStorage.setItem(`panel_${this.panelName}_size`, size.toString());
+    }
+  }
+
+  private loadSavedSize(): void {
+    if (this.panelName) {
+      const size = localStorage.getItem(`panel_${this.panelName}_size`);
+      if (size) {
+        if (this.horizontal) {
+          this.container.style.height = `${size}px`;
+        } else {
+          this.container.style.width = `${size}px`;
+        }
+      }
+    }
   }
 
   onMouseDown(): void {

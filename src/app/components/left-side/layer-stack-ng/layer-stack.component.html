@@ -1,23 +1,18 @@
 <mfd-layer-stack-actions-header></mfd-layer-stack-actions-header>
-<div class="resize-container">
-  <div class="resize-content">
-    <p-tree [value]="treeService.itemList"
-            [(selection)]="treeService.selectedItem"
-            selectionMode="single"
-            [draggableNodes]="true"
-            [droppableNodes]="true"
-            (onNodeDrop)="onNodeDrop()"
-            (onNodeSelect)="onSelectionChange($event)"
-            draggableScope="self"
-            droppableScope="self"
-            class="tree"
-            styleClass="tree">
-      <ng-template let-node  pTemplate="treeNode">
-        <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'"
-           (click)="onToggleVisibility(node)"></i>
-        <span class="node-label" [ngClass]="node.itemType === 'group' ? 'p-tree-group-header': ''">{{node.label}}</span>
-      </ng-template>
-    </p-tree>
-  </div>
-  <mfd-resize-bar [horizontal]="true"></mfd-resize-bar>
-</div>
+<p-tree [value]="treeService.itemList"
+        [(selection)]="treeService.selectedItem"
+        selectionMode="single"
+        [draggableNodes]="true"
+        [droppableNodes]="true"
+        (onNodeDrop)="onNodeDrop()"
+        (onNodeSelect)="onSelectionChange($event)"
+        draggableScope="self"
+        droppableScope="self"
+        class="tree"
+        styleClass="tree">
+  <ng-template let-node  pTemplate="treeNode">
+    <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'"
+       (click)="onToggleVisibility(node)"></i>
+    <span class="node-label" [ngClass]="node.itemType === 'group' ? 'p-tree-group-header': ''">{{node.label}}</span>
+  </ng-template>
+</p-tree>
