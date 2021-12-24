@@ -21,9 +21,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTreeModule } from '@angular/material/tree';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatTreeComponent } from './components/left-side/layer-stack/mat-tree/mat-tree.component';
 import { SortablejsModule } from 'ngx-sortablejs';
-import { MatTreeItemListComponent } from './components/left-side/layer-stack/mat-tree/mat-tree-item-list/mat-tree-item-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { GroupPropertiesComponent } from './components/right-side/toolbox/properties/element-types/group-properties/group-properties.component';
 import { RectanglePropertiesComponent } from './components/right-side/toolbox/properties/element-types/rectangle-properties/rectangle-properties.component';
@@ -81,7 +79,6 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { TextureFileSelectorComponent } from './components/right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
 import { SpinnerOverlayComponent } from './components/dialogs/spinner-overlay/spinner-overlay.component';
 import { LayerStackComponent } from './components/left-side/layer-stack-ng/layer-stack.component';
-import { LayerListComponent } from './components/left-side/layer-stack/layer-list.component';
 import { LayerStackActionsHeaderComponent } from './components/left-side/layer-stack-ng/layer-stack-actions-header/layer-stack-actions-header.component';
 import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-panel.component';
 
@@ -94,8 +91,6 @@ import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-p
     WorkAreaComponent,
     ElementSelectorComponent,
     PropertiesComponent,
-    MatTreeComponent,
-    MatTreeItemListComponent,
     GroupPropertiesComponent,
     RectanglePropertiesComponent,
     FabricCanvasComponent,
@@ -136,7 +131,6 @@ import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-p
     TextureFileSelectorComponent,
     SpinnerOverlayComponent,
     LayerStackComponent,
-    LayerListComponent,
     LayerStackActionsHeaderComponent,
     ResizeablePanelComponent,
   ],

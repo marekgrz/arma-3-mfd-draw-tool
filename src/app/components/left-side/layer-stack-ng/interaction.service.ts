@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from './tree.service';
-import { ItemType, StackItem } from '../elements/StackItem';
+import { ItemType, StackItem } from './elements/StackItem';
 import { fabric } from 'fabric';
-import { StoreService } from '../../../../utils/store.service';
-import { findByID, flattenNode } from '../../../../common/Utils';
-import { ConfirmDialogComponent } from '../../../dialogs/confirm-dialog/confirm-dialog.component';
+import { StoreService } from '../../../utils/store.service';
+import { findByID, flattenNode } from '../../../common/Utils';
+import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ID } from '../../../../common/ProjectFileStructure';
-import { HistoryService } from '../../../../utils/history.service';
+import { ID } from '../../../common/ProjectFileStructure';
+import { HistoryService } from '../../../utils/history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,12 +38,8 @@ export class InteractionService {
   }
 
   deselectCurrentItems(): void {
-    this.treeService.selectedItem = null;
-    const elements = document.querySelectorAll('.selected-item, .selected-root');
-    elements.forEach(el => {
-      el.classList.remove('selected-item');
-      el.classList.remove('selected-root');
-    });
+    this.treeService.clearSelection();
+    this.store.canvas.discardActiveObject();
   }
 
   onItemInLayerStackSelected(item: StackItem): void {
@@ -65,7 +61,7 @@ export class InteractionService {
       return;
     }
     if (!this.drawingMode) {
-      this.deselectCurrentItems();
+      this.treeService.clearSelection();
       if (ids.length < 2) {
         this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
       }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeService } from '../components/left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../components/left-side/layer-stack-ng/tree.service';
 import { StoreService } from './store.service';
 import { BONENAME, CIRCLESTEP, ID, LINETYPE, parseFileToProject, POINTS, ProjectFileStructure } from '../common/ProjectFileStructure';
 import * as CircularJSON from 'flatted';

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MessageService, TreeDragDropService, TreeNode } from 'primeng/api';
-import { TreeService } from '../layer-stack/mat-tree/tree.service';
-import { InteractionService } from '../layer-stack/mat-tree/interaction.service';
-import { ItemType, StackItem } from '../layer-stack/elements/StackItem';
+import { TreeService } from './tree.service';
+import { InteractionService } from './interaction.service';
+import { ItemType, StackItem } from './elements/StackItem';
 
 @Component({
   selector: 'mfd-layer-stack',
@@ -16,6 +16,10 @@ export class LayerStackComponent {
   }
 
   onSelectionChange(event): void {
+    if (event.node.itemType === ItemType.group) {
+      this.interaction.deselectCurrentItems();
+      this.treeService.selectedItem = event.node;
+    }
     this.interaction.onItemInLayerStackSelected(this.treeService.selectedItem);
   }
 

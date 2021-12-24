@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeService } from '../../../left-side/layer-stack/mat-tree/tree.service';
-import { ItemType, StackItem } from '../../../left-side/layer-stack/elements/StackItem';
+import { TreeService } from '../../../left-side/layer-stack-ng/tree.service';
+import { ItemType, StackItem } from '../../../left-side/layer-stack-ng/elements/StackItem';
 
 @Component({
   selector: 'mfd-properties',

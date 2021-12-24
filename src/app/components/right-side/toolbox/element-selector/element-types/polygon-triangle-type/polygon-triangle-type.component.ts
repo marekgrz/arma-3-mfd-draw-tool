@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { fabric } from 'fabric';
 import { Color } from '@angular-material-components/color-picker';
-import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
-import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { ID } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';

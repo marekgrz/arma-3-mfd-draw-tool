@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, HostListener, Input, ViewChild } from '@angular/core';
 import { StoreService } from '../../../utils/store.service';
 import { FabricComponent } from 'ngx-fabric-wrapper';
-import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
-import { InteractionService } from '../../left-side/layer-stack/mat-tree/interaction.service';
+import { TreeService } from '../../left-side/layer-stack-ng/tree.service';
+import { InteractionService } from '../../left-side/layer-stack-ng/interaction.service';
 import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
 import { BONENAME } from '../../../common/ProjectFileStructure';
@@ -87,7 +87,7 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   private onDeselected(canvas): void {
     canvas.on('before:selection:cleared', () => {
-      this.interaction.deselectCurrentItems();
+      this.treeService.clearSelection();
     });
   }
 

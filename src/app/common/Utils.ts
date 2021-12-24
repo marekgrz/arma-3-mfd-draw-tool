@@ -1,6 +1,6 @@
-import {StackItem} from '../components/left-side/layer-stack/elements/StackItem';
-import {fabric} from 'fabric';
-import {Color} from '@angular-material-components/color-picker';
+import { StackItem } from '../components/left-side/layer-stack-ng/elements/StackItem';
+import { fabric } from 'fabric';
+import { Color } from '@angular-material-components/color-picker';
 
 export function getBoneIfExists(bone: string): string {
   return bone && bone.length > 0 ? bone + ', ' : '';

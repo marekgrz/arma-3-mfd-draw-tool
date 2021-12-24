@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import { HistoryService } from '../../../../../utils/history.service';
-import { TreeService } from '../../../../left-side/layer-stack/mat-tree/tree.service';
-import { StackItem } from '../../../../left-side/layer-stack/elements/StackItem';
+import { TreeService } from '../../../../left-side/layer-stack-ng/tree.service';
+import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../utils/store.service';
 
 @Directive()

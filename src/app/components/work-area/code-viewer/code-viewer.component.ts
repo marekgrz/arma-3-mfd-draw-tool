@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { TreeService } from '../../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../../left-side/layer-stack-ng/tree.service';
 import { ClassGroup } from '../../../templates/ClassGroup';
 import { ElementParserService } from '../../../utils/element-parser.service';
 import * as Mustache from 'mustache';

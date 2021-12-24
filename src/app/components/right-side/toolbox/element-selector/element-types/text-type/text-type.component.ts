@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../../../../../utils/store.service';
-import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { fabric } from 'fabric';
-import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { ID } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';

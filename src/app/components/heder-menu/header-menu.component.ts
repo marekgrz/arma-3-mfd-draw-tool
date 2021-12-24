@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { IpcService } from '../../utils/ipc.service';
-import { TreeService } from '../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../left-side/layer-stack-ng/tree.service';
 import { ToastrService } from 'ngx-toastr';
 import { StoreService } from '../../utils/store.service';
 import { parseFileToProject, parseProjectToFile } from '../../common/ProjectFileStructure';

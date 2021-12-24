@@ -5,7 +5,7 @@ import { Circle } from 'fabric/fabric-impl';
 import { CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 
 @Component({
   selector: 'mfd-circle-properties',

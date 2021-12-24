@@ -5,7 +5,7 @@ import { Point } from 'fabric/fabric-impl';
 import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 
 @Component({
   selector: 'mfd-line-properties',

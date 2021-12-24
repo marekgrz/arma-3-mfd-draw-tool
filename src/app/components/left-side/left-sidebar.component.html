@@ -1,14 +1,6 @@
 <mfd-resizeable-panel [horizontal]="false" position="right" panelName="left-sidebar">
   <div class="layer-list-view">
-    <!--    <div class="resize-container">-->
-    <!--      <div class="resize-content">-->
-    <!--        <mfd-section-header [label]="'Layers'"></mfd-section-header>-->
-    <!--        <mfd-layer-stack></mfd-layer-stack>-->
-    <!--      </div>-->
-    <!--      <mfd-resize-bar [horizontal]="true" panelName="layer-stack"></mfd-resize-bar>-->
-    <!--    </div>-->
-
-    <mfd-resizeable-panel position="bottom" [horizontal]="true">
+    <mfd-resizeable-panel position="bottom" [horizontal]="true" panelName="layer-stack">
       <mfd-section-header [label]="'Layers'"></mfd-section-header>
       <mfd-layer-stack></mfd-layer-stack>
     </mfd-resizeable-panel>

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ItemType, StackItem } from '../elements/StackItem';
+import { ItemType, StackItem } from './elements/StackItem';
 import { Circle, Polyline, Rect, Triangle } from 'fabric/fabric-impl';
 import { fabric } from 'fabric';
-import { StoreService } from '../../../../utils/store.service';
-import { deleteElementById, findByID, flattenList } from '../../../../common/Utils';
-import { ID } from '../../../../common/ProjectFileStructure';
+import { StoreService } from '../../../utils/store.service';
+import { deleteElementById, findByID, flattenList } from '../../../common/Utils';
+import { ID } from '../../../common/ProjectFileStructure';
 import { Builder } from 'builder-pattern';
 
 @Injectable({
@@ -27,6 +27,10 @@ export class TreeService {
   private textIndex = 1;
 
   constructor(public store: StoreService) {
+  }
+
+  clearSelection(): void {
+    this.selectedItem = null;
   }
 
   resetProjectStack(): void {

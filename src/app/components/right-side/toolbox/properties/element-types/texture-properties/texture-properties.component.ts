@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { StoreService } from '../../../../../../utils/store.service';
 import TgaLoader from 'tga-js';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { TextureFile } from './texture-file-selector/texture-file-selector.component';
 
 @Component({

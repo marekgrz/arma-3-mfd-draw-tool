@@ -1,12 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { LineType } from '../../../../../../templates/Line';
-import { BONENAME, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 
 @Component({
   selector: 'mfd-triangle-properties',

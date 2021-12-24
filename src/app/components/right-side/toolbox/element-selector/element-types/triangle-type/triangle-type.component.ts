@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { fabric } from 'fabric';
-import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
-import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
+import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
+import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { StoreService } from '../../../../../../utils/store.service';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
-import { FormControl } from '@angular/forms';
+import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
 

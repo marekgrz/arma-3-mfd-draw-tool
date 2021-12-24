@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StackItem } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 
 @Component({
   selector: 'mfd-group-properties',

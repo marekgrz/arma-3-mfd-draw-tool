@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { BaseElementProperties } from '../base-element-properties.directive';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 
 @Component({
   selector: 'mfd-polygon-triangle-properties',

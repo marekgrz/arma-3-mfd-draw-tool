@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TreeService } from '../../layer-stack/mat-tree/tree.service';
-import { InteractionService } from '../../layer-stack/mat-tree/interaction.service';
+import { TreeService } from '../tree.service';
+import { InteractionService } from '../interaction.service';
 import { TreeNode } from 'primeng/api';
 
 @Component({

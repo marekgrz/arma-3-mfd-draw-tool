@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { fabric } from 'fabric';
-import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
-import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { CIRCLESTEP, ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../base-element-type.directive';

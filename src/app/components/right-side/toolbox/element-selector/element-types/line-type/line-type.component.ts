@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Point, Polyline } from 'fabric/fabric-impl';
 import { StoreService } from '../../../../../../utils/store.service';
-import { TreeService } from '../../../../../left-side/layer-stack/mat-tree/tree.service';
+import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { InteractionService } from '../../../../../left-side/layer-stack/mat-tree/interaction.service';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { fromEvent } from 'rxjs';
 import { fabric } from 'fabric';
-import { generateId } from '../../../../../left-side/layer-stack/elements/StackItem';
+import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { HistoryService } from '../../../../../../utils/history.service';
