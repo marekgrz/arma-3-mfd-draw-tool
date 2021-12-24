@@ -1,6 +1,7 @@
 import { Point } from '../../../../common/Point';
 import { TextureFile } from '../../../right-side/toolbox/properties/element-types/texture-properties/texture-file-selector/texture-file-selector.component';
 import { TreeNode } from 'primeng/api';
+import { v4 as uuidv4 } from 'uuid';
 
 export class StackItem implements TreeNode {
   id: string = generateId();
@@ -52,5 +53,5 @@ export enum ItemType {
 }
 
 export function generateId(): string {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  return uuidv4();
 }
