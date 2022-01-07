@@ -57,83 +57,91 @@ export class TreeService {
   }
 
   itemFromLine(line: Polyline): StackItem {
-    const item = new StackItem();
-    item.id = line[ID];
-    item.label = 'Line_' + this.lineIndex++;
-    item.itemType = ItemType.line;
-    item.data = line;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(line[ID])
+      .label('Line_' + this.lineIndex++)
+      .itemType( ItemType.line)
+      .data(line)
+      .children(null)
+      .icon('material-icons-outlined line')
+      .build();
   }
 
   itemFromRectangle(rectangle: Rect): StackItem {
-    const item = new StackItem();
-    item.id = rectangle[ID];
-    item.label = 'Rectangle_' + this.rectangleIndex++;
-    item.itemType = ItemType.rectangle;
-    item.data = rectangle;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(rectangle[ID])
+      .label('Rectangle_' + this.rectangleIndex++)
+      .itemType(ItemType.rectangle)
+      .data(rectangle)
+      .children(null)
+      .icon('material-icons-outlined rectangle')
+      .build();
   }
 
   itemFromText(text: fabric.Text): StackItem {
-    const item = new StackItem();
-    item.id = text[ID];
-    item.label = 'TextElement_' + this.textIndex++;
-    item.itemType = ItemType.text;
-    item.data = text;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(text[ID])
+      .label('TextElement_' + this.textIndex++)
+      .itemType(ItemType.text)
+      .data(text)
+      .children(null)
+      .icon('material-icons-outlined text')
+      .build();
   }
 
   itemFromTriangle(triangle: Triangle): StackItem {
-    const item = new StackItem();
-    item.id = triangle[ID];
-    item.label = 'Triangle' + this.triangleIndex++;
-    item.itemType = ItemType.triangle;
-    item.data = triangle;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(triangle[ID])
+      .label('Triangle' + this.triangleIndex++)
+      .itemType(ItemType.triangle)
+      .data(triangle)
+      .children(null)
+      .icon('material-icons-outlined triangle')
+      .build();
   }
 
   itemFromCircle(circle: Circle): StackItem {
-    const item = new StackItem();
-    item.id = circle[ID];
-    item.label = 'Circle_' + this.circleIndex++;
-    item.itemType = ItemType.circle;
-    item.data = circle;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(circle[ID])
+      .label('Circle_' + this.circleIndex++)
+      .itemType(ItemType.circle)
+      .data(circle)
+      .children(null)
+      .icon('material-icons-outlined circle')
+      .build();
   }
 
   itemFromPolygonRectangle(rectangle: Rect): StackItem {
-    const item = new StackItem();
-    item.id = rectangle[ID];
-    item.label = 'Polygon_Rectangle_' + this.polygonRectangleIndex++;
-    item.itemType = ItemType.polygonRect;
-    item.data = rectangle;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(rectangle[ID])
+      .label('Polygon_Rectangle_' + this.polygonRectangleIndex++)
+      .itemType(ItemType.polygonRect)
+      .data(rectangle)
+      .children(null)
+      .icon('material-icons rectangle')
+      .build();
   }
 
   itemFromPolygonTriangle(triangle: Triangle): StackItem {
-    const item = new StackItem();
-    item.id = triangle[ID];
-    item.label = 'Polygon_Triangle_' + this.polygonTriangleIndex++;
-    item.itemType = ItemType.polygonTriangle;
-    item.data = triangle;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(triangle[ID])
+      .label('Polygon_Triangle_' + this.polygonTriangleIndex++)
+      .itemType(ItemType.polygonTriangle)
+      .data(triangle)
+      .children(null)
+      .icon('material-icons network_cell')
+      .build();
   }
 
   itemFromTexture(texture: fabric.Image): StackItem {
-    const item = new StackItem();
-    item.id = texture[ID];
-    item.label = 'Texture_' + this.textureIndex++;
-    item.itemType = ItemType.texture;
-    item.data = texture;
-    item.children = null;
-    return item;
+    return Builder(StackItem)
+      .id(texture[ID])
+      .label('Texture_' + this.textureIndex++)
+      .itemType(ItemType.texture)
+      .data(texture)
+      .children(null)
+      .icon('material-icons image')
+      .build();
   }
 
   createGroup(): void {
@@ -175,9 +183,7 @@ export class TreeService {
       .itemType(ItemType.group)
       .data(undefined)
       .droppable(true)
-      .icon('pi pi-folder')
-      .expandedIcon('pi pi-folder-open')
-      .collapsedIcon('pi pi-folder')
+      .icon('pi pi-folder-open')
       .styleClass('group-class')
       .leaf(false)
       .build();

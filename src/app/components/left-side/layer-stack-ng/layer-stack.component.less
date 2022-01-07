@@ -2,18 +2,21 @@
   padding: 0;
 
   .node-visibility {
-    border-right: 2px solid #c7b1b1d6;
-    transform: translateX(-67px);
+    position: absolute;
     padding: 4px;
+    left: 0;
+    font-size: 0.8rem;
+    writing-mode: vertical-lr;
+    visibility: hidden;
   }
 
   .pi-eye-slash {
-    opacity: 0.5;
+    visibility: visible;
   }
 
-  .node-label {
-    margin-left: -20px;
-  }
+  //.node-label {
+  //  margin-left: -20px;
+  //}
 
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
     color: white;
@@ -21,5 +24,19 @@
 }
 
 .group-class {
+  margin-left: 0;
   background: black;
+}
+@background-color: black;
+.test-container {
+  background-color: @background-color;
+  display: flex;
+  flex-direction: column;
+  .test {
+    width: 100px;
+  }
+}
+
+.test-parent {
+  @background-color: red;
 }

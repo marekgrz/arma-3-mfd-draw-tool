@@ -41,10 +41,18 @@ p[hidden] {
 .p-tree {
   background: none;
   padding: 0;
+  color: #e5e5e5;
 
-  .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
-    color: white !important;
-    margin-left: 40px;
+  .p-tree-container .p-treenode .p-treenode-content  {
+
+    .p-treenode-icon {
+      color: white !important;
+      margin-left: 40px;
+    }
+
+    .material-icons,.material-icons-outlined {
+      font-size: 15px;
+    }
   }
 
   .p-tree-container .p-treenode .p-treenode-leaf .p-treenode-content .p-tree-toggler:focus {
@@ -66,7 +74,10 @@ p[hidden] {
 
   //children-padding
   .p-treenode-children {
-    padding: 0 0 0 40px;
+    padding: 0;
+    div {
+      padding-left: 40px !important;
+    }
   }
 
   //item-padding
@@ -77,17 +88,48 @@ p[hidden] {
     border: none;
   }
 
+  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+    color: white;
+    transform: scale(0.7);
+    width: auto;
+    left: 17px;
+    margin-right: 0;
+  }
+
   //expand-button-outline
   .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
     outline: 0 none !important;
+    box-shadow: none;
   }
 
   .p-tree-container .p-treenode {
     padding: 0;
   }
+
+  .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable {
+    &:hover {
+      .node-visibility {
+        visibility: visible;
+      }
+    }
+
+    &:focus {
+      outline: 0 none !important;
+      box-shadow: none;
+    }
+  }
 }
 
-//.group-class {
+.pi-folder-open {
+  margin-left: 20px !important;
+  color: white;
+}
+
+.p-tree-toggler {
+  color: white !important;
+}
+
+  //.group-class {
 //  >div:first-child {
 //    background: #6e9fb7ad !important;
 //  }
@@ -313,3 +355,5 @@ p[hidden] {
   font-family: "TahomaB";
   src: local("TahomaB"), url(./assets/fonts/TahomaB.ttf) format("truetype");
 }
+
+@import "assets/icons/google-icons";

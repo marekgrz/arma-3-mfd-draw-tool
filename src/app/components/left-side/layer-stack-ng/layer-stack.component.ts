@@ -34,13 +34,16 @@ export class LayerStackComponent {
     this.interaction.refreshView();
   }
 
-  onToggleVisibility(item: StackItem, groupVisibility: boolean = null): void {
+  onToggleVisibility(item: StackItem, nodeRef = null, groupVisibility: boolean = null): void {
     item.layerVisible = groupVisibility !== null ? groupVisibility : !item.layerVisible;
     if (item.data) {
       item.data.visible = item.layerVisible ? true : false;
     }
+    if (nodeRef) {
+      nodeRef.parentElement.parentElement.parentElement.parentElement.style.opacity = item.layerVisible ? 1 : 0.3;
+    }
     if (item.itemType === ItemType.group) {
-      item.children.forEach(it => this.onToggleVisibility(it, item.layerVisible));
+      item.children.forEach(it => this.onToggleVisibility(it, null, item.layerVisible));
     }
     this.interaction.refreshView(true);
   }
