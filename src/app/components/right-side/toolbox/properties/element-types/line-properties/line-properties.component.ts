@@ -6,6 +6,7 @@ import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-line-properties',
@@ -17,8 +18,8 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   angle: number;
   lineType = LineType.full;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -79,7 +80,7 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
     this.setElementStroke(line);
     this.setElementStroke(line);
     this.setElementRotation(line);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   getAngle(): number {

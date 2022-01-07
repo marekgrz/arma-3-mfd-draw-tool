@@ -5,6 +5,7 @@ import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-triangle-properties',
@@ -17,8 +18,8 @@ export class TrianglePropertiesComponent extends BaseElementProperties implement
   color: string;
   lineType = LineType.full;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class TrianglePropertiesComponent extends BaseElementProperties implement
     this.setElementLineType(triangle, this.lineType);
     this.setElementStroke(triangle);
     this.setElementRotation(triangle);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   getAngle(): number {

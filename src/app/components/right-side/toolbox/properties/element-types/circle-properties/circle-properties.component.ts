@@ -6,6 +6,7 @@ import { CIRCLESTEP, LINETYPE } from '../../../../../../common/ProjectFileStruct
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-circle-properties',
@@ -21,8 +22,8 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
   circleStep = 0.1;
   lineType = LineType.full;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
     this.setElementLineType(circle, this.lineType);
     this.setElementStroke(circle);
     this.setElementRotation(circle);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   updateDiameterX(event): void {

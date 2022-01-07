@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from './tree.service';
-import { ItemType, StackItem } from './elements/StackItem';
+import { generateId, ItemType, StackItem } from './elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../utils/store.service';
 import { findByID, flattenNode } from '../../../common/Utils';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ID } from '../../../common/ProjectFileStructure';
+import { BONENAME, CIRCLESTEP, ID, LINETYPE, POINTS } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
+import * as CircularJSON from 'flatted';
+import { ElementTransformService } from '../../right-side/toolbox/properties/element-types/element-transform.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class InteractionService {
   constructor(private treeService: TreeService,
               private store: StoreService,
               private dialog: MatDialog,
-              private historyService: HistoryService) {
+              private historyService: HistoryService,
+              private elementTransform: ElementTransformService) {
   }
 
   refreshView(skipSnapshot: boolean = false): void {
@@ -90,5 +93,35 @@ export class InteractionService {
         this.refreshView();
       }
     });
+  }
+
+  onDuplicateSelection(): void {
+    const selectionCopy = this.cloneSelection(this.treeService.selectedItem);
+    if (this.treeService.selectedItem.parent) {
+      const index = this.treeService.selectedItem.parent.children.findIndex(it => it.id === this.treeService.selectedItem.id) + 1;
+      this.treeService.selectedItem.parent.children.splice(index, 0, selectionCopy);
+    } else {
+      const index = this.treeService.itemList.findIndex(it => it.id === this.treeService.selectedItem.id) + 1;
+      this.treeService.itemList.splice(index, 0, selectionCopy);
+    }
+    this.refreshView();
+  }
+
+  private cloneSelection(item: StackItem): StackItem {
+    const itemCopy: StackItem = CircularJSON.parse(CircularJSON.stringify(item));
+    const newId = generateId();
+    itemCopy.id = newId;
+    if (item.data) {
+      item.data.clone((clone) => {
+        itemCopy.data = clone;
+        itemCopy.data[ID] = newId;
+        this.elementTransform.setElementPosition(clone, itemCopy, itemCopy.bone);
+        this.store.canvas.add(clone);
+      }, [POINTS, CIRCLESTEP, LINETYPE, BONENAME]);
+    }
+    if (item.children) {
+      itemCopy.children = item.children.map(child => this.cloneSelection(child));
+    }
+    return itemCopy;
   }
 }

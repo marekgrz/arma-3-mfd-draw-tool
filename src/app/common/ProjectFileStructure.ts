@@ -69,7 +69,7 @@ export class GlobalHUDProperties {
 
 // TODO Change to MetaData object type
 ///// CUSTOM PROPERTIES /////////////
-///// DEINE THEM IN THE PARSE FUNCTION ABOVE ////////////
+///// DEFINE THEM IN THE PARSE FUNCTION ABOVE ////////////
 export const ID = 'id';
 export const POINTS = 'points';
 export const CIRCLESTEP = 'circleStep';

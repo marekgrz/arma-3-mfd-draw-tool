@@ -1,11 +1,12 @@
 <mfd-layer-stack-actions-header></mfd-layer-stack-actions-header>
 <p-tree [value]="treeService.itemList"
         [(selection)]="treeService.selectedItem"
-        selectionMode="single"
         [draggableNodes]="true"
         [droppableNodes]="true"
         (onNodeDrop)="onNodeDrop()"
-        (onNodeSelect)="onSelectionChange($event)"
+        (selectionChange)="onSelectionChange($event)"
+        [contextMenu]="cm"
+        selectionMode="single"
         draggableScope="self"
         droppableScope="self"
         class="tree"
@@ -16,3 +17,5 @@
     <span class="node-label" [ngClass]="node.itemType === 'group' ? 'p-tree-group-header': ''">{{node.label}}</span>
   </ng-template>
 </p-tree>
+
+<p-contextMenu #cm [model]="items"></p-contextMenu>

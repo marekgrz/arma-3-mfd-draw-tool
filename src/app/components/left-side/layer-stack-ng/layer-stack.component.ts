@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService, TreeDragDropService, TreeNode } from 'primeng/api';
+import { MenuItem, MessageService, TreeDragDropService, TreeNode } from 'primeng/api';
 import { TreeService } from './tree.service';
 import { InteractionService } from './interaction.service';
 import { ItemType, StackItem } from './elements/StackItem';
@@ -12,13 +12,19 @@ import { ItemType, StackItem } from './elements/StackItem';
 })
 export class LayerStackComponent {
 
+  items: MenuItem[];
+
   constructor(public treeService: TreeService, private interaction: InteractionService) {
+    this.items = [
+      {label: 'Duplicate layer', icon: 'pi pi-copy', command: () => this.onContextMenuDuplicate()},
+      {label: 'Remove', icon: 'pi pi-trash', command: () => this.onContextMenuDelete()}
+    ];
   }
 
-  onSelectionChange(event): void {
-    if (event.node.itemType === ItemType.group) {
+  onSelectionChange(selection): void {
+    if (selection.itemType === ItemType.group) {
       this.interaction.deselectCurrentItems();
-      this.treeService.selectedItem = event.node;
+      this.treeService.selectedItem = selection;
     }
     this.interaction.onItemInLayerStackSelected(this.treeService.selectedItem);
   }
@@ -37,6 +43,18 @@ export class LayerStackComponent {
       item.children.forEach(it => this.onToggleVisibility(it, item.layerVisible));
     }
     this.interaction.refreshView(true);
+  }
+
+  private onContextMenuDelete(): void {
+    if (this.treeService.selectedItem) {
+      this.interaction.onDeleteSelection();
+    }
+  }
+
+  private onContextMenuDuplicate(): void {
+    if (this.treeService.selectedItem) {
+      this.interaction.onDuplicateSelection();
+    }
   }
 
   private refreshParents(treeNode: TreeNode[], parent: TreeNode): void {

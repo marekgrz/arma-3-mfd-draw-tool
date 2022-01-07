@@ -3,6 +3,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-polygon-triangle-properties',
@@ -14,8 +15,8 @@ export class PolygonTrianglePropertiesComponent extends BaseElementProperties im
   angle: number;
   color: string;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class PolygonTrianglePropertiesComponent extends BaseElementProperties im
     this.setElementPosition(triangle);
     this.setElementFill(triangle);
     this.setElementRotation(triangle);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   getAngle(): number {

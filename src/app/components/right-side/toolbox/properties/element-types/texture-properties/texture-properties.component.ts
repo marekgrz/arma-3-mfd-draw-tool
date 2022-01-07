@@ -5,6 +5,7 @@ import TgaLoader from 'tga-js';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { TextureFile } from './texture-file-selector/texture-file-selector.component';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-texture-properties',
@@ -19,8 +20,8 @@ export class TexturePropertiesComponent extends BaseElementProperties implements
 
   tga = new TgaLoader();
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class TexturePropertiesComponent extends BaseElementProperties implements
     image.setCoords();
     image.rotate(this.angle);
     this.loadTextureFile(file);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   loadTextureFile(textureFile: TextureFile): void {

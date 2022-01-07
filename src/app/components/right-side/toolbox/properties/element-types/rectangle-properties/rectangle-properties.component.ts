@@ -5,6 +5,7 @@ import { LineType } from '../../../../../../templates/Line';
 import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { ElementTransformService } from '../element-transform.service';
 
 @Component({
   selector: 'mfd-rectangle-properties',
@@ -17,8 +18,8 @@ export class RectanglePropertiesComponent extends BaseElementProperties implemen
   color: string;
   lineType = LineType.full;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
-    super(store, interactionService);
+  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+    super(store, interactionService, elementTransformService);
   }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class RectanglePropertiesComponent extends BaseElementProperties implemen
     this.setElementLineType(rect, this.lineType);
     this.setElementStroke(rect);
     this.setElementRotation(rect);
-    this.interactionService.refreshView();
+    this.refresh();
   }
 
   getAngle(): number {

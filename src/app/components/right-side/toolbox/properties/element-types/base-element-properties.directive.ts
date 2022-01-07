@@ -1,10 +1,10 @@
 import { LineType } from '../../../../../templates/Line';
 import { StoreService } from '../../../../../utils/store.service';
 import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
-import { BONENAME, LINETYPE } from '../../../../../common/ProjectFileStructure';
-import { BoneFixedModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
+import { BONENAME } from '../../../../../common/ProjectFileStructure';
 import { InteractionService } from '../../../../left-side/layer-stack-ng/interaction.service';
 import { Directive, Input, OnInit } from '@angular/core';
+import { ElementTransformService } from './element-transform.service';
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
@@ -18,7 +18,9 @@ export class BaseElementProperties implements OnInit {
 
   boneName: string;
 
-  constructor(public store: StoreService, public interactionService: InteractionService) {
+  constructor(public store: StoreService,
+              private interactionService: InteractionService,
+              public elementTransformService: ElementTransformService) {
   }
 
   ngOnInit(): void {
@@ -26,72 +28,26 @@ export class BaseElementProperties implements OnInit {
   }
 
   setElementLineType(element, lineType: LineType): void {
-    element[LINETYPE] = lineType;
-    switch (lineType) {
-      case LineType.full: {
-        element.set('strokeDashArray', undefined);
-        break;
-      }
-      case LineType.dotted: {
-        element.set('strokeDashArray', [element['strokeWidth'], element['strokeWidth']]);
-        break;
-      }
-      case LineType.dashed: {
-        element.set('strokeDashArray', [Number.parseFloat(element['strokeWidth']) * 2, Number.parseFloat(element['strokeWidth']) * 2]);
-        break;
-      }
-      case LineType.dotDashed: {
-        element.set('strokeDashArray', [Number.parseFloat(element['strokeWidth']) * 2, Number.parseFloat(element['strokeWidth']) * 2]);
-        break;
-      }
-      default: {
-        element.set('strokeDashArray', undefined);
-        break;
-      }
-    }
+    this.elementTransformService.setElementLineType(element, lineType);
   }
 
   setElementPosition(element): void {
-    console.log('Left before: ' + element.left);
-    console.log('Top before: ' + element.top);
-    const bone = this.store.bones.find(it => it.name === this.boneName);
-    const basePosition = this.store.getCanvasPositionFromDiscrete(this.item.base.position);
-    element[BONENAME] = this.boneName;
-    if (bone === undefined) {
-      element.left = basePosition.x;
-      element.top = basePosition.y;
-      console.log('Left after: ' + element.left);
-      console.log('Top after: ' + element.top);
-      return;
-    }
-
-    switch (bone.type) {
-      case BoneType.fixed: {
-        element.left = basePosition.x + (bone as BoneFixedModel).pos0.x * this.store.canvasWidth;
-        element.top = basePosition.y + (bone as BoneFixedModel).pos0.y * this.store.canvasHeight;
-        break;
-      }
-      // case BoneType.linear: {
-      //   element.left = basePositionX + (bone as BoneLinearModel).pos0.x;
-      //   element.top = basePositionY + (bone as BoneLinearModel).pos0.y;
-      //   break;
-      // }
-    }
-    console.log('Left after: ' + element.left);
-    console.log('Top after: ' + element.top);
+    this.elementTransformService.setElementPosition(element, this.item, this.boneName);
   }
 
   setElementStroke(element): void {
-    element.set('stroke', this.color);
-    element.set('strokeWidth', Number(this.item.data.strokeWidth));
+    this.elementTransformService.setElementStroke(element, this.color, Number(this.item.data.strokeWidth));
   }
 
   setElementFill(element): void {
-    element.set('fill', this.color);
+    this.elementTransformService.setElementFill(element, this.color);
   }
 
   setElementRotation(element): void {
-    element.setCoords();
-    element.rotate(this.angle);
+    this.elementTransformService.setElementRotation(element, this.angle);
+  }
+
+  refresh(): void {
+    this.interactionService.refreshView();
   }
 }

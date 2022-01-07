@@ -21,7 +21,7 @@ export class StackItem implements TreeNode {
   type = 'treeNode';
   styleClass: string;
   leaf = true;
-  // parent?: StackItem;
+  parent?: StackItem;
 }
 
 export class GroupProperties {
