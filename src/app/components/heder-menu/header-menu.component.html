@@ -1,0 +1,27 @@
+<mat-toolbar class="header">
+  <button mat-button (click)="newProject()">
+    <i class="material-icons">add_to_photos</i>New
+  </button>
+  <mat-divider [vertical]="true"></mat-divider>
+  <button mat-button (click)="openProject()">
+    <i class="material-icons">folder_open</i>Open
+  </button>
+  <mat-divider [vertical]="true" *ngIf="store.isProjectStarted"></mat-divider>
+  <button mat-button *ngIf="store.isProjectStarted" (click)="saveProjectAs()">
+    <i class="material-icons">save_alt</i>Save as
+  </button>
+  <mat-divider [vertical]="true" *ngIf="store.isProjectStarted"></mat-divider>
+  <button mat-button *ngIf="store.isProjectStarted" (click)="saveProject()">
+    <i class="material-icons">save_alt</i>Save
+  </button>
+  <mat-divider [vertical]="true" *ngIf="store.isProjectStarted"></mat-divider>
+  <button *ngIf="store.isProjectStarted" mat-button>
+    <i class="material-icons">exit_to_app</i>Export to A3
+  </button>
+  <button *ngIf="store.isProjectStarted" mat-button
+          (click)="historyService.undo()"
+          [disabled]="!historyService.snapshotsExist()">
+    <i class="material-icons">undo</i>Undo
+  </button>
+  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
+</mat-toolbar>

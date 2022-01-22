@@ -1,0 +1,39 @@
+<div class="row-container">
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Canvas width</mat-label>
+    <input type="number" matInput autocomplete="off" [(ngModel)]="width" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Canvas height</mat-label>
+    <input type="number" matInput autocomplete="off" [(ngModel)]="height" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Aspect ratio</mat-label>
+    <input disabled type="number" matInput autocomplete="off" [(ngModel)]="store.canvasAspectRatio" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-checkbox class="checkbox" [(ngModel)]="useImage" >Use image as background</mat-checkbox>
+  <div [className]="useImage ? '' : 'disabled'">
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Canvas background</mat-label>
+      <ngx-mat-file-input [formControl]="file" [value]="defaultFile" [accept]="'image/*'"></ngx-mat-file-input>
+      <mat-icon matSuffix class="clickable">folder</mat-icon>
+    </mat-form-field>
+    <mat-icon matSuffix class="clickable info-icon"
+              [matTooltip]="'This is only background image. It will not be visible in game.'"
+              matTooltipPosition="above">info
+    </mat-icon>
+  </div>
+  <div [className]="useImage ? 'disabled' : ''">
+    <mat-form-field class="small-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+      <input matInput [ngxMatColorPicker]="picker" [formControl]="color">
+      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+      <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    </mat-form-field>
+  </div>
+  <div class="action-button">
+    <button mat-button (click)="updateCanvasOptions()">
+      <i class="material-icons">save</i>Save
+    </button>
+  </div>
+</div>
+

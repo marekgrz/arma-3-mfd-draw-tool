@@ -1,0 +1,8 @@
+<!--<canvas [width]="store.canvasWidth"-->
+<!--        [height]="store.canvasHeight"-->
+<!--        [fabric]="config"-->
+<!--        id="fabric_canvas" #fabric_canvas></canvas>-->
+<div *ngIf="!loaded">
+  <div *ngFor="let font of store.FONT_LIST" [style.font-family]="font">&nbsp;</div>
+</div>
+<fabric [config]="config" (selectionCreated)="element = $event.selected[0]" [notClickable]="previewOnly"></fabric>

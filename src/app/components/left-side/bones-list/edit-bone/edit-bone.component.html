@@ -1,0 +1,30 @@
+<div mat-dialog-title>Edit bone</div>
+<mat-dialog-content>
+  <!--  NAME-->
+  <mat-form-field appearance="outline" class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Name</mat-label>
+    <input matInput autocomplete="off"
+           disabled
+           [(ngModel)]="bone.name"
+           [type]="'text'">
+  </mat-form-field>
+  <!--  TYPE-->
+  <mat-form-field appearance="outline" class="medium-input select full-width" color="accent">
+    <mat-label>Bone type</mat-label>
+    <mat-select [(ngModel)]="bone.type">
+      <mat-option [value]="'fixed'">Fixed</mat-option>
+      <mat-option [value]="'linear'">Linear</mat-option>
+      <mat-option [value]="'rotational'">Rotational</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!--  FIXED-->
+  <div *ngIf="bone.type==='fixed'">
+    <mfd-bone-fixed [bone]="bone"></mfd-bone-fixed>
+  </div>
+  <!--      ROTATIONAL-->
+  <!--      LINEAR-->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="saveBone()">Create</button>
+</mat-dialog-actions>

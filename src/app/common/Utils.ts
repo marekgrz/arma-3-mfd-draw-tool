@@ -1,14 +1,9 @@
-import {Color} from './Color';
+import { StackItem } from '../components/left-side/layer-stack-ng/elements/StackItem';
+import { fabric } from 'fabric';
+import { Color } from '@angular-material-components/color-picker';
 
 export function getBoneIfExists(bone: string): string {
   return bone && bone.length > 0 ? bone + ', ' : '';
-}
-
-export function getCondition(condition: string): string {
-  if (!condition) {
-    return '';
-  }
-  return `condition = "${condition}";`;
 }
 
 
@@ -17,4 +12,62 @@ export function getColorArray(color: Color): string {
     return '';
   }
   return `color[] = { ${color.r}, ${color.g}, ${color.b}, ${color.a} };`;
+}
+
+export function findByID(id: string, items: StackItem[]): StackItem {
+  for (const item of items) {
+    if (item.id === id) {
+      return item;
+    }
+    if (item.children) {
+      const result = findByID(id, item.children);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return undefined;
+}
+
+export function flattenList(nodes: StackItem[]): StackItem[] {
+  const items: StackItem[] = [];
+
+  function flatChildren(children): void {
+    children.forEach(item => {
+      items.push(item);
+      if (item.children) {
+        flatChildren(item.children);
+      }
+    });
+  }
+
+  flatChildren(nodes);
+  return items;
+}
+
+export function flattenNode(node: StackItem): fabric.Object[] {
+  if (!node.children) {
+    if (!node.data) {
+      return [];
+    }
+    return [node.data];
+  }
+  let elements = [];
+  node.children.map(item => {
+      if (item.children) {
+        elements = [...elements, ...flattenNode(item)];
+      }
+      if (item.data) {
+        elements.push(item.data);
+      }
+    }
+  );
+  return elements;
+}
+
+export function deleteElementById(node: StackItem, id): void {
+  if (node.children) {
+    node.children.forEach(it => deleteElementById(it, id));
+    node.children = node.children.filter(it => it.id !== id);
+  }
 }

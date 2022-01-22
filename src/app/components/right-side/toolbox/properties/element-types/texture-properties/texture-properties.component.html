@@ -1,0 +1,22 @@
+<div class="row-container">
+<!--  FileName-->
+  <mfd-texture-file-selector class="full-width" [(file)]="item.textureFile" (fileChange)="save($event)"></mfd-texture-file-selector>
+<!--  Position-->
+  <mfd-position-input [(positionX)]="item.data.left"
+                      [(positionY)]="item.data.top"
+                      (save)="save()"></mfd-position-input>
+<!--   Dimensions-->
+  <div class="pair-elements">
+    <mfd-dimensions-input [(item)]="item"
+                          (save)="save()"></mfd-dimensions-input>
+<!--  Angle-->
+    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-label>Angle</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
+    </mat-form-field>
+  </div>
+<!--  Bone-->
+  <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
+</div>
+
+<mfd-spinner-overlay *ngIf="loading"></mfd-spinner-overlay>

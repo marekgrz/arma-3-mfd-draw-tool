@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 html, body {
   height: 100%;
   color: #838588;
@@ -18,6 +17,227 @@ body {
 //
 //GLOBAL
 //
+.custom-snackbar {
+  color: #d2d2d2;
+  font-weight: 500;
+  background: #636567;
+  //margin: 0 !important;
+  //position: absolute;
+  //left: 25px;
+  //top: 60px;
+}
+
+.disabled-container {
+  pointer-events: none;
+  filter: brightness(0.5);
+  opacity: 0.4;
+  background: black;
+}
+
+p[hidden] {
+  display: none;
+}
+
+.p-tree {
+  background: none;
+  padding: 0;
+  color: #e5e5e5;
+
+  .p-tree-container .p-treenode .p-treenode-content  {
+
+    .p-treenode-icon {
+      color: white !important;
+      margin-left: 40px;
+    }
+
+    .material-icons,.material-icons-outlined {
+      font-size: 15px;
+    }
+  }
+
+  .p-tree-container .p-treenode .p-treenode-leaf .p-treenode-content .p-tree-toggler:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+
+  .p-treenode-leaf > .p-treenode-content .p-tree-toggler {
+    width: 0 !important;
+    margin: 0 !important;
+  }
+
+  //selected-background
+  .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+    background: #58646e;;
+    color: white;
+  }
+
+  //children-padding
+  .p-treenode-children {
+    padding: 0;
+    div {
+      padding-left: 40px !important;
+    }
+  }
+
+  //item-padding
+  .p-tree-container .p-treenode .p-treenode-content {
+    border-radius: 0;
+    transition: box-shadow 0.15s;
+    padding: 0 5px 0 5px;
+    border: none;
+  }
+
+  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+    color: white;
+    transform: scale(0.7);
+    width: auto;
+    left: 17px;
+    margin-right: 0;
+  }
+
+  //expand-button-outline
+  .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+    outline: 0 none !important;
+    box-shadow: none;
+  }
+
+  .p-tree-container .p-treenode {
+    padding: 0;
+  }
+
+  .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable {
+    &:hover {
+      .node-visibility {
+        visibility: visible;
+      }
+    }
+
+    &:focus {
+      outline: 0 none !important;
+      box-shadow: none;
+    }
+  }
+}
+
+.pi-folder-open {
+  margin-left: 20px !important;
+  color: white;
+}
+
+.p-tree-toggler {
+  color: white !important;
+}
+
+  //.group-class {
+//  >div:first-child {
+//    background: #6e9fb7ad !important;
+//  }
+//}
+
+.hljs-ln-numbers {
+  border-right: 1px solid #b3b3b3;
+  padding-right: 8px !important;
+  text-align: end;
+}
+
+.hljs-ln td {
+  padding-left: 5px !important;
+}
+
+.hljs {
+  border-radius: 5px;
+  max-height: 90vh;
+  tab-size: 3;
+}
+
+.row-container {
+  justify-content: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.info-icon {
+  color: grey;
+  vertical-align: sub;
+  padding-left: 10px;
+}
+
+.checkbox {
+  padding: 0 10px 10px 10px;
+  font-size: 0.7rem;
+  display: flex;
+}
+
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.scrollable {
+  overflow: auto;
+}
+
+
+.pair-elements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 48%;
+  }
+}
+
+.medium-input {
+  font-size: 15px;
+  color: #efefef;
+
+  .mat-form-field-infix {
+    padding: 0.5em !important;
+
+    .mat-select-arrow-wrapper .mat-select-arrow {
+      margin-top: 5px !important;
+    }
+  }
+}
+
+.small-input {
+  font-size: 12px;
+  color: #efefef;
+
+  .mat-form-field-infix {
+    padding: 0.5em !important;
+
+    .mat-select-arrow-wrapper .mat-select-arrow {
+      margin-top: 5px !important;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.align-left {
+  align-self: flex-start;
+  float: left;
+}
+
 .section-title {
   background-color: #394048;
   padding: 10px;
@@ -28,3 +248,112 @@ body {
   letter-spacing: 5px;
   font-weight: lighter;
 }
+
+.disable-text-selection {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.mat-tooltip {
+  font-size: 14px !important;
+  background: #515c67;
+}
+
+.upper-canvas {
+  position: relative !important;
+}
+
+.tree-content {
+  margin: 5px !important;
+}
+
+.tree-content-main, .root-title {
+  margin-left: 15px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #737373;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9d9d9d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a2a2a2;
+}
+
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-title, .hljs-section, .hljs-doctag, .hljs-type, .hljs-name, .hljs-strong {
+  white-space: normal;
+}
+
+
+// fonts
+@font-face {
+  font-family: "EtelkaMonospacePro";
+  src: local("EtelkaMonospacePro"), url(./assets/fonts/EtelkaMonospacePro.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "EtelkaMonospaceProBold";
+  src: local("EtelkaMonospacePro"), url(./assets/fonts/EtelkaMonospaceProBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "EtelkaNarrowMediumPro";
+  src: local("EtelkaNarrowMediumPro"), url(./assets/fonts/EtelkaNarrowMediumPro.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "LucidaConsoleB";
+  src: local("LucidaConsoleB"), url(./assets/fonts/LucidaConsoleB.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "PuristaBold";
+  src: local("PuristaBold"), url(./assets/fonts/PuristaBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaLight";
+  src: local("PuristaLight"), url(./assets/fonts/PuristaLight.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaMedium";
+  src: local("PuristaMedium"), url(./assets/fonts/PuristaMedium.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "PuristaSemiBold";
+  src: local("PuristaSemiBold"), url(./assets/fonts/PuristaSemiBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: local("RobotoCondensed"), url(./assets/fonts/RobotoCondensed.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensedBold";
+  src: local("RobotoCondensedBold"), url(./assets/fonts/RobotoCondensedBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensedLight";
+  src: local("RobotoCondensedLight"), url(./assets/fonts/RobotoCondensedLight.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "TahomaB";
+  src: local("TahomaB"), url(./assets/fonts/TahomaB.ttf) format("truetype");
+}
+
+@import "assets/icons/google-icons";

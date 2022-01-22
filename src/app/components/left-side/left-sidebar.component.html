@@ -1,0 +1,11 @@
+<mfd-resizeable-panel [horizontal]="false" position="right" panelName="left-sidebar">
+  <div class="layer-list-view">
+    <mfd-resizeable-panel position="bottom" [horizontal]="true" panelName="layer-stack">
+      <mfd-section-header [label]="'Layers'"></mfd-section-header>
+      <mfd-layer-stack></mfd-layer-stack>
+    </mfd-resizeable-panel>
+    <mfd-section-header [label]="'Bones stack (anchors)'"></mfd-section-header>
+    <mfd-bones-list class="scrollable"></mfd-bones-list>
+  </div>
+  <mfd-sources-list *ngIf="previewMode" class="layer-list"></mfd-sources-list>
+</mfd-resizeable-panel>

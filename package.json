@@ -1,16 +1,44 @@
 {
   "name": "arma-mfd-drawer",
   "version": "0.0.0",
+  "main": "index.js",
+  "repository": {},
+  "browser": {
+    "http": false,
+    "https": false,
+    "net": false,
+    "path": false,
+    "stream": false,
+    "tls": false,
+    "constants": false,
+    "fs": false,
+    "os": false,
+    "zlib": false
+  },
+  "build": {
+    "appId": "com.mgrzejszczak.A3MFDDrawer",
+    "productName": "A3 MFD Drawer",
+    "files": [
+      "dist"
+    ]
+  },
   "scripts": {
+    "postinstall": "ngcc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prerelease": "npm run build -- --prod",
+    "release": "electron-builder",
+    "prestart": "npm run clean",
+    "electron": "wait-on http://localhost:4200 && electron .",
+    "start:electron": "concurrently -k \"ng serve \" \"npm run electron\""
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/color-picker": "^5.0.2",
     "@angular/animations": "~11.0.4",
     "@angular/cdk": "^11.0.2",
     "@angular/common": "~11.0.4",
@@ -22,12 +50,27 @@
     "@angular/platform-browser-dynamic": "~11.0.4",
     "@angular/router": "~11.0.4",
     "@types/fabric": "^4.2.0",
-    "mouse-wheel-zoom": "^1.1.5",
+    "@types/mustache": "^4.1.2",
+    "builder-pattern": "^1.3.0",
+    "chalk": "^4.1.2",
+    "electron-reload": "^1.5.0",
+    "flatted": "^3.2.4",
+    "hex-rgb": "^5.0.0",
+    "mustache": "^4.2.0",
+    "ngx-color-picker": "^11.0.0",
     "ngx-fabric-wrapper": "^11.0.0",
-    "ngx-highlight-js": "^11.1.0",
-    "ngx-tree-dnd": "^2.6.0",
+    "ngx-highlightjs": "^4.1.3",
+    "ngx-material-file-input": "^2.1.1",
+    "ngx-opencv": "^2.0.1",
+    "ngx-sortablejs": "^10.0.0",
+    "ngx-toastr": "^13.2.0",
+    "primeicons": "^5.0.0",
+    "primeng": "^11.4.5",
     "rxjs": "~6.6.0",
+    "sortablejs": "^1.12.0",
+    "tga-js": "^1.1.1",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -35,8 +78,12 @@
     "@angular/cli": "~11.0.4",
     "@angular/compiler-cli": "~11.0.4",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.19.11",
+    "@types/sortablejs": "^1.10.6",
     "codelyzer": "^6.0.0",
+    "concurrently": "^5.3.0",
+    "electron": "^16.0.2",
+    "electron-builder": "^22.9.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",
@@ -47,6 +94,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "wait-on": "^5.2.1"
   }
 }

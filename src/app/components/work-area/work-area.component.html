@@ -1,16 +1,50 @@
-<div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer">
-    <div class="work-area mat-card mat-elevation-z0" #workspace>
-      <canvas width="500" height="500"></canvas>
-    </div>
+<div class="top-container">
+  <mat-button-toggle-group appearance="legacy">
+    <mat-button-toggle [checked]="viewMode==='design'"
+                       (change)="viewMode = $event.source.value; showDesigner.emit(true); showPreview.emit(false)"
+                       class="btn" value="design"
+                       [disableRipple]="true">Design
+    </mat-button-toggle>
+    <mat-button-toggle [checked]="viewMode==='preview'"
+                       (change)="viewMode = $event.source.value; showDesigner.emit(false); showPreview.emit(true)"
+                       class="btn" value="preview"
+                       [disableRipple]="true">Preview
+    </mat-button-toggle>
+    <mat-button-toggle [checked]="viewMode==='text'"
+                       (change)="viewMode = $event.source.value; showDesigner.emit(false); showPreview.emit(false)"
+                       class="btn" value="text"
+                       [disableRipple]="true">Text
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 </div>
-<div class="bottom-container">
+<div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer"
+     [style.display]="viewMode==='design' || viewMode==='preview' ? '' : 'none'">
+  <div class="back-overlay" #workspace>
+    <img class="back"
+         *ngIf="store.canvasUseImage"
+         [width]="store.canvasWidth"
+         [src]="store.canvasBackgroundImg"
+         [height]="store.canvasHeight">
+    <mfd-fabric-canvas [style.background]="!store.canvasUseImage ? store.canvasBackGroundColor.rgba : 'transparent'"
+                       style="display: block"
+                       [previewOnly]="viewMode==='preview'"></mfd-fabric-canvas>
+  </div>
+</div>
+<div class="code-container" *ngIf="viewMode==='text'">
+  <mfd-code-viewer></mfd-code-viewer>
+</div>
+
+<div class="bottom-container" *ngIf="viewMode!=='text'">
   <div class="zoom-actions">
-    <button mat-mini-fab>
+    <button mat-mini-fab (click)="zoomIn()">
       <mat-icon>add</mat-icon>
     </button>
     <span class="value">{{ZOOM_LEVEL | number : '1.2-2'}}</span>
-    <button mat-mini-fab>
+    <button mat-mini-fab (click)="zoomOut()">
       <mat-icon>remove</mat-icon>
+    </button>
+    <button mat-mini-fab [matTooltip]="'Reset zoom'" (click)="resetZoom()">
+      <mat-icon>fullscreen_exit</mat-icon>
     </button>
   </div>
   <span class="author">Created by Marek Grzejszczak</span>

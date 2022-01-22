@@ -1,27 +1,18 @@
 .main {
   display: flex;
   justify-content: space-between;
-  .layer-list {
-    display: block;
-    height: calc(100vh - 60px);
-    width: 18vw;
-    min-width: 350px;
-    background-color: #454f58;
-    z-index: 10;
-  }
 
   .work-area {
+    overflow: hidden;
     display: block;
     height: calc(100vh - 60px);
     width: 100%;
     z-index: 1;
   }
 
-  .toolbox {
+  .sidebar {
     display: block;
     height: calc(100vh - 60px);
-    width: 18vw;
-    min-width: 350px;
     background-color: #454f58;
     z-index: 10;
   }
@@ -34,5 +25,11 @@
     .horizontal-divider {
       width: 100%;
     }
+  }
+
+  .backdrop{
+    position: absolute;
+    height: 100%;
+    width: 100%;
   }
 }

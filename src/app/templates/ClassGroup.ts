@@ -1,33 +1,20 @@
-import {Color} from '../common/Color';
-import {BaseShape} from '../common/BaseShape';
-import {getColorArray, getCondition} from '../common/Utils';
+import {BaseElementModel} from '../common/BaseElementModel';
+import {getColorArray} from '../common/Utils';
+import {Color} from '@angular-material-components/color-picker';
+import {Point} from '../common/Point';
 
-export class ClassGroup implements BaseShape {
+export class ClassGroup extends BaseElementModel {
   name: string;
-  content: BaseShape[] = [];
+  content: BaseElementModel[] = [];
+  contentText: string;
   color?: Color;
+  alpha?: number;
+  clipTL?: Point;
+  clipBR?: Point;
+  clipTLParallax?: Point;
+  clipBRParallax?: Point;
   condition?: string;
-
-  getElement(indent: string = ''): string {
-    return `
-${indent}class ${this.name}
-${indent}{
-${indent}\t${getColorArray(this.color)}
-${indent}\t${getCondition(this.condition)}
-${indent}\t${getContent(this.content, indent)}
-${indent}};${addCommentsOnEndOfClass(this.name)}`;
-  }
-}
-
-function getContent(content: BaseShape[], indent: string): string {
-  let result = ``;
-  indent += '\t';
-  content.forEach(shape => {
-    result += shape.getElement(indent);
-  });
-  return result;
-}
-
-function addCommentsOnEndOfClass(name: string, bool: boolean = true): string {
-  return bool ? ` //End of ${name}` : ``;
+  blinking?: boolean;
+  blinkingPattern?: string;
+  blinkingStartsOn?: number;
 }

@@ -10,6 +10,7 @@
         "statements"
       ]
     },
+    "no-string-literal": false,
     "array-type": false,
     "arrow-return-shorthand": true,
     "curly": true,
@@ -30,7 +31,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      200
     ],
     "member-ordering": [
       true,
@@ -139,13 +140,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "mfd",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "mfd",
       "kebab-case"
     ]
   }

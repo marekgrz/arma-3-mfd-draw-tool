@@ -1,0 +1,12 @@
+<div *ngIf="treeService.selectedItem" class="properties-container">
+  <mfd-root-properties [item]="treeService.selectedItem" *ngIf="isRoot(treeService.selectedItem)"></mfd-root-properties>
+  <mfd-group-properties [item]="treeService.selectedItem" *ngIf="isGroup(treeService.selectedItem)"></mfd-group-properties>
+  <mfd-rectangle-properties [item]="treeService.selectedItem" *ngIf="isRectangle(treeService.selectedItem)"></mfd-rectangle-properties>
+  <mfd-texture-properties [item]="treeService.selectedItem" *ngIf="isTexture(treeService.selectedItem)"></mfd-texture-properties>
+  <mfd-circle-properties [item]="treeService.selectedItem" *ngIf="isCircle(treeService.selectedItem)"></mfd-circle-properties>
+  <mfd-triangle-properties [item]="treeService.selectedItem" *ngIf="isTriangle(treeService.selectedItem)"></mfd-triangle-properties>
+  <mfd-polygon-triangle-properties [item]="treeService.selectedItem" *ngIf="isPolygonTriangle(treeService.selectedItem)"></mfd-polygon-triangle-properties>
+  <mfd-polygon-rectangle-properties [item]="treeService.selectedItem" *ngIf="isPolygonRectangle(treeService.selectedItem)"></mfd-polygon-rectangle-properties>
+  <mfd-line-properties [item]="treeService.selectedItem" *ngIf="isLine(treeService.selectedItem)"></mfd-line-properties>
+  <mfd-text-properties [item]="treeService.selectedItem" *ngIf="isText(treeService.selectedItem)"></mfd-text-properties>
+</div>

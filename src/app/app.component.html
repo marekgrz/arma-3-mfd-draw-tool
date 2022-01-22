@@ -1,6 +1,6 @@
-<app-heder-menu></app-heder-menu>
-<div class="main">
-  <app-layer-list class="layer-list"></app-layer-list>
-  <app-work-area class="work-area"></app-work-area>
-  <app-toolbox class="toolbox"></app-toolbox>
+<mfd-header-menu></mfd-header-menu>
+<div class="main" [ngClass]="!store.isProjectStarted ? 'disabled-container' : ''">
+  <mfd-left-sidebar [previewMode]="previewMode" class="sidebar"></mfd-left-sidebar>
+  <mfd-work-area (showDesigner)="showToolbox = $event" (showPreview)="previewMode = $event" class="work-area"></mfd-work-area>
+  <mfd-right-sidebar *ngIf="showToolbox" class="sidebar"></mfd-right-sidebar>
 </div>

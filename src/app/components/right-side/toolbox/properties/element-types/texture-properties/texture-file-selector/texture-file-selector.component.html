@@ -1,0 +1,20 @@
+<mat-form-field appearance="outline" class="full-width small-input" [color]="'accent'" [floatLabel]="'always'" (click)="fileInput.click()">
+  <mat-label>Texture image [TGA]</mat-label>
+  <input matInput required
+         class="clickable"
+         [ngModel]="file.filePath"
+         readonly
+         type="text">
+  <mat-icon matSuffix class="clickable">folder</mat-icon>
+</mat-form-field>
+<mat-form-field appearance="outline" class="full-width small-input" [color]="'accent'" [floatLabel]="'always'" >
+  <mat-label>ARMA path</mat-label>
+  <input matInput required
+         [placeholder]="file.filePath"
+         [(ngModel)]="file.relativePath"
+         type="text">
+</mat-form-field>
+<mat-error *ngIf="file.filePath && file.relativePath === file.filePath" class="file-explicit-path-message">
+  Warning: Explicit path has been set, when exporting to ARMA set path to texture file manually in config file
+</mat-error>
+<input type="file" class="hidden-file-input" accept=".tga" (change)="handleFileInput($event.target.files)" #fileInput>

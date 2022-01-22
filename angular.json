@@ -12,12 +12,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "mfd",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/arma-mfd-drawer",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,10 +29,23 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "./node_modules/ngx-tree-dnd/styles-tree-dnd.css",
+              "./node_modules/highlight.js/styles/dracula.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "index.js",
+                "inject": false
+              }
+            ],
+            "allowedCommonJsDependencies": [
+              "highlight.js",
+              "fabric"
+            ]
           },
           "configurations": {
             "production": {
@@ -40,6 +53,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "index.js",
+                  "with": "index.prod.js"
                 }
               ],
               "optimization": true,
@@ -94,7 +111,11 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "./node_modules/ngx-tree-dnd/styles-tree-dnd.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/highlight.js/styles/dracula.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.less"
             ],
             "scripts": []
