@@ -1,6 +1,7 @@
 <mat-form-field [color]="'accent'" [floatLabel]="'always'" appearance="outline" class="small-input">
   <mat-label>Element name</mat-label>
   <input (focusout)="updateIfNeeded()"
+         (keydown.enter)="updateIfNeeded()"
          [(ngModel)]="_name"
          autocomplete="off"
          matInput
