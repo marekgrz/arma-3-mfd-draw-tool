@@ -76,7 +76,7 @@ export class LineTypeComponent {
     const line = new fabric.Polyline(
       coords,
       {
-        fill: '#000000',
+        fill: 'rgba(0,0,0,0)',
         stroke: '#000000',
         strokeWidth: 5,
         strokeUniform: true,
