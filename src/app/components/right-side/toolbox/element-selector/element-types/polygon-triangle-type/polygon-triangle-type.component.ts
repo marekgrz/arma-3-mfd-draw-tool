@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
@@ -26,7 +25,7 @@ export class PolygonTriangleTypeComponent extends BaseElementType {
     const triangle = new fabric.Triangle({
       width: 50, height: 50,
       left: 100, top: 100,
-      fill: new Color(0, 0, 0, 1) as any,
+      fill: '#000000',
     });
     triangle[ID] = generateId();
     this.createNewElement(this.treeService.itemFromPolygonTriangle(triangle));

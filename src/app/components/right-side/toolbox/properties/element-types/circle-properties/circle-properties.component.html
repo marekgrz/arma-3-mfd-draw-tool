@@ -62,7 +62,7 @@
     </mat-select>
   </mat-form-field>
 <!--  COLOR-->
-  <mfd-color-selector [(color)]="color" (colorChange)="save()"></mfd-color-selector>
+  <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
 <!--  ANGLE-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>

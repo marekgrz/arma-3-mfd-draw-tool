@@ -4,7 +4,6 @@ import { generateId, ItemType, StackItem } from './elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../utils/store.service';
 import { findByID, flattenNode } from '../../../common/Utils';
-import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BONENAME, CIRCLESTEP, ID, LINETYPE, POINTS } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
@@ -77,22 +76,18 @@ export class InteractionService {
   }
 
   onDeleteSelection(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {message: 'Delete selected elements?'}
+    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //   data: {message: 'Delete selected elements?'}
+    // });
+    this.store.canvas.getActiveObjects().forEach(it => {
+      this.store.canvas.remove(it);
+      this.treeService.deleteItemByID(it[ID]);
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.store.canvas.getActiveObjects().forEach(it => {
-          this.store.canvas.remove(it);
-          this.treeService.deleteItemByID(it[ID]);
-        });
-        if (this.treeService.selectedItem && this.treeService.selectedItem.itemType === ItemType.group) {
-          this.treeService.deleteItemByID(this.treeService.selectedItem.id);
-        }
-        this.store.canvas.discardActiveObject();
-        this.refreshView();
-      }
-    });
+    if (this.treeService.selectedItem && this.treeService.selectedItem.itemType === ItemType.group) {
+      this.treeService.deleteItemByID(this.treeService.selectedItem.id);
+    }
+    this.store.canvas.discardActiveObject();
+    this.refreshView();
   }
 
   onDuplicateSelection(): void {

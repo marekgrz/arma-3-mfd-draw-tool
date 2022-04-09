@@ -25,7 +25,7 @@ export class CircleTypeComponent extends BaseElementType {
   addCircle(): void {
     const circle = new fabric.Circle({
       radius: 50,
-      fill: 'rgba(0,0,0,0)',
+      fill: '#000000',
       stroke: '#000000',
       strokeWidth: 1,
       strokeUniform: true,

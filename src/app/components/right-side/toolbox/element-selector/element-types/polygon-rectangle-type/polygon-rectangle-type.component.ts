@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { fabric } from 'fabric';
-import { Color } from '@angular-material-components/color-picker';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { ID } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../base-element-type.directive';
@@ -26,7 +25,7 @@ export class PolygonRectangleTypeComponent extends BaseElementType {
     const rect = new fabric.Rect({
       width: 50, height: 50,
       left: 100, top: 100,
-      fill: new Color(0, 0, 0, 1) as any,
+      fill: '#000000',
     });
     rect[ID] = generateId();
     this.createNewElement(this.treeService.itemFromPolygonRectangle(rect));

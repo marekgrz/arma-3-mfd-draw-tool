@@ -26,7 +26,7 @@ export class TriangleTypeComponent extends BaseElementType {
     const triangle = new fabric.Triangle({
       width: 50, height: 50,
       left: 0, top: 0,
-      fill: 'rgba(0,0,0,0)',
+      fill: '#000000',
       stroke: '#000000',
       centeredRotation: true,
       strokeWidth: 1,

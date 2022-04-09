@@ -8,10 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ColorSelectorComponent implements OnInit {
 
   @Input()
-  color: string;
+  colorHex: string;
 
   @Output()
-  colorChange: EventEmitter<string> = new EventEmitter<string>();
+  colorHexChange: EventEmitter<string> = new EventEmitter<string>();
 
   private startValue;
 
@@ -19,12 +19,12 @@ export class ColorSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.startValue = this.color.slice();
+    this.startValue = this.colorHex.slice();
   }
 
   onColorChanged(): void {
-    if (this.color !== this.startValue) {
-      this.colorChange.emit(this.color);
+    if (this.colorHex !== this.startValue) {
+      this.colorHexChange.emit(this.colorHex);
     }
   }
 }

@@ -1,7 +1,7 @@
 <div class="small-input full-width color-picker-wrapper">
-  <input matInput class="color-picker-input" [value]="color"
-         [(colorPicker)]="color"
+  <input matInput class="color-picker-input" [value]="colorHex"
+         [(colorPicker)]="colorHex"
          [cpOutputFormat]="'hex'"
          (colorPickerClose)="onColorChanged()"
-         [style.background]="color"/>
+         [style.background]="colorHex"/>
 </div>
