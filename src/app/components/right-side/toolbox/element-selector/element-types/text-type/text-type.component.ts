@@ -28,6 +28,7 @@ export class TextTypeComponent extends BaseElementType {
       fontFamily: 'RobotoCondensed',
       textAlign: 'center',
       fontSize: 50,
+      lockRotation: true,
     });
     text[ID] = generateId();
     this.createNewElement(this.treeService.itemFromText(text));

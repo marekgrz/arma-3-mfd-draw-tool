@@ -37,6 +37,7 @@ export class TextPropertiesComponent implements OnInit {
     text.set('fill', this.color);
     text.setCoords();
     text['source'] = this.source;
+    text.lockRotation = true;
     this.store.canvas.requestRenderAll();
   }
 
