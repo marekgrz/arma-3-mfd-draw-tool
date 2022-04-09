@@ -1,6 +1,6 @@
 import { Point } from '../../../common/Point';
 
-export class  BoneBaseModel {
+export class BoneBaseModel {
   name: string;
   type: BoneType;
 }

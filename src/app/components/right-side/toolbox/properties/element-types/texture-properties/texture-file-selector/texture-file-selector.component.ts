@@ -14,7 +14,8 @@ export class TextureFileSelectorComponent {
   @Output()
   fileChange: EventEmitter<TextureFile> = new EventEmitter<TextureFile>();
 
-  constructor() {}
+  constructor() {
+  }
 
   openTexture(): void {
     console.log('Clicked');

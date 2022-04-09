@@ -60,7 +60,7 @@ export class TreeService {
     return Builder(StackItem)
       .id(line[ID])
       .label('Line_' + this.lineIndex++)
-      .itemType( ItemType.line)
+      .itemType(ItemType.line)
       .data(line)
       .children(null)
       .icon('material-icons-outlined line')

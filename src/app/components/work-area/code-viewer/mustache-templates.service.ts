@@ -10,7 +10,8 @@ export class MustacheTemplatesService {
 
   templates: MustacheTemplates;
 
-  constructor(private ipc: IpcService) {}
+  constructor(private ipc: IpcService) {
+  }
 
   loadTemplates(): Observable<MustacheTemplates> {
     if (this.templates) {
@@ -33,6 +34,7 @@ export class MustacheTemplatesService {
       .group(message.find(it => it.name === 'group')?.template)
       .line(message.find(it => it.name === 'line')?.template)
       .polygon(message.find(it => it.name === 'polygon')?.template)
+      .text(message.find(it => it.name === 'text')?.template)
       .build();
     this.templates = templates;
     return templates;
@@ -48,4 +50,5 @@ export class MustacheTemplates {
   group: string;
   line: string;
   polygon: string;
+  text: string;
 }

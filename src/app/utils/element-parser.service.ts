@@ -11,13 +11,15 @@ import { CIRCLESTEP, ID, LINETYPE, POINTS } from '../common/ProjectFileStructure
 import { StoreService } from './store.service';
 import { Builder } from 'builder-pattern';
 import hexRgb from 'hex-rgb';
+import { TextElement } from '../templates/TextElement';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementParserService {
 
-  constructor(private treeService: TreeService, private store: StoreService) {}
+  constructor(private treeService: TreeService, private store: StoreService) {
+  }
 
   public getMFDClass(): ClassGroup {
     const bonesClass = Builder(ClassGroup)
@@ -28,7 +30,7 @@ export class ElementParserService {
     const drawClass = Builder(ClassGroup)
       .name('Draw')
       .type(ElementType.group)
-      .content( this.convertToA3Format(this.treeService.itemList))
+      .content(this.convertToA3Format(this.treeService.itemList))
       .build();
 
     return Builder(ClassGroup)
@@ -73,6 +75,9 @@ export class ElementParserService {
       case ItemType.texture: {
         return this.createPolygon(this.addPointsFromCoords(item));
       }
+      case ItemType.text: {
+        return this.createText(this.addPointsFromCoords(item));
+      }
     }
   }
 
@@ -80,7 +85,6 @@ export class ElementParserService {
     return Builder(ClassGroup)
       .name(item.label)
       .type(ElementType.group)
-      .color(new Color(1, 1, 1, 1))
       .condition(item.groupProperties?.condition)
       .blinking(item.groupProperties?.blinking)
       .blinkingPattern(item.groupProperties?.blinkingPattern)
@@ -114,6 +118,26 @@ export class ElementParserService {
       .color(element.fill)
       .texturePath(item.textureFile?.relativePath)
       .points(element.points)
+      .build();
+  }
+
+  private createText(item: StackItem): TextElement {
+    const element = item.data;
+    const fontWidth = (item.data.calcTextWidth() / element.text.length) / this.store.canvasWidth;
+    const fontHeight = (item.data.calcTextHeight()) / this.store.canvasHeight;
+    const pos = Point.from(element.aCoords.tl.x / this.store.canvasWidth, element.aCoords.tl.y / this.store.canvasHeight);
+    const right = Point.from(pos.x + fontWidth, pos.y);
+    const down = Point.from(pos.x, pos.y + fontHeight);
+    return Builder(TextElement)
+      .name(item.label)
+      .color(this.toRgba(element.fill))
+      .type(ElementType.text)
+      .text(element.text)
+      .align(element.textAlign)
+      .scale(1)
+      .pos(pos)
+      .right(right)
+      .down(down)
       .build();
   }
 

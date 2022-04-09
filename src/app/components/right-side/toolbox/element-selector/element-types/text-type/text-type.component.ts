@@ -24,6 +24,7 @@ export class TextTypeComponent extends BaseElementType {
   addText(): void {
     const text = new fabric.Text('Text', {
       left: 100, top: 100,
+      fill: '#000000',
       fontFamily: 'RobotoCondensed',
       textAlign: 'center',
       fontSize: 50,

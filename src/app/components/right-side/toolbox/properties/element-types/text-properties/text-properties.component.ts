@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
@@ -6,7 +6,8 @@ import { SourceService } from '../../../../../../utils/source.service';
 @Component({
   selector: 'mfd-text-properties',
   templateUrl: './text-properties.component.html',
-  styleUrls: ['./text-properties.component.less']
+  styleUrls: ['./text-properties.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class TextPropertiesComponent implements OnInit {
 

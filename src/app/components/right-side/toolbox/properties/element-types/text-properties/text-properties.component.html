@@ -19,7 +19,17 @@
     </mat-form-field>
   </div>
 
-  <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText" >Use static text</mat-checkbox>
+  <mat-button-toggle-group name="textAlign" aria-label="Text align" class="align-selector"
+                           [(ngModel)]="item.data.textAlign" (ngModelChange)="save()">
+    <mat-button-toggle value="left" [matTooltip]="'Left align'"><i class="material-icons">format_align_left</i>
+    </mat-button-toggle>
+    <mat-button-toggle value="center" [matTooltip]="'Center align'"><i class="material-icons">format_align_center</i>
+    </mat-button-toggle>
+    <mat-button-toggle value="right" [matTooltip]="'Right align'"><i class="material-icons">format_align_right</i>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText">Use static text</mat-checkbox>
   <div [className]="staticText ? '' : 'disabled'">
     <mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Static text</mat-label>

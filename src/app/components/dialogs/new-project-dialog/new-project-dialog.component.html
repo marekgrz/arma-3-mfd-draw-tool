@@ -1,14 +1,15 @@
 <h2 mat-dialog-title>New project</h2>
 <mat-dialog-content class="mat-typography">
   <div class="row-container">
-    <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'" [formGroup]="requiredFields">
+    <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'"
+                    [formGroup]="requiredFields">
       <mat-label>MFD Classname</mat-label>
       <input matInput autocomplete="off"
              required
-      formControlName="name">
+             formControlName="name">
       <mat-error *ngIf="name.invalid || name.invalid">Field required</mat-error>
     </mat-form-field>
-<!--MEM POINTS-->
+    <!--MEM POINTS-->
     <div class="section" [formGroup]="requiredFields">
       <div class="title">Memory points
         <mat-icon matSuffix class="clickable info-icon"
@@ -56,7 +57,7 @@
       </div>
     </div>
 
-<!--SCREEN DIMENSIONS-->
+    <!--SCREEN DIMENSIONS-->
     <div class="section" [formGroup]="requiredFields">
       <div class="title">Screen dimensions
         <mat-icon matSuffix class="clickable info-icon"

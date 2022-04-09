@@ -1,6 +1,6 @@
 <div mat-dialog-title>Create new bone</div>
 <mat-dialog-content>
-<!--  NAME-->
+  <!--  NAME-->
   <mat-form-field appearance="outline" class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Name</mat-label>
     <input matInput autocomplete="off"
@@ -9,7 +9,7 @@
     <mat-error *ngIf="nameFormControl.hasError('required')">Field required</mat-error>
     <mat-error *ngIf="nameFormControl.hasError('exists')">Bone with that name already exists</mat-error>
   </mat-form-field>
-<!--  TYPE-->
+  <!--  TYPE-->
   <mat-form-field appearance="outline" class="medium-input select full-width" color="accent">
     <mat-label>Bone type</mat-label>
     <mat-select [(ngModel)]="boneType">
@@ -18,12 +18,12 @@
       <mat-option [value]="'rotational'">Rotational</mat-option>
     </mat-select>
   </mat-form-field>
-<!--  FIXED-->
+  <!--  FIXED-->
   <div *ngIf="boneType==='fixed'">
     <mfd-bone-fixed [bone]="fixedBone"></mfd-bone-fixed>
   </div>
-<!--      ROTATIONAL-->
-<!--      LINEAR-->
+  <!--      ROTATIONAL-->
+  <!--      LINEAR-->
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

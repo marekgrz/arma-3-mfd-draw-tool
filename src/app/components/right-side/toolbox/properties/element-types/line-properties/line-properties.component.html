@@ -1,14 +1,14 @@
 <div class="row-container">
-<!--  Name-->
+  <!--  Name-->
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
-<!--  Position-->
+  <!--  Position-->
   <mfd-position-input [(positionX)]="item.base.position.x"
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
   <!--  Dimensions-->
   <mfd-dimensions-input [(item)]="item"
                         (save)="save()"></mfd-dimensions-input>
-<!--  Stroke-->
+  <!--  Stroke-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Stroke</mat-label>
     <input matInput autocomplete="off"
@@ -16,16 +16,16 @@
            [(ngModel)]="item.data.strokeWidth"
            (change)="save()">
   </mat-form-field>
-<!--  Line Type-->
+  <!--  Line Type-->
   <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
     <mat-label>Line type</mat-label>
     <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
       <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-<!--  Color-->
+  <!--  Color-->
   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
-<!--  Angle-->
+  <!--  Angle-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">

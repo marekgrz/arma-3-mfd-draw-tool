@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {fromEvent, Subscription} from 'rxjs';
-import {StoreService} from '../../utils/store.service';
-import { EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { StoreService } from '../../utils/store.service';
 
 @Component({
   selector: 'mfd-work-area',

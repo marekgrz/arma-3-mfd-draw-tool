@@ -11,9 +11,10 @@
         droppableScope="self"
         class="tree"
         styleClass="tree">
-  <ng-template let-node  pTemplate="treeNode">
+  <ng-template let-node pTemplate="treeNode">
     <span #nodeRef>
-      <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'" (click)="onToggleVisibility(node, nodeRef)"></i>
+      <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'"
+         (click)="onToggleVisibility(node, nodeRef)"></i>
       <span class="node-label" [ngClass]="node.itemType === 'group' ? 'p-tree-group-header': ''">{{node.label}}</span>
     </span>
   </ng-template>

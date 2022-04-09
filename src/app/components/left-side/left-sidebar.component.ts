@@ -10,5 +10,6 @@ export class LeftSidebarComponent {
   @Input()
   previewMode: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 }

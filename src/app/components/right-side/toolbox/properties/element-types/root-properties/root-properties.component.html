@@ -9,9 +9,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Aspect ratio</mat-label>
-    <input disabled type="number" matInput autocomplete="off" [(ngModel)]="store.canvasAspectRatio" placeholder="Placeholder">
+    <input disabled type="number" matInput autocomplete="off" [(ngModel)]="store.canvasAspectRatio"
+           placeholder="Placeholder">
   </mat-form-field>
-  <mat-checkbox class="checkbox" [(ngModel)]="useImage" >Use image as background</mat-checkbox>
+  <mat-checkbox class="checkbox" [(ngModel)]="useImage">Use image as background</mat-checkbox>
   <div [className]="useImage ? '' : 'disabled'">
     <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Canvas background</mat-label>

@@ -11,7 +11,8 @@ export class BoneFixedComponent implements OnInit {
   @Input()
   bone: BoneFixedModel;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

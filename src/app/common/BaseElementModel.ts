@@ -7,5 +7,6 @@ export enum ElementType {
   line = 'LINE',
   circle = 'CIRCLE',
   triangle = 'TRIANGLE',
-  polygon = 'POLYGON'
+  polygon = 'POLYGON',
+  text = 'TEXT'
 }

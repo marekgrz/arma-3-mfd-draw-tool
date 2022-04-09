@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BaseElementModel, ElementType } from '../../../common/BaseElementModel';
 import { Line } from '../../../templates/Line';
 import { Polygon } from '../../../templates/Polygon';
+import { TextElement } from '../../../templates/TextElement';
 
 @Component({
   selector: 'mfd-code-viewer',
@@ -59,12 +60,16 @@ export class CodeViewerComponent implements OnDestroy {
       case ElementType.line: {
         const line = content as Line;
         line.points.map((point, index) => point['comma'] = index < line.points.length - 1);
-        return Mustache.render(this.templates.line, content);
+        return Mustache.render(this.templates.line, line);
       }
       case ElementType.polygon: {
-        const line = content as Polygon;
-        line.points.map((point, index) => point['comma'] = index < line.points.length - 1);
-        return Mustache.render(this.templates.polygon, content);
+        const polygon = content as Polygon;
+        polygon.points.map((point, index) => point['comma'] = index < polygon.points.length - 1);
+        return Mustache.render(this.templates.polygon, polygon);
+      }
+      case ElementType.text: {
+        const textElement = content as TextElement;
+        return Mustache.render(this.templates.text, textElement);
       }
     }
   }

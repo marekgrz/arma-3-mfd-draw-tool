@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SourceService} from '../../../utils/source.service';
+import { Component, OnInit } from '@angular/core';
+import { SourceService } from '../../../utils/source.service';
 
 @Component({
   selector: 'mfd-sources-list',
