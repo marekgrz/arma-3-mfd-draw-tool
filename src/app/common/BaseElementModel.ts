@@ -4,6 +4,7 @@ export class BaseElementModel {
 
 export enum ElementType {
   group = 'GROUP',
+  mfdParent = 'MFDPARENT',
   line = 'LINE',
   circle = 'CIRCLE',
   triangle = 'TRIANGLE',

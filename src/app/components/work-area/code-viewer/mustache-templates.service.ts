@@ -31,6 +31,7 @@ export class MustacheTemplatesService {
 
   private getMustacheTemplates(message: TemplateData[]): MustacheTemplates {
     const templates = Builder(MustacheTemplates)
+      .mfdParent(message.find(it => it.name === 'mfd_parent')?.template)
       .group(message.find(it => it.name === 'group')?.template)
       .line(message.find(it => it.name === 'line')?.template)
       .polygon(message.find(it => it.name === 'polygon')?.template)
@@ -47,6 +48,7 @@ export interface TemplateData {
 }
 
 export class MustacheTemplates {
+  mfdParent: string;
   group: string;
   line: string;
   polygon: string;

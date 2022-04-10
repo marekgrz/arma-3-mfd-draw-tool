@@ -10,4 +10,8 @@ export class Color {
     this.b = blue;
     this.a = alpha;
   }
+
+  static from(red: number, green: number, blue: number, alpha: number): Color {
+    return new Color(red, green, blue, alpha);
+  }
 }

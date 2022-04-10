@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ItemType, StackItem } from '../components/left-side/layer-stack-ng/elements/StackItem';
 import { BaseElementModel, ElementType } from '../common/BaseElementModel';
 import { ClassGroup } from '../templates/ClassGroup';
-import { Color } from '@angular-material-components/color-picker';
 import { Line } from '../templates/Line';
 import { Polygon } from '../templates/Polygon';
 import { Point } from '../common/Point';
@@ -12,6 +11,8 @@ import { StoreService } from './store.service';
 import { Builder } from 'builder-pattern';
 import hexRgb from 'hex-rgb';
 import { TextElement } from '../templates/TextElement';
+import { MaterialColor, MFDParentClass } from '../templates/MFDParentClass';
+import { Color } from '../common/Color';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,24 @@ export class ElementParserService {
       .content(this.convertToA3Format(this.treeService.itemList))
       .build();
 
-    return Builder(ClassGroup)
-      .name('MFD')
-      .type(ElementType.group)
+    return Builder(MFDParentClass)
+      .name(this.store.hudProperties.name)
+      .type(ElementType.mfdParent)
       .content([bonesClass, drawClass])
+      .topLeft(this.store.hudProperties.topLeft)
+      .topRight(this.store.hudProperties.topRight)
+      .bottomLeft(this.store.hudProperties.bottomLeft)
+      .bottomRight(this.store.hudProperties.bottomRight)
+      .borderTop(this.store.hudProperties.borderTop)
+      .borderBottom(this.store.hudProperties.borderBottom)
+      .borderLeft(this.store.hudProperties.borderLeft)
+      .borderRight(this.store.hudProperties.borderRight)
+      .font(this.store.hudProperties.font)
+      .color(Color.from(1.0, 1.0, 1.0, 1.0))
+      .material(MaterialColor.from(
+        this.toRgba(this.store.hudProperties.material.diffuse),
+        this.toRgba(this.store.hudProperties.material.ambient),
+        this.toRgba(this.store.hudProperties.material.emissive)))
       .build();
   }
 

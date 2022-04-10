@@ -1,6 +1,6 @@
 import { BaseElementModel } from '../common/BaseElementModel';
-import { Color } from '@angular-material-components/color-picker';
 import { Point } from '../common/Point';
+import { Color } from '../common/Color';
 
 export class TextElement extends BaseElementModel {
   name: string;

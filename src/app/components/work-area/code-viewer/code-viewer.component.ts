@@ -10,6 +10,7 @@ import { BaseElementModel, ElementType } from '../../../common/BaseElementModel'
 import { Line } from '../../../templates/Line';
 import { Polygon } from '../../../templates/Polygon';
 import { TextElement } from '../../../templates/TextElement';
+import { MFDParentClass } from '../../../templates/MFDParentClass';
 
 @Component({
   selector: 'mfd-code-viewer',
@@ -50,6 +51,13 @@ export class CodeViewerComponent implements OnDestroy {
 
   private renderObjectToString(content: BaseElementModel): string {
     switch (content.type) {
+      case ElementType.mfdParent: {
+        const input = content as MFDParentClass;
+        if (input.content) {
+          input.contentText = this.addIndentForEachLine(this.getInnerContent(input));
+        }
+        return Mustache.render(this.templates.mfdParent, input);
+      }
       case ElementType.group: {
         const input = content as ClassGroup;
         if (input.content) {

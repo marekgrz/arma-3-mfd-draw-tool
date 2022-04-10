@@ -1,0 +1,23 @@
+class {{name}}
+{
+  topLeft       = "{{topLeft}}";
+  topRight      = "{{topRight}}";
+  bottomLeft    = "{{bottomLeft}}";
+  bottomRight   = "{{bottomRight}}";
+  borderTop     = "{{borderTop}}";
+  borderBottom  = "{{borderBottom}}";
+  borderLeft    = "{{borderLeft}}";
+  borderRight   = "{{borderRight}}";
+  font          = "{{font}}";
+  {{#color}}
+  color[] = { {{color.r}}, {{color.g}}, {{color.b}}, {{color.a}} };
+  {{/color}}
+  {{#material}}
+  class material {
+    ambient[]   = { {{material.ambient.r}}, {{material.ambient.g}}, {{material.ambient.b}}, {{material.ambient.a}} };
+    diffuse[]   = { {{material.diffuse.r}}, {{material.diffuse.g}}, {{material.diffuse.b}}, {{material.diffuse.a}} };
+    emissive[]  = { {{material.emissive.r}}, {{material.emissive.g}}, {{material.emissive.b}}, {{material.emissive.a}} };
+  };
+  {{/material}}
+  {{{contentText}}}
+};//End of {{name}}

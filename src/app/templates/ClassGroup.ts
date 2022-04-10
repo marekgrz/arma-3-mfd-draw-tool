@@ -1,7 +1,6 @@
-import {BaseElementModel} from '../common/BaseElementModel';
-import {getColorArray} from '../common/Utils';
-import {Color} from '@angular-material-components/color-picker';
-import {Point} from '../common/Point';
+import { BaseElementModel } from '../common/BaseElementModel';
+import { Point } from '../common/Point';
+import { Color } from '../common/Color';
 
 export class ClassGroup extends BaseElementModel {
   name: string;
