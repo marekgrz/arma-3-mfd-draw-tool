@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { FormControl } from '@angular/forms';
-import { FileInput } from 'ngx-material-file-input';
+
+// import { FileInput } from 'ngx-material-file-input';
 
 @Component({
   selector: 'mfd-root-properties',
@@ -19,14 +20,14 @@ export class RootPropertiesComponent implements OnInit {
 
   file = new FormControl('');
   color: FormControl;
-  defaultFile: FileInput;
+  // defaultFile: FileInput;
   useImage = false;
 
   constructor(public store: StoreService) {
     this.width = store.canvasWidth;
     this.height = store.canvasHeight;
     this.useImage = this.store.canvasUseImage;
-    this.defaultFile = new FileInput(this.store.canvasBackgroundFile != null ? [this.store.canvasBackgroundFile] : []);
+    // this.defaultFile = new FileInput(this.store.canvasBackgroundFile != null ? [this.store.canvasBackgroundFile] : []);
     this.color = new FormControl(this.store.canvasBackGroundColor);
   }
 

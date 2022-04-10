@@ -28,7 +28,6 @@ import { RectanglePropertiesComponent } from './components/right-side/toolbox/pr
 import { FabricModule } from 'ngx-fabric-wrapper';
 import { FabricCanvasComponent } from './components/work-area/fabric-canvas/fabric-canvas.component';
 import { RootPropertiesComponent } from './components/right-side/toolbox/properties/element-types/root-properties/root-properties.component';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS, NgxMatColorPickerModule } from '@angular-material-components/color-picker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TexturePropertiesComponent } from './components/right-side/toolbox/properties/element-types/texture-properties/texture-properties.component';
@@ -155,7 +154,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
         SortablejsModule.forRoot({animation: 150}),
         MatExpansionModule,
         FabricModule,
-        MaterialFileInputModule,
+        // MaterialFileInputModule,
         ReactiveFormsModule,
         NgxMatColorPickerModule,
         ColorPickerModule,
