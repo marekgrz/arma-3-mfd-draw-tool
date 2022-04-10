@@ -19,7 +19,6 @@ export function parseProjectToFile(treeService: TreeService, store: StoreService
   project.globalHUDProperties = store.hudProperties;
   project.bones = store.bones;
   return CircularJSON.stringify(project);
-  // return JSON.stringify(project);
 }
 
 export function parseFileToProject(message: string, treeService: TreeService, store: StoreService): void {
@@ -53,17 +52,17 @@ export class GlobalHUDProperties {
   font = 'RobotoCondensed';
   helmetMountedDisplay = false;
   material: {
-    ambient: Color,
-    diffuse: Color,
-    emissive: Color,
+    ambient: string,
+    diffuse: string,
+    emissive: string,
   } = {
-    ambient: new Color(128, 128, 128, 1),
-    diffuse: new Color(255, 255, 255, 1),
-    emissive: new Color(128, 128, 128, 1)
+    ambient: '#000000',
+    diffuse: '#000000',
+    emissive: '#000000',
   };
   // additional
-  screenWidth: number;
-  screenHeight: number;
+  screenWidth = 1024;
+  screenHeight = 1024;
 }
 
 

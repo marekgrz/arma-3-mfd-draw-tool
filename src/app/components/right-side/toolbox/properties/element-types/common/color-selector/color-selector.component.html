@@ -2,6 +2,7 @@
   <input matInput class="color-picker-input" [value]="colorHex"
          [(colorPicker)]="colorHex"
          [cpOutputFormat]="'hex'"
+         [cpAlphaChannel]="'always'"
          (colorPickerClose)="onColorChanged()"
          [style.background]="colorHex"/>
 </div>

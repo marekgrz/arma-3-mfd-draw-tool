@@ -5,11 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { StoreService } from '../../utils/store.service';
 import { parseFileToProject, parseProjectToFile } from '../../common/ProjectFileStructure';
 import { MatDialog } from '@angular/material/dialog';
-import { NewProjectDialogComponent } from '../dialogs/new-project-dialog/new-project-dialog.component';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from '../../utils/local-storage.service';
 import { HistoryService } from '../../utils/history.service';
+import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
 
 @Component({
   selector: 'mfd-header-menu',
@@ -99,7 +99,7 @@ export class HeaderMenuComponent implements OnInit {
     this.store.resetCanvas();
     this.treeService.resetProjectStack();
     this.ipc.send('new', '');
-    const dialogRef = this.dialog.open(NewProjectDialogComponent);
+    const dialogRef = this.dialog.open(ProjectSettingsDialogCreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       result ? this.hideSnackBarInfo() : this.showSnackBarInfo();

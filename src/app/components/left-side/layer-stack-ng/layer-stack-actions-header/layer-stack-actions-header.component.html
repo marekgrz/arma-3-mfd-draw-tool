@@ -1,5 +1,5 @@
 <div class="layer-buttons" #wrapper>
-  <button mat-button class="project-settings-btn">
+  <button mat-button class="project-settings-btn" (click)="onEditProjectSettings()">
     Project settings
   </button>
   <div class="action-icons">
@@ -18,7 +18,7 @@
 
 <ng-template #actionList>
   <button class="action-button-color" mat-button matTooltip="Delete selected element"
-          [disabled]="!treeService.selectedItem" (click)="deleteSelection()">
+          [disabled]="!treeService.selectedItem" (click)="onDeleteSelection()">
     <i class="material-icons">delete</i>
   </button>
   <button class="action-button-color" mat-button matTooltip="Create group" (click)="onNewGroup()">

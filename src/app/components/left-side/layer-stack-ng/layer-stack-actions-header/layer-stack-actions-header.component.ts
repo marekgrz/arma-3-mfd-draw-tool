@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TreeService } from '../tree.service';
 import { InteractionService } from '../interaction.service';
 import { TreeNode } from 'primeng/api';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectSettingsDialogModifyComponent } from '../../../dialogs/project-settings-dialog/project-settings-dialog-modify/project-settings-dialog-modify.component';
 
 @Component({
   selector: 'mfd-layer-stack-actions-header',
@@ -11,10 +13,15 @@ import { TreeNode } from 'primeng/api';
 export class LayerStackActionsHeaderComponent {
 
   constructor(public treeService: TreeService,
-              private interaction: InteractionService) {
+              private interaction: InteractionService,
+              private dialog: MatDialog) {
   }
 
-  deleteSelection(): void {
+  onEditProjectSettings(): void {
+    this.dialog.open(ProjectSettingsDialogModifyComponent);
+  }
+
+  onDeleteSelection(): void {
     if (this.treeService.selectedItem) {
       this.interaction.onDeleteSelection();
     }

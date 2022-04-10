@@ -43,7 +43,7 @@ import { HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions } from 'ngx-highli
 import { ToastrModule } from 'ngx-toastr';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NewProjectDialogComponent } from './components/dialogs/new-project-dialog/new-project-dialog.component';
+import { ProjectSettingsContentComponent } from './components/dialogs/project-settings-dialog/project-settings-content/project-settings-content.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
 import { LineTypeComponent } from './components/right-side/toolbox/element-selector/element-types/line-type/line-type.component';
@@ -81,6 +81,8 @@ import { LayerStackComponent } from './components/left-side/layer-stack-ng/layer
 import { LayerStackActionsHeaderComponent } from './components/left-side/layer-stack-ng/layer-stack-actions-header/layer-stack-actions-header.component';
 import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-panel.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { ProjectSettingsDialogCreateComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
+import { ProjectSettingsDialogModifyComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-modify/project-settings-dialog-modify.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
     TrianglePropertiesComponent,
     LinePropertiesComponent,
     CodeViewerComponent,
-    NewProjectDialogComponent,
+    ProjectSettingsContentComponent,
     ConfirmDialogComponent,
     LineTypeComponent,
     RectangleTypeComponent,
@@ -133,6 +135,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
     LayerStackComponent,
     LayerStackActionsHeaderComponent,
     ResizeablePanelComponent,
+    ProjectSettingsDialogCreateComponent,
+    ProjectSettingsDialogModifyComponent,
   ],
     imports: [
         BrowserModule,

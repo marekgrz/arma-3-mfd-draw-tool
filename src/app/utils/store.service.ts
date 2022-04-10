@@ -78,6 +78,10 @@ export class StoreService {
     this.isProjectStarted = true;
   }
 
+  updateProject(hudProperties: GlobalHUDProperties): void {
+    this.hudProperties = hudProperties;
+  }
+
   resetCanvas(): void {
     if (this.canvas) {
       this.canvasWidth = 0;
