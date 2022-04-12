@@ -76,22 +76,22 @@ export class ElementParserService {
         return this.createLine(this.lineFromCircle(item));
       }
       case ItemType.rectangle: {
-        return this.createLine(this.addPointsFromCoords(item));
+        return this.createLine(this.addPointsToRectangle(item));
       }
       case ItemType.triangle: {
-        return this.createLine(this.addPointsFromCoords(item));
+        return this.createLine(this.addPointsToTriangle(item));
       }
       case ItemType.polygonRect: {
-        return this.createPolygon(this.addPointsFromCoords(item));
+        return this.createPolygon(this.addPointsToRectangle(item, true));
       }
       case ItemType.polygonTriangle: {
-        return this.createPolygon(this.addPointsFromCoords(item));
+        return this.createPolygon(this.addPointsToTriangle(item, true));
       }
       case ItemType.texture: {
-        return this.createPolygon(this.addPointsFromCoords(item));
+        return this.createPolygon(this.addPointsToRectangle(item, true));
       }
       case ItemType.text: {
-        return this.createText(this.addPointsFromCoords(item));
+        return this.createText(item);
       }
     }
   }
@@ -118,7 +118,7 @@ export class ElementParserService {
       .name(item.label)
       .type(ElementType.line)
       .color(this.toRgba(element.stroke))
-      .points(element.points)
+      .points(this.canvasPointsToMFDPoints(element.points))
       .bone(item.bone)
       .lineType(element[LINETYPE])
       .width(Number(element.strokeWidth))
@@ -130,15 +130,15 @@ export class ElementParserService {
     return Builder(Polygon)
       .name(item.label)
       .type(ElementType.polygon)
-      .color(element.fill)
+      .color(this.toRgba(element.fill))
       .texturePath(item.textureFile?.relativePath)
-      .points(element.points)
+      .points(this.canvasPointsToMFDPoints(element.points))
       .build();
   }
 
   private createText(item: StackItem): TextElement {
     const element = item.data;
-    const fontWidth = (item.data.calcTextWidth() / element.text.length) / this.store.canvasWidth;
+    const fontWidth = ((item.data.calcTextWidth() / element.text.length) * 1.8) / this.store.canvasWidth;
     const fontHeight = (item.data.calcTextHeight()) / this.store.canvasHeight;
     const pos = Point.from(element.aCoords.tl.x / this.store.canvasWidth, element.aCoords.tl.y / this.store.canvasHeight);
     const right = Point.from(pos.x + fontWidth, pos.y);
@@ -172,10 +172,26 @@ export class ElementParserService {
     return item;
   }
 
-  private addPointsFromCoords(item: StackItem): StackItem {
+  private addPointsToRectangle(item: StackItem, isPolygon: boolean = false): StackItem {
     const element = this.store.canvas.getObjects().find(it => it[ID] === item.id);
-    item.data[POINTS] = [element.oCoords.mt, element.oCoords.br, element.oCoords.bl, element.oCoords.mt];
+    item.data[POINTS] = [element.oCoords.bl, element.oCoords.tl, element.oCoords.tr, element.oCoords.br];
+    if (!isPolygon) {
+      item.data[POINTS].push(element.oCoords.bl);
+    }
     return item;
+  }
+
+  private addPointsToTriangle(item: StackItem, isPolygon: boolean = false): StackItem {
+    const element = this.store.canvas.getObjects().find(it => it[ID] === item.id);
+    item.data[POINTS] = [element.oCoords.bl, element.oCoords.mt, element.oCoords.br];
+    if (!isPolygon) {
+      item.data[POINTS].push(element.oCoords.bl);
+    }
+    return item;
+  }
+
+  private canvasPointsToMFDPoints(points: Point[]): Point[] {
+    return points.map(point => Point.from(point.x / this.store.canvasWidth, point.y / this.store.canvasHeight));
   }
 
   private toRgba(hexString: string): Color {

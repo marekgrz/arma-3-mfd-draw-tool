@@ -15,7 +15,6 @@ import { HistoryService } from '../../../../../../utils/history.service';
 })
 export class TriangleTypeComponent extends BaseElementType {
 
-
   constructor(store: StoreService,
               historyService: HistoryService,
               treeService: TreeService) {
@@ -26,7 +25,7 @@ export class TriangleTypeComponent extends BaseElementType {
     const triangle = new fabric.Triangle({
       width: 50, height: 50,
       left: 0, top: 0,
-      fill: '#000000',
+      fill: 'rgba(0,0,0,0)',
       stroke: '#000000',
       centeredRotation: true,
       strokeWidth: 1,

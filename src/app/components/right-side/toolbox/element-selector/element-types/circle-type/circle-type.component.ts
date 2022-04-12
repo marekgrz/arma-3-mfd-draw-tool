@@ -15,7 +15,6 @@ import { HistoryService } from '../../../../../../utils/history.service';
 })
 export class CircleTypeComponent extends BaseElementType {
 
-
   constructor(store: StoreService,
               historyService: HistoryService,
               treeService: TreeService) {
@@ -25,7 +24,7 @@ export class CircleTypeComponent extends BaseElementType {
   addCircle(): void {
     const circle = new fabric.Circle({
       radius: 50,
-      fill: '#000000',
+      fill: 'rgba(0,0,0,0)',
       stroke: '#000000',
       strokeWidth: 1,
       strokeUniform: true,

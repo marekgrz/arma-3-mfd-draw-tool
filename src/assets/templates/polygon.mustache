@@ -9,9 +9,11 @@ class {{name}}
     texturePath = "{{texturePath}}";
     {{/texturePath}}
     points[] = {
-    {{#points}}
-      { {{#bone}}"{{bone}}",{{/bone}} { {{x}}, {{y}} }, 1}{{#comma}},{{/comma}}
-    {{/points}}
+      {
+        {{#points}}
+          { {{#bone}}"{{bone}}",{{/bone}} { {{x}}, {{y}} }, 1}{{#comma}},{{/comma}}
+        {{/points}}
+      }
     };
   };
 };//End of {{name}}
