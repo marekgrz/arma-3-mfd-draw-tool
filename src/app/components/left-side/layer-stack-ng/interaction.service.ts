@@ -65,7 +65,7 @@ export class InteractionService {
     if (!this.drawingMode) {
       this.treeService.clearSelection();
       if (ids.length < 2) {
-        this.treeService.selectedItem = findByID(ids[0], this.treeService.itemList);
+        this.treeService.setSelectedItem(findByID(ids[0], this.treeService.itemList));
       }
       // ids.forEach(id => {
       //   const element = document.getElementById(id);

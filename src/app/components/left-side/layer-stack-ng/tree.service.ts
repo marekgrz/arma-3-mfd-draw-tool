@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ItemType, StackItem } from './elements/StackItem';
 import { Circle, Polyline, Rect, Triangle } from 'fabric/fabric-impl';
 import { fabric } from 'fabric';
@@ -13,6 +13,7 @@ import { Builder } from 'builder-pattern';
 export class TreeService {
 
   selectedItem: StackItem;
+  selectedItemChanged: EventEmitter<StackItem> = new EventEmitter<StackItem>();
 
   itemList: StackItem[] = [];
 
@@ -27,6 +28,12 @@ export class TreeService {
   private textIndex = 1;
 
   constructor(public store: StoreService) {
+  }
+
+  setSelectedItem(item: StackItem): void {
+    this.clearSelection();
+    this.selectedItem = item;
+    this.selectedItemChanged.emit(this.selectedItem);
   }
 
   clearSelection(): void {
@@ -174,7 +181,7 @@ export class TreeService {
   // UNUSED YET
   updateItemParent(itemID: string, newParentID: string): void {
     const selectedItem = findByID(itemID, this.itemList);
-    //selectedItem.parent = findByID(newParentID, this.itemList);
+    // selectedItem.parent = findByID(newParentID, this.itemList);
   }
 
   private newGroup(): StackItem {
