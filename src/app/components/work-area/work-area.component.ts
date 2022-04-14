@@ -22,8 +22,8 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   ZOOM_LEVEL = 1;
   ZOOM_STEP = 0.1;
   private subscriptions: Subscription[] = [];
+  private mouseMoveSubscription;
 
-  private middleMouseDown = false;
   private mouseClickPosition = [];
   private startPosition = [0, 0];
   private offsetPosition = [0, 0];
@@ -32,19 +32,16 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-
     this.subscriptions = [
       fromEvent(this.workspaceContainer.nativeElement, 'wheel').subscribe((e: MouseEvent) => this.onScroll(e)),
       fromEvent(this.workspaceContainer.nativeElement, 'mousedown').subscribe((e: MouseEvent) => this.onMouseDown(e)),
       fromEvent(this.workspaceContainer.nativeElement, 'mouseup').subscribe(_ => this.onMouseUp()),
-      fromEvent(this.workspaceContainer.nativeElement, 'mousemove').subscribe((e: MouseEvent) => this.onMouseMove(e)),
     ];
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(it => it.unsubscribe());
   }
-
 
   resetZoom(): void {
     this.ZOOM_LEVEL = 1;
@@ -70,23 +67,24 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
 
   private onMouseDown(e: MouseEvent): void {
     if (e.button === 1) {
-      this.middleMouseDown = true;
       this.mouseClickPosition = [e.clientX, e.clientY];
       this.startPosition = [...this.offsetPosition];
       e.preventDefault();
+      this.mouseMoveSubscription = fromEvent(this.workspaceContainer.nativeElement, 'mousemove')
+        .subscribe((mouseEvent: MouseEvent) => this.onMouseMove(mouseEvent));
     }
   }
 
   private onMouseUp(): void {
-    this.middleMouseDown = false;
+    if (this.mouseMoveSubscription) {
+      this.mouseMoveSubscription.unsubscribe();
+    }
   }
 
   private onMouseMove(e: MouseEvent): void {
-    if (this.middleMouseDown) {
-      this.offsetPosition[0] = this.startPosition[0] - (this.mouseClickPosition[0] - e.clientX);
-      this.offsetPosition[1] = this.startPosition[1] - (this.mouseClickPosition[1] - e.clientY);
-      this.updatePositionAndScale();
-    }
+    this.offsetPosition[0] = this.startPosition[0] - (this.mouseClickPosition[0] - e.clientX);
+    this.offsetPosition[1] = this.startPosition[1] - (this.mouseClickPosition[1] - e.clientY);
+    this.updatePositionAndScale();
   }
 
   private updatePositionAndScale(): void {
