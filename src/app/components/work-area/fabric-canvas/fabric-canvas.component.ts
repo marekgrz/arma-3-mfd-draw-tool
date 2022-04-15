@@ -7,6 +7,7 @@ import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
 import { BONENAME } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -33,25 +34,20 @@ export class FabricCanvasComponent implements AfterViewInit {
   STEP_ANGLE = 0.01;
 
   @HostListener('window:keydown', ['$event'])
-  onActivateSnapping(event: KeyboardEvent): void {
+  onKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Shift') {
-      this.snappingEnabled = true;
+      this.enableSnapping();
     }
   }
 
   @HostListener('window:keyup', ['$event'])
   onDisableSnapping(event: KeyboardEvent): void {
-    this.snappingEnabled = false;
-  }
-
-  @HostListener('mousemove')
-  onRotateObject(): void {
-    if (this.element) {
-      this.element.setOptions({snapAngle: this.snappingEnabled ? this.SNAP_ANGLE : this.STEP_ANGLE});
+    this.disableSnapping();
+    if (event.key === 'Delete' && this.treeService.selectedItem) {
+      this.deleteObject(event);
     }
   }
 
-  @HostListener('document:keyup', ['$event'])
   deleteObject(event: KeyboardEvent): void {
     if (event.key === 'Delete' && this.treeService.selectedItem) {
       this.interaction.onDeleteSelection();
@@ -73,36 +69,20 @@ export class FabricCanvasComponent implements AfterViewInit {
     });
   }
 
-  private setupCanvas(): void {
-    const canvas = this.componentRef.directiveRef.fabric();
-    this.onSelected(canvas);
-    this.onDeselected(canvas);
-    this.onHighLighted(canvas);
-    this.objectMoving(canvas);
-    this.objectModified(canvas);
-    this.store.canvas = canvas;
-    this.store.canvas.setWidth(this.store.canvasWidth);
-    this.store.canvas.setHeight(this.store.canvasHeight);
+  onSelected(elements): void {
+    const elementIds = elements.selected.map(it => it.id);
+    if (elementIds && elementIds.length > 0) {
+      this.interaction.onItemInCanvasSelected(elementIds);
+    }
+    this.element = elements.selected[0];
   }
 
-  private onDeselected(canvas): void {
-    canvas.on('before:selection:cleared', () => {
-      this.treeService.clearSelection();
-    });
+  onDeselected(): void {
+    this.treeService.clearSelection();
+    this.element = null;
   }
 
-  private onSelected(canvas): void {
-    const selectionHandler = () => {
-      const elementIds = canvas.getActiveObjects().map(it => it.id);
-      if (elementIds && elementIds.length > 0) {
-        this.interaction.onItemInCanvasSelected(elementIds);
-      }
-    };
-    canvas.on('selection:created', selectionHandler);
-    canvas.on('selection:updated', selectionHandler);
-  }
-
-  private onHighLighted(canvas): void {
+  onHighLighted(canvas): void {
     canvas.on('mouse:over', e => {
       if (e.target) {
         e.target.set('opacity', '0.5');
@@ -118,25 +98,41 @@ export class FabricCanvasComponent implements AfterViewInit {
     });
   }
 
-  private objectMoving(canvas): void {
-    canvas.on('object:moving', e => {
-      const selectedItem = this.treeService.selectedItem;
-      if (!!selectedItem.base) {
-        selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
-        selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
-        // has bone
-        const bone = this.store.bones.find(it => it.name === selectedItem.data[BONENAME]) as BoneFixedModel;
-        if (bone !== undefined) {
-          selectedItem.base.position.x -= bone.pos0.x;
-          selectedItem.base.position.y -= bone.pos0.y;
-        }
+  onObjectMoving(e): void {
+    const selectedItem = this.treeService.selectedItem;
+    if (!!selectedItem.base) {
+      selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
+      selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
+      // has bone
+      const bone = this.store.bones.find(it => it.name === selectedItem.data[BONENAME]) as BoneFixedModel;
+      if (bone !== undefined) {
+        selectedItem.base.position.x -= bone.pos0.x;
+        selectedItem.base.position.y -= bone.pos0.y;
       }
-    });
+    }
   }
 
-  private objectModified(canvas): void {
-    canvas.on('object:modified', () => {
-      this.historyService.addSnapshot();
-    });
+  onObjectModified(): void {
+    this.historyService.addSnapshot();
+  }
+
+  private setupCanvas(): void {
+    const canvas = this.componentRef.directiveRef.fabric();
+    this.onHighLighted(canvas);
+    this.store.canvas = canvas;
+    this.store.canvas.setWidth(this.store.canvasWidth);
+    this.store.canvas.setHeight(this.store.canvasHeight);
+  }
+
+  private enableSnapping(): void {
+    if (this.element) {
+      this.element.setOptions({snapAngle: this.SNAP_ANGLE});
+    }
+  }
+
+  private disableSnapping(): void {
+    if (this.element) {
+      this.element.setOptions({snapAngle: this.STEP_ANGLE});
+    }
   }
 }

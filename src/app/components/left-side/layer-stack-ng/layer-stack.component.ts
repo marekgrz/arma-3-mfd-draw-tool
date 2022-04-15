@@ -24,7 +24,7 @@ export class LayerStackComponent {
   onSelectionChange(selection): void {
     if (selection.itemType === ItemType.group) {
       this.interaction.deselectCurrentItems();
-      this.treeService.selectedItem = selection;
+      this.treeService.setSelectedItem(selection);
     }
     this.interaction.onItemInLayerStackSelected(this.treeService.selectedItem);
   }

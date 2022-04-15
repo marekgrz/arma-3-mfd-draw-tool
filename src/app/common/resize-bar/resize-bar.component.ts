@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'mfd-resize-bar',
@@ -23,7 +24,7 @@ export class ResizeBarComponent implements AfterViewInit {
 
   private container: HTMLDivElement;
 
-  private resizeEnabled = false;
+  private subscription: Subscription;
 
   private isLast = false;
 
@@ -36,22 +37,25 @@ export class ResizeBarComponent implements AfterViewInit {
     this.loadSavedSize();
   }
 
-  @HostListener('document:mouseup')
-  onMouseUp(): void {
-    this.resizeEnabled = false;
+  onMouseDown(): void {
+    this.subscription = fromEvent(document, 'mousemove').subscribe((e: MouseEvent) => this.onMouseMove(e));
+    fromEvent(document, 'mouseup').subscribe((e: MouseEvent) => this.onMouseUp());
   }
 
-  @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
-    if (this.resizeEnabled) {
-      event.preventDefault();
-      const distance = this.calculateDistance(event);
-      this.savePanelSize(distance);
-      if (this.horizontal) {
-        this.container.style.height = `${distance}px`;
-      } else {
-        this.container.style.width = `${distance}px`;
-      }
+    event.preventDefault();
+    const distance = this.calculateDistance(event);
+    this.savePanelSize(distance);
+    if (this.horizontal) {
+      this.container.style.height = `${distance}px`;
+    } else {
+      this.container.style.width = `${distance}px`;
+    }
+  }
+
+  onMouseUp(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -86,9 +90,5 @@ export class ResizeBarComponent implements AfterViewInit {
         }
       }
     }
-  }
-
-  onMouseDown(): void {
-    this.resizeEnabled = true;
   }
 }

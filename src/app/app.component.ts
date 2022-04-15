@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {StoreService} from './utils/store.service';
+import { Component } from '@angular/core';
+import { StoreService } from './utils/store.service';
 
 @Component({
   selector: 'mfd-root',
