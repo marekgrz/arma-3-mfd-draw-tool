@@ -85,6 +85,11 @@ export class LineTypeComponent {
       });
     line[ID] = temporary ? 'tempPolyLine' : generateId();
     line[LINETYPE] = LineType.full;
+    line.on('mousedown', (event) => {
+      if (event.button === 3) {
+        this.store.openContextMenu(event);
+      }
+    });
     this.store.canvas.add(line);
     return line;
   }
