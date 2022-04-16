@@ -180,6 +180,18 @@ export class TreeService {
     // }
   }
 
+  validateNames(): void {
+    const validateLevel = (level: StackItem[]) => {
+      level.forEach(item => {
+        item.incorrectName = level.filter(it => it.label === item.label).length > 1;
+        if (item.children) {
+          validateLevel(item.children);
+        }
+      });
+    };
+    validateLevel(this.itemList);
+  }
+
   // UNUSED YET
   updateItemParent(itemID: string, newParentID: string): void {
     const selectedItem = findByID(itemID, this.itemList);

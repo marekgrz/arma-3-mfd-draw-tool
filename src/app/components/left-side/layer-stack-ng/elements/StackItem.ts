@@ -22,6 +22,7 @@ export class StackItem implements TreeNode {
   styleClass: string;
   leaf = true;
   parent?: StackItem;
+  incorrectName = false;
 }
 
 export class GroupProperties {

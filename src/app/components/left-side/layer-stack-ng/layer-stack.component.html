@@ -15,7 +15,9 @@
     <span #nodeRef>
       <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'"
          (click)="onToggleVisibility(node, nodeRef)"></i>
-      <span class="node-label" [ngClass]="node.itemType === 'group' ? 'p-tree-group-header': ''">{{node.label}}</span>
+      <span class="node-label" [class.incorrect]="node.incorrectName"
+            [class.p-tree-group-header]="node.itemType === 'group'">{{node.label}}</span>
+      <i class="material-icons node-warning" *ngIf="node.incorrectName" matSuffix [matTooltip]="'Incorrrect name. Cant have duplicate names on the same level'">info</i>
     </span>
   </ng-template>
 </p-tree>

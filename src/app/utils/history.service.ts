@@ -21,6 +21,7 @@ export class HistoryService {
     this.treeService.resetProjectStack();
     const previous = this.getPreviousSnapshot();
     parseFileToProject(CircularJSON.stringify(previous.projectData), this.treeService, this.store);
+    this.treeService.validateNames();
     console.debug('Undo. Snapshots left ' + (this.appSnapshotList.length));
   }
 
@@ -28,6 +29,7 @@ export class HistoryService {
     this.snapShotVersion++;
     const snapShot: ProjectSnapshot = {projectData: this.currentProjectData(), version: this.snapShotVersion};
     this.appSnapshotList.push(snapShot);
+    this.treeService.validateNames();
     console.debug('Added snapshot. Current snapshots:  ' + (this.appSnapshotList.length));
   }
 
