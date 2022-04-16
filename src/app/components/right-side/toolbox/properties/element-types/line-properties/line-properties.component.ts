@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Point } from 'fabric/fabric-impl';
@@ -7,18 +7,23 @@ import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { ElementTransformService } from '../element-transform.service';
+import { LineUtilsService } from '../../../element-selector/element-types/line-type/line-utils.service';
 
 @Component({
   selector: 'mfd-line-properties',
   templateUrl: './line-properties.component.html',
-  styleUrls: ['./line-properties.component.less']
+  styleUrls: ['./line-properties.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LinePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
   lineType = LineType.full;
 
-  constructor(public store: StoreService, interactionService: InteractionService, elementTransformService: ElementTransformService) {
+  constructor(public store: StoreService,
+              interactionService: InteractionService,
+              elementTransformService: ElementTransformService,
+              private lineUtils: LineUtilsService) {
     super(store, interactionService, elementTransformService);
   }
 
@@ -73,13 +78,12 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   }
 
   save(): void {
-    const line: fabric.Object = this.store.canvas.getActiveObject();
-    line.left = Number(this.item.data.left);
-    line.top = Number(this.item.data.top);
+    const line: fabric.Polyline = this.store.canvas.getActiveObject() as fabric.Polyline;
     line[LINETYPE] = this.lineType;
     this.setElementStroke(line);
     this.setElementStroke(line);
     this.setElementRotation(line);
+    this.lineUtils.recalculatePolyLineDimensions(line);
     this.refresh();
   }
 

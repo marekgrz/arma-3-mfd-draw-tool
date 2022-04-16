@@ -41,7 +41,7 @@ export class ElementTransformService {
 
   setElementPosition(element: fabric.Object, item: StackItem, boneName: string): void {
     const bone = this.store.bones.find(it => it.name === boneName);
-    const basePosition = this.store.getCanvasPositionFromDiscrete(item.base.position);
+    const basePosition = item.base.position;
     element[BONENAME] = boneName;
     if (bone === undefined) {
       element.left = basePosition.x;
@@ -49,8 +49,8 @@ export class ElementTransformService {
     } else {
       switch (bone.type) {
         case BoneType.fixed: {
-          element.left = basePosition.x + (bone as BoneFixedModel).pos0.x * this.store.canvasWidth;
-          element.top = basePosition.y + (bone as BoneFixedModel).pos0.y * this.store.canvasHeight;
+          element.left = basePosition.x + (bone as BoneFixedModel).pos0.x;
+          element.top = basePosition.y + (bone as BoneFixedModel).pos0.y;
           break;
         }
         // TODO rest of bone types

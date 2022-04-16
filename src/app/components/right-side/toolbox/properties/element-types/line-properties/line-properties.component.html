@@ -2,12 +2,16 @@
   <!--  Name-->
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
   <!--  Position-->
-  <mfd-position-input [(positionX)]="item.base.position.x"
-                      [(positionY)]="item.base.position.y"
-                      (save)="save()"></mfd-position-input>
-  <!--  Dimensions-->
-  <mfd-dimensions-input [(item)]="item"
-                        (save)="save()"></mfd-dimensions-input>
+  <div class="points-list">
+    <div *ngFor="let point of item.data.points, let i = index">
+      <span class="point-index">Point {{i+1}}</span>
+      <mfd-position-input class="point-item"
+                          [(positionX)]="point.x"
+                          [(positionY)]="point.y"
+                          (save)="save()"></mfd-position-input>
+    </div>
+  </div>
+
   <!--  Stroke-->
   <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Stroke</mat-label>

@@ -83,6 +83,7 @@ import { ResizeablePanelComponent } from './common/resizeable-panel/resizeable-p
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ProjectSettingsDialogCreateComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
 import { ProjectSettingsDialogModifyComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-modify/project-settings-dialog-modify.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { ProjectSettingsDialogModifyComponent } from './components/dialogs/proje
         TreeModule,
         ClipboardModule,
         ContextMenuModule,
+        MatProgressBarModule,
     ],
   providers: [
     {

@@ -7,7 +7,8 @@ import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
 import { BONENAME } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
-import { fromEvent, Subscription } from 'rxjs';
+import { ItemType } from '../../left-side/layer-stack-ng/elements/StackItem';
+import { LineUtilsService } from '../../right-side/toolbox/element-selector/element-types/line-type/line-utils.service';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -58,7 +59,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   constructor(public store: StoreService,
               public treeService: TreeService,
               private interaction: InteractionService,
-              private historyService: HistoryService) {
+              private historyService: HistoryService,
+              private lineUtils: LineUtilsService) {
   }
 
   ngAfterViewInit(): void {
@@ -101,8 +103,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   onObjectMoving(e): void {
     const selectedItem = this.treeService.selectedItem;
     if (!!selectedItem.base) {
-      selectedItem.base.position.x = e.target.left / this.store.canvasWidth;
-      selectedItem.base.position.y = e.target.top / this.store.canvasHeight;
+      selectedItem.base.position.x = e.target.left;
+      selectedItem.base.position.y = e.target.top;
       // has bone
       const bone = this.store.bones.find(it => it.name === selectedItem.data[BONENAME]) as BoneFixedModel;
       if (bone !== undefined) {
@@ -110,9 +112,18 @@ export class FabricCanvasComponent implements AfterViewInit {
         selectedItem.base.position.y -= bone.pos0.y;
       }
     }
+    if (selectedItem.itemType === ItemType.line) {
+      selectedItem.data.hasBorders = true;
+      this.lineUtils.recalculatePolyLinePointsPosition(selectedItem.data);
+    }
   }
 
   onObjectModified(): void {
+    const selectedItem = this.treeService.selectedItem;
+    if (selectedItem.itemType === ItemType.line) {
+      selectedItem.data.hasBorders = true;
+      this.lineUtils.recalculatePolyLineDimensions(selectedItem.data);
+    }
     this.historyService.addSnapshot();
   }
 

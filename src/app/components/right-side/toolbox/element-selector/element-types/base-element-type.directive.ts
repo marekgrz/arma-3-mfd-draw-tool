@@ -3,6 +3,7 @@ import { HistoryService } from '../../../../../utils/history.service';
 import { TreeService } from '../../../../left-side/layer-stack-ng/tree.service';
 import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../utils/store.service';
+import { Point } from '../../../../../common/Point';
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
@@ -14,6 +15,7 @@ export class BaseElementType {
   }
 
   createNewElement(item: StackItem): void {
+    item.base.position = Point.from(item.data.left, item.data.top);
     this.store.canvas.add(item.data);
     this.treeService.pushToListInCorrectPlace(item);
     this.historyService.addSnapshot();
