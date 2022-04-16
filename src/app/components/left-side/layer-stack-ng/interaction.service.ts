@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from './tree.service';
-import { generateId, ItemType, StackItem } from './elements/StackItem';
+import { generateId, generateLabelCopy, ItemType, StackItem } from './elements/StackItem';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../utils/store.service';
 import { findByID, flattenNode } from '../../../common/Utils';
@@ -113,6 +113,7 @@ export class InteractionService {
     const itemCopy: StackItem = CircularJSON.parse(CircularJSON.stringify(item));
     const newId = generateId();
     itemCopy.id = newId;
+    itemCopy.label = generateLabelCopy(item, this.treeService.itemList);
     if (item.data) {
       item.data.clone((clone) => {
         itemCopy.data = clone;

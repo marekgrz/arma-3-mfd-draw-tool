@@ -55,3 +55,13 @@ export enum ItemType {
 export function generateId(): string {
   return uuidv4();
 }
+
+export function generateLabelCopy(item: StackItem, allItems: StackItem[]): string {
+  let index = 1;
+  let newName = item.label + '_copy_1';
+  while (allItems.find(it => it.label === newName)) {
+    newName = item.label + `_copy_${index}`;
+    index++;
+  }
+  return newName;
+}
