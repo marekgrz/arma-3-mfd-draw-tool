@@ -164,6 +164,8 @@ export class TreeService {
   deleteItemByID(id: string): void {
     this.itemList.forEach(it => deleteElementById(it, id));
     this.itemList = this.itemList.filter(it => it.id !== id);
+    this.selectedItem = null;
+    this.selectedItemChanged.emit(this.selectedItem);
   }
 
   pushToListInCorrectPlace(item: StackItem): void {
