@@ -5,10 +5,13 @@ import { TreeService } from '../../left-side/layer-stack-ng/tree.service';
 import { InteractionService } from '../../left-side/layer-stack-ng/interaction.service';
 import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
-import { BONENAME } from '../../../common/ProjectFileStructure';
+import { BONENAME, ID } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
-import { ItemType } from '../../left-side/layer-stack-ng/elements/StackItem';
+import { ItemType, StackItem } from '../../left-side/layer-stack-ng/elements/StackItem';
 import { LineUtilsService } from '../../right-side/toolbox/element-selector/element-types/line-type/line-utils.service';
+import { MenuItem } from 'primeng/api';
+import { ContextMenu } from 'primeng/contextmenu';
+import { findByID } from '../../../common/Utils';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -18,6 +21,7 @@ import { LineUtilsService } from '../../right-side/toolbox/element-selector/elem
 export class FabricCanvasComponent implements AfterViewInit {
 
   @ViewChild(FabricComponent, {static: false}) componentRef?: FabricComponent;
+  @ViewChild('contextMenu') contextMenu: ContextMenu;
 
   @Input()
   previewOnly: boolean;
@@ -33,6 +37,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   SNAP_ANGLE = 5;
 
   STEP_ANGLE = 0.01;
+
+  menuItems: MenuItem[];
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
@@ -61,6 +67,7 @@ export class FabricCanvasComponent implements AfterViewInit {
               private interaction: InteractionService,
               private historyService: HistoryService,
               private lineUtils: LineUtilsService) {
+    this.setupContextMenu();
   }
 
   ngAfterViewInit(): void {
@@ -125,6 +132,32 @@ export class FabricCanvasComponent implements AfterViewInit {
       this.lineUtils.recalculatePolyLineDimensions(selectedItem.data);
     }
     this.historyService.addSnapshot();
+  }
+
+  private setupContextMenu(): void {
+    this.store.itemContextMenuOpened.subscribe(value => {
+      const item = findByID(value.target[ID], this.treeService.itemList);
+      this.menuItems = [];
+      this.menuItems = [
+        {label: item.label, disabled: true},
+        {label: 'Select', icon: 'pi pi-arrow-up-left', command: () => this.onContextMenuSelect(item)},
+        {label: 'Duplicate layer', icon: 'pi pi-copy', command: () => this.onContextMenuDuplicate(item)},
+        {label: 'Remove', icon: 'pi pi-trash', command: () => this.onContextMenuDelete(item)}
+      ];
+      this.contextMenu.show(value.e);
+    });
+  }
+
+  private onContextMenuSelect(item: StackItem): void {
+    this.interaction.onItemInLayerStackSelected(item);
+  }
+
+  private onContextMenuDelete(item: StackItem): void {
+    this.interaction.onDeleteById(item.id);
+  }
+
+  private onContextMenuDuplicate(item: StackItem): void {
+    this.interaction.onDuplicateItem(item);
   }
 
   private setupCanvas(): void {

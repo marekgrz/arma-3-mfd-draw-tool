@@ -76,9 +76,6 @@ export class InteractionService {
   }
 
   onDeleteSelection(): void {
-    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    //   data: {message: 'Delete selected elements?'}
-    // });
     this.store.canvas.getActiveObjects().forEach(it => {
       this.store.canvas.remove(it);
       this.treeService.deleteItemByID(it[ID]);
@@ -90,13 +87,23 @@ export class InteractionService {
     this.refreshView();
   }
 
+  onDeleteById(itemId): void {
+    this.store.canvas.remove(this.store.canvas.getObjects().find(it => it[ID] === itemId));
+    this.treeService.deleteItemByID(itemId);
+    this.refreshView();
+  }
+
   onDuplicateSelection(): void {
-    const selectionCopy = this.cloneSelection(this.treeService.selectedItem);
-    if (this.treeService.selectedItem.parent) {
-      const index = this.treeService.selectedItem.parent.children.findIndex(it => it.id === this.treeService.selectedItem.id) + 1;
-      this.treeService.selectedItem.parent.children.splice(index, 0, selectionCopy);
+    this.onDuplicateItem(this.treeService.selectedItem);
+  }
+
+  onDuplicateItem(item: StackItem): void {
+    const selectionCopy = this.cloneSelection(item);
+    if (item.parent) {
+      const index = item.parent.children.findIndex(it => it.id === item.id) + 1;
+      item.parent.children.splice(index, 0, selectionCopy);
     } else {
-      const index = this.treeService.itemList.findIndex(it => it.id === this.treeService.selectedItem.id) + 1;
+      const index = this.treeService.itemList.findIndex(it => it.id === item.id) + 1;
       this.treeService.itemList.splice(index, 0, selectionCopy);
     }
     this.refreshView();

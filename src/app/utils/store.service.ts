@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Color } from '@angular-material-components/color-picker';
 import { Canvas } from 'fabric/fabric-impl';
 import { GlobalHUDProperties, ProjectFileStructure } from '../common/ProjectFileStructure';
 import { BoneBaseModel } from '../components/left-side/bones-list/BoneBaseModel';
 import { Point } from '../common/Point';
 import { Builder } from 'builder-pattern';
+import { fabric } from 'fabric';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,8 @@ export class StoreService {
   hudProperties: GlobalHUDProperties = new GlobalHUDProperties();
   isProjectStarted = false;
 
+  itemContextMenuOpened: EventEmitter<{ e: MouseEvent, target: fabric.Object }> = new EventEmitter<{ e: MouseEvent, target: fabric.Object }>();
+
   constructor() {
   }
 
@@ -64,7 +67,14 @@ export class StoreService {
     this.hudProperties = project.globalHUDProperties;
     this.updateCanvas();
     this.canvas.loadFromJSON(project.canvasContent, this.canvas.renderAll.bind(this.canvas));
-    this.canvas.getObjects().forEach(obj => obj.strokeUniform = true);
+    this.canvas.getObjects().forEach(obj => {
+      obj.on('mousedown', (event) => {
+        if (event.button === 3) {
+          this.openContextMenu(event);
+        }
+      });
+      obj.strokeUniform = true;
+    });
     this.canvas.requestRenderAll();
     this.isProjectStarted = true;
   }
@@ -92,13 +102,16 @@ export class StoreService {
     }
   }
 
+  openContextMenu(target): void {
+    this.itemContextMenuOpened.emit(target);
+  }
+
   getCanvasPositionFromDiscrete(point: Point): Point {
     return Builder(Point)
       .x(point.x * this.canvasWidth)
       .y(point.y * this.canvasHeight)
       .build();
   }
-
 
   addUsedSource(sourceName: string): void {
     if (this.usedSources.find(it => it === sourceName)) {

@@ -16,6 +16,11 @@ export class BaseElementType {
 
   createNewElement(item: StackItem): void {
     item.base.position = Point.from(item.data.left, item.data.top);
+    item.data.on('mousedown', (event) => {
+      if (event.button === 3) {
+        this.store.openContextMenu(event);
+      }
+    });
     this.store.canvas.add(item.data);
     this.treeService.pushToListInCorrectPlace(item);
     this.historyService.addSnapshot();
