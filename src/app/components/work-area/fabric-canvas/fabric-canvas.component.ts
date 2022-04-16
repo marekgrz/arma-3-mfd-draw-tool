@@ -26,7 +26,9 @@ export class FabricCanvasComponent implements AfterViewInit {
   @Input()
   previewOnly: boolean;
 
-  config = {};
+  config = {
+    fireRightClick: this
+  };
 
   element: fabric.Object;
 
