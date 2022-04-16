@@ -29,7 +29,8 @@ export class TriangleTypeComponent extends BaseElementType {
       stroke: '#000000',
       centeredRotation: true,
       strokeWidth: 1,
-      strokeUniform: true
+      strokeUniform: true,
+      padding: 0,
     });
     triangle[ID] = generateId();
     triangle[LINETYPE] = LineType.full;

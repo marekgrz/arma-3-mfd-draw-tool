@@ -26,6 +26,9 @@ export class PolygonRectangleTypeComponent extends BaseElementType {
       width: 50, height: 50,
       left: 100, top: 100,
       fill: '#000000',
+      strokeWidth: 0,
+      strokeUniform: true,
+      padding: 0,
     });
     rect[ID] = generateId();
     this.createNewElement(this.treeService.itemFromPolygonRectangle(rect));

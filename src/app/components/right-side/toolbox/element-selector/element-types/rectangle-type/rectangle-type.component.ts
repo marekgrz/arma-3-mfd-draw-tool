@@ -30,6 +30,7 @@ export class RectangleTypeComponent extends BaseElementType {
       stroke: '#000000',
       strokeWidth: 1,
       strokeUniform: true,
+      padding: 0,
     });
     rect[ID] = generateId();
     rect[LINETYPE] = LineType.full;

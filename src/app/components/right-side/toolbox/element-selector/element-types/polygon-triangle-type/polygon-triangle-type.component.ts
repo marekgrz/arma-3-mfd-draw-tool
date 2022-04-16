@@ -26,6 +26,7 @@ export class PolygonTriangleTypeComponent extends BaseElementType {
       width: 50, height: 50,
       left: 100, top: 100,
       fill: '#000000',
+      padding: 0,
     });
     triangle[ID] = generateId();
     this.createNewElement(this.treeService.itemFromPolygonTriangle(triangle));
