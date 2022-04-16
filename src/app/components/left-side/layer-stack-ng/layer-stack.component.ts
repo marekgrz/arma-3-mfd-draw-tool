@@ -31,6 +31,7 @@ export class LayerStackComponent {
 
   onNodeDrop(): void {
     this.refreshParents(this.treeService.itemList, null);
+    this.treeService.refreshStackPosition();
     this.interaction.refreshView();
   }
 
