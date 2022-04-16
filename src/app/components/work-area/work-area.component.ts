@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { StoreService } from '../../utils/store.service';
+import { TreeService } from '../left-side/layer-stack-ng/tree.service';
 
 @Component({
   selector: 'mfd-work-area',
@@ -28,7 +29,8 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   private startPosition = [0, 0];
   private offsetPosition = [0, 0];
 
-  constructor(public store: StoreService) {
+  constructor(public store: StoreService,
+              private treeService: TreeService) {
   }
 
   ngAfterViewInit(): void {
@@ -57,6 +59,13 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   zoomOut(): void {
     this.ZOOM_LEVEL -= this.ZOOM_STEP;
     this.updatePositionAndScale();
+  }
+
+  deselectAll(event): void {
+    if (event.target.id === 'workspaceContainer') {
+      this.store.canvas.discardActiveObject().renderAll();
+      this.treeService.clearSelection();
+    }
   }
 
   private onScroll(e): void {

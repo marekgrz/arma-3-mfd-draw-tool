@@ -38,6 +38,13 @@ export class TreeService {
 
   clearSelection(): void {
     this.selectedItem = null;
+    this.selectedItemChanged.emit(this.selectedItem);
+  }
+
+  deleteItemByID(id: string): void {
+    this.itemList.forEach(it => deleteElementById(it, id));
+    this.itemList = this.itemList.filter(it => it.id !== id);
+    this.clearSelection();
   }
 
   resetProjectStack(): void {
@@ -159,13 +166,6 @@ export class TreeService {
     // }
     this.itemList.unshift(this.newGroup());
     this.groupIndex++;
-  }
-
-  deleteItemByID(id: string): void {
-    this.itemList.forEach(it => deleteElementById(it, id));
-    this.itemList = this.itemList.filter(it => it.id !== id);
-    this.selectedItem = null;
-    this.selectedItemChanged.emit(this.selectedItem);
   }
 
   pushToListInCorrectPlace(item: StackItem): void {
