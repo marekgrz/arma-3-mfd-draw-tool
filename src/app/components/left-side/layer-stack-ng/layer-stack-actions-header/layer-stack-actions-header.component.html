@@ -24,7 +24,7 @@
   <button class="action-button-color" mat-button matTooltip="Create group" (click)="onNewGroup()">
     <i class="material-icons">snippet_folder</i>
   </button>
-  <button class="action-button-color" mat-button matTooltip="Duplicate selected element" disabled>
+  <button class="action-button-color" mat-button matTooltip="Duplicate selected element" [disabled]="!this.treeService.selectedItem" (click)="onDuplicateSelection()">
     <i class="material-icons">content_copy</i>
   </button>
   <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>

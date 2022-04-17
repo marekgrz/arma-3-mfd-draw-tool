@@ -27,6 +27,12 @@ export class LayerStackActionsHeaderComponent {
     }
   }
 
+  onDuplicateSelection(): void {
+    if (this.treeService.selectedItem) {
+      this.interaction.onDuplicateSelection();
+    }
+  }
+
   onNewGroup(): void {
     this.treeService.createGroup();
     this.interaction.refreshView();
