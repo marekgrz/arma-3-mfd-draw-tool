@@ -44,24 +44,27 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Shift') {
-      this.enableSnapping();
-    }
+    const callback = {
+      Shift: () => this.enableSnapping(),
+      ArrowLeft: () => this.translateObject(Direction.left),
+      ArrowRight: () => this.translateObject(Direction.right),
+      ArrowUp: () => this.translateObject(Direction.up),
+      ArrowDown: () => this.translateObject(Direction.down),
+    }[event.key];
+    callback?.();
   }
 
   @HostListener('window:keyup', ['$event'])
   onDisableSnapping(event: KeyboardEvent): void {
     this.disableSnapping();
     if (event.key === 'Delete' && this.treeService.selectedItem) {
-      this.deleteObject(event);
+      this.deleteObject();
     }
   }
 
-  deleteObject(event: KeyboardEvent): void {
-    if (event.key === 'Delete' && this.treeService.selectedItem) {
-      this.interaction.onDeleteSelection();
-      this.element = null;
-    }
+  deleteObject(): void {
+    this.interaction.onDeleteSelection();
+    this.element = null;
   }
 
   constructor(public store: StoreService,
@@ -176,9 +179,30 @@ export class FabricCanvasComponent implements AfterViewInit {
     }
   }
 
+  private translateObject(dir: Direction): void {
+    if (!this.treeService.selectedItem) {
+      return;
+    }
+    const element = this.treeService.selectedItem.data;
+    switch (dir) {
+      case Direction.up: element.top = element.top - 1; break;
+      case Direction.down: element.top = element.top + 1; break;
+      case Direction.left: element.left = element.left - 1; break;
+      case Direction.right: element.left = element.left + 1; break;
+    }
+    this.interaction.refreshView();
+  }
+
   private disableSnapping(): void {
     if (this.element) {
       this.element.setOptions({snapAngle: this.STEP_ANGLE});
     }
   }
+}
+
+enum Direction {
+  up,
+  down,
+  left,
+  right
 }
