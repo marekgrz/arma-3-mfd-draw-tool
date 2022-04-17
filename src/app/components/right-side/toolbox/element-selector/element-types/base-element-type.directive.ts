@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { HistoryService } from '../../../../../utils/history.service';
 import { TreeService } from '../../../../left-side/layer-stack-ng/tree.service';
 import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
@@ -8,6 +8,9 @@ import { Point } from '../../../../../common/Point';
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
 export class BaseElementType {
+
+  @Input()
+  label: string;
 
   constructor(public store: StoreService,
               public historyService: HistoryService,

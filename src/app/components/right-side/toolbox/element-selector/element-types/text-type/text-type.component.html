@@ -1,1 +1,5 @@
-<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addText()">Text</mat-list-item>
+<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addText()">
+  <mat-icon class="material-icons-outlined text" matPrefix></mat-icon>
+  {{label}}
+  <span mat-ripple class="material-icons margin-left-auto add-button" matSuffix (click)="addText()">add</span>
+</mat-list-item>

@@ -1,1 +1,5 @@
-<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addPolygonRect()">Polygon (Rectangle)</mat-list-item>
+<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addPolygonRect()">
+  <mat-icon class="material-icons rectangle" matPrefix></mat-icon>
+  {{label}}
+  <span mat-ripple class="material-icons margin-left-auto add-button" matSuffix (click)="addPolygonRect()">add</span>
+</mat-list-item>

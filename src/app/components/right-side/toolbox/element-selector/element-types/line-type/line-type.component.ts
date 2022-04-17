@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Point, Polyline } from 'fabric/fabric-impl';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
@@ -17,6 +17,9 @@ import { HistoryService } from '../../../../../../utils/history.service';
   styleUrls: ['./line-type.component.less']
 })
 export class LineTypeComponent {
+
+  @Input()
+  label: string;
 
   lineDrawingStarted = false;
   points: Point[];

@@ -1,1 +1,5 @@
-<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addCircle()">Circle</mat-list-item>
+<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addCircle()">
+  <mat-icon class="material-icons-outlined circle" matPrefix></mat-icon>
+  {{label}}
+  <span mat-ripple class="material-icons margin-left-auto add-button" matSuffix (click)="addCircle()">add</span>
+</mat-list-item>

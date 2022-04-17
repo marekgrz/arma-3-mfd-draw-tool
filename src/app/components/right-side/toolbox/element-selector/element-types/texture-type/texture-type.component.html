@@ -1,1 +1,5 @@
-<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addTexture()">Polygon (Texture)</mat-list-item>
+<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="addTexture()">
+  <mat-icon class="material-icons image" matPrefix></mat-icon>
+  {{label}}
+  <span mat-ripple class="material-icons margin-left-auto add-button" matSuffix (click)="addTexture()">add</span>
+</mat-list-item>

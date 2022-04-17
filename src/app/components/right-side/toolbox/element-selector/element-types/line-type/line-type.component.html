@@ -1,1 +1,5 @@
-<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="startLineDrawing()">Line</mat-list-item>
+<mat-list-item matRipple class="mat-list-option disable-text-selection" (dblclick)="startLineDrawing()">
+  <mat-icon class="material-icons-outlined line" matPrefix></mat-icon>
+  {{label}}
+  <span mat-ripple class="material-icons margin-left-auto add-button" matSuffix (click)="startLineDrawing()">add</span>
+</mat-list-item>

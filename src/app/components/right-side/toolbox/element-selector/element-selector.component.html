@@ -4,13 +4,29 @@
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
-<mat-list>
-  <mfd-line-type></mfd-line-type>
-  <mfd-rectangle-type></mfd-rectangle-type>
-  <mfd-triangle-type></mfd-triangle-type>
-  <mfd-circle-type></mfd-circle-type>
-  <mfd-texture-type></mfd-texture-type>
-  <mfd-polygon-rectangle-type></mfd-polygon-rectangle-type>
-  <mfd-polygon-triangle-type></mfd-polygon-triangle-type>
-  <mfd-text-type></mfd-text-type>
+<mat-list class="item-list">
+  <mfd-line-type
+    *ngIf="allElementTypes.get('line').visible"
+    [label]="allElementTypes.get('line').label"></mfd-line-type>
+  <mfd-rectangle-type
+    *ngIf="allElementTypes.get('rectangle').visible"
+    [label]="allElementTypes.get('rectangle').label"></mfd-rectangle-type>
+  <mfd-triangle-type
+    *ngIf="allElementTypes.get('triangle').visible"
+    [label]="allElementTypes.get('triangle').label"></mfd-triangle-type>
+  <mfd-circle-type
+    *ngIf="allElementTypes.get('circle').visible"
+    [label]="allElementTypes.get('circle').label"></mfd-circle-type>
+  <mfd-texture-type
+    *ngIf="allElementTypes.get('texture').visible"
+    [label]="allElementTypes.get('texture').label"></mfd-texture-type>
+  <mfd-polygon-rectangle-type
+    *ngIf="allElementTypes.get('polygonRect').visible"
+    [label]="allElementTypes.get('polygonRect').label"></mfd-polygon-rectangle-type>
+  <mfd-polygon-triangle-type
+    *ngIf="allElementTypes.get('polygonTriangle').visible"
+    [label]="allElementTypes.get('polygonTriangle').label"></mfd-polygon-triangle-type>
+  <mfd-text-type
+    *ngIf="allElementTypes.get('text').visible"
+    [label]="allElementTypes.get('text').label"></mfd-text-type>
 </mat-list>
