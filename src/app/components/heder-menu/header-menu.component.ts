@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from '../../utils/local-storage.service';
 import { HistoryService } from '../../utils/history.service';
 import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
+import { Subscription } from 'rxjs';
+import { ArmaFormatterService } from '../work-area/code-viewer/arma-formatter.service';
 
 @Component({
   selector: 'mfd-header-menu',
@@ -19,6 +21,7 @@ import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-setting
 export class HeaderMenuComponent implements OnInit {
 
   loading = false;
+  subscription: Subscription;
 
   constructor(public dialog: MatDialog,
               private ipc: IpcService,
@@ -27,7 +30,8 @@ export class HeaderMenuComponent implements OnInit {
               private snackBar: MatSnackBar,
               private toastr: ToastrService,
               private localStorageService: LocalStorageService,
-              public historyService: HistoryService) {
+              public historyService: HistoryService,
+              private armaFormatter: ArmaFormatterService) {
   }
 
   ngOnInit(): void {
@@ -39,7 +43,7 @@ export class HeaderMenuComponent implements OnInit {
   @HostListener('window:keydown', ['$event'])
   saveKey(e: KeyboardEvent): void {
     if (e.key === 's' && e.ctrlKey) {
-      this.saveProjectAs();
+      this.saveProject();
     }
   }
 
@@ -84,6 +88,14 @@ export class HeaderMenuComponent implements OnInit {
   saveProject(): void {
     this.loading = true;
     this.ipc.send('saveFile', parseProjectToFile(this.treeService, this.store));
+  }
+
+  exportToA3(): void {
+    this.loading = true;
+    this.subscription = this.armaFormatter.getFormattedText().subscribe(value => {
+        this.ipc.send('exportToA3', value);
+      }
+    );
   }
 
   private showSnackBarInfo(): void {
@@ -131,6 +143,10 @@ export class HeaderMenuComponent implements OnInit {
         this.toastr.success('Project loaded');
         this.hideSnackBarInfo();
       }
+    });
+    this.ipc.on('fileExported', () => {
+      this.toastr.success('Export successful');
+      this.loading = false;
     });
   }
 }

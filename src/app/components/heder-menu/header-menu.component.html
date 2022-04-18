@@ -15,7 +15,7 @@
     <i class="material-icons">save_alt</i>Save
   </button>
   <mat-divider [vertical]="true" *ngIf="store.isProjectStarted"></mat-divider>
-  <button *ngIf="store.isProjectStarted" mat-button>
+  <button *ngIf="store.isProjectStarted" mat-button (click)="exportToA3()">
     <i class="material-icons">exit_to_app</i>Export to A3
   </button>
   <button *ngIf="store.isProjectStarted" mat-button

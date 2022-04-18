@@ -1,5 +1,5 @@
-<mat-progress-bar mode="indeterminate" class="progress-bar" *ngIf="!templates"></mat-progress-bar>
-<div *ngIf="templates">
+<mat-progress-bar mode="indeterminate" class="progress-bar" *ngIf="!structuredText"></mat-progress-bar>
+<div *ngIf="structuredText">
   <div class="action-button">
     <button mat-button [cdkCopyToClipboard]="structuredText" (click)="onCopy()">
       <i class="material-icons">content_copy</i>Copy

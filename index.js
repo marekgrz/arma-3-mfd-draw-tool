@@ -79,7 +79,7 @@ ipcMain.on('reopenLastFile', (event, message) => {
 
 ipcMain.on('saveFile', (event, message) => {
   if (filePath) {
-    saveFileToDir(message, event);
+    saveFileToDir(message, event, 'fileSaved');
     console.log(chalk.green('File saved'));
   } else {
     showSaveDialog(message, event);
@@ -91,6 +91,10 @@ ipcMain.on('saveFileAs', (event, message) => {
   showSaveDialog(message, event);
 });
 
+ipcMain.on('exportToA3', (event, message) => {
+  showExportDialog(message, event);
+});
+
 function showSaveDialog(message, event) {
   dialog.showSaveDialog({properties: ['saveFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
     .then((e) => {
@@ -100,8 +104,22 @@ function showSaveDialog(message, event) {
         return;
       }
       filePath = e.filePath;
-      saveFileToDir(message, event);
+      saveFileToDir(message, event, 'fileSaved');
       console.log(chalk.green('File saved'));
+    });
+}
+
+function showExportDialog(message, event) {
+  dialog.showSaveDialog({properties: ['saveFile'], filters: [{name: 'A3 class file', extensions: ['hpp']}]})
+    .then((e) => {
+      if (e.canceled) {
+        console.log(chalk.red('File export cancelled'));
+        event.sender.send('Error');
+        return;
+      }
+      filePath = e.filePath;
+      saveFileToDir(message, event, 'fileExported');
+      console.log(chalk.green('File export successful'));
     });
 }
 
@@ -117,10 +135,12 @@ function openProject(event, channel) {
   });
 }
 
-function saveFileToDir(content, event) {
+function saveFileToDir(content, event, channel) {
   fs.writeFile(filePath, content, err => {
     if (err) {
       event.sender.send('Error');
+    } else {
+      event.sender.send(channel);
     }
   });
 }
