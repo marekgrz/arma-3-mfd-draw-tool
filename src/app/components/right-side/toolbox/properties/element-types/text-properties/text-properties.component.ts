@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
+import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
   selector: 'mfd-text-properties',
@@ -19,6 +20,7 @@ export class TextPropertiesComponent implements OnInit {
   source: string;
   staticText = true;
   value = '1';
+  sourceValue = 0;
 
   constructor(public store: StoreService,
               public sources: SourceService) {
@@ -27,6 +29,9 @@ export class TextPropertiesComponent implements OnInit {
   ngOnInit(): void {
     this.fontName = this.item.data.fontFamily;
     this.color = this.store.canvas.getActiveObject().fill as string;
+    if (!this.item.data.sourceScale) {
+      this.item.data.sourceScale = 1;
+    }
   }
 
   save(): void {
@@ -35,13 +40,17 @@ export class TextPropertiesComponent implements OnInit {
     text.top = Number(this.item.data.top);
     text.set('fontFamily', this.fontName);
     text.set('fill', this.color);
+    text.set('originX', this.item.data.textAlign);
     text.setCoords();
     text['source'] = this.source;
     text.lockRotation = true;
     this.store.canvas.requestRenderAll();
   }
 
-  refreshText(): void {
+  refreshText(change: MatSliderChange = null): void {
+    if (!this.staticText) {
+      this.item.data.text = (change.value * this.item.data.sourceScale).toString();
+    }
     this.store.canvas.requestRenderAll();
   }
 

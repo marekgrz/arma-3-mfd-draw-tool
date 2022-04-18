@@ -119,4 +119,12 @@ export class StoreService {
     }
     this.usedSources.push(sourceName);
   }
+
+  fromCanvasX(dim: number): number {
+    return dim / this.canvasWidth;
+  }
+
+  fromCanvasY(dim: number): number {
+    return dim / this.canvasHeight;
+  }
 }

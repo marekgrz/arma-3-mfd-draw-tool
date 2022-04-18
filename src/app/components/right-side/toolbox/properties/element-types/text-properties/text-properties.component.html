@@ -55,6 +55,7 @@
                (change)="save()">
       </mat-form-field>
     </div>
+    <mat-slider class="full-width" min="-1" max="1" step="0.01" value="0" [thumbLabel]="true" [(ngModel)]="sourceValue" (input)="refreshText($event)"></mat-slider>
   </div>
 
   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>

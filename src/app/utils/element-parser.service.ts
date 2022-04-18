@@ -13,13 +13,16 @@ import hexRgb from 'hex-rgb';
 import { TextElement } from '../templates/TextElement';
 import { MaterialColor, MFDParentClass } from '../templates/MFDParentClass';
 import { Color } from '../common/Color';
+import { TextUtilsService } from './text-utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementParserService {
 
-  constructor(private treeService: TreeService, private store: StoreService) {
+  constructor(private treeService: TreeService,
+              private store: StoreService,
+              private textUtils: TextUtilsService) {
   }
 
   public getMFDClass(): ClassGroup {
@@ -138,21 +141,19 @@ export class ElementParserService {
 
   private createText(item: StackItem): TextElement {
     const element = item.data;
-    const fontWidth = ((item.data.calcTextWidth() / element.text.length) * 1.8) / this.store.canvasWidth;
-    const fontHeight = (item.data.calcTextHeight()) / this.store.canvasHeight;
-    const pos = Point.from(element.aCoords.tl.x / this.store.canvasWidth, element.aCoords.tl.y / this.store.canvasHeight);
-    const right = Point.from(pos.x + fontWidth, pos.y);
-    const down = Point.from(pos.x, pos.y + fontHeight);
+    const textPos = this.textUtils.getTextPosition(element);
+    const invertedTextAlign = this.textUtils.invertTextAlign(element.textAlign);
     return Builder(TextElement)
       .name(item.label)
       .color(this.toRgba(element.fill))
+      .font(this.store.hudProperties.font !== element.fontFamily ? element.fontFamily : null)
       .type(ElementType.text)
       .text(element.text)
-      .align(element.textAlign)
+      .align(invertedTextAlign)
       .scale(1)
-      .pos(pos)
-      .right(right)
-      .down(down)
+      .pos(textPos.pos)
+      .right(textPos.right)
+      .down(textPos.down)
       .build();
   }
 
@@ -191,7 +192,7 @@ export class ElementParserService {
   }
 
   private canvasPointsToMFDPoints(points: Point[]): Point[] {
-    return points.map(point => Point.from(point.x / this.store.canvasWidth, point.y / this.store.canvasHeight));
+    return points.map(point => Point.from(this.store.fromCanvasX(point.x), this.store.fromCanvasY(point.y)));
   }
 
   private toRgba(hexString: string): Color {
@@ -199,4 +200,3 @@ export class ElementParserService {
     return new Color(color.red / 255, color.green / 255, color.blue / 255, color.alpha);
   }
 }
-

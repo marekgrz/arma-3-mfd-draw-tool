@@ -5,6 +5,7 @@ import { Color } from '../common/Color';
 export class TextElement extends BaseElementModel {
   name: string;
   color: Color;
+  font?: string;
   source = '';
   text?: string;
   bone?: string;
