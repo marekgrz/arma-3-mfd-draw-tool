@@ -6,6 +6,7 @@
   <div *ngFor="let font of store.FONT_LIST" [style.font-family]="font">&nbsp;</div>
 </div>
 <fabric [config]="config"
+        tabindex="1"
         (selectionCreated)="onSelected($event)"
         (selectionUpdated)="onSelected($event)"
         (beforeSelectionCleared)="onDeselected()"

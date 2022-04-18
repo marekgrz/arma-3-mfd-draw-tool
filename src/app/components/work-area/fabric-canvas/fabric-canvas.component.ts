@@ -42,7 +42,6 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   menuItems: MenuItem[];
 
-  @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
     const callback = {
       Shift: () => this.enableSnapping(),
@@ -51,6 +50,7 @@ export class FabricCanvasComponent implements AfterViewInit {
       ArrowUp: () => this.translateObject(Direction.up),
       ArrowDown: () => this.translateObject(Direction.down),
     }[event.key];
+    event.preventDefault();
     callback?.();
   }
 
@@ -73,6 +73,7 @@ export class FabricCanvasComponent implements AfterViewInit {
               private historyService: HistoryService,
               private lineUtils: LineUtilsService) {
     this.setupContextMenu();
+    document.getElementById('workspaceContainer').addEventListener('keydown', (event) => this.onKeyDown(event));
   }
 
   ngAfterViewInit(): void {
