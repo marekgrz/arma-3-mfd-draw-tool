@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
 import { TreeService } from '../components/left-side/layer-stack-ng/tree.service';
 import { StoreService } from './store.service';
-import { BONENAME, CIRCLESTEP, ID, LINETYPE, parseFileToProject, POINTS, ProjectFileStructure } from '../common/ProjectFileStructure';
+import {
+  BONENAME,
+  CIRCLESTEP,
+  ID,
+  LINETYPE,
+  LOCKORIENTATION,
+  parseFileToProject,
+  POINTS,
+  ProjectFileStructure
+} from '../common/ProjectFileStructure';
 import * as CircularJSON from 'flatted';
 
 @Injectable({
@@ -39,7 +48,7 @@ export class HistoryService {
 
   private currentProjectData(): ProjectFileStructure {
     const projectData: ProjectFileStructure = new ProjectFileStructure();
-    projectData.canvasContent = this.store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME]);
+    projectData.canvasContent = this.store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME, LOCKORIENTATION]);
     projectData.layerStackContent = this.treeService.itemList;
     projectData.globalHUDProperties = this.store.hudProperties;
     projectData.bones = this.store.bones;

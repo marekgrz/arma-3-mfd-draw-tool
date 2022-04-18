@@ -14,7 +14,7 @@ export class ProjectFileStructure {
 
 export function parseProjectToFile(treeService: TreeService, store: StoreService): string {
   const project: ProjectFileStructure = new ProjectFileStructure();
-  project.canvasContent = store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME]);
+  project.canvasContent = store.canvas.toJSON([ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME, LOCKORIENTATION]);
   project.layerStackContent = treeService.itemList;
   project.globalHUDProperties = store.hudProperties;
   project.bones = store.bones;
@@ -74,4 +74,5 @@ export const POINTS = 'points';
 export const CIRCLESTEP = 'circleStep';
 export const LINETYPE = 'lineType';
 export const BONENAME = 'boneName';
+export const LOCKORIENTATION = 'lockRotation';
 
