@@ -148,6 +148,9 @@ export class HeaderMenuComponent implements OnInit {
       this.toastr.success('Export successful');
       this.loading = false;
     });
+    this.ipc.on('Error', () => {
+      this.loading = false;
+    });
   }
 }
 
