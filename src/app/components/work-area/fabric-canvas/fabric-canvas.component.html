@@ -11,6 +11,7 @@
         (selectionUpdated)="onSelected($event)"
         (beforeSelectionCleared)="onDeselected()"
         (objectMoving)="onObjectMoving($event)"
+        (beforeTransform)="onBeforeTransform($event)"
         (objectModified)="onObjectModified()"
         [notClickable]="previewOnly"></fabric>
 

@@ -12,6 +12,7 @@ import { LineUtilsService } from '../../right-side/toolbox/element-selector/elem
 import { MenuItem } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
 import { findByID } from '../../../common/Utils';
+import { Point } from '../../../common/Point';
 
 @Component({
   selector: 'mfd-fabric-canvas',
@@ -39,6 +40,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   SNAP_ANGLE = 5;
 
   STEP_ANGLE = 0.01;
+
+  startPoint: Point;
 
   menuItems: MenuItem[];
 
@@ -115,6 +118,16 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   onObjectMoving(e): void {
     const selectedItem = this.treeService.selectedItem;
+    if (this.snappingEnabled) {
+      if (Math.abs(this.startPoint.x - e.pointer.x) > Math.abs(this.startPoint.y - e.pointer.y)) {
+        this.setAxisLock(false, true);
+      } else {
+        this.setAxisLock(true, false);
+      }
+    } else {
+      this.setAxisLock(false, false);
+    }
+
     if (!!selectedItem.base) {
       selectedItem.base.position.x = e.target.left;
       selectedItem.base.position.y = e.target.top;
@@ -131,8 +144,13 @@ export class FabricCanvasComponent implements AfterViewInit {
     }
   }
 
+  onBeforeTransform(e): void {
+    this.startPoint = Point.from(e.transform.ex, e.transform.ey);
+  }
+
   onObjectModified(): void {
     const selectedItem = this.treeService.selectedItem;
+    this.setAxisLock(false, false);
     if (selectedItem.itemType === ItemType.line) {
       selectedItem.data.hasBorders = true;
       this.lineUtils.recalculatePolyLineDimensions(selectedItem.data);
@@ -175,6 +193,7 @@ export class FabricCanvasComponent implements AfterViewInit {
   }
 
   private enableSnapping(): void {
+    this.snappingEnabled = true;
     if (this.element) {
       this.element.setOptions({snapAngle: this.SNAP_ANGLE});
     }
@@ -186,18 +205,32 @@ export class FabricCanvasComponent implements AfterViewInit {
     }
     const element = this.treeService.selectedItem.data;
     switch (dir) {
-      case Direction.up: element.top = element.top - 1; break;
-      case Direction.down: element.top = element.top + 1; break;
-      case Direction.left: element.left = element.left - 1; break;
-      case Direction.right: element.left = element.left + 1; break;
+      case Direction.up:
+        element.top = element.top - 1;
+        break;
+      case Direction.down:
+        element.top = element.top + 1;
+        break;
+      case Direction.left:
+        element.left = element.left - 1;
+        break;
+      case Direction.right:
+        element.left = element.left + 1;
+        break;
     }
     this.interaction.refreshView();
   }
 
   private disableSnapping(): void {
+    this.snappingEnabled = false;
     if (this.element) {
       this.element.setOptions({snapAngle: this.STEP_ANGLE});
     }
+  }
+
+  private setAxisLock(lockX: boolean, lockY: boolean): void {
+    this.treeService.selectedItem.data.lockMovementX = lockX;
+    this.treeService.selectedItem.data.lockMovementY = lockY;
   }
 }
 
