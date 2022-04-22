@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+<mat-form-field appearance="standard" class="small-input select font-type" color="accent">
   <mat-label>Bone</mat-label>
   <mat-select (ngModelChange)="boneChange.emit($event)" (selectionChange)="save.emit()"
               [(ngModel)]="bone"

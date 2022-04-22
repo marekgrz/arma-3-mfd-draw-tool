@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-  background-color: #515c67;
+  background-color: var(--primary-background-color);
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -242,14 +242,15 @@ p[hidden] {
 }
 
 .section-title {
-  background-color: #394048;
+  background-color: var(--secondary-background-color);
   padding: 10px;
   font-size: 1rem;
-  text-align: center;
   color: #a4a5a7;
   font-family: inherit;
-  letter-spacing: 5px;
-  font-weight: lighter;
+  letter-spacing: 1px;
+  font-weight: 400;
+  text-align: left;
+  padding-left: 2rem;
 }
 
 .disable-text-selection {
@@ -296,7 +297,6 @@ p[hidden] {
 .hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-title, .hljs-section, .hljs-doctag, .hljs-type, .hljs-name, .hljs-strong {
   white-space: normal;
 }
-
 
 // fonts
 @font-face {
@@ -358,5 +358,6 @@ p[hidden] {
   font-family: "TahomaB";
   src: local("TahomaB"), url(./assets/fonts/TahomaB.ttf) format("truetype");
 }
-
+@import "variables.less";
 @import "assets/icons/google-icons";
+@import (inline) "material-theming.less";

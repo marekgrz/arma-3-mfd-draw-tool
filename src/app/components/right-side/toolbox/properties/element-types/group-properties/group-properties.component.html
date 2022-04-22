@@ -1,15 +1,15 @@
 <mfd-name-input [(name)]="item.label"></mfd-name-input>
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
+<mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
   <mat-label>Condition</mat-label>
   <input matInput autocomplete="off" [(ngModel)]="item.groupProperties.condition">
 </mat-form-field>
 <mat-checkbox class="checkbox" [(ngModel)]="item.groupProperties.blinking">Blinking?</mat-checkbox>
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'"
+<mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'"
                 *ngIf="item.groupProperties.blinking">
   <mat-label>Blinking pattern as Array (intervals, separated by comma)</mat-label>
   <input matInput autocomplete="off" [(ngModel)]="item.groupProperties.blinkingPattern" placeholder="0.2, 0.2">
 </mat-form-field>
-<mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'"
+<mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'"
                 *ngIf="item.groupProperties.blinking">
   <mat-label>Blinking starts on (time in seconds)</mat-label>
   <input matInput type="number" autocomplete="off" [(ngModel)]="item.groupProperties.blinkingStartsOn" placeholder="1">
@@ -17,13 +17,13 @@
 
 <!--CLIP TL-->
 <div class="pair-elements">
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
            [(ngModel)]="item.groupProperties.clipTL.x">
   </mat-form-field>
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
@@ -33,13 +33,13 @@
 
 <!--CLIP BR-->
 <div class="pair-elements">
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
            [(ngModel)]="item.groupProperties.clipBR.x">
   </mat-form-field>
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
@@ -49,13 +49,13 @@
 
 <!--CLIP Parallax TL-->
 <div class="pair-elements">
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT PARALLAX [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
            [(ngModel)]="item.groupProperties.clipTLParallax.x">
   </mat-form-field>
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip TOP LEFT PARALLAX [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
@@ -65,13 +65,13 @@
 
 <!--CLIP Parallax BR-->
 <div class="pair-elements">
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT PARALLAX [X]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
            [(ngModel)]="item.groupProperties.clipBRParallax.x">
   </mat-form-field>
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Clip BOTTOM RIGHT PARALLAX [Y]</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"

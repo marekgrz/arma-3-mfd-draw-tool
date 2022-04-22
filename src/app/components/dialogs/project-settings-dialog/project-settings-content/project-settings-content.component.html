@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{editMode ? 'Modify project' : 'New project'}}</h2>
 <mat-dialog-content class="mat-typography">
   <div class="row-container">
-    <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'"
+    <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'"
                     [formGroup]="requiredFields">
       <mat-label>MFD Classname</mat-label>
       <input matInput autocomplete="off" required formControlName="name">
@@ -15,12 +15,12 @@
         </mat-icon>
       </div>
       <div class="pair-elements">
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Top left memory point</mat-label>
           <input matInput autocomplete="off" required formControlName="topLeft" [type]="'text'">
           <mat-error *ngIf="topLeft.invalid">Field required</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Top right memory point</mat-label>
           <input matInput autocomplete="off" required formControlName="topRight" [type]="'text'">
           <mat-error *ngIf="topRight.invalid">Field required</mat-error>
@@ -28,13 +28,13 @@
       </div>
 
       <div class="pair-elements">
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Bottom left memory point</mat-label>
           <input matInput autocomplete="off" required formControlName="bottomLeft" [type]="'text'">
           <mat-error *ngIf="bottomLeft.invalid">Field required</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Bottom right memory point</mat-label>
           <input matInput autocomplete="off" required formControlName="bottomRight" [type]="'text'">
           <mat-error *ngIf="bottomRight.invalid">Field required</mat-error>
@@ -51,12 +51,12 @@
           </mat-icon>
         </div>
         <div class="pair-elements">
-          <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
             <mat-label>Screen width</mat-label>
             <input matInput autocomplete="off" required formControlName="screenWidth" [type]="'number'">
             <mat-error *ngIf="screenWidth.invalid">Field required</mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+          <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
             <mat-label>Screen height</mat-label>
             <input matInput autocomplete="off" required formControlName="screenHeight" [type]="'number'">
             <mat-error *ngIf="screenHeight.invalid">Field required</mat-error>
@@ -72,11 +72,11 @@
         </mat-icon>
       </div>
       <div class="pair-elements">
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Top border</mat-label>
           <input matInput autocomplete="off" [(ngModel)]="globalHudProperties.borderTop" placeholder="0" [type]="'number'">
         </mat-form-field>
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Bottom border</mat-label>
           <input matInput autocomplete="off"
                  [(ngModel)]="globalHudProperties.borderBottom"
@@ -86,7 +86,7 @@
       </div>
 
       <div class="pair-elements">
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Left border</mat-label>
           <input matInput autocomplete="off"
                  [(ngModel)]="globalHudProperties.borderLeft"
@@ -94,7 +94,7 @@
                  [type]="'number'">
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-form-field appearance="standard" class="medium-input" [color]="'accent'" [floatLabel]="'always'">
           <mat-label>Right border</mat-label>
           <input matInput autocomplete="off"
                  [(ngModel)]="globalHudProperties.borderRight"
@@ -106,7 +106,7 @@
 
     <div class="section">
       <div class="pair-elements">
-        <mat-form-field appearance="outline" class="medium-input select" color="accent">
+        <mat-form-field appearance="standard" class="medium-input select" color="accent">
           <mat-label>Font type</mat-label>
           <mat-select [(ngModel)]="globalHudProperties.font">
             <mat-option *ngFor="let font of store.FONT_LIST" [value]="font">{{font}}</mat-option>
@@ -124,7 +124,7 @@
         </mat-icon>
       </div>
       <div class="color-row">
-        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="standard">
           <mat-label>Diffuse</mat-label>
           <input matInput class="color-picker-input" [formControl]="diffuseColor"
                  [colorPicker]="diffuseColor.value"
@@ -135,7 +135,7 @@
                  [style.background]="diffuseColor.value"/>
         </mat-form-field>
 
-        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="standard">
           <mat-label>Ambient</mat-label>
           <input matInput class="color-picker-input" [formControl]="ambientColor"
                  [colorPicker]="ambientColor.value"
@@ -146,7 +146,7 @@
                  [style.background]="ambientColor.value"/>
         </mat-form-field>
 
-        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="outline">
+        <mat-form-field class="medium-input full-width" [color]="'accent'" [floatLabel]="'always'" appearance="standard">
           <mat-label>Emissive</mat-label>
           <input matInput class="color-picker-input" [formControl]="emissiveColor"
                  [colorPicker]="emissiveColor.value"

@@ -1,5 +1,5 @@
 <div class="pair-elements">
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Position [X]</mat-label>
     <input matInput autocomplete="off"
            name="positionX" ngDefaultControl
@@ -7,8 +7,9 @@
            [(ngModel)]="positionX"
            (ngModelChange)="positionXChange.emit(positionX)"
            (change)="save.emit()">
+    <mat-icon matSuffix class="width-icon">height</mat-icon>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Position [Y]</mat-label>
     <input matInput autocomplete="off"
            name="positionY" ngDefaultControl
@@ -16,5 +17,6 @@
            [(ngModel)]="positionY"
            (ngModelChange)="positionYChange.emit(positionY)"
            (change)="save.emit()">
+    <mat-icon matSuffix>height</mat-icon>
   </mat-form-field>
 </div>

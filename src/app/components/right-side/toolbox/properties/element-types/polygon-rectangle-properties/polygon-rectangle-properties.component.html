@@ -11,7 +11,7 @@
 <!--  Color-->
   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
 <!--  Angle-->
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
   </mat-form-field>

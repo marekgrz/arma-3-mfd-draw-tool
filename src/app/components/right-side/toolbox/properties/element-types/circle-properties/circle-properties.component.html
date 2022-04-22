@@ -7,7 +7,7 @@
                       (save)="save()"></mfd-position-input>
   <!--  STEP-->
   <div class="pair-elements circle-step">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Step</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
@@ -23,14 +23,14 @@
   <mat-checkbox class="checkbox" [(ngModel)]="uniformDiameter" (ngModelChange)="makeDiameterUniform()">Uniform radius
   </mat-checkbox>
   <div class="pair-elements" *ngIf="!uniformDiameter">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Radius X</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
              [value]="getDiameterX()"
              (change)="updateDiameterX($event)">
     </mat-form-field>
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Radius Y</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
@@ -39,7 +39,7 @@
     </mat-form-field>
   </div>
   <div class="pair-elements" *ngIf="uniformDiameter">
-    <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Radius</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
@@ -48,7 +48,7 @@
     </mat-form-field>
   </div>
   <!--  STROKE-->
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Stroke</mat-label>
     <input matInput autocomplete="off"
            [type]="'number'"
@@ -56,7 +56,7 @@
            (change)="save()">
   </mat-form-field>
   <!--  Line Type-->
-  <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+  <mat-form-field appearance="standard" class="small-input select font-type" color="accent">
     <mat-label>Line type</mat-label>
     <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
       <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
@@ -65,7 +65,7 @@
   <!--  COLOR-->
   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
   <!--  ANGLE-->
-  <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
     <mat-label>Angle</mat-label>
     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
   </mat-form-field>

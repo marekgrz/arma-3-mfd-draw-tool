@@ -4,13 +4,13 @@
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
   <div class="pair-elements">
-    <mat-form-field appearance="outline" class="small-input select font-type" color="accent">
+    <mat-form-field appearance="standard" class="small-input select font-type" color="accent">
       <mat-label>Font type</mat-label>
       <mat-select [(ngModel)]="fontName" (selectionChange)="save()">
         <mat-option *ngFor="let font of store.FONT_LIST" [value]="font">{{font}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="small-input font-size" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input font-size" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Font size</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
@@ -31,7 +31,7 @@
 
   <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText">Use static text</mat-checkbox>
   <div [className]="staticText ? '' : 'disabled'">
-    <mat-form-field appearance="outline" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
+    <mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Static text</mat-label>
       <input matInput autocomplete="off"
              [type]="'text'"
@@ -41,13 +41,13 @@
   </div>
   <div [className]="staticText ? 'disabled' : ''">
     <div class="pair-elements sources">
-      <mat-form-field appearance="outline" class="small-input select" color="accent">
+      <mat-form-field appearance="standard" class="small-input select" color="accent">
         <mat-label>Source</mat-label>
         <mat-select [(ngModel)]="source" (selectionChange)="save()">
           <mat-option *ngFor="let source of getAvailableSources()" [value]="source">{{source}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+      <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
         <mat-label>Source scale</mat-label>
         <input matInput autocomplete="off"
                [type]="'number'"
