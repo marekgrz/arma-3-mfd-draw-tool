@@ -359,6 +359,29 @@ p[hidden] {
   font-family: "TahomaB";
   src: local("TahomaB"), url(./assets/fonts/TahomaB.ttf) format("truetype");
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #787878;
+  border-radius: 8px;
+  border: 3px solid transparent;
+}
+
 @import "variables.less";
 @import "assets/icons/google-icons";
 @import (inline) "material-theming.less";
