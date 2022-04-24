@@ -6,10 +6,12 @@
   <div class="points-list">
     <div *ngFor="let point of item.data.points, let i = index" class="point-item">
       <span class="point-index">#{{i+1}}</span>
-      <mfd-position-input class="point-item"
-                          [(positionX)]="point.x"
-                          [(positionY)]="point.y"
-                          (save)="save()"></mfd-position-input>
+      <div class="point-pair">
+        <mfd-position-input class="point-item"
+                            [(positionX)]="point.x"
+                            [(positionY)]="point.y"
+                            (save)="save()"></mfd-position-input>
+      </div>
     </div>
   </div>
 

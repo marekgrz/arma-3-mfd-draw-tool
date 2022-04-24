@@ -1,23 +1,26 @@
-.point-index {
-  display: flex;
-  font-size: 1rem;
-  padding-bottom: 3px;
-  margin-block: auto;
-  margin-left: -25px;
-  margin-right: 10px;
-}
-
 .points-list {
-  margin-inline: auto;
-  width: 80%;
+  height: 300px;
+  overflow: auto;
 
   .point-item {
     display: flex;
     margin-block: 3px;
 
-    .mat-form-field-wrapper {
-      margin: 0;
-      padding-bottom: 5px;
+    .point-index {
+      display: flex;
+      font-size: 1rem;
+      padding-bottom: 3px;
+      margin-block: auto;
+    }
+
+    .point-pair {
+      margin-inline: auto;
+      width: 80%;
+
+      .mat-form-field-wrapper {
+        margin: 0;
+        padding-bottom: 5px;
+      }
     }
   }
 }
