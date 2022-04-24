@@ -1,0 +1,8 @@
+<mat-form-field appearance="standard" class="small-input select font-type" color="accent">
+    <mat-label>Line type</mat-label>
+    <mat-select [(ngModel)]="_lineType"
+                (ngModelChange)="lineTypeChange.emit($event)" (selectionChange)="save.emit()">
+        <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
+    </mat-select>
+    <mat-icon matSuffix>line_style</mat-icon>
+</mat-form-field>

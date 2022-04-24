@@ -1,20 +1,22 @@
 <div class="row-container">
 <!--  Name-->
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
 <!--    Position-->
   <mfd-position-input [(positionX)]="item.base.position.x"
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <!--  Dimensions-->
   <mfd-dimensions-input [(item)]="item"
                         (save)="save()"></mfd-dimensions-input>
-<!--  Color-->
-  <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
-<!--  Angle-->
-  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-    <mat-label>Angle</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
-  </mat-form-field>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
+  <div class="pair-elements">
+    <!--  Color-->
+    <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()" class="pair-item"></mfd-color-selector>
+    <!--  Angle-->
+    <mfd-angle-input [(angle)]="angle" [initialValue]="getAngle()" (save)="save()" class="pair-item"></mfd-angle-input>
+  </div>
 <!--  Bone-->
   <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>

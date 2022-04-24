@@ -1,10 +1,25 @@
 .color-picker-wrapper {
-  padding-bottom: 1.34375em;
+  background: var(--primary-controls-background);
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
 
   .color-picker-input {
     text-align: left;
     padding: 0.5em 0 0.5em 0;
     border-radius: 5px;
     border: 1px solid #7d848a;
+    height: 30%;
+    width: 85%;
+    margin: auto 10px;
+    cursor: pointer;
   }
+
+  mat-icon {
+    margin: auto 10px auto auto;
+  }
+}
+
+mfd-color-selector {
+  padding-bottom: 0.9rem;
 }

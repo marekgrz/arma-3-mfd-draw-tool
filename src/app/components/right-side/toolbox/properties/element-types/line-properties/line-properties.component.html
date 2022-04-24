@@ -2,9 +2,10 @@
   <!--  Name-->
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
   <!--  Position-->
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <div class="points-list">
-    <div *ngFor="let point of item.data.points, let i = index">
-      <span class="point-index">Point {{i+1}}</span>
+    <div *ngFor="let point of item.data.points, let i = index" class="point-item">
+      <span class="point-index">#{{i+1}}</span>
       <mfd-position-input class="point-item"
                           [(positionX)]="point.x"
                           [(positionY)]="point.y"
@@ -12,36 +13,19 @@
     </div>
   </div>
 
-  <mat-divider vertical="false"></mat-divider>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <div class="pair-elements">
     <!--  Stroke-->
-    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-      <mat-label>Stroke</mat-label>
-      <input matInput autocomplete="off"
-             [type]="'number'"
-             [(ngModel)]="item.data.strokeWidth"
-             (change)="save()">
-      <mat-icon matSuffix>border_color</mat-icon>
-    </mat-form-field>
+    <mfd-stroke-width-input class="pair-item" [(width)]="item.data.strokeWidth" (save)="save()"></mfd-stroke-width-input>
     <!--  Line Type-->
-    <mat-form-field appearance="standard" class="small-input select font-type" color="accent">
-      <mat-label>Line type</mat-label>
-      <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
-        <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
-      </mat-select>
-      <mat-icon matSuffix>line_style</mat-icon>
-    </mat-form-field>
+    <mfd-line-type-selector class="pair-item" [(lineType)]="lineType" (save)="save()"></mfd-line-type-selector>
   </div>
 
-  <mat-divider vertical="false"></mat-divider>
- <div class="pair-elements">
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
+  <div class="pair-elements">
    <!--  Color-->
-   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
+   <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()" class="pair-item"></mfd-color-selector>
    <!--  Angle-->
-   <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-     <mat-label>Angle</mat-label>
-     <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
-     <mat-icon matSuffix>rotate_right</mat-icon>
-   </mat-form-field>
+    <mfd-angle-input [(angle)]="angle" [initialValue]="getAngle()" (save)="save()" class="pair-item"></mfd-angle-input>
  </div>
 </div>

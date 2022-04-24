@@ -1,8 +1,11 @@
 <div class="row-container">
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <mfd-position-input [(positionX)]="item.base.position.x"
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
+
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <div class="pair-elements">
     <mat-form-field appearance="standard" class="small-input select font-type" color="accent">
       <mat-label>Font type</mat-label>
@@ -10,6 +13,20 @@
         <mat-option *ngFor="let font of store.FONT_LIST" [value]="font">{{font}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()" class="pair-item"></mfd-color-selector>
+  </div>
+
+  <div class="pair-elements">
+    <mat-button-toggle-group name="textAlign" aria-label="Text align" class="align-selector pair-item"
+                             [(ngModel)]="item.data.textAlign" (ngModelChange)="save()">
+      <mat-button-toggle value="left" [matTooltip]="'Left align'"><i class="material-icons">format_align_left</i>
+      </mat-button-toggle>
+      <mat-button-toggle value="center" [matTooltip]="'Center align'"><i class="material-icons">format_align_center</i>
+      </mat-button-toggle>
+      <mat-button-toggle value="right" [matTooltip]="'Right align'"><i class="material-icons">format_align_right</i>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
     <mat-form-field appearance="standard" class="small-input font-size" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Font size</mat-label>
       <input matInput autocomplete="off"
@@ -19,16 +36,7 @@
     </mat-form-field>
   </div>
 
-  <mat-button-toggle-group name="textAlign" aria-label="Text align" class="align-selector"
-                           [(ngModel)]="item.data.textAlign" (ngModelChange)="save()">
-    <mat-button-toggle value="left" [matTooltip]="'Left align'"><i class="material-icons">format_align_left</i>
-    </mat-button-toggle>
-    <mat-button-toggle value="center" [matTooltip]="'Center align'"><i class="material-icons">format_align_center</i>
-    </mat-button-toggle>
-    <mat-button-toggle value="right" [matTooltip]="'Right align'"><i class="material-icons">format_align_right</i>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText">Use static text</mat-checkbox>
   <div [className]="staticText ? '' : 'disabled'">
     <mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
@@ -57,6 +65,4 @@
     </div>
     <mat-slider class="full-width" min="-1" max="1" step="0.01" value="0" [thumbLabel]="true" [(ngModel)]="sourceValue" (input)="refreshText($event)"></mat-slider>
   </div>
-
-  <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
 </div>

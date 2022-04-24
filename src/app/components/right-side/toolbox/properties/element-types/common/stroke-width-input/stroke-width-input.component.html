@@ -1,0 +1,9 @@
+<mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Stroke</mat-label>
+    <input matInput autocomplete="off"
+           [type]="'number'"
+           [(ngModel)]="_width"
+           (ngModelChange)="widthChange.emit($event)"
+           (change)="save.emit()">
+    <mat-icon matSuffix>border_color</mat-icon>
+</mat-form-field>

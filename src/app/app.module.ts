@@ -84,6 +84,9 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ProjectSettingsDialogCreateComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
 import { ProjectSettingsDialogModifyComponent } from './components/dialogs/project-settings-dialog/project-settings-dialog-modify/project-settings-dialog-modify.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { StrokeWidthInputComponent } from './components/right-side/toolbox/properties/element-types/common/stroke-width-input/stroke-width-input.component';
+import { LineTypeSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/line-type-selector/line-type-selector.component';
+import { AngleInputComponent } from './components/right-side/toolbox/properties/element-types/common/angle-input/angle-input.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +141,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ResizeablePanelComponent,
     ProjectSettingsDialogCreateComponent,
     ProjectSettingsDialogModifyComponent,
+    StrokeWidthInputComponent,
+    LineTypeSelectorComponent,
+    AngleInputComponent,
   ],
     imports: [
         BrowserModule,

@@ -6,6 +6,7 @@
            [type]="'number'"
            [value]="getWidth()"
            (change)="updateWidth($event)">
+    <mat-icon class="width-icon" matSuffix>expand_all</mat-icon>
   </mat-form-field>
   <!--    Height-->
   <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
@@ -14,5 +15,6 @@
            [type]="'number'"
            [value]="getHeight()"
            (change)="updateHeight($event)">
+    <mat-icon matSuffix>expand_all</mat-icon>
   </mat-form-field>
 </div>

@@ -2,34 +2,29 @@
   <!--  Name-->
   <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
   <!--  Position-->
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <mfd-position-input [(positionX)]="item.base.position.x"
                       [(positionY)]="item.base.position.y"
                       (save)="save()"></mfd-position-input>
   <!--  Dimensions-->
   <mfd-dimensions-input [(item)]="item"
                         (save)="save()"></mfd-dimensions-input>
-  <!--  Stroke-->
-  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-    <mat-label>Stroke</mat-label>
-    <input matInput autocomplete="off"
-           [type]="'number'"
-           [(ngModel)]="item.data.strokeWidth"
-           (change)="save()">
-  </mat-form-field>
-  <!--  Line Type-->
-  <mat-form-field appearance="standard" class="small-input select font-type" color="accent">
-    <mat-label>Line type</mat-label>
-    <mat-select [(ngModel)]="lineType" (selectionChange)="save()">
-      <mat-option *ngFor="let type of store.LINE_TYPE_LIST" [value]="type.value">{{type.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <!--  Color-->
-  <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()"></mfd-color-selector>
-  <!--  Angle-->
-  <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-    <mat-label>Angle</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="angle" [value]="getAngle()" (change)="save()">
-  </mat-form-field>
+
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
+  <div class="pair-elements">
+    <!--  Stroke-->
+    <mfd-stroke-width-input class="pair-item" [(width)]="item.data.strokeWidth" (save)="save()"></mfd-stroke-width-input>
+    <!--  Line Type-->
+    <mfd-line-type-selector class="pair-item" [(lineType)]="lineType" (save)="save()"></mfd-line-type-selector>
+  </div>
+
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
+  <div class="pair-elements">
+    <!--  Color-->
+    <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()" class="pair-item"></mfd-color-selector>
+    <!--  Angle-->
+    <mfd-angle-input [(angle)]="angle" [initialValue]="getAngle()" (save)="save()" class="pair-item"></mfd-angle-input>
+  </div>
   <!--  Bone-->
   <mfd-bones-selector [(bone)]="boneName" (save)="save()"></mfd-bones-selector>
 </div>

@@ -1,0 +1,6 @@
+<mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+    <mat-label>Angle</mat-label>
+    <input matInput autocomplete="off" [(ngModel)]="_angle"
+           (ngModelChange)="angleChange.emit($event)" [value]="initialValue" (change)="save.emit()">
+    <mat-icon matSuffix>rotate_right</mat-icon>
+</mat-form-field>

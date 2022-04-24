@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'mfd-color-selector',
   templateUrl: './color-selector.component.html',
-  styleUrls: ['./color-selector.component.less']
+  styleUrls: ['./color-selector.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ColorSelectorComponent implements OnInit {
 

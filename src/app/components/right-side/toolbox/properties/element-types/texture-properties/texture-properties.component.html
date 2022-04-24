@@ -1,4 +1,7 @@
 <div class="row-container">
+  <!--  Name-->
+  <mfd-name-input [(name)]="item.label" (save)="save()"></mfd-name-input>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <!--  FileName-->
   <mfd-texture-file-selector class="full-width" [(file)]="item.textureFile"
                              (fileChange)="save($event)"></mfd-texture-file-selector>
@@ -6,6 +9,7 @@
   <mfd-position-input [(positionX)]="item.data.left"
                       [(positionY)]="item.data.top"
                       (save)="save()"></mfd-position-input>
+  <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
   <!--   Dimensions-->
   <div class="pair-elements">
     <mfd-dimensions-input [(item)]="item"
