@@ -22,6 +22,7 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   viewMode: 'design' | 'text' | 'preview' = 'design';
   ZOOM_LEVEL = 1;
   ZOOM_STEP = 0.1;
+  BOUNDARY_PADDING = 40;
   private subscriptions: Subscription[] = [];
   private mouseMoveSubscription;
 
@@ -91,6 +92,13 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   }
 
   private onMouseMove(e: MouseEvent): void {
+    const boundary: DOMRect = this.workspaceContainer.nativeElement.getBoundingClientRect();
+    if (e.clientX < boundary.left + this.BOUNDARY_PADDING
+      || e.clientX > boundary.right - this.BOUNDARY_PADDING
+      || e.clientY < boundary.top + this.BOUNDARY_PADDING
+      || e.clientY > boundary.bottom - this.BOUNDARY_PADDING) {
+      this.mouseMoveSubscription.unsubscribe();
+    }
     this.offsetPosition[0] = this.startPosition[0] - (this.mouseClickPosition[0] - e.clientX);
     this.offsetPosition[1] = this.startPosition[1] - (this.mouseClickPosition[1] - e.clientY);
     this.updatePositionAndScale();
