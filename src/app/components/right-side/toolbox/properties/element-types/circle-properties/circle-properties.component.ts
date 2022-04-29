@@ -16,9 +16,9 @@ import { ElementTransformService } from '../element-transform.service';
 export class CirclePropertiesComponent extends BaseElementProperties implements OnInit {
 
   angle: number;
-  newDiameterX: number;
-  newDiameterY: number;
-  uniformDiameter = true;
+  radiusX: number;
+  radiusY: number;
+  uniformRadius = true;
   circleStep = 0.1;
   lineType = LineType.full;
 
@@ -28,8 +28,8 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.newDiameterX = this.getDiameterX();
-    this.newDiameterY = this.getDiameterY();
+    this.radiusX = this.getRadiusX();
+    this.radiusY = this.getRadiusY();
     this.angle = this.getAngle();
     this.circleStep = this.item.data[CIRCLESTEP];
     this.lineType = this.item.data[LINETYPE];
@@ -40,8 +40,8 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
     const circle: fabric.Circle = this.store.canvas.getActiveObject() as Circle;
     circle.left = Number(this.item.data.left);
     circle.top = Number(this.item.data.top);
-    circle.scaleX = Number(this.newDiameterX / this.item.data.width);
-    circle.scaleY = Number(this.newDiameterY / this.item.data.height);
+    circle.scaleX = Number(this.radiusX / this.item.data.width * 2);
+    circle.scaleY = Number(this.radiusY / this.item.data.height * 2);
     circle[CIRCLESTEP] = this.circleStep;
     this.setElementPosition(circle);
     this.setElementLineType(circle, this.lineType);
@@ -51,36 +51,36 @@ export class CirclePropertiesComponent extends BaseElementProperties implements 
   }
 
   updateDiameterX(event): void {
-    this.newDiameterX = event.target.value;
+    this.radiusX = event.target.value;
     this.save();
   }
 
   updateDiameterY(event): void {
-    this.newDiameterY = event.target.value;
+    this.radiusY = event.target.value;
     this.save();
   }
 
   updateDiameter(event): void {
-    this.newDiameterX = event.target.value;
-    this.newDiameterY = event.target.value;
+    this.radiusX = event.target.value;
+    this.radiusY = event.target.value;
     this.save();
   }
 
-  getDiameterX(): number {
-    return this.item.data.width * this.item.data.scaleX;
+  getRadiusX(): number {
+    return (this.item.data.width * this.item.data.scaleX) / 2;
   }
 
-  getDiameterY(): number {
-    return this.item.data.height * this.item.data.scaleY;
+  getRadiusY(): number {
+    return (this.item.data.height * this.item.data.scaleY) / 2;
   }
 
   getAngle(): number {
     return this.item.data.angle * 1;
   }
 
-  makeDiameterUniform(): void {
-    if (this.uniformDiameter) {
-      this.newDiameterY = this.newDiameterX.valueOf();
+  makeRadiusUniform(): void {
+    if (this.uniformRadius) {
+      this.radiusY = this.radiusX.valueOf();
       this.save();
     }
   }

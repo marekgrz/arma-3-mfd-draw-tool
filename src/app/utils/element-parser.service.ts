@@ -159,16 +159,17 @@ export class ElementParserService {
 
   private lineFromCircle(item: StackItem): StackItem {
     const element = item.data;
-    const radiusX = element.width / 2;
-    const radiusY = element.height / 2;
-    const centerX = 317.5;
-    const centerY = 108.5;
+    const radiusX = element.width * element.scaleX / 2;
+    const radiusY = element.height * element.scaleY / 2;
+    const centerX = element.left + radiusX;
+    const centerY = element.top + radiusY;
     const points: Point[] = [];
     for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element[CIRCLESTEP])) {
       const x = centerX + radiusX * Math.cos(a);
       const y = centerY + radiusY * Math.sin(a);
       points.push({x, y} as Point);
     }
+    points.push(points[0]);
     item.data[POINTS] = points;
     return item;
   }

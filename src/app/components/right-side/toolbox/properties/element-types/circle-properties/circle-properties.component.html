@@ -22,14 +22,14 @@
   </div>
   <!--  RADIUS-->
   <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
-  <mat-checkbox class="checkbox" [(ngModel)]="uniformDiameter" (ngModelChange)="makeDiameterUniform()">Uniform radius
+  <mat-checkbox class="checkbox" [(ngModel)]="uniformRadius" (ngModelChange)="makeRadiusUniform()">Uniform radius
   </mat-checkbox>
-  <div class="pair-elements" *ngIf="!uniformDiameter">
+  <div class="pair-elements" *ngIf="!uniformRadius">
     <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Radius X</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [value]="getDiameterX()"
+             [value]="getRadiusX()"
              (change)="updateDiameterX($event)">
       <mat-icon class="icon-ellipse-x" matSuffix>panorama_fish_eye</mat-icon>
     </mat-form-field>
@@ -37,17 +37,17 @@
       <mat-label>Radius Y</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [value]="getDiameterY()"
+             [value]="getRadiusY()"
              (change)="updateDiameterY($event)">
       <mat-icon class="icon-ellipse-y" matSuffix>panorama_fish_eye</mat-icon>
     </mat-form-field>
   </div>
-  <div class="pair-elements" *ngIf="uniformDiameter">
+  <div class="pair-elements" *ngIf="uniformRadius">
     <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Radius</mat-label>
       <input matInput autocomplete="off"
              [type]="'number'"
-             [value]="getDiameterX()"
+             [value]="getRadiusX()"
              (change)="updateDiameter($event)">
       <mat-icon matSuffix>panorama_fish_eye</mat-icon>
     </mat-form-field>
