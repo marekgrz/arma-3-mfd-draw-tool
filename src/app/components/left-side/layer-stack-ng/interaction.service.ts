@@ -119,6 +119,11 @@ export class InteractionService {
         itemCopy.data = clone;
         itemCopy.data[ID] = newId;
         this.elementTransform.setElementPosition(clone, itemCopy, itemCopy.bone);
+        itemCopy.data.on('mousedown', (event) => {
+          if (event.button === 3) {
+            this.store.openContextMenu(event);
+          }
+        });
         this.store.canvas.add(clone);
       }, [...CUSTOM_PROPERTIES]);
     }
