@@ -10,7 +10,7 @@
         <mfd-position-input class="point-item"
                             [(positionX)]="point.x"
                             [(positionY)]="point.y"
-                            (save)="save()"></mfd-position-input>
+                            (save)="onPointPositionModified()"></mfd-position-input>
       </div>
     </div>
   </div>
@@ -28,6 +28,6 @@
    <!--  Color-->
    <mfd-color-selector [(colorHex)]="color" (colorHexChange)="save()" class="pair-item"></mfd-color-selector>
    <!--  Angle-->
-    <mfd-angle-input [(angle)]="angle" [initialValue]="getAngle()" (save)="save()" class="pair-item"></mfd-angle-input>
+    <mfd-angle-input [(angle)]="angle" [initialValue]="getAngle()" (save)="onAngleModified()" class="pair-item"></mfd-angle-input>
  </div>
 </div>

@@ -3,7 +3,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Point } from 'fabric/fabric-impl';
 import { LineType } from '../../../../../../templates/Line';
-import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { CURRENT_ANGLE, LINETYPE, PREVIOUS_ANGLE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { ElementTransformService } from '../element-transform.service';
@@ -81,14 +81,34 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
     const line: fabric.Polyline = this.store.canvas.getActiveObject() as fabric.Polyline;
     line[LINETYPE] = this.lineType;
     this.setElementStroke(line);
-    this.setElementStroke(line);
-    this.setElementRotation(line);
+    this.refresh();
+  }
+
+  onPointPositionModified(): void {
+    const line: fabric.Polyline = this.store.canvas.getActiveObject() as fabric.Polyline;
     this.lineUtils.recalculatePolyLineDimensions(line);
     this.refresh();
   }
 
+
+  /* .rotate() nie obraca o zadana wartosc a ustawia kąt calego obiektu. Czyli .rotate(0) ustawi element zeby mial kąt 0 stopni*/
+  onAngleModified(): void {
+    const line: fabric.Polyline = this.store.canvas.getActiveObject() as fabric.Polyline;
+    this.item.data[CURRENT_ANGLE] = this.angle;
+    if (!this.item.data[PREVIOUS_ANGLE]) {
+      this.item.data[PREVIOUS_ANGLE] = 0;
+    }
+    const angleDiff = this.item.data[CURRENT_ANGLE] - this.item.data[PREVIOUS_ANGLE];
+    this.item.data[PREVIOUS_ANGLE] = this.item.data[CURRENT_ANGLE];
+    line.rotate(angleDiff);
+    line.setCoords();
+    this.lineUtils.recalculateRotation(line);
+    this.refresh();
+  }
+
+  // Custom angle for line due to ability to modify points
   getAngle(): number {
-    return this.item.data.angle * 1;
+    return this.item.data[CURRENT_ANGLE] || 0 * 1;
   }
 
   private setupPolyLineEdit(): void {

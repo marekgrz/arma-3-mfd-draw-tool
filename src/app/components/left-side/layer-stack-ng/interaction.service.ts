@@ -5,7 +5,7 @@ import { fabric } from 'fabric';
 import { StoreService } from '../../../utils/store.service';
 import { findByID, flattenNode } from '../../../common/Utils';
 import { MatDialog } from '@angular/material/dialog';
-import { BONENAME, CIRCLESTEP, ID, LINETYPE, LOCKORIENTATION, POINTS } from '../../../common/ProjectFileStructure';
+import { CUSTOM_PROPERTIES, ID } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
 import * as CircularJSON from 'flatted';
 import { ElementTransformService } from '../../right-side/toolbox/properties/element-types/element-transform.service';
@@ -120,7 +120,7 @@ export class InteractionService {
         itemCopy.data[ID] = newId;
         this.elementTransform.setElementPosition(clone, itemCopy, itemCopy.bone);
         this.store.canvas.add(clone);
-      }, [POINTS, CIRCLESTEP, LINETYPE, BONENAME, LOCKORIENTATION]);
+      }, [...CUSTOM_PROPERTIES]);
     }
     if (item.children) {
       itemCopy.children = item.children.map(child => this.cloneSelection(child));

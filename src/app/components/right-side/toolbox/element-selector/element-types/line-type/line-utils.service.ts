@@ -34,4 +34,19 @@ export class LineUtilsService {
     });
     polyLine.setCoords();
   }
+
+  public recalculateRotation(polyLine: fabric.Polyline): void {
+    const matrix = polyLine.calcTransformMatrix();
+    const transformedPoints = polyLine.points.map(p => {
+      return new fabric.Point(
+        p.x - polyLine.pathOffset.x,
+        p.y - polyLine.pathOffset.y);
+    }).map(p => {
+      return fabric.util.transformPoint(p, matrix, false);
+    });
+    polyLine.points = transformedPoints;
+    polyLine.setCoords();
+    this.recalculatePolyLineDimensions(polyLine);
+    polyLine.rotate(0);
+  }
 }
