@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
-import { CIRCLESTEP, ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { CIRCLE_STEP, ID, LINE_TYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';
@@ -31,8 +31,8 @@ export class CircleTypeComponent extends BaseElementType {
       left: 50, top: 50
     });
     circle[ID] = generateId();
-    circle[CIRCLESTEP] = 0.1;
-    circle[LINETYPE] = LineType.full;
+    circle[CIRCLE_STEP] = 0.1;
+    circle[LINE_TYPE] = LineType.full;
     this.createNewElement(this.treeService.itemFromCircle(circle));
   }
 }

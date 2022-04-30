@@ -3,7 +3,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
-import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { ID, LINE_TYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';
@@ -33,7 +33,7 @@ export class RectangleTypeComponent extends BaseElementType {
       padding: 0,
     });
     rect[ID] = generateId();
-    rect[LINETYPE] = LineType.full;
+    rect[LINE_TYPE] = LineType.full;
     this.createNewElement(this.treeService.itemFromRectangle(rect));
   }
 }

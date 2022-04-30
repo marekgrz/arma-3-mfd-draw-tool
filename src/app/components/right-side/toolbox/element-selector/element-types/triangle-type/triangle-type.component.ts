@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { StoreService } from '../../../../../../utils/store.service';
-import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { ID, LINE_TYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';
@@ -33,7 +33,7 @@ export class TriangleTypeComponent extends BaseElementType {
       padding: 0,
     });
     triangle[ID] = generateId();
-    triangle[LINETYPE] = LineType.full;
+    triangle[LINE_TYPE] = LineType.full;
     this.createNewElement(this.treeService.itemFromTriangle(triangle));
   }
 }

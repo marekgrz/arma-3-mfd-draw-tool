@@ -1,7 +1,7 @@
 import { LineType } from '../../../../../templates/Line';
 import { StoreService } from '../../../../../utils/store.service';
 import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
-import { BONENAME } from '../../../../../common/ProjectFileStructure';
+import { BONE_NAME } from '../../../../../common/ProjectFileStructure';
 import { InteractionService } from '../../../../left-side/layer-stack-ng/interaction.service';
 import { Directive, Input, OnInit } from '@angular/core';
 import { ElementTransformService } from './element-transform.service';
@@ -24,7 +24,7 @@ export class BaseElementProperties implements OnInit {
   }
 
   ngOnInit(): void {
-    this.boneName = this.item.data[BONENAME];
+    this.boneName = this.item.data[BONE_NAME];
   }
 
   setElementLineType(element, lineType: LineType): void {

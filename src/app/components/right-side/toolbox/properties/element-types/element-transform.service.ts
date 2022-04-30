@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LineType } from '../../../../../templates/Line';
-import { BONENAME, LINETYPE } from '../../../../../common/ProjectFileStructure';
+import { BONE_NAME, LINE_TYPE } from '../../../../../common/ProjectFileStructure';
 import { fabric } from 'fabric';
 import { StackItem } from '../../../../left-side/layer-stack-ng/elements/StackItem';
 import { BoneFixedModel, BoneType } from '../../../../left-side/bones-list/BoneBaseModel';
@@ -14,7 +14,7 @@ export class ElementTransformService {
   constructor(private store: StoreService) { }
 
   setElementLineType(element, lineType: LineType): void {
-    element[LINETYPE] = lineType;
+    element[LINE_TYPE] = lineType;
     switch (lineType) {
       case LineType.full: {
         element.set('strokeDashArray', undefined);
@@ -42,7 +42,7 @@ export class ElementTransformService {
   setElementPosition(element: fabric.Object, item: StackItem, boneName: string): void {
     const bone = this.store.bones.find(it => it.name === boneName);
     const basePosition = item.base.position;
-    element[BONENAME] = boneName;
+    element[BONE_NAME] = boneName;
     if (bone === undefined) {
       element.left = basePosition.x;
       element.top = basePosition.y;

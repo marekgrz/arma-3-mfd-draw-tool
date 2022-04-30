@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fabric } from 'fabric';
 import { StoreService } from '../../../../../../utils/store.service';
 import { LineType } from '../../../../../../templates/Line';
-import { LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { LINE_TYPE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { ElementTransformService } from '../element-transform.service';
@@ -26,7 +26,7 @@ export class RectanglePropertiesComponent extends BaseElementProperties implemen
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.lineType = this.item.data[LINETYPE];
+    this.lineType = this.item.data[LINE_TYPE];
     this.color = this.store.canvas.getActiveObject().stroke;
   }
 

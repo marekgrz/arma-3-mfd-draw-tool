@@ -71,12 +71,12 @@ export class GlobalHUDProperties {
 ///// DEFINE THEM IN THE PARSE FUNCTION ABOVE ////////////
 export const ID = 'id';
 export const POINTS = 'points';
-export const CIRCLESTEP = 'circleStep';
-export const LINETYPE = 'lineType';
-export const BONENAME = 'boneName';
-export const LOCKORIENTATION = 'lockRotation';
+export const CIRCLE_STEP = 'circleStep';
+export const LINE_TYPE = 'lineType';
+export const BONE_NAME = 'boneName';
+export const LOCK_ORIENTATION = 'lockRotation';
 export const PREVIOUS_ANGLE = 'previousAngle';
 export const CURRENT_ANGLE = 'currentAngle';
 
-export const CUSTOM_PROPERTIES = [ID, POINTS, CIRCLESTEP, LINETYPE, BONENAME, LOCKORIENTATION, CURRENT_ANGLE, PREVIOUS_ANGLE];
+export const CUSTOM_PROPERTIES = [ID, POINTS, CIRCLE_STEP, LINE_TYPE, BONE_NAME, LOCK_ORIENTATION, CURRENT_ANGLE, PREVIOUS_ANGLE];
 

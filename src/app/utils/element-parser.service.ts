@@ -6,7 +6,7 @@ import { Line } from '../templates/Line';
 import { Polygon } from '../templates/Polygon';
 import { Point } from '../common/Point';
 import { TreeService } from '../components/left-side/layer-stack-ng/tree.service';
-import { CIRCLESTEP, ID, LINETYPE, POINTS } from '../common/ProjectFileStructure';
+import { CIRCLE_STEP, ID, LINE_TYPE, POINTS } from '../common/ProjectFileStructure';
 import { StoreService } from './store.service';
 import { Builder } from 'builder-pattern';
 import hexRgb from 'hex-rgb';
@@ -123,7 +123,7 @@ export class ElementParserService {
       .color(this.toRgba(element.stroke))
       .points(this.canvasPointsToMFDPoints(element.points))
       .bone(item.bone)
-      .lineType(element[LINETYPE])
+      .lineType(element[LINE_TYPE])
       .width(Number(element.strokeWidth))
       .build();
   }
@@ -164,7 +164,7 @@ export class ElementParserService {
     const centerX = element.left + radiusX;
     const centerY = element.top + radiusY;
     const points: Point[] = [];
-    for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element[CIRCLESTEP])) {
+    for (let a = 0; a <= 2 * Math.PI; a += Number.parseFloat(element[CIRCLE_STEP])) {
       const x = centerX + radiusX * Math.cos(a);
       const y = centerY + radiusY * Math.sin(a);
       points.push({x, y} as Point);

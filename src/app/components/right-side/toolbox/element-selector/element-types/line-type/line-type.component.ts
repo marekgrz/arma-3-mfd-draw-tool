@@ -7,7 +7,7 @@ import { InteractionService } from '../../../../../left-side/layer-stack-ng/inte
 import { fromEvent } from 'rxjs';
 import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
-import { ID, LINETYPE } from '../../../../../../common/ProjectFileStructure';
+import { ID, LINE_TYPE } from '../../../../../../common/ProjectFileStructure';
 import { LineType } from '../../../../../../templates/Line';
 import { HistoryService } from '../../../../../../utils/history.service';
 
@@ -87,7 +87,7 @@ export class LineTypeComponent {
         transparentCorners: false,
       });
     line[ID] = temporary ? 'tempPolyLine' : generateId();
-    line[LINETYPE] = LineType.full;
+    line[LINE_TYPE] = LineType.full;
     line.on('mousedown', (event) => {
       if (event.button === 3) {
         this.store.openContextMenu(event);

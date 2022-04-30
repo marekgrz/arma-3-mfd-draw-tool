@@ -5,7 +5,7 @@ import { TreeService } from '../../left-side/layer-stack-ng/tree.service';
 import { InteractionService } from '../../left-side/layer-stack-ng/interaction.service';
 import { fabric } from 'fabric';
 import { BoneFixedModel } from '../../left-side/bones-list/BoneBaseModel';
-import { BONENAME, ID } from '../../../common/ProjectFileStructure';
+import { BONE_NAME, ID } from '../../../common/ProjectFileStructure';
 import { HistoryService } from '../../../utils/history.service';
 import { ItemType, StackItem } from '../../left-side/layer-stack-ng/elements/StackItem';
 import { LineUtilsService } from '../../right-side/toolbox/element-selector/element-types/line-type/line-utils.service';
@@ -132,7 +132,7 @@ export class FabricCanvasComponent implements AfterViewInit {
       selectedItem.base.position.x = e.target.left;
       selectedItem.base.position.y = e.target.top;
       // has bone
-      const bone = this.store.bones.find(it => it.name === selectedItem.data[BONENAME]) as BoneFixedModel;
+      const bone = this.store.bones.find(it => it.name === selectedItem.data[BONE_NAME]) as BoneFixedModel;
       if (bone !== undefined) {
         selectedItem.base.position.x -= bone.pos0.x;
         selectedItem.base.position.y -= bone.pos0.y;

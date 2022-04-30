@@ -3,7 +3,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { fabric } from 'fabric';
 import { Point } from 'fabric/fabric-impl';
 import { LineType } from '../../../../../../templates/Line';
-import { CURRENT_ANGLE, LINETYPE, PREVIOUS_ANGLE } from '../../../../../../common/ProjectFileStructure';
+import { CURRENT_ANGLE, LINE_TYPE, PREVIOUS_ANGLE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementProperties } from '../base-element-properties.directive';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 import { ElementTransformService } from '../element-transform.service';
@@ -30,7 +30,7 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
   ngOnInit(): void {
     super.ngOnInit();
     this.angle = this.getAngle();
-    this.lineType = this.item.data[LINETYPE];
+    this.lineType = this.item.data[LINE_TYPE];
     this.color = this.store.canvas.getActiveObject().stroke;
     this.setupPolyLineEdit();
   }
@@ -79,7 +79,7 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
 
   save(): void {
     const line: fabric.Polyline = this.store.canvas.getActiveObject() as fabric.Polyline;
-    line[LINETYPE] = this.lineType;
+    line[LINE_TYPE] = this.lineType;
     this.setElementStroke(line);
     this.refresh();
   }
@@ -89,7 +89,6 @@ export class LinePropertiesComponent extends BaseElementProperties implements On
     this.lineUtils.recalculatePolyLineDimensions(line);
     this.refresh();
   }
-
 
   /* .rotate() nie obraca o zadana wartosc a ustawia kąt calego obiektu. Czyli .rotate(0) ustawi element zeby mial kąt 0 stopni*/
   onAngleModified(): void {
