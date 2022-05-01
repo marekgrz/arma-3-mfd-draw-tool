@@ -1,7 +1,8 @@
 <mfd-resizeable-panel [horizontal]="false" position="right" panelName="left-sidebar">
   <div class="layer-list-view">
+    <mfd-section-header [label]="'Layers'"></mfd-section-header>
+    <mfd-layer-stack-actions-header></mfd-layer-stack-actions-header>
     <mfd-resizeable-panel position="bottom" [horizontal]="true" panelName="layer-stack">
-      <mfd-section-header [label]="'Layers'"></mfd-section-header>
       <mfd-layer-stack></mfd-layer-stack>
     </mfd-resizeable-panel>
     <mfd-section-header [label]="'Bones stack (anchors)'"></mfd-section-header>
