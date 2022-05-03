@@ -48,21 +48,8 @@
     </mat-form-field>
   </div>
   <div [className]="staticText ? 'disabled' : ''">
-    <div class="pair-elements sources">
-      <mat-form-field appearance="standard" class="small-input select" color="accent">
-        <mat-label>Source</mat-label>
-        <mat-select [(ngModel)]="source" (selectionChange)="save()">
-          <mat-option *ngFor="let source of getAvailableSources()" [value]="source">{{source}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
-        <mat-label>Source scale</mat-label>
-        <input matInput autocomplete="off"
-               [type]="'number'"
-               [(ngModel)]="item.data.sourceScale"
-               (change)="save()">
-      </mat-form-field>
-    </div>
-    <mat-slider class="full-width" min="-1" max="1" step="0.01" value="0" [thumbLabel]="true" [(ngModel)]="sourceValue" (input)="refreshText($event)"></mat-slider>
+    <mfd-text-properties-source-selector [(source)]="source" (save)="save()"
+                                         [(sourceScale)]="item.data.sourceScale"
+                                         (refreshText)="refreshText($event)"></mfd-text-properties-source-selector>
   </div>
 </div>

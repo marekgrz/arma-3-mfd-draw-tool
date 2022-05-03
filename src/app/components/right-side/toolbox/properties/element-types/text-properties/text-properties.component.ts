@@ -21,7 +21,6 @@ export class TextPropertiesComponent implements OnInit {
   source: string;
   staticText = true;
   value = '1';
-  sourceValue = 0;
 
   constructor(public store: StoreService,
               public sources: SourceService,
@@ -54,9 +53,5 @@ export class TextPropertiesComponent implements OnInit {
       this.item.data.text = (change.value * this.item.data.sourceScale).toString();
     }
     this.store.canvas.requestRenderAll();
-  }
-
-  getAvailableSources(): string[] {
-    return Object.keys(this.sources);
   }
 }

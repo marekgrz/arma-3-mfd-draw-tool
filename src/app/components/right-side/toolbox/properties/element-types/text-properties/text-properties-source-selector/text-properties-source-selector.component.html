@@ -1,0 +1,28 @@
+<div class="pair-elements sources">
+    <mat-form-field appearance="standard" class="small-input select" color="accent">
+        <mat-label>Source</mat-label>
+        <mat-select [ngModel]="source"
+                    (ngModelChange)="sourceChange.emit($event)" (selectionChange)="save.emit()">
+            <mat-form-field appearance="outline" class="small-input full-width search-box" [color]="'accent'">
+                <mat-label>Search</mat-label>
+                <input matInput autocomplete="off"
+                       [type]="'text'" [(ngModel)]="searchValue" (ngModelChange)="filterOptions()">
+                <span matSuffix class="material-icons">search</span>
+            </mat-form-field>
+            <mat-option class="add-source" (click)="addCustomOption()">
+              Custom source
+              <span mat-ripple class="material-icons">add</span>
+            </mat-option>
+            <mat-option *ngFor="let source of filteredOptions" [value]="source">{{source}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="small-input" [color]="'accent'" [floatLabel]="'always'">
+        <mat-label>Source scale</mat-label>
+        <input matInput autocomplete="off"
+               [type]="'number'"
+               [ngModel]="sourceScale"
+               (ngModelChange)="sourceScaleChange.emit($event)"
+               (change)="save.emit()">
+    </mat-form-field>
+</div>
+<mat-slider class="full-width" min="-1" max="1" step="0.01" value="0" [thumbLabel]="true" [(ngModel)]="sourceValue" (input)="refreshText.emit($event)"></mat-slider>

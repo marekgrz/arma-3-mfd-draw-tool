@@ -87,6 +87,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { StrokeWidthInputComponent } from './components/right-side/toolbox/properties/element-types/common/stroke-width-input/stroke-width-input.component';
 import { LineTypeSelectorComponent } from './components/right-side/toolbox/properties/element-types/common/line-type-selector/line-type-selector.component';
 import { AngleInputComponent } from './components/right-side/toolbox/properties/element-types/common/angle-input/angle-input.component';
+import { TextPropertiesSourceSelectorComponent } from './components/right-side/toolbox/properties/element-types/text-properties/text-properties-source-selector/text-properties-source-selector.component';
+import { CreateSourceDialogComponent } from './components/right-side/toolbox/properties/element-types/text-properties/text-properties-source-selector/text-properties-source-selector-new/create-source-dialog.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +146,8 @@ import { AngleInputComponent } from './components/right-side/toolbox/properties/
     StrokeWidthInputComponent,
     LineTypeSelectorComponent,
     AngleInputComponent,
+    TextPropertiesSourceSelectorComponent,
+    CreateSourceDialogComponent,
   ],
     imports: [
         BrowserModule,
