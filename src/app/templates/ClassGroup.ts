@@ -15,5 +15,5 @@ export class ClassGroup extends BaseElementModel {
   condition?: string;
   blinking?: boolean;
   blinkingPattern?: string;
-  blinkingStartsOn?: number;
+  blinkingStartsOn?: boolean;
 }

@@ -28,8 +28,8 @@ export class StackItem implements TreeNode {
 export class GroupProperties {
   condition?: string;
   blinking = false;
-  blinkingPattern?: string;
-  blinkingStartsOn?: number;
+  blinkingPattern?: string = '0.2, 0.2';
+  blinkingStartsOn?: boolean = true;
   clipTL: Point = new Point();
   clipBR: Point = new Point();
   clipTLParallax: Point = new Point();
