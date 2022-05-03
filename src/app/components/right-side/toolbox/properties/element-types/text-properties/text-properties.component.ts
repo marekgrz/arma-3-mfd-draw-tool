@@ -3,6 +3,7 @@ import { StackItem } from '../../../../../left-side/layer-stack-ng/elements/Stac
 import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
 import { MatSliderChange } from '@angular/material/slider';
+import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
 
 @Component({
   selector: 'mfd-text-properties',
@@ -23,7 +24,8 @@ export class TextPropertiesComponent implements OnInit {
   sourceValue = 0;
 
   constructor(public store: StoreService,
-              public sources: SourceService) {
+              public sources: SourceService,
+              private interaction: InteractionService) {
   }
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class TextPropertiesComponent implements OnInit {
     text.setCoords();
     text['source'] = this.source;
     text.lockRotation = true;
-    this.store.canvas.requestRenderAll();
+    this.interaction.refreshView();
   }
 
   refreshText(change: MatSliderChange = null): void {
