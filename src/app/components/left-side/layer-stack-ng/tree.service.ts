@@ -164,7 +164,18 @@ export class TreeService {
     // } else {
     //
     // }
-    this.itemList.unshift(this.newGroup());
+    if (this.selectedItem) {
+      if (this.selectedItem.parent) {
+        const parentChildren = this.selectedItem.parent.children;
+        const index = parentChildren.findIndex(it => it.id === this.selectedItem.id);
+        parentChildren.splice(index, 0, this.newGroup());
+      } else {
+        const index = this.itemList.findIndex(it => it.id === this.selectedItem.id);
+        this.itemList.splice(index, 0, this.newGroup());
+      }
+    } else {
+      this.itemList.unshift(this.newGroup());
+    }
     this.groupIndex++;
   }
 
