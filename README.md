@@ -13,6 +13,21 @@ npm run start:electron
 8. Bones
 
 9. Przesuwanie grupy elementow a ich pozycja bazowa
+#How to run
+1. Using electron:
+   ```npm start:electron```
 
+  Electron build can be used for faster frontend development since it has hot-reload functional.
+2. Using neutralino:
+      ```npm start:neutralino```
+   
+Neutralino is much lighter and uses OS web browser instead of Chromium.
+#How to build production app
+Run command: `npm build_prod_neutralino`
+
+Result will be packed to .exe inside `dist/a3-mfd-drawer` directory.
+
+
+#Note
 If you add any element-specific property, define it also in:
-ProjectFileStructure.ts/parseProjectToFile()
+`ProjectFileStructure.ts/parseProjectToFile()`

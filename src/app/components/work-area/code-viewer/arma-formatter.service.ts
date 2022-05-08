@@ -9,8 +9,8 @@ import { TextElement } from '../../../templates/TextElement';
 import { ElementParserService } from '../../../utils/element-parser.service';
 import { Observable, of } from 'rxjs';
 import { Builder } from 'builder-pattern';
-import { IpcService } from '../../../utils/ipc.service';
 import { map } from 'rxjs/operators';
+import { FileSystemService, TemplateData } from '../../../utils/backend/file-system.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ArmaFormatterService {
   templates: MustacheTemplates;
 
   constructor(private elementParser: ElementParserService,
-              private ipc: IpcService) {
+              private fsService: FileSystemService) {
   }
 
   getFormattedText(): Observable<string> {
@@ -42,10 +42,9 @@ export class ArmaFormatterService {
         observer.complete();
       });
     }
-    this.ipc.send('loadTemplates', '');
     return new Observable<MustacheTemplates>(observer => {
-      this.ipc.on('loadTemplates', (event: Electron.IpcMessageEvent, message: TemplateData[]) => {
-        observer.next(this.getMustacheTemplates(message));
+      this.fsService.fetchMustacheTemplates().subscribe(templates => {
+        observer.next(this.getMustacheTemplates(templates));
         observer.complete();
       });
     });
@@ -111,11 +110,6 @@ export class ArmaFormatterService {
     const indent = content.includes('\n\t') ? '\n   ' : '\n  ';
     return content.replace(regexSearch, indent);
   }
-}
-
-export interface TemplateData {
-  name: string;
-  template: string;
 }
 
 export class MustacheTemplates {

@@ -36,10 +36,7 @@
               "src/styles.less"
             ],
             "scripts": [
-              {
-                "input": "index.js",
-                "inject": false
-              }
+              "src/assets/neutralino.js"
             ],
             "allowedCommonJsDependencies": [
               "highlight.js",
@@ -58,10 +55,41 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
-                  "replace": "index.js",
-                  "with": "index.prod.js"
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "neutralino": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.neutralino.ts"
+                }
+              ]
+            },
+            "neutralino-production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.neutralino-prod.ts"
                 }
               ],
               "optimization": true,
