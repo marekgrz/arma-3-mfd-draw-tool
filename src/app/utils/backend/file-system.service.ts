@@ -7,35 +7,35 @@ import { AbstractFileSystemService } from './abstract-file-system-service';
 })
 export class FileSystemService {
 
-  constructor(private fsNeutralino: AbstractFileSystemService) {
+  constructor(private fs: AbstractFileSystemService) {
   }
 
   newProject(): void {
-    this.fsNeutralino.newProject();
+    this.fs.newProject();
   }
 
   async openProject(): Promise<ProjectFileData> {
-    return this.fsNeutralino.openProject();
+    return this.fs.openProject();
   }
 
   async reopenProject(): Promise<ProjectFileData> {
-    return this.fsNeutralino.reopenProject();
+    return this.fs.reopenProject();
   }
 
   async saveProject(data: string): Promise<void> {
-    return this.fsNeutralino.saveProject(data);
+    return this.fs.saveProject(data);
   }
 
   async saveProjectAs(data: string): Promise<void> {
-    return this.fsNeutralino.saveProjectAs(data);
+    return this.fs.saveProjectAs(data);
   }
 
   async exportToA3(data: string): Promise<void> {
-    await this.fsNeutralino.exportToA3(data);
+    await this.fs.exportToA3(data);
   }
 
   fetchMustacheTemplates(): Observable<TemplateData[]> {
-    return this.fsNeutralino.fetchMustacheTemplates();
+    return this.fs.fetchMustacheTemplates();
   }
 }
 

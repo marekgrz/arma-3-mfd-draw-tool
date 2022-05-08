@@ -32,7 +32,7 @@
   },
   "modes": {
     "window": {
-      "title": "a3-mfd-drawer",
+      "title": "Arma 3 MFD drawer",
       "width": 800,
       "height": 500,
       "minWidth": 400,
@@ -40,7 +40,7 @@
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "/resources/icons/appIcon.png",
-      "enableInspector": false,
+      "enableInspector": true,
       "borderless": false,
       "maximize": true,
       "hidden": false,

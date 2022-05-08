@@ -32,6 +32,9 @@ export class FileSystemNeutralinoService extends AbstractFileSystemService {
 
   async reopenProject(): Promise<ProjectFileData> {
     const path = this.localStorageService.getLastLoadedProjectPath();
+    if (!path) {
+      return undefined;
+    }
     const data = await Neutralino.filesystem.readFile(path);
     this.saveFilePath = path;
     return {data, filePath: path} as ProjectFileData;

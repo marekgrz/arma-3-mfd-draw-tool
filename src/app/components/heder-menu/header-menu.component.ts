@@ -9,7 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from '../../utils/local-storage.service';
 import { HistoryService } from '../../utils/history.service';
 import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
-import { Subscription } from 'rxjs';
 import { ArmaFormatterService } from '../work-area/code-viewer/arma-formatter.service';
 import 'neutralinojs-types';
 import { FileSystemService, ProjectFileData } from '../../utils/backend/file-system.service';
@@ -22,7 +21,6 @@ import { FileSystemService, ProjectFileData } from '../../utils/backend/file-sys
 export class HeaderMenuComponent implements OnInit {
 
   loading = false;
-  subscription: Subscription;
 
   constructor(public dialog: MatDialog,
               private treeService: TreeService,
@@ -78,7 +76,11 @@ export class HeaderMenuComponent implements OnInit {
   async reopenProject(): Promise<void> {
     this.loading = true;
     const project = await this.fsService.reopenProject();
-    this.loadProject(project);
+    if (project) {
+      this.loadProject(project);
+    } else  {
+      this.startNewProject();
+    }
     this.loading = false;
   }
 
