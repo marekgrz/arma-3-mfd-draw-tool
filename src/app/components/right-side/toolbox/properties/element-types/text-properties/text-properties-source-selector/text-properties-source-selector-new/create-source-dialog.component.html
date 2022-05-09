@@ -1,7 +1,7 @@
 <!--<h1 mat-dialog-title>Required confirmation</h1>-->
 <div mat-dialog-content>Add custom source</div>
 
-<mat-form-field appearance="standard" class="small-input full-width content" [color]="'accent'">
+<mat-form-field appearance="standard" class="small-input full-width content" [color]="'accent'" [floatLabel]="'always'">
   <mat-label>Source name</mat-label>
   <input matInput autocomplete="off"
          [type]="'text'" [(ngModel)]="sourceName">
@@ -9,5 +9,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial [matDialogClose]="true" (click)="success()" [disabled]="sourceName">Create</button>
+  <button mat-button mat-dialog-close cdkFocusInitial [matDialogClose]="true" (click)="success()" [disabled]="!sourceName">Create</button>
 </mat-dialog-actions>
