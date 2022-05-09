@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'neutralinojs-types';
 import chalk from 'chalk';
-import { LocalStorageService } from '../local-storage.service';
+import { PersistenceService } from '../persistence.service';
 import { Observable } from 'rxjs';
 import { ProjectFileData, TemplateData } from './file-system.service';
 import { AbstractFileSystemService } from './abstract-file-system-service';
@@ -13,7 +13,7 @@ export class FileSystemNeutralinoService extends AbstractFileSystemService {
 
   private saveFilePath: string;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private persistenceService: PersistenceService) {
     super();
   }
 
@@ -31,7 +31,7 @@ export class FileSystemNeutralinoService extends AbstractFileSystemService {
   }
 
   async reopenProject(): Promise<ProjectFileData> {
-    const path = this.localStorageService.getLastLoadedProjectPath();
+    const path = await this.persistenceService.getLastLoadedProjectPath();
     if (!path) {
       return undefined;
     }

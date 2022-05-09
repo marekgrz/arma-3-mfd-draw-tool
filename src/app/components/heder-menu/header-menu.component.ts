@@ -6,7 +6,7 @@ import { parseFileToProject, parseProjectToFile } from '../../common/ProjectFile
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LocalStorageService } from '../../utils/local-storage.service';
+import { PersistenceService } from '../../utils/persistence.service';
 import { HistoryService } from '../../utils/history.service';
 import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
 import { ArmaFormatterService } from '../work-area/code-viewer/arma-formatter.service';
@@ -27,7 +27,7 @@ export class HeaderMenuComponent implements OnInit {
               public store: StoreService,
               private snackBar: MatSnackBar,
               private toastr: ToastrService,
-              private localStorageService: LocalStorageService,
+              private persistenceService: PersistenceService,
               public historyService: HistoryService,
               private armaFormatter: ArmaFormatterService,
               private fsService: FileSystemService) {
@@ -126,7 +126,7 @@ export class HeaderMenuComponent implements OnInit {
 
   private loadProject(message: ProjectFileData): void {
     parseFileToProject(message.data, this.treeService, this.store);
-    this.localStorageService.setLastLoadedProjectPath(message.filePath);
+    this.persistenceService.setLastLoadedProjectPath(message.filePath);
     this.historyService.addSnapshot();
     this.toastr.success('Project loaded');
     this.hideSnackBarInfo();

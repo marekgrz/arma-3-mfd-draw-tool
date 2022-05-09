@@ -94,6 +94,8 @@ import { environment } from '../environments/environment';
 import { FileSystemNeutralinoService } from './utils/backend/file-system-neutralino.service';
 import { FileSystemElectronService } from './utils/backend/file-system-electron.service';
 import { AbstractFileSystemService } from './utils/backend/abstract-file-system-service';
+import { PersistenceService } from './utils/persistence.service';
+import { PersistenceNeutralinoService } from './utils/persistence-neutralino.service';
 
 @NgModule({
   declarations: [
@@ -204,7 +206,8 @@ import { AbstractFileSystemService } from './utils/backend/abstract-file-system-
       } as HighlightOptions
     },
     {provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS},
-    {provide: AbstractFileSystemService, useClass: environment.neutralino ? FileSystemNeutralinoService : FileSystemElectronService}
+    {provide: AbstractFileSystemService, useClass: environment.neutralino ? FileSystemNeutralinoService : FileSystemElectronService},
+    {provide: PersistenceService, useClass: environment.neutralino ? PersistenceNeutralinoService : PersistenceService}
   ],
   bootstrap: [AppComponent]
 })

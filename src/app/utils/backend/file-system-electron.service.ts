@@ -3,7 +3,7 @@ import { IpcService } from '../ipc.service';
 import { ProjectFileData, TemplateData } from './file-system.service';
 import { AbstractFileSystemService } from './abstract-file-system-service';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from '../local-storage.service';
+import { PersistenceService } from '../persistence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { LocalStorageService } from '../local-storage.service';
 export class FileSystemElectronService extends AbstractFileSystemService {
 
   constructor(private ipc: IpcService,
-              private localStorageService: LocalStorageService) {
+              private persistenceService: PersistenceService) {
     super();
   }
 
@@ -28,8 +28,8 @@ export class FileSystemElectronService extends AbstractFileSystemService {
     });
   }
 
-  reopenProject(): Promise<ProjectFileData> {
-    const lastPath = this.localStorageService.getLastLoadedProjectPath();
+  async reopenProject(): Promise<ProjectFileData> {
+    const lastPath = await this.persistenceService.getLastLoadedProjectPath();
     this.ipc.send('reopenLastFile', lastPath);
     return new Promise<ProjectFileData>((resolve) => {
       this.ipc.on('reopenLastFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
