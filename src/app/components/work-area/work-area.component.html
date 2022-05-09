@@ -18,6 +18,7 @@
   </mat-button-toggle-group>
 </div>
 <div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer"
+     (mouseout)="onMouseUp()"
      [style.display]="viewMode==='design' || viewMode==='preview' ? '' : 'none'" (click)="deselectAll($event)">
   <div class="back-overlay" #workspace>
     <img class="back"

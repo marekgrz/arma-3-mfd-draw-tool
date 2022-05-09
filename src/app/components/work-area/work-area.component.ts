@@ -85,7 +85,7 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private onMouseUp(): void {
+  onMouseUp(): void {
     if (this.mouseMoveSubscription) {
       this.mouseMoveSubscription.unsubscribe();
     }
