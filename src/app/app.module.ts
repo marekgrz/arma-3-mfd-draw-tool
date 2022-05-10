@@ -195,6 +195,7 @@ import { PersistenceNeutralinoService } from './utils/persistence-neutralino.ser
     ContextMenuModule,
     MatProgressBarModule,
     MatSlideToggleModule,
+    HttpClientModule
   ],
   providers: [
     {

@@ -1,5 +1,4 @@
-import { ProjectFileData, TemplateData } from './file-system.service';
-import { Observable } from 'rxjs';
+import { ProjectFileData } from './file-system.service';
 
 export abstract class AbstractFileSystemService {
 
@@ -14,6 +13,4 @@ export abstract class AbstractFileSystemService {
   abstract saveProjectAs(data: string): Promise<void>;
 
   abstract exportToA3(data: string): Promise<void>;
-
-  abstract fetchMustacheTemplates(): Observable<TemplateData[]>;
 }

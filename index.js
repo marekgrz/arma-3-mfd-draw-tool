@@ -61,16 +61,6 @@ ipcMain.on('openFile', event => {
     });
 });
 
-ipcMain.on('loadTemplates', event => {
-  const templatesPath = './src/assets/templates';
-  const templates = [];
-  fs.readdirSync(templatesPath).forEach(fileName => {
-    const file = (fs.readFileSync(`${templatesPath}/${fileName}`, 'utf8'));
-    templates.push(new TemplateData(fileName.replace('.mustache', ''), file));
-  });
-  event.sender.send('loadTemplates', templates)
-});
-
 ipcMain.on('reopenLastFile', (event, message) => {
   filePath = message;
   openProject(event, 'reopenLastFile');
@@ -164,15 +154,5 @@ class TextureFileData {
     this.data = data;
     this.filePath = filePath;
     this.fileName = filename;
-  }
-}
-
-class TemplateData {
-  name;
-  template;
-
-  constructor(name, template) {
-    this.name = name;
-    this.template = template;
   }
 }

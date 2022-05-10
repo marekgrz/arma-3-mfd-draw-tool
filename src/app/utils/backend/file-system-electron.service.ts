@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IpcService } from '../ipc.service';
-import { ProjectFileData, TemplateData } from './file-system.service';
+import { ProjectFileData } from './file-system.service';
 import { AbstractFileSystemService } from './abstract-file-system-service';
-import { Observable } from 'rxjs';
 import { PersistenceService } from '../persistence.service';
 
 @Injectable({
@@ -61,16 +60,6 @@ export class FileSystemElectronService extends AbstractFileSystemService {
     return new Promise<void>((resolve) => {
       this.ipc.on('fileExported', () => {
         resolve();
-      });
-    });
-  }
-
-  fetchMustacheTemplates(): Observable<TemplateData[]> {
-    this.ipc.send('loadTemplates', '');
-    return new Observable<TemplateData[]>(observer => {
-      this.ipc.on('loadTemplates', (event: Electron.IpcMessageEvent, message: TemplateData[]) => {
-        observer.next(message);
-        observer.complete();
       });
     });
   }

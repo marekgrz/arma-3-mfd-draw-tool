@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import 'neutralinojs-types';
 import chalk from 'chalk';
 import { PersistenceService } from '../persistence.service';
-import { Observable } from 'rxjs';
-import { ProjectFileData, TemplateData } from './file-system.service';
+import { ProjectFileData } from './file-system.service';
 import { AbstractFileSystemService } from './abstract-file-system-service';
 
 @Injectable({
@@ -54,22 +53,6 @@ export class FileSystemNeutralinoService extends AbstractFileSystemService {
 
   async exportToA3(data: string): Promise<void> {
     await this.showSaveDialog(data, 'Export to', 'A3 Class file', 'hpp');
-  }
-
-  fetchMustacheTemplates(): Observable<TemplateData[]> {
-    const templatesPath = './src/assets/templates';
-    return new Observable<TemplateData[]>(observer => {
-      Neutralino.filesystem.readDirectory(templatesPath).then(entries => {
-        const fileEntries = entries.filter(file => file.type === 'FILE');
-        const fileOpenPromises = fileEntries
-          .map(fileName => Neutralino.filesystem.readFile(`${templatesPath}/${fileName.entry}`));
-        Promise.all(fileOpenPromises).then((files) => {
-          const templateData = files.map((file, index) => new TemplateData(fileEntries[index].entry.replace('.mustache', ''), file));
-          observer.next(templateData);
-          observer.complete();
-        });
-      });
-    });
   }
 
   private async showSaveDialog(content: string, title: string, fileExtensionName: string, extension: string): Promise<void> {
