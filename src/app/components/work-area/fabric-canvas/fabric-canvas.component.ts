@@ -159,7 +159,8 @@ export class FabricCanvasComponent implements AfterViewInit {
   }
 
   private setupContextMenu(): void {
-    this.store.itemContextMenuOpened.subscribe(value => {
+    this.store.itemContextMenuOpened.subscribe((value: any) => {
+      const newEvent = new MouseEvent(value.e.type, {clientX: value.absolutePointer.x, clientY: value.absolutePointer.y});
       const item = findByID(value.target[ID], this.treeService.itemList);
       this.menuItems = [];
       this.menuItems = [
@@ -168,7 +169,7 @@ export class FabricCanvasComponent implements AfterViewInit {
         {label: 'Duplicate layer', icon: 'pi pi-copy', command: () => this.onContextMenuDuplicate(item)},
         {label: 'Remove', icon: 'pi pi-trash', command: () => this.onContextMenuDelete(item)}
       ];
-      this.contextMenu.show(value.e);
+      this.contextMenu.show(newEvent);
     });
   }
 
