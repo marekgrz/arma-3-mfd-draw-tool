@@ -37,14 +37,16 @@ export class HeaderMenuComponent implements OnInit {
     setTimeout(() => this.reopenProject(), 1000);
   }
 
-  @HostListener('window:keydown', ['$event'])
-  async saveKey(e: KeyboardEvent): Promise<void> {
+  @HostListener('document:keydown', ['$event'])
+  saveKey(e: KeyboardEvent): void{
+    console.log('Key press');
     if (e.key === 's' && e.ctrlKey) {
-      await this.saveProject();
+      console.log('Key press with ctrl');
+      this.saveProject();
     }
   }
 
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   undoKey(e: KeyboardEvent): void {
     if (e.key === 'z' && e.ctrlKey) {
       this.historyService.undo();
@@ -70,6 +72,9 @@ export class HeaderMenuComponent implements OnInit {
     this.loading = true;
     const project = await this.fsService.openProject();
     this.loading = false;
+    if (project === null) {
+      return ;
+    }
     this.loadProject(project);
   }
 
@@ -86,20 +91,29 @@ export class HeaderMenuComponent implements OnInit {
 
   async saveProjectAs(): Promise<void> {
     this.loading = true;
-    await this.fsService.saveProjectAs(parseProjectToFile(this.treeService, this.store));
+    const saved = await this.fsService.saveProjectAs(parseProjectToFile(this.treeService, this.store));
+    if (saved) {
+      this.toastr.success('Project saved');
+    }
     this.loading = false;
   }
 
   async saveProject(): Promise<void> {
     this.loading = true;
-    await this.fsService.saveProject(parseProjectToFile(this.treeService, this.store));
+    const saved = await this.fsService.saveProject(parseProjectToFile(this.treeService, this.store));
+    if (saved) {
+      this.toastr.success('Project saved');
+    }
     this.loading = false;
   }
 
   async exportToA3(): Promise<void> {
     this.loading = true;
     const data = await this.armaFormatter.getFormattedText().toPromise();
-    await this.fsService.exportToA3(data);
+    const exported = await this.fsService.exportToA3(data);
+    if (exported) {
+      this.toastr.success('Project exported');
+    }
     this.loading = false;
   }
 

@@ -39,35 +39,37 @@ export class FileSystemNeutralinoService extends AbstractFileSystemService {
     return {data, filePath: path} as ProjectFileData;
   }
 
-  async saveProject(data: string): Promise<void> {
+  async saveProject(data: string): Promise<boolean> {
     if (this.saveFilePath) {
-      await this.saveFileToDir(this.saveFilePath, data);
+      return await this.saveFileToDir(this.saveFilePath, data);
     } else {
-      await this.showSaveDialog(data, 'Save project to', 'A3 MFD drawer file', 'a3mfd');
+      return await this.showSaveDialog(data, 'Save project to', 'A3 MFD drawer file', 'a3mfd');
     }
   }
 
-  async saveProjectAs(data: string): Promise<void> {
-    await this.showSaveDialog(data, 'Save project to', 'A3 MFD drawer file', 'a3mfd');
+  async saveProjectAs(data: string): Promise<boolean> {
+    return await this.showSaveDialog(data, 'Save project to', 'A3 MFD drawer file', 'a3mfd');
   }
 
-  async exportToA3(data: string): Promise<void> {
-    await this.showSaveDialog(data, 'Export to', 'A3 Class file', 'hpp');
+  async exportToA3(data: string): Promise<boolean> {
+    return await this.showSaveDialog(data, 'Export to', 'A3 Class file', 'hpp');
   }
 
-  private async showSaveDialog(content: string, title: string, fileExtensionName: string, extension: string): Promise<void> {
+  private async showSaveDialog(content: string, title: string, fileExtensionName: string, extension: string): Promise<boolean> {
     // @ts-ignore (incorrect type, TS shows 'filter' and should be 'filters')
     const savePath = await Neutralino.os.showSaveDialog(title, {filters: [{name: fileExtensionName, extensions: [extension]}]});
     if (savePath) {
       this.saveFilePath = savePath;
-      await this.saveFileToDir(savePath, content);
+      return await this.saveFileToDir(savePath, content);
     } else {
       console.log(chalk.red('File save cancelled'));
+      return false;
     }
   }
 
-  private async saveFileToDir(filePath: string, content: string): Promise<void> {
+  private async saveFileToDir(filePath: string, content: string): Promise<boolean> {
     await Neutralino.filesystem.writeFile(filePath, content);
     console.log(chalk.green('File saved'));
+    return true;
   }
 }

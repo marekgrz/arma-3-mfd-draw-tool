@@ -51,7 +51,7 @@ ipcMain.on('openFile', event => {
   dialog.showOpenDialog({properties: ['openFile'], filters: [{name: 'A3 MFD drawer file', extensions: ['a3mfd']}]})
     .then((e) => {
       if (e.canceled) {
-        event.sender.send('Error');
+        event.sender.send('cancel');
         console.log(chalk.blue('File opening cancelled'));
         return;
       }
@@ -90,11 +90,11 @@ function showSaveDialog(message, event) {
     .then((e) => {
       if (e.canceled) {
         console.log(chalk.red('File save cancelled'));
-        event.sender.send('Error');
+        event.sender.send('cancel');
         return;
       }
       filePath = e.filePath;
-      saveFileToDir(message, event, 'fileSaved');
+      saveFileToDir(message, event, 'saveFileAs');
       console.log(chalk.green('File saved'));
     });
 }
@@ -104,7 +104,7 @@ function showExportDialog(message, event) {
     .then((e) => {
       if (e.canceled) {
         console.log(chalk.red('File export cancelled'));
-        event.sender.send('Error');
+        event.sender.send('cancel');
         return;
       }
       filePath = e.filePath;

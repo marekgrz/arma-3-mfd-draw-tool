@@ -8,9 +8,9 @@ export abstract class AbstractFileSystemService {
 
   abstract reopenProject(): Promise<ProjectFileData>;
 
-  abstract saveProject(data: string): Promise<void>;
+  abstract saveProject(data: string): Promise<boolean>;
 
-  abstract saveProjectAs(data: string): Promise<void>;
+  abstract saveProjectAs(data: string): Promise<boolean>;
 
-  abstract exportToA3(data: string): Promise<void>;
+  abstract exportToA3(data: string): Promise<boolean>;
 }

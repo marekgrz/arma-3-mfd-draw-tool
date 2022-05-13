@@ -21,16 +21,16 @@ export class FileSystemService {
     return this.fs.reopenProject();
   }
 
-  async saveProject(data: string): Promise<void> {
+  async saveProject(data: string): Promise<boolean> {
     return this.fs.saveProject(data);
   }
 
-  async saveProjectAs(data: string): Promise<void> {
+  async saveProjectAs(data: string): Promise<boolean> {
     return this.fs.saveProjectAs(data);
   }
 
-  async exportToA3(data: string): Promise<void> {
-    await this.fs.exportToA3(data);
+  async exportToA3(data: string): Promise<boolean> {
+    return await this.fs.exportToA3(data);
   }
 }
 
