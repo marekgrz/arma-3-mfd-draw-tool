@@ -4,6 +4,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { SourceService } from '../../../../../../utils/source.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { InteractionService } from '../../../../../left-side/layer-stack-ng/interaction.service';
+import { SOURCE } from '../../../../../../common/ProjectFileStructure';
 
 @Component({
   selector: 'mfd-text-properties',
@@ -18,7 +19,7 @@ export class TextPropertiesComponent implements OnInit {
 
   color: string;
   fontName: string;
-  source: string;
+  source = 'altitudeASL';
   staticText = true;
   value = '1';
 
@@ -30,6 +31,10 @@ export class TextPropertiesComponent implements OnInit {
   ngOnInit(): void {
     this.fontName = this.item.data.fontFamily;
     this.color = this.store.canvas.getActiveObject().fill as string;
+    this.staticText = this.item.data[SOURCE] === 'static';
+    if (!this.staticText) {
+      this.source = this.item.data[SOURCE];
+    }
     if (!this.item.data.sourceScale) {
       this.item.data.sourceScale = 1;
     }
@@ -43,7 +48,7 @@ export class TextPropertiesComponent implements OnInit {
     text.set('fill', this.color);
     text.set('originX', this.item.data.textAlign);
     text.setCoords();
-    text['source'] = this.source;
+    text[SOURCE] = this.staticText ? 'static' : this.source;
     text.lockRotation = true;
     this.interaction.refreshView();
   }

@@ -10,8 +10,11 @@ class {{name}}
     type      = "text";
     align     = "{{align}}";
     scale     = {{scale}};
+    {{#isStatic}}
     text      = "{{text}}";
-    source    = "static";
+    {{/isStatic}}
+    source    = "{{source}}";
+    sourceScale    = {{sourceScale}};
     pos[]		= { { {{pos.x}}, {{pos.y}} }, 1 };
     right[]		= { { {{right.x}}, {{right.y}} }, 1 };
     down[]		= { { {{down.x}}, {{down.y}} }, 1 };

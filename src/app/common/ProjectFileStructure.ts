@@ -77,6 +77,8 @@ export const BONE_NAME = 'boneName';
 export const LOCK_ORIENTATION = 'lockRotation';
 export const PREVIOUS_ANGLE = 'previousAngle';
 export const CURRENT_ANGLE = 'currentAngle';
+export const SOURCE = 'source';
+export const SOURCE_SCALE = 'sourceScale';
 
-export const CUSTOM_PROPERTIES = [ID, POINTS, CIRCLE_STEP, LINE_TYPE, BONE_NAME, LOCK_ORIENTATION, CURRENT_ANGLE, PREVIOUS_ANGLE];
+export const CUSTOM_PROPERTIES = [ID, POINTS, CIRCLE_STEP, LINE_TYPE, BONE_NAME, LOCK_ORIENTATION, CURRENT_ANGLE, PREVIOUS_ANGLE, SOURCE, SOURCE_SCALE];
 
