@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, 
 import { fromEvent, Subscription } from 'rxjs';
 import { StoreService } from '../../utils/store.service';
 import { TreeService } from '../left-side/layer-stack-ng/tree.service';
+import { FabricCanvasComponent } from './fabric-canvas/fabric-canvas.component';
 
 @Component({
   selector: 'mfd-work-area',
@@ -12,6 +13,7 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('workspaceContainer') workspaceContainer: ElementRef;
   @ViewChild('workspace') workspace: ElementRef;
+  @ViewChild(FabricCanvasComponent, {static: false}) fabricCanvasComponent: FabricCanvasComponent;
 
   @Output()
   showDesigner: EventEmitter<any> = new EventEmitter<any>();
@@ -92,6 +94,7 @@ export class WorkAreaComponent implements AfterViewInit, OnDestroy {
   }
 
   private onMouseMove(e: MouseEvent): void {
+    this.fabricCanvasComponent.contextMenu.hide();
     const boundary: DOMRect = this.workspaceContainer.nativeElement.getBoundingClientRect();
     if (e.clientX < boundary.left + this.BOUNDARY_PADDING
       || e.clientX > boundary.right - this.BOUNDARY_PADDING
