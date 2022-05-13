@@ -7,7 +7,7 @@ This tool provides ability to draw MFDs (Multi Function Display) and export them
 Go to [releases page](https://gitlab.com/marekgr/arma-3-mfd-draw-tool/-/releases) and download newest binaries package (**Arma 3 MFD drawer binaries.zip**).\
 Unpack downloaded zip and use applicable executable for your OS.
 
-## Usage
+# Usage
 After starting the app you will be greeted with project settings dialog
 
 ![Screenshot](docs/project_settings.png)
@@ -31,7 +31,7 @@ Main view consists of five main panels:
 
 Each panel can be resized according to user needs. Panel sizes will be saved should not change after app has been restarted.
 
-##Keyboard shortcuts
+## Keyboard shortcuts
 - `CTRL + S` - save project
 - `CTRL + Z` - undo last action (redo is not yet supported)
 - `SHIFT + drag on element` - enables snap to axis during object drag on canvas
@@ -40,7 +40,7 @@ Each panel can be resized according to user needs. Panel sizes will be saved sho
 - `Shift + Mouse scroll` - move canvas horizontally if overflow
 - `Ctrl + Mouse scroll` - zoom canvas in or out
 
-##Features
+## Features
 - Basic shapes (circle, rectangle, triangle)
 - Line tool - define many points using mouse clicks
 - Triangular or rectangular polygons
@@ -55,11 +55,11 @@ Each panel can be resized according to user needs. Panel sizes will be saved sho
 
 ![Screenshot](docs/text_viewer.png)
 
-#Examples:
+# Examples:
 Project view and ingame export
 
 ![Screenshot](docs/example.png)
-#Known issues
+# Known issues
 - A lot
 - But if you find any, please create issue in gitlab :)
 ## License
