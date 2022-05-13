@@ -38,18 +38,13 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   @HostListener('document:keydown', ['$event'])
-  saveKey(e: KeyboardEvent): void{
-    console.log('Key press');
-    if (e.key === 's' && e.ctrlKey) {
-      console.log('Key press with ctrl');
-      this.saveProject();
-    }
-  }
-
-  @HostListener('document:keydown', ['$event'])
   undoKey(e: KeyboardEvent): void {
     if (e.key === 'z' && e.ctrlKey) {
       this.historyService.undo();
+    }
+    if (e.key === 's' && e.ctrlKey) {
+      console.log('Key press with ctrl');
+      this.saveProject();
     }
   }
 
