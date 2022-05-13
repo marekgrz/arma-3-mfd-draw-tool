@@ -3,7 +3,7 @@ import { StoreService } from '../../../../../../utils/store.service';
 import { TreeService } from '../../../../../left-side/layer-stack-ng/tree.service';
 import { fabric } from 'fabric';
 import { generateId } from '../../../../../left-side/layer-stack-ng/elements/StackItem';
-import { ID } from '../../../../../../common/ProjectFileStructure';
+import { ID, SOURCE, SOURCE_SCALE } from '../../../../../../common/ProjectFileStructure';
 import { BaseElementType } from '../base-element-type.directive';
 import { HistoryService } from '../../../../../../utils/history.service';
 
@@ -33,6 +33,8 @@ export class TextTypeComponent extends BaseElementType {
       lockRotation: true,
     });
     text[ID] = generateId();
+    text[SOURCE] = 'static';
+    text[SOURCE_SCALE] = 1;
     this.createNewElement(this.treeService.itemFromText(text));
   }
 }

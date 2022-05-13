@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { IpcService } from '../../utils/ipc.service';
 import { TreeService } from '../left-side/layer-stack-ng/tree.service';
 import { ToastrService } from 'ngx-toastr';
 import { StoreService } from '../../utils/store.service';
@@ -7,11 +6,12 @@ import { parseFileToProject, parseProjectToFile } from '../../common/ProjectFile
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LocalStorageService } from '../../utils/local-storage.service';
+import { PersistenceService } from '../../utils/persistence.service';
 import { HistoryService } from '../../utils/history.service';
 import { ProjectSettingsDialogCreateComponent } from '../dialogs/project-settings-dialog/project-settings-dialog-create/project-settings-dialog-create.component';
-import { Subscription } from 'rxjs';
 import { ArmaFormatterService } from '../work-area/code-viewer/arma-formatter.service';
+import 'neutralinojs-types';
+import { FileSystemService, ProjectFileData } from '../../utils/backend/file-system.service';
 
 @Component({
   selector: 'mfd-header-menu',
@@ -21,36 +21,30 @@ import { ArmaFormatterService } from '../work-area/code-viewer/arma-formatter.se
 export class HeaderMenuComponent implements OnInit {
 
   loading = false;
-  subscription: Subscription;
 
   constructor(public dialog: MatDialog,
-              private ipc: IpcService,
               private treeService: TreeService,
               public store: StoreService,
               private snackBar: MatSnackBar,
               private toastr: ToastrService,
-              private localStorageService: LocalStorageService,
+              private persistenceService: PersistenceService,
               public historyService: HistoryService,
-              private armaFormatter: ArmaFormatterService) {
+              private armaFormatter: ArmaFormatterService,
+              private fsService: FileSystemService) {
   }
 
   ngOnInit(): void {
-    this.setupFileHandling();
-    // this.startNewProject();
     setTimeout(() => this.reopenProject(), 1000);
   }
 
-  @HostListener('window:keydown', ['$event'])
-  saveKey(e: KeyboardEvent): void {
-    if (e.key === 's' && e.ctrlKey) {
-      this.saveProject();
-    }
-  }
-
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   undoKey(e: KeyboardEvent): void {
     if (e.key === 'z' && e.ctrlKey) {
       this.historyService.undo();
+    }
+    if (e.key === 's' && e.ctrlKey) {
+      console.log('Key press with ctrl');
+      this.saveProject();
     }
   }
 
@@ -69,33 +63,53 @@ export class HeaderMenuComponent implements OnInit {
     }
   }
 
-  openProject(): void {
-    this.ipc.send('openFile', '');
-  }
-
-  reopenProject(): void {
-    const lastPath = this.localStorageService.getLastLoadedProjectPath();
-    if (lastPath) {
-      this.ipc.send('reopenLastFile', lastPath);
+  async openProject(): Promise<void> {
+    this.loading = true;
+    const project = await this.fsService.openProject();
+    this.loading = false;
+    if (project === null) {
+      return ;
     }
+    this.loadProject(project);
   }
 
-  saveProjectAs(): void {
+  async reopenProject(): Promise<void> {
     this.loading = true;
-    this.ipc.send('saveFileAs', parseProjectToFile(this.treeService, this.store));
+    const project = await this.fsService.reopenProject();
+    if (project) {
+      this.loadProject(project);
+    } else  {
+      this.startNewProject();
+    }
+    this.loading = false;
   }
 
-  saveProject(): void {
+  async saveProjectAs(): Promise<void> {
     this.loading = true;
-    this.ipc.send('saveFile', parseProjectToFile(this.treeService, this.store));
+    const saved = await this.fsService.saveProjectAs(parseProjectToFile(this.treeService, this.store));
+    if (saved) {
+      this.toastr.success('Project saved', '', {progressBar: true, timeOut: 1500});
+    }
+    this.loading = false;
   }
 
-  exportToA3(): void {
+  async saveProject(): Promise<void> {
     this.loading = true;
-    this.subscription = this.armaFormatter.getFormattedText().subscribe(value => {
-        this.ipc.send('exportToA3', value);
-      }
-    );
+    const saved = await this.fsService.saveProject(parseProjectToFile(this.treeService, this.store));
+    if (saved) {
+      this.toastr.success('Project saved', '', {progressBar: true, timeOut: 1500});
+    }
+    this.loading = false;
+  }
+
+  async exportToA3(): Promise<void> {
+    this.loading = true;
+    const data = await this.armaFormatter.getFormattedText().toPromise();
+    const exported = await this.fsService.exportToA3(data);
+    if (exported) {
+      this.toastr.success('Project exported', '', {progressBar: true, timeOut: 1500});
+    }
+    this.loading = false;
   }
 
   private showSnackBarInfo(): void {
@@ -110,7 +124,7 @@ export class HeaderMenuComponent implements OnInit {
     this.hideSnackBarInfo();
     this.store.resetCanvas();
     this.treeService.resetProjectStack();
-    this.ipc.send('new', '');
+    this.fsService.newProject();
     const dialogRef = this.dialog.open(ProjectSettingsDialogCreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -119,42 +133,11 @@ export class HeaderMenuComponent implements OnInit {
     this.historyService.addSnapshot();
   }
 
-  private setupFileHandling(): void {
-    this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
-      parseFileToProject(message.data, this.treeService, this.store);
-      this.localStorageService.setLastLoadedProjectPath(message.filePath);
-      this.historyService.addSnapshot();
-      this.toastr.success('Project loaded');
-      this.hideSnackBarInfo();
-    });
-    this.ipc.on('saveFile', () => {
-      this.toastr.success('Project saved');
-      this.loading = false;
-    });
-    this.ipc.on('saveFileAs', () => {
-      this.toastr.success('Project saved');
-      this.loading = false;
-    });
-    this.ipc.on('reopenLastFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
-      if (!!message) {
-        parseFileToProject(message.data, this.treeService, this.store);
-        this.localStorageService.setLastLoadedProjectPath(message.filePath);
-        this.historyService.addSnapshot();
-        this.toastr.success('Project loaded');
-        this.hideSnackBarInfo();
-      }
-    });
-    this.ipc.on('fileExported', () => {
-      this.toastr.success('Export successful');
-      this.loading = false;
-    });
-    this.ipc.on('Error', () => {
-      this.loading = false;
-    });
+  private loadProject(message: ProjectFileData): void {
+    parseFileToProject(message.data, this.treeService, this.store);
+    this.persistenceService.setLastLoadedProjectPath(message.filePath);
+    this.historyService.addSnapshot();
+    this.toastr.success('Project loaded', '', {progressBar: true, timeOut: 1500});
+    this.hideSnackBarInfo();
   }
-}
-
-interface ProjectFileData {
-  data: string;
-  filePath: string;
 }

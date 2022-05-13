@@ -14,11 +14,20 @@ export class LayerStackComponent {
 
   items: MenuItem[];
 
+  nodeRef: HTMLElement;
+
   constructor(public treeService: TreeService, private interaction: InteractionService) {
     this.items = [
       {label: 'Duplicate layer', icon: 'pi pi-copy', command: () => this.onContextMenuDuplicate()},
+      {label: 'Hide', icon: 'pi pi-eye-slash', command: () => this.onContextMenuToggleVisibility()},
       {label: 'Remove', icon: 'pi pi-trash', command: () => this.onContextMenuDelete()}
     ];
+  }
+
+  onContextMenuShow(e: { node: StackItem}): void {
+    this.items[1].label = e.node.layerVisible ? 'Hide' : 'Show';
+    this.items[1].icon = e.node.layerVisible ? 'pi pi-eye-slash' : 'pi pi-eye';
+    this.nodeRef = document.getElementById(e.node.id);
   }
 
   onSelectionChange(selection): void {
@@ -41,7 +50,7 @@ export class LayerStackComponent {
       item.data.visible = item.layerVisible ? true : false;
     }
     if (nodeRef) {
-      nodeRef.parentElement.parentElement.parentElement.parentElement.style.opacity = item.layerVisible ? 1 : 0.3;
+      nodeRef.parentElement.parentElement.parentElement.parentElement.style.opacity = item.layerVisible ? 1 : 0.5;
     }
     if (item.itemType === ItemType.group) {
       item.children.forEach(it => this.onToggleVisibility(it, null, item.layerVisible));
@@ -58,6 +67,12 @@ export class LayerStackComponent {
   private onContextMenuDuplicate(): void {
     if (this.treeService.selectedItem) {
       this.interaction.onDuplicateSelection();
+    }
+  }
+
+  private onContextMenuToggleVisibility(): void {
+    if (this.treeService.selectedItem) {
+      this.onToggleVisibility(this.treeService.selectedItem, this.nodeRef);
     }
   }
 

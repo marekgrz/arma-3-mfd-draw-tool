@@ -8,9 +8,8 @@ import { Polygon } from '../../../templates/Polygon';
 import { TextElement } from '../../../templates/TextElement';
 import { ElementParserService } from '../../../utils/element-parser.service';
 import { Observable, of } from 'rxjs';
-import { Builder } from 'builder-pattern';
-import { IpcService } from '../../../utils/ipc.service';
 import { map } from 'rxjs/operators';
+import { MustacheTemplates, TemplatesService } from './templates.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,47 +19,19 @@ export class ArmaFormatterService {
   templates: MustacheTemplates;
 
   constructor(private elementParser: ElementParserService,
-              private ipc: IpcService) {
+              private templatesService: TemplatesService) {
   }
 
   getFormattedText(): Observable<string> {
     if (this.templates) {
       return of(this.renderObjectToString(this.elementParser.getMFDClass()));
     }
-    return this.loadTemplates()
+    return this.templatesService.loadTemplates()
       .pipe(
         map(value => {
           this.templates = value;
           return this.renderObjectToString(this.elementParser.getMFDClass());
         }));
-  }
-
-  private loadTemplates(): Observable<MustacheTemplates> {
-    if (this.templates) {
-      return new Observable<MustacheTemplates>(observer => {
-        observer.next(this.templates);
-        observer.complete();
-      });
-    }
-    this.ipc.send('loadTemplates', '');
-    return new Observable<MustacheTemplates>(observer => {
-      this.ipc.on('loadTemplates', (event: Electron.IpcMessageEvent, message: TemplateData[]) => {
-        observer.next(this.getMustacheTemplates(message));
-        observer.complete();
-      });
-    });
-  }
-
-  private getMustacheTemplates(message: TemplateData[]): MustacheTemplates {
-    const templates = Builder(MustacheTemplates)
-      .mfdParent(message.find(it => it.name === 'mfd_parent')?.template)
-      .group(message.find(it => it.name === 'group')?.template)
-      .line(message.find(it => it.name === 'line')?.template)
-      .polygon(message.find(it => it.name === 'polygon')?.template)
-      .text(message.find(it => it.name === 'text')?.template)
-      .build();
-    this.templates = templates;
-    return templates;
   }
 
   private renderObjectToString(content: BaseElementModel): string {
@@ -111,17 +82,4 @@ export class ArmaFormatterService {
     const indent = content.includes('\n\t') ? '\n   ' : '\n  ';
     return content.replace(regexSearch, indent);
   }
-}
-
-export interface TemplateData {
-  name: string;
-  template: string;
-}
-
-export class MustacheTemplates {
-  mfdParent: string;
-  group: string;
-  line: string;
-  polygon: string;
-  text: string;
 }

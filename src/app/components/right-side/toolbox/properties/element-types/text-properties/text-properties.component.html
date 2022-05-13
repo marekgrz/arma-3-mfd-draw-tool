@@ -37,7 +37,7 @@
   </div>
 
   <mat-divider vertical="false" class="mat-divider-padding-bottom"></mat-divider>
-  <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText">Use static text</mat-checkbox>
+  <mat-checkbox class="checkbox align-left" [(ngModel)]="staticText" (change)="save()">Use static text</mat-checkbox>
   <div [className]="staticText ? '' : 'disabled'">
     <mat-form-field appearance="standard" class="small-input full-width" [color]="'accent'" [floatLabel]="'always'">
       <mat-label>Static text</mat-label>

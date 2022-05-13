@@ -90,6 +90,12 @@ import { AngleInputComponent } from './components/right-side/toolbox/properties/
 import { TextPropertiesSourceSelectorComponent } from './components/right-side/toolbox/properties/element-types/text-properties/text-properties-source-selector/text-properties-source-selector.component';
 import { CreateSourceDialogComponent } from './components/right-side/toolbox/properties/element-types/text-properties/text-properties-source-selector/text-properties-source-selector-new/create-source-dialog.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { environment } from '../environments/environment';
+import { FileSystemNeutralinoService } from './utils/backend/file-system-neutralino.service';
+import { FileSystemElectronService } from './utils/backend/file-system-electron.service';
+import { AbstractFileSystemService } from './utils/backend/abstract-file-system-service';
+import { PersistenceService } from './utils/persistence.service';
+import { PersistenceNeutralinoService } from './utils/persistence-neutralino.service';
 
 @NgModule({
   declarations: [
@@ -189,6 +195,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ContextMenuModule,
     MatProgressBarModule,
     MatSlideToggleModule,
+    HttpClientModule
   ],
   providers: [
     {
@@ -200,6 +207,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       } as HighlightOptions
     },
     {provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS},
+    {provide: AbstractFileSystemService, useClass: environment.neutralino ? FileSystemNeutralinoService : FileSystemElectronService},
+    {provide: PersistenceService, useClass: environment.neutralino ? PersistenceNeutralinoService : PersistenceService}
   ],
   bootstrap: [AppComponent]
 })

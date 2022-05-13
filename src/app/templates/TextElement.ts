@@ -7,7 +7,9 @@ export class TextElement extends BaseElementModel {
   color: Color;
   font?: string;
   source = '';
+  sourceScale = 1;
   text?: string;
+  isStatic: boolean;
   bone?: string;
   align: string = TextElementAlign.center;
   scale = 1;

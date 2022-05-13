@@ -159,7 +159,7 @@ export class FabricCanvasComponent implements AfterViewInit {
   }
 
   private setupContextMenu(): void {
-    this.store.itemContextMenuOpened.subscribe(value => {
+    this.store.itemContextMenuOpened.subscribe((value: any) => {
       const item = findByID(value.target[ID], this.treeService.itemList);
       this.menuItems = [];
       this.menuItems = [

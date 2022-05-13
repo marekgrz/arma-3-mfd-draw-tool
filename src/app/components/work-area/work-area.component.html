@@ -18,6 +18,7 @@
   </mat-button-toggle-group>
 </div>
 <div class="work-container" data-wheel-zoom #workspaceContainer id="workspaceContainer"
+     (mouseout)="onMouseUp()"
      [style.display]="viewMode==='design' || viewMode==='preview' ? '' : 'none'" (click)="deselectAll($event)">
   <div class="back-overlay" #workspace>
     <img class="back"
@@ -25,8 +26,7 @@
          [width]="store.canvasWidth"
          [src]="store.canvasBackgroundImg"
          [height]="store.canvasHeight">
-    <mfd-fabric-canvas
-                       style="display: block"
+    <mfd-fabric-canvas style="display: block"
                        [previewOnly]="viewMode==='preview'"></mfd-fabric-canvas>
   </div>
 </div>

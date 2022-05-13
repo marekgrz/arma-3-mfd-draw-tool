@@ -1,10 +1,10 @@
-
 <p-tree [value]="treeService.itemList"
         [(selection)]="treeService.selectedItem"
         [draggableNodes]="true"
         [droppableNodes]="true"
         (onNodeDrop)="onNodeDrop()"
         (selectionChange)="onSelectionChange($event)"
+        (onNodeContextMenuSelect)="onContextMenuShow($event)"
         [contextMenu]="cm"
         selectionMode="single"
         draggableScope="self"
@@ -12,7 +12,7 @@
         class="tree"
         styleClass="tree">
   <ng-template let-node pTemplate="treeNode">
-    <span #nodeRef>
+    <span #nodeRef class="note-wrapper" [id]="node.id">
       <i class="pi node-visibility" [ngClass]="node.layerVisible ? 'pi-eye' : 'pi-eye-slash'" (click)="onToggleVisibility(node, nodeRef)"></i>
       <span class="node-label" [class.incorrect]="node.incorrectName" [class.p-tree-group-header]="node.itemType === 'group'">{{node.label}}</span>
       <i class="material-icons node-warning" *ngIf="node.incorrectName" matSuffix [matTooltip]="'Incorrrect name. Cant have duplicate names on the same level'">info</i>

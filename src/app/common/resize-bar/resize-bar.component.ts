@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
+import { PersistenceService } from '../../utils/persistence.service';
 
 @Component({
   selector: 'mfd-resize-bar',
@@ -28,7 +29,9 @@ export class ResizeBarComponent implements AfterViewInit {
 
   private isLast = false;
 
-  constructor() {
+  private panelSize = 0;
+
+  constructor(private persistenceService: PersistenceService) {
   }
 
   ngAfterViewInit(): void {
@@ -45,7 +48,7 @@ export class ResizeBarComponent implements AfterViewInit {
   onMouseMove(event: MouseEvent): void {
     event.preventDefault();
     const distance = this.calculateDistance(event);
-    this.savePanelSize(distance);
+    this.panelSize = distance;
     if (this.horizontal) {
       this.container.style.height = `${distance}px`;
     } else {
@@ -54,6 +57,7 @@ export class ResizeBarComponent implements AfterViewInit {
   }
 
   onMouseUp(): void {
+    this.savePanelSize(this.panelSize);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
@@ -75,13 +79,13 @@ export class ResizeBarComponent implements AfterViewInit {
 
   private savePanelSize(size: number): void {
     if (this.panelName) {
-      localStorage.setItem(`panel_${this.panelName}_size`, size.toString());
+      this.persistenceService.setPanelSize(this.panelName, size);
     }
   }
 
-  private loadSavedSize(): void {
+  private async loadSavedSize(): Promise<void> {
     if (this.panelName) {
-      const size = localStorage.getItem(`panel_${this.panelName}_size`);
+      const size = await this.persistenceService.getPanelSize(this.panelName);
       if (size) {
         if (this.horizontal) {
           this.container.style.height = `${size}px`;

@@ -1,9 +1,9 @@
 <div class="pair-elements sources">
-    <mat-form-field appearance="standard" class="small-input select" color="accent">
+    <mat-form-field appearance="standard" class="small-input select" color="accent" [floatLabel]="'always'">
         <mat-label>Source</mat-label>
         <mat-select [ngModel]="source"
                     (ngModelChange)="sourceChange.emit($event)" (selectionChange)="save.emit()">
-            <mat-form-field appearance="outline" class="small-input full-width search-box" [color]="'accent'">
+            <mat-form-field appearance="outline" class="small-input full-width search-box" [color]="'accent'" [floatLabel]="'always'">
                 <mat-label>Search</mat-label>
                 <input matInput autocomplete="off"
                        [type]="'text'" [(ngModel)]="searchValue" (ngModelChange)="filterOptions()">

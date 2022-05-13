@@ -33,7 +33,7 @@ export class TextPropertiesSourceSelectorComponent {
   allOptions: string[];
 
   constructor(private sourceService: SourceService,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog) {
     this.setSourceList();
   }
 
