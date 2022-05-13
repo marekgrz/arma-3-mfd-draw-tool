@@ -93,7 +93,7 @@ export class HeaderMenuComponent implements OnInit {
     this.loading = true;
     const saved = await this.fsService.saveProjectAs(parseProjectToFile(this.treeService, this.store));
     if (saved) {
-      this.toastr.success('Project saved');
+      this.toastr.success('Project saved', '', {progressBar: true, timeOut: 1500});
     }
     this.loading = false;
   }
@@ -102,7 +102,7 @@ export class HeaderMenuComponent implements OnInit {
     this.loading = true;
     const saved = await this.fsService.saveProject(parseProjectToFile(this.treeService, this.store));
     if (saved) {
-      this.toastr.success('Project saved');
+      this.toastr.success('Project saved', '', {progressBar: true, timeOut: 1500});
     }
     this.loading = false;
   }
@@ -112,7 +112,7 @@ export class HeaderMenuComponent implements OnInit {
     const data = await this.armaFormatter.getFormattedText().toPromise();
     const exported = await this.fsService.exportToA3(data);
     if (exported) {
-      this.toastr.success('Project exported');
+      this.toastr.success('Project exported', '', {progressBar: true, timeOut: 1500});
     }
     this.loading = false;
   }
@@ -142,7 +142,7 @@ export class HeaderMenuComponent implements OnInit {
     parseFileToProject(message.data, this.treeService, this.store);
     this.persistenceService.setLastLoadedProjectPath(message.filePath);
     this.historyService.addSnapshot();
-    this.toastr.success('Project loaded');
+    this.toastr.success('Project loaded', '', {progressBar: true, timeOut: 1500});
     this.hideSnackBarInfo();
   }
 }

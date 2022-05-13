@@ -56,7 +56,7 @@ export class FileSystemElectronService extends AbstractFileSystemService {
     });
     this.ipc.on('error', () => {
       this.resolve(null);
-      this.toastr.error('Error opening project');
+      this.toastr.error('Error opening project', '', {progressBar: true, timeOut: 1500});
     });
     this.ipc.on('openFile', (event: Electron.IpcMessageEvent, message: ProjectFileData) => {
       this.resolve(message);
