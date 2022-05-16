@@ -89,6 +89,11 @@ export class FabricCanvasComponent implements AfterViewInit {
 
   onSelected(elements): void {
     const elementIds = elements.selected.map(it => it.id);
+    if (elements.selected.length > 1) {
+      elements.target.lockMovementX = true;
+      elements.target.lockMovementY = true;
+      elements.target.lockRotation = true;
+    }
     if (elementIds && elementIds.length > 0) {
       this.interaction.onItemInCanvasSelected(elementIds);
     }
