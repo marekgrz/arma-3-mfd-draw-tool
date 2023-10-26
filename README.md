@@ -59,8 +59,7 @@ Each panel can be resized according to user needs. Panel sizes will be saved sho
 Project view and ingame export
 
 ![Screenshot](docs/example.png)
-# Known issues
-- A lot
-- But if you find any, please create issue in gitlab :)
+# Issues
+- If you find any, please create issue in gitlab
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
